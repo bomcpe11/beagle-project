@@ -154,12 +154,12 @@ class Object {
  * @param integer $type Error type constant. Defined in app/Config/core.php.
  * @return boolean Success of log write
  */
-	public function log($msg, $type = LOG_ERR, $scope = null) {
+	public function log($msg, $type = LOG_DEBUG, $scope = null) {
 		if (!is_string($msg)) {
 			$msg = print_r($msg, true);
 		}
-
-		return CakeLog::write($type, $msg, $scope);
+		$bt = debug_backtrace();  //MODIFIED BY BOMBERMAN : Add filename & line number to logger.
+		return CakeLog::write($type, '['.basename($bt[0]['file']).':'.$bt[0]['line'].'] '.$msg, $scope);
 	}
 
 /**

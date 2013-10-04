@@ -57,5 +57,10 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 			Footer...
 		</div>
 	</div>
+	<?php
+		if(isset($footer_trace) && !empty($footer_trace)){
+			?><div>####### FOOTER TRACE #######<br /><pre><?php print_r($footer_trace); ?></pre></div><?php
+		}
+	?>
 </body>
 </html>

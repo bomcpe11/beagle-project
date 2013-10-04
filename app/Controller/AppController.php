@@ -33,7 +33,12 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 	
+	private $is_AllowFooterTrace = true;
+	
 	protected function setTitle($msg){
 		$this->set('title_for_layout', $msg);
+	}
+	protected function trace($msg){
+		if($this->$is_AllowFooterTrace) $this->set('footer_trace', $msg);
 	}
 }

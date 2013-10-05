@@ -31,7 +31,7 @@ App::uses('AppController', 'Controller');
  */
 class WelcomeController extends AppController {
 
-	public $uses = array('User');
+	public $uses = array('Profile');
 
 	public function index(){
 		
@@ -39,6 +39,6 @@ class WelcomeController extends AppController {
 		
 		$this->log('Test Logger krafffffff!!!!ครับ');
 		
-		//$this->trace($this->User->getUsers());
+		$this->trace($this->Profile->getProfiles());
 	}
 }

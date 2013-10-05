@@ -38,6 +38,7 @@ class WelcomeController extends AppController {
 		$this->setTitle('ยินดีต้อนรับ');
 		
 		$this->log('Test Logger krafffffff!!!!ครับ');
+		$this->log('Test Logger krafffffff!!!!ค่ะ');
 		
 		$this->trace($this->Profile->getProfiles());
 	}

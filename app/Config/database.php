@@ -61,13 +61,26 @@
  */
 class DATABASE_CONFIG {
 
+	#Localhost
+// 	public $default = array(
+// 			'datasource' => 'Database/Mysql',
+// 			'persistent' => false,
+// 			'host' => 'localhost',
+// 			'login' => 'root',
+// 			'password' => '1234',
+// 			'database' => 'jstporg_hub',
+// 			'prefix' => '',
+// 			'encoding' => 'utf8',
+// 	);
+	
+	#SMS-Host
 	public $default = array(
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'root',
-		'password' => '1234',
-		'database' => 'jstporg_hub',
+		'host' => '61.19.247.206',
+		'login' => 'irh9535_jstphub',
+		'password' => 'jstphub_2013',
+		'database' => 'irh9535_jstphub',
 		'prefix' => '',
 		'encoding' => 'utf8',
 	);

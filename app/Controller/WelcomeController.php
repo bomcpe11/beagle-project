@@ -41,4 +41,4 @@ class WelcomeController extends AppController {
 		
 		$this->trace($this->Profile->getProfiles());
 	}
-}// test
+}

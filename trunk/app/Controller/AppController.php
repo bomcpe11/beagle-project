@@ -37,6 +37,7 @@ class AppController extends Controller {
 	
 	protected function setTitle($msg){
 		$this->set('title_for_layout', $msg);
+		$this->set('page_title', $msg);
 	}
 	protected function trace($msg){
 		if($this->is_AllowFooterTrace) $this->set('footer_trace', $msg);

@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+.tableLayout {
+	border: 3px solid #666666;
+	width: 50%;
+	background-color: #F5F5F0;
+}
+.tableForm {
+}
+.tdLabel {
+	padding-left: 50px;
+}
+.upperBar {
+    border-bottom: 3px solid #666666;
+    padding-bottom: 5px;
+}

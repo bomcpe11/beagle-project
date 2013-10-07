@@ -10,7 +10,7 @@ class Gvar extends AppModel {
 		// local variables
 		$result = null;
 		$strSql = "SELECT varcode, vardesc1 FROM gvars WHERE varname='".$byVarName."'";
-		$this->log($strSql, LOG_DEBUG);
+		$this->log($strSql);
 		
 		// query $strSql
 		$result = $this->query($strSql);

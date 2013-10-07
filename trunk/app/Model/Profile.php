@@ -8,7 +8,7 @@ class Profile extends AppModel {
 	/* ------------------------------------------------------------------------------------------------------- */
 	public function checkUsername($username) {
 		$strSql = "SELECT * FROM profiles WHERE login = '".$username."';";
-		$this->log($strSql, LOG_DEBUG);
+		$this->log($strSql);
 		
 		$result = $this->query($strSql);
 		
@@ -17,7 +17,7 @@ class Profile extends AppModel {
 	/* ------------------------------------------------------------------------------------------------------- */
 	public function checkPassword($password) {
 		$strSql = "SELECT * FROM profiles WHERE encrypt_password = '".$password."';";
-		$this->log($strSql, LOG_DEBUG);
+		$this->log($strSql);
 	
 		$result = $this->query($strSql);
 	

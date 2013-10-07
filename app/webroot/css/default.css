@@ -8,3 +8,7 @@ div#layout-header h1{
 div#layout-footer{
 	text-align: center;
 }
+.ui-datepicker-trigger{
+	vertical-align: middle;
+	cursor: pointer;
+}

@@ -78,9 +78,9 @@ class DATABASE_CONFIG {
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
 		'host' => '61.19.247.206',
-		'login' => 'irh9535_jstphub',
+		'login' => 'irh9608_jstphub',
 		'password' => 'jstphub_2013',
-		'database' => 'irh9535_jstphub',
+		'database' => 'irh9608_jstphub',
 		'prefix' => '',
 		'encoding' => 'utf8',
 	);

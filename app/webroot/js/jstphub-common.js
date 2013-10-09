@@ -109,3 +109,64 @@ function setBirthDatePicker(selector){
 //			}
 //	);
 //}
+
+function openPopupHtml(title, html, buttons, openFunc, closeFunc, isPutCloseBtn){
+//	var NewDialog = jQuery('<div style="width:800px;">\
+//            <p>This is your dialog content, which dfssssssss sssssssss sssssssssssss<br /><br /><br /><br /><br /><br /><br /><br /><br /> sssssssssssss sssssssss ssssss can be multiline and dynamic.</p>\
+//        </div>');
+	var NewDialog = jQuery(html);
+	if(buttons==undefined) buttons = [{text: "Close", click: function() {jQuery(this).dialog("close"); jQuery(this).remove();}}]
+	else if(isPutCloseBtn==undefined || isPutCloseBtn==true) buttons.push({text: "Close", click: function() {jQuery(this).dialog("close"); jQuery(this).remove();}});
+//		console.log(NewDialog.width());
+        NewDialog.dialog({
+            modal: true,
+            title: title,
+            resizable: false,
+            show: 'fade',
+            width: NewDialog.width(),
+            buttons: buttons,
+            open: openFunc,
+            close: closeFunc
+        });
+}
+
+function jAlert(msg, okFunc, openFunc, closeFunc){
+	var NewDialog = jQuery('<div style="width:300px;"><p>'+msg+'</p></div>');
+	NewDialog.dialog({
+	  modal: true,
+	  title: 'JSTP Alert',
+	  resizable: false,
+	  closeOnEscape: false,
+	  show: 'fade',
+	  width: NewDialog.width(),
+      open: function(){
+    	  jQuery(this).parent().find('button.ui-dialog-titlebar-close').hide();
+    	  openFunc(); 
+      },
+      close: closeFunc,
+	  buttons: [
+		{text: "OK", click: function() {jQuery(this).dialog("close"); okFunc(); jQuery(this).remove();}}
+	  ]
+	});
+}
+
+function jConfirm(msg, okFunc, cancelFunc, openFunc, closeFunc){
+	var NewDialog = jQuery('<div style="width:300px;"><p>'+msg+'</p></div>');
+	NewDialog.dialog({
+	  modal: true,
+	  title: 'JSTP Confirm',
+	  resizable: false,
+	  closeOnEscape: false,
+	  show: 'fade',
+	  width: NewDialog.width(),
+	  open: function(){
+    	  jQuery(this).parent().find('button.ui-dialog-titlebar-close').hide();
+    	  openFunc(); 
+      },
+      close: closeFunc,
+	  buttons: [
+		{text: "OK", click: function() {jQuery(this).dialog("close"); okFunc(); jQuery(this).remove();}},
+		{text: "Cancel", click: function() {jQuery(this).dialog("close"); cancelFunc(); jQuery(this).remove();}}
+	  ]
+	});
+}

@@ -12,3 +12,6 @@ div#layout-footer{
 	vertical-align: middle;
 	cursor: pointer;
 }
+.ui-button-text-only .ui-button-text{
+	padding: .15em 1em;
+}

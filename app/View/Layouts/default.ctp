@@ -29,15 +29,15 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 	<?php
 		//echo $this->Html->meta('icon');
 
-	echo $this->Html->css('default');
-		echo $this->Html->css('loading');
 		echo $this->Html->css('jquery/ui/south-street/jquery-ui-1.10.3.custom.min');
+		echo $this->Html->css('loading');
+		echo $this->Html->css('default');
 
 		echo $this->Html->script('jquery/core/jquery-1.10.2.min');
 		echo $this->Html->script('jquery/ui/jquery-ui-1.10.3.custom.min');
 		echo $this->Html->script('jquery/ui/jquery.ui.1.10.3.datepicker.th');
-		echo $this->Html->script('jstphub-common');
 		echo $this->Html->script('loading');
+		echo $this->Html->script('jstphub-common');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');

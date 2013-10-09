@@ -11,14 +11,12 @@
  * Depends:
  *	jquery.ui.core.js
  */
-
-
-//#### TH Mod. by BOMBERMAN (Chinnawat B.) ####################################
-//Ref url : http://www.thaicreate.com/community/how-to-localize-datepicker.html
-
 	
 (function( $, undefined ) {
 
+//#### TH Mod. by BOMBERMAN (Chinnawat B.) ####################################
+//Ref url : http://www.thaicreate.com/community/how-to-localize-datepicker.html
+	
 $.extend($.ui, { datepicker: { version: "1.10.3" } });
 
 var PROP_NAME = "datepicker",
@@ -50,12 +48,12 @@ function Datepicker() {
 		prevText: "Prev", // Display text for previous month link
 		nextText: "Next", // Display text for next month link
 		currentText: "Today", // Display text for current month link
-		monthNames: ["มกราคม","February","March","April","May","June",
-			"July","August","September","October","November","December"], // Names of months for drop-down and formatting
-		monthNamesShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], // For formatting
-		dayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], // For formatting
-		dayNamesShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], // For formatting
-		dayNamesMin: ["Su","Mo","Tu","We","Th","Fr","Sa"], // Column headings for days starting at Sunday
+		monthNames: ["มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน",
+			"กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤษจิกายน","ธันวาคม"], // Names of months for drop-down and formatting
+		monthNamesShort: ["มค", "กพ", "มีค", "เมย", "พค", "มิย", "กค", "สค", "กย", "ตค", "พย", "ธค"], // For formatting
+		dayNames: ["อาทิตย์", "จันทร์", "อังคาร", "พุธ", "พฤหัสบดี", "ศุกร์", "เสาร์"], // For formatting
+		dayNamesShort: ["อา", "จ", "อ", "พ", "พฤ", "ศ", "ส"], // For formatting
+		dayNamesMin: ["อา", "จ", "อ", "พ", "พฤ", "ศ", "ส"], // Column headings for days starting at Sunday
 		weekHeader: "Wk", // Column header for week of the year
 		dateFormat: "dd/mm/yy", // See format options on parseDate
 		firstDay: 0, // The first day of the week, Sun = 0, Mon = 1, ...
@@ -224,6 +222,8 @@ $.extend(Datepicker.prototype, {
 					{ src:buttonImage, alt:buttonText, title:buttonText })));
 			input[isRTL ? "before" : "after"](inst.trigger);
 			inst.trigger.click(function() {
+				//alert('click');
+				//console.log(input[0].value);
 				if ($.datepicker._datepickerShowing && $.datepicker._lastInput === input[0]) {
 					$.datepicker._hideDatepicker();
 				} else if ($.datepicker._datepickerShowing && $.datepicker._lastInput !== input[0]) {
@@ -1416,9 +1416,11 @@ $.extend(Datepicker.prototype, {
 		return inst.settings[name] !== undefined ?
 			inst.settings[name] : this._defaults[name];
 	},
-
+	
 	/* Parse existing date and initialise date picker. */
 	_setDateFromField: function(inst, noDefault) {
+		//alert('aa');
+		//alert(inst.input.val());
 		if (inst.input.val() === inst.lastVal) {
 			return;
 		}
@@ -1804,7 +1806,7 @@ $.extend(Datepicker.prototype, {
 		if ( !inst.yearshtml ) {
 			inst.yearshtml = "";
 			if (secondary || !changeYear) {
-				html += "<span class='ui-datepicker-year'>" + drawYear + "</span>";
+				html += "<span class='ui-datepicker-year'>" + (drawYear+543) + "</span>";
 			} else {
 				// determine range of years to display
 				years = this._get(inst, "yearRange").split(":");

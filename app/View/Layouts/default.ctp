@@ -43,7 +43,7 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 	?>
 <script type="text/javascript">
 	jQuery.noConflict();
-	G_WEB_ROOT = <?php $this->webroot; ?>;
+	G_WEB_ROOT = '<?php echo $this->webroot; ?>';
 </script>
 </head>
 <body>

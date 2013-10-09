@@ -114,22 +114,13 @@ class Profile extends AppModel {
    		return $flag;
 	}// insert
 	/* ------------------------------------------------------------------------------------------------------- */
-	public function checkUsername($username) {
+	public function checkLogin($username) {
 		$strSql = "SELECT * FROM profiles WHERE login = '".$username."';";
 		$this->log($strSql);
 		
 		$result = $this->query($strSql);
 		
 		return $result;
-	}// checkUsername
-	/* ------------------------------------------------------------------------------------------------------- */
-	public function checkPassword($password) {
-		$strSql = "SELECT * FROM profiles WHERE encrypt_password = '".$password."';";
-		$this->log($strSql);
-	
-		$result = $this->query($strSql);
-	
-		return $result;
-	}// checkUsername
+	}// checkLogin
 }
 ?>

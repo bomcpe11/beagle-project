@@ -35,6 +35,10 @@ class AppController extends Controller {
 	
 	private $is_AllowFooterTrace = true;
 	
+// 	public function __construct(){
+// 		$this->log('__construct()');
+// 	}
+	
 	protected function setTitle($msg){
 		$this->set('title_for_layout', $msg);
 		$this->set('page_title', $msg);

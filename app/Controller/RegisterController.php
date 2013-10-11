@@ -3,6 +3,7 @@ session_start();
 class RegisterController extends AppController {
 	/* ------------------------------------------------------------------------------------------------------ */
 	public $names = "RegisterController";
+	public $layout = "public";
 	public $uses = array("Gvar"
 						, "Profile");
 	/* ------------------------------------------------------------------------------------------------------ */

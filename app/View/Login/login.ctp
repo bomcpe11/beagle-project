@@ -2,9 +2,6 @@
 <!-- ###################################################################################################### -->
 <script type="text/JavaScript">
 	/* ------------------------------------------------------------------------------------------------- */
-	var cookieUsername = "<?php echo $cookieUsername;?>";
-	var cookiePassword = "<?php echo $cookiePassword;?>";
-	/* ------------------------------------------------------------------------------------------------- */
 	jQuery(document).keyup(function(e) {
 			// check e.keyCode
 			if ( e.keyCode == 13 ) {	// press enter
@@ -20,19 +17,7 @@
 	);// jQuery.keyup
 	/* ------------------------------------------------------------------------------------------------- */
 	jQuery(document).ready(function() {
-			// set cookie
-			if ( cookieUsername.length > 0 
-					&& cookiePassword.length > 0 ) {
-				// set text
-				jQuery("#text_username").val(cookieUsername);
-				jQuery("#text_password").val(cookiePassword);
-
-				// set checkbox
-				jQuery("#checkbox_remem").prop('checked', true);
-
-				loginFnc();
-			}// if
-		}// function
+		}// function()
 	);// jQuery.ready
 	/* ------------------------------------------------------------------------------------------------- */
 	function loginFnc() {
@@ -42,7 +27,7 @@
 		var password = jQuery("#text_password").val();
 		var rememberMe = jQuery("#checkbox_remem").is(":checked");
 		
-		jQuery.post("<?php echo $this->Html->url('/login/loginFnc');?>"
+		jQuery.post("<?php echo $this->Html->url('/login/loginAjax');?>"
 				, {"username":username
 					, "password":password
 					, "rememberMe":rememberMe}
@@ -111,11 +96,13 @@
 						<img width="150px" height="150px" src="<?php echo $this->webroot;?>img/JSTPLogo2.gif"/>
 					</td>
 					<td>
+						<p style="text-indent: 25px;word-wrap: break-word;">
 						ระบบจัดการข้อมูลผ่านทางเว็บไซด์เป็นส่วนหนึ่งของโครงการพัฒนาอัจฉริยภาพทางวิทยาศาสตร์และเทคโนโลยีส าหรับเด็กและ
 						เยาวชน ( JSTP) ซึ่งจะรวบรวมและจัดเก็บข้อมูลส่วนบุคคลของนักเรียนที่สมัครเข้าร่วมโครงการ อาทิเช่น ประวัติส่วนบุคคล
 						ประสบการณ์การท างานวิจัย ตลอดจนผลงานที่ได้รับรางวัล เป็นต้นโดยมีวัตถุประสงค์เพื่อพัฒนาการจัดเก็บข้อมูลอย่างเป็นระบบ
 						สะดวกในการสืบค้นข้อมูล รวมทั้งยังสามารถติดตามความก้าวหน้าของนักเรียนที่ได้รับการคัดเลือกเข้าร่วมโครงการ เพื่อเป็น
 						ประโยชน์ในการพัฒนาโครงการต่อไป
+						</p>
 					</td>
 				</tr>
 			</table>

@@ -41,5 +41,7 @@ class WelcomeController extends AppController {
 		$this->log('Test Logger krafffffff!!!!ค่ะ');
 		
 		//$this->trace($this->Profile->getProfiles());
+		
+		//$this->trace($this->Session->read('objuser'));
 	}
 }

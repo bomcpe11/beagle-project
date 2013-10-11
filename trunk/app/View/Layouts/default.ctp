@@ -1,4 +1,19 @@
 <?php
+
+//######### Check $_SESSION for user loged-in #############
+if(isset($_SESSION['objuser']) && !empty($_SESSION['objuser'])){
+	//TODO: it have objuser.
+}else{
+	//TODO: not found objuser, not loged-in., Redirect to LoginController
+	//$this->redirect(array('controller' => 'orders'));
+	//header( "location: ".$this->webroot."login" );
+	
+	
+	
+	//exit(0);
+	//return;
+}
+
 /**
  *
  * PHP 5
@@ -70,6 +85,7 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 			?><div>####### FOOTER TRACE #######<br /><pre><?php print_r($footer_trace); ?></pre></div><?php
 		}
 	?>
+	<div>####### SESSION #######<br /><pre><?php //print_r($_SESSION); ?></pre></div>
 	<div id="block-page" class="loading-unblock"><div id="block-page_hdn"></div></div>
 	<div id="div_loading" class="loading-invisible">
 	    &nbsp;

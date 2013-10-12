@@ -107,20 +107,95 @@ class Profile extends AppModel {
   		$strSql .= " ,'".$last_login_at."'"; // last_login_at - IN datetime
 		$strSql .= " )";
    		$strSql .= ";";
-   		$this->log($strSql);
+   		$this->log("strSql => ".$strSql);
    		
-   		$flag = $this->query($strSql);
+   		try {
+   			$this->query($strSql);
+   			
+   			$flag = true;
+   		} catch(Exception $e) {
+   			$this->log("exception => ".$e->getMessage());
+   		}// try catch
    		
    		return $flag;
 	}// insert
 	/* ------------------------------------------------------------------------------------------------------- */
 	public function checkLogin($username) {
+		$result = null;
 		$strSql = "SELECT * FROM profiles WHERE login = '".$username."';";
-		$this->log($strSql);
+		$this->log("strSql => ".$strSql);
 		
-		$result = $this->query($strSql);
+		try {
+   			$result = $this->query($strSql);
+   		} catch(Exception $e) {
+   			$this->log("exception => ".$e->getMessage());
+   		}// try catch
 		
 		return $result;
 	}// checkLogin
+	/* ------------------------------------------------------------------------------------------------------- */
+	public function checkCardId($cardId) {
+		$result = null;
+		$strSql = "SELECT cardid FROM profiles WHERE cardid = '".$cardId."';";
+		$this->log("strSql => ".$strSql);
+		
+		try {
+   			$result = $this->query($strSql);
+   		} catch(Exception $e) {
+   			$this->log("exception => ".$e->getMessage());
+   		}// try catch
+		
+		return $result;
+	}// checkCardId
+	/* ------------------------------------------------------------------------------------------------------- */
+	public function checkEmail($email) {
+		$result = null;
+		$strSql = "SELECT email FROM profiles WHERE email = '".$email."';";
+		$this->log("strSql => ".$strSql);
+	
+		try {
+   			$result = $this->query($strSql);
+   		} catch(Exception $e) {
+   			$this->log("exception => ".$e->getMessage());
+   		}// try catch
+	
+		return $result;
+	}// checkEmail
+	/* ------------------------------------------------------------------------------------------------------- */
+	public function checkNameTh($nameTh, $lastNameTh) {
+		$result = null;
+		$strSql = "SELECT nameth, lastnameth";
+		$strSql .= " FROM profiles";
+		$strSql .= " WHERE nameth = '".$nameTh."'";
+		$strSql .= " AND lastnameth = '".$lastNameTh."'";
+		$strSql .= ";";
+		$this->log("strSql => ".$strSql);
+	
+		try {
+   			$result = $this->query($strSql);
+   		} catch(Exception $e) {
+   			$this->log("exception => ".$e->getMessage());
+   		}// try catch
+	
+		return $result;
+	}// checkNameTh
+	/* ------------------------------------------------------------------------------------------------------- */
+	public function checkNameEng($nameEng, $lastNameEng) {
+		$result = null;
+		$strSql = "SELECT nameeng, lastnameeng";
+		$strSql .= " FROM profiles";
+		$strSql .= " WHERE nameeng = '".$nameEng."'";
+		$strSql .= " AND lastnameeng = '".$lastNameEng."'";
+		$strSql .= ";";
+		$this->log("strSql => ".$strSql);
+	
+		try {
+   			$result = $this->query($strSql);
+   		} catch(Exception $e) {
+   			$this->log("exception => ".$e->getMessage());
+   		}// try catch
+	
+		return $result;
+	}// checkNameEng
 }
 ?>

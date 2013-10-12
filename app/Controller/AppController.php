@@ -35,16 +35,23 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 	
 	private $is_AllowFooterTrace = true;
+	private $objuser = null;
 	
-// 	public function __construct(){
-// 		$this->log('__construct()');
-// 	}
+	function beforeFilter(){
+		$this->objuser = $this->Session->read('objuser');
+		$this->set('objuser', $this->objuser);
+	}
 	
 	protected function setTitle($msg){
 		$this->set('title_for_layout', $msg);
 		$this->set('page_title', $msg);
 	}
 	protected function trace($msg){
-		if($this->is_AllowFooterTrace) $this->set('footer_trace', $msg);
+		if($this->is_AllowFooterTrace){
+			$this->set('footer_trace', $msg);
+		}
+	}
+	protected function getObjUser(){
+		return $this->objuser;
 	}
 }

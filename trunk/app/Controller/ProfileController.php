@@ -1,11 +1,11 @@
 <?php
-class LogoutController extends AppController {
+class ProfileController extends AppController {
 
 	public $uses = array();
 
 	public function index(){
 		
-		$this->log('Logout successful');
+		$this->log('index()');
 		
 		
 	}

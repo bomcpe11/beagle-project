@@ -45,5 +45,6 @@ class WelcomeController extends AppController {
 		//$this->log('SESSION.DETAIL='.print_r($_SESSION, true));
 		
 		$this->trace($this->Session->read('objuser'));
+		$this->trace($this->getObjUser());
 	}
 }

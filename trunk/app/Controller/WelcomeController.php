@@ -19,7 +19,6 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-App::uses('AppController', 'Controller');
 
 /**
  * Static content controller
@@ -42,6 +41,9 @@ class WelcomeController extends AppController {
 		
 		//$this->trace($this->Profile->getProfiles());
 		
-		//$this->trace($this->Session->read('objuser'));
+		//$this->Session->write('objuser', 'TEST SESSION');
+		//$this->log('SESSION.DETAIL='.print_r($_SESSION, true));
+		
+		$this->trace($this->Session->read('objuser'));
 	}
 }

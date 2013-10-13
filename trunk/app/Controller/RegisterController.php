@@ -4,6 +4,7 @@ class RegisterController extends AppController {
 	/* ------------------------------------------------------------------------------------------------------ */
 	public $names = "RegisterController";
 	public $layout = "public";
+	public $components = array("Cookie");
 	public $uses = array("Gvar"
 						, "Profile");
 	/* ------------------------------------------------------------------------------------------------------ */
@@ -57,15 +58,33 @@ class RegisterController extends AppController {
 		$captcha_code = $this->request->data["captcha_code"];
 		/* session */
 		$sessionCaptchaCode = $this->Session->read("random_number");
+		/* cookie */
+		$cookieTimeOut = (3600 * 24) * 30;  // or '1 month'
 		
-		// check $captcha_code
-		$this->log("### session captcha => ".$sessionCaptchaCode." ###");
-		$this->log("### user captcha => ".$captcha_code." ###");
-		if ( $captcha_code == $sessionCaptchaCode ) {
-			$this->log("### captcha correct ###");
-			$this->Profile->begin();
-			// insert data
-			if ( $this->Profile-> insert($cardid // $cardid
+		// validate data
+		$checkCardId = $this->Profile->checkCardId($cardid);
+		$checkEmail	= $this->Profile->checkEmail($email);
+		$checkNameTh = $this->Profile->checkNameTh($nameth, $lastnameth);
+		$checkNameEn = $this->Profile->checkNameEng($nameeng, $lastnameeng);
+		$checkUsername = $this->Profile->checkLogin($username);
+		if ( count($checkCardId) == 1 ) {
+			$result = "เลขบัตรประจำตัวประชาชน ซ้ำ";
+		} else if ( count($checkEmail) == 1 ) {
+			$result = "อีเมล์ ซ้ำ";
+		} else if ( count($checkNameTh) == 1 ) {
+			$result = "ชื่อ นามสกุล ภาษาไทย ซ้ำ";
+		} else if ( count($checkNameEn) == 1 ) {
+			$result = "ชื่อ นามสกุล ภาษาอังกฤษ ซ้ำ";
+		} else if ( count($checkUsername) == 1 ) {
+			$result = "username ซ้ำ";
+		} else {
+			// validate captcha
+			$this->log("### session captcha => ".$sessionCaptchaCode." ###");
+			$this->log("### user captcha => ".$captcha_code." ###");
+			if ( $captcha_code == $sessionCaptchaCode ) {
+				$this->log("### captcha correct ###");
+				// insert data
+				if ( $this->Profile-> insert($cardid // $cardid
 				  		, $cardtype	// $cardtype
 				  		, $nameth	// $nameth
 				  		, $lastnameth	// $lastnameth
@@ -95,25 +114,28 @@ class RegisterController extends AppController {
 				  		, ""	// $role
 				  		, ""	// $login_count
 				  		, ""	// $failed_login_count
-				 		, "") ) {	// $last_login_at
-				$this->Profile->commit();
-				
-				$result = "";
+				 		, "") ) {
+				 	$result = "ลงทะเบียนเรียบร้อย";
+				 	
+				 	// set cookie
+				 	$this->Cookie->time = $cookieTimeOut;
+				 	$this->Cookie->write("cookieUsername", $username);
+				 	$this->Cookie->write("cookieEncryptPassword", md5($password));
+				 	$this->log("### write cookie complete ###");
+				} else {
+					$result = "ไม่สามารถลงทะเบียนได้ กรุณาติดต่อผู้ดูแลระบบ";
+				}// if else
 			} else {
-				$this->Profile->rollback();
+				$result = "captcha ไม่ถูกต้อง";
 			}// if else
-		} else {
-			$this->log("### captcha incorrect ###");
-			
-			$result = "captcha ไม่ถูกต้อง";
-		}// if else
+		}// if
 		
 		// send data to view
 		$this->layout = "ajax";
 		$this->set("message", json_encode(array("result" => $result)));
 		$this->render("response");
 		
-		$this->log("START :: RegisterController -> insertFnc()");
+		$this->log("END :: RegisterController -> insertFnc()");
 	}// insertFnc
 	/* ------------------------------------------------------------------------------------------------------ */
 	public function changeFormatDate($data) {

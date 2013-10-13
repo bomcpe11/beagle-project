@@ -46,5 +46,8 @@ class WelcomeController extends AppController {
 		
 		$this->trace($this->Session->read('objuser'));
 		$this->trace($this->getObjUser());
+		$this->set("page_title","Welcome");
 	}
+
+	
 }

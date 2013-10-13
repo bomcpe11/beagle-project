@@ -40,6 +40,16 @@ class AppController extends Controller {
 	function beforeFilter(){
 		$this->objuser = $this->Session->read('objuser');
 		$this->set('objuser', $this->objuser);
+	
+		$this->set("image_file","");
+		$this->set("position","");
+		$this->set("titleth","นางสาว");
+		$this->set("image_desc","รายละเอียดรูป ");
+		$this->set("nameth","ณัฐพร");
+		$this->set("lastnameth","แสงสุวรรณ");
+		$this->set("login","nattaporn.s");
+		$this->set("last_login_at","01/01/2556");
+		
 	}
 	
 	protected function setTitle($msg){

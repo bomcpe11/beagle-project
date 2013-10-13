@@ -57,14 +57,28 @@
 				|| password.length == 0
 				|| confirm_password.length == 0
 				|| captcha_code.length == 0 ) {
-			alert("ช่องที่มี * ต้องไม่ใช่ค่าว่าง");
+			jAlert("กรุณากรอกข้อมูลช่องที่ * ให้ครบ" 
+					, function(){ 
+					}//okFunc	
+					, function(){ 
+					}//openFunc
+					, function(){ 		
+					}//closeFunc
+			);// jAlert
 			
 			return false;
 		}// if
 
 		// validate select_cardtype
 		if ( cardtype == "-1") {
-			alert("กรุณาเลือกประเภทของบัตร");
+			jAlert("กรุณาเลือกประเภทของบัตร" 
+					, function(){ 
+					}//okFunc	
+					, function(){ 
+					}//openFunc
+					, function(){ 		
+					}//closeFunc
+			);// jAlert
 			
 			return false;
 		}// if
@@ -72,28 +86,56 @@
 		// validate titlename
 		if ( titleth == "-1"
 				|| titleen == "-1" ) {
-			alert("กรุณาเลือกคำหน้านำชื่อ");
+			jAlert("กรุณาเลือกคำหน้านำชื่อ" 
+					, function(){ 
+					}//okFunc	
+					, function(){ 
+					}//openFunc
+					, function(){ 		
+					}//closeFunc
+			);// jAlert
 			
 			return false;
 		}// if
 
 		// validate text_cardid
 		if ( !validateCardId(cardid) ) {
-			alert("เลขบัตรจำตัว ไม่ถูกต้อง");
+			jAlert("เลขบัตรประจำตัวประชาชน ไม่ถูกต้อง"
+					, function(){ 
+					}//okFunc	
+					, function(){ 
+					}//openFunc
+					, function(){ 		
+					}//closeFunc
+			);// jAlert
 			
 			return false;
 		}// if
 
 		// validate text_email
 		if ( !validateEmail(email) ) {
-			alert("อีเมล์ ไม่ถูกต้อง");
+			jAlert("อีเมล์ ไม่ถูกต้อง"
+					, function(){ 
+					}//okFunc	
+					, function(){ 
+					}//openFunc
+					, function(){ 		
+					}//closeFunc
+			);// jAlert
 			
 			return false;
 		}// if
 
 		// validate text_password, text_confirm_password
 		if ( password != confirm_password ) {
-			alert("Password ไม่ตรงกัน");
+			jAlert("Password ไม่ตรงกัน"
+					, function(){ 
+					}//okFunc	
+					, function(){ 
+					}//openFunc
+					, function(){ 		
+					}//closeFunc
+			);// jAlert
 			
 			return false;
 		}// if
@@ -126,11 +168,19 @@
 					, "password":password
 					, "captcha_code":captcha_code}
 				, function(data) {
-					if ( data.result.length > 0 ) {
-						alert(data.result);
-					} else {
-						window.location.replace("<?php echo $this->webroot;?>profile/index");
-					}// if else
+					if ( data.result ) {
+						jAlert(data.result
+								, function(){ 
+									if ( data.result == "ลงทะเบียนเรียบร้อย" ) {
+										window.location.replace("<?php echo $this->webroot;?>login/index");
+									}// if
+								}//okFunc	
+								, function(){ 
+								}//openFunc
+								, function(){ 		
+								}//closeFunc
+						);// jAlert
+					}//if else
 
 					unloading();
 				}// function(data)
@@ -275,8 +325,7 @@
 		
 		<td class="tdLabel">ที่อยู่ : </td>
 		<td rowspan="2" class="tdData">
-			<textarea rows="3" cols="19" id="textarea_address" maxlength="1000">
-			</textarea>
+			<textarea rows="3" cols="30" id="textarea_address" maxlength="1000"></textarea>
 		</td>
 	</tr>
 	<tr>
@@ -308,44 +357,56 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="tdLabel">* Username : </td>
-		<td class="tdData">
-			<input type="text" id="text_username" class="textbox" value="" size="24" maxlength="255"/>
+		<td colspan="2">
+			<!-- table username, password -->
+			<table width="100%">
+				<tr>
+					<td class="tdLabel">* Username : </td>
+					<td class="tdData">
+						<input type="text" id="text_username" class="textbox" value="" size="24" maxlength="255"/>
+					</td>
+				</tr>
+				<tr>
+					<td class="tdLabel">* Password : </td>
+					<td class="tdData">
+						<input type="password" id="text_password" class="textbox" value="" size="24" maxlength="40"/>
+					</td>
+				</tr>
+				<tr>
+					<td class="tdLabel">* Password confirm : </td>
+					<td class="tdData">
+						<input type="password" id="text_confirm_password" class="textbox" value="" size="24" maxlength="40"/>
+					</td>
+				</tr>
+			</table>
 		</td>
-		
-		<td rowspan="3" colspan="2" align="center">
-			<div id="captcha-wrap">
-				<div class="captcha-box">
-					<img src="<?php echo $this->webroot;?>reCaptcha/get_captcha.php" alt="" id="captcha" />
-				</div>
-				<div class="text-box">
-					<label>* กรุณากรอกข้อความที่เห็น :</label>
-					<input name="captcha-code" type="text" id="captcha_code"/>
-				</div>
-				<div class="captcha-action">
-					<img style="width: 25px;height: 25px;" src="<?php echo $this->webroot;?>img/refresh-icon.gif" alt="" id="captcha-refresh" onClick="JavaScript:change_Captcha();" />
-				</div>
-				
-			</div>
+		<td colspan="2">
+			<!-- table captcha-->
+			<table width="100%">
+				<tr align="center">
+					<td>
+						<div id="captcha-wrap">
+							<div class="captcha-box">
+								<img src="<?php echo $this->webroot;?>reCaptcha/get_captcha.php" alt="" id="captcha" />
+							</div>
+							<div class="text-box">
+								<label>* กรุณากรอกข้อความที่เห็น : </label>
+								<input name="captcha-code" type="text" id="captcha_code"/>
+							</div>
+							<div class="captcha-action">
+								<img style="width: 25px;height: 25px;" src="<?php echo $this->webroot;?>img/refresh-icon.gif" alt="" id="captcha-refresh" onClick="JavaScript:change_Captcha();" />
+							</div>
+						</div>
+					</td>
+				</tr>
+			</table>
 		</td>
-		
 	</tr>
-	<tr>
-		<td class="tdLabel">* Password : </td>
-		<td class="tdData">
-			<input type="password" id="text_password" class="textbox" value="" size="24" maxlength="40"/>
-		</td>
-	</tr>
-	<tr>
-		<td class="tdLabel">* Password confirm : </td>
-		<td class="tdData">
-			<input type="password" id="text_confirm_password" class="textbox" value="" size="24" maxlength="40"/>
-		</td>
-	</tr>
-	<tr align="center" style="height: 100px;">
+	<tr align="center" style="height: 50px;">
 		<td colspan="4">
 			<input type="button" value="ยืนยันการลงทะเบียน" onClick="JavaScript:submitData();"/>
 			<input type="button" value="ล้างข้อมูล" onClick="JavaScript:clearScreen();"/>
 		</td>
 	</tr>
+	
 </table>

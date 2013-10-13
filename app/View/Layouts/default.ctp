@@ -54,29 +54,139 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
+				
 	?>
+
 <script type="text/javascript">
 	jQuery.noConflict();
 	G_WEB_ROOT = '<?php echo $this->webroot; ?>';
+	
+	jQuery(document).ready(function(){
+		//---------------------------------------------------------------------------------------------
+		jQuery("#gotoProfile").click(function() {changePage("Profile");});
+		//---------------------------------------------------------------------------------------------
+		jQuery("#gotoChangePic").click(function() {changePage("Changepic");});
+		//---------------------------------------------------------------------------------------------
+		jQuery("#gotoChangePwd").click(function() {changePage("Changepwd");});
+		//---------------------------------------------------------------------------------------------
+		jQuery("#gotoPsearch").click(function() {changePage("Psearch");});
+		//---------------------------------------------------------------------------------------------
+		jQuery("#gotoExport").click(function() {changePage("Export");});
+		//---------------------------------------------------------------------------------------------
+	});
+
+	//-------------------------------------------------------------------------------------------------
+	function changePage(path){
+		var link = "";
+		
+		switch(path)
+		{
+		case "Profile":
+		  link = '<?php echo Router::url(array("controller"=>"Profile","action"=>"index"));?>'
+		  break;
+		case "Changepic":
+		  link = '<?php echo Router::url(array("controller"=>"Changepic","action"=>"index"));?>'
+		  break;
+		case "Changepwd":
+			  link = '<?php echo Router::url(array("controller"=>"Changepwd","action"=>"index"));?>'
+			  break;
+		case "Psearch":
+			  link = '<?php echo Router::url(array("controller"=>"Psearch","action"=>"index"));?>'
+			  break;
+		case "Export":
+			  link = '<?php echo Router::url(array("controller"=>"Export","action"=>"index"));?>'
+			  break;		  			    
+		default:
+		  link = '<?php echo Router::url(array("controller"=>"Welcome","action"=>"index"));?>'
+		}
+		
+		jQuery.ajax({
+	           dataType: "html",
+	           type: "POST",
+	           evalScripts: true,
+	           url: link,
+	           data: ({type:'original'}),
+	           success: function (data, textStatus){
+	        	   jQuery("#layout").html();
+	        	   jQuery("#layout").html(data);
+
+	           }
+	       });
+	}       
+	//-------------------------------------------------------------------------------------------------
 </script>
+
 </head>
+<div id="layout">
 <body>
 	<div id="layout-container">
 		<div id="layout-header">
 			<h1>Header</h1>
-			<hr />
 		</div>
-		<div id="layout-content">
-
-			<?php //echo $this->Session->flash(); ?>
-
-			<?php echo $this->fetch('content'); ?>
-		</div>
-		<div id="layout-footer">
-			<hr />
-			Footer...
+<div id="layout-body">
+		    <table border="1" width="100%" >
+		       <tr valign="top">
+		          <!--profile-menu -->
+		          <td width="20%">
+		          
+		                 <center>
+		                    <a>
+		                     	<?php if(isset($position) && !empty($position)){
+		                     	        echo $position;
+		                     	      }else{
+  										echo $titleth;
+  									  }
+								?>
+		                        <?php echo $nameth; ?>&nbsp;&nbsp;<?php echo $lastnameth; ?>
+		                    </a>
+		                 </center>
+		                 
+		                 </br>
+		                 <div id="profile-container">
+		                    </br>
+		                    <div id="profile-picture">
+		                        <img width="150px" height="150px"  src="<?php echo $image_file; ?>">
+		                    </div>
+		                     <center><a><?php echo $image_desc; ?></a></center>
+		                 </div>
+		                 </br>
+		                 
+		                 <div id="profile-desc">
+		                     <a class="label">Username : <?php echo $login; ?></a> </br>
+		                     <a class="label"> เข้าระบบล่าสุด :  <?php echo $last_login_at; ?></a>
+		                 </div>
+		                 </br>
+		                 
+		                 <!--layout-menu -->
+		                 <div id="link-menu">
+		                     <a><b>เมนู</b></a><br>
+		                     &nbsp;&nbsp;<a style="cursor: pointer;" class="label" id="gotoProfile">ข้อมูลส่วนตัว </a><br>
+		                     &nbsp;&nbsp;<a style="cursor: pointer;" class="label" id="gotoChangePic" >เปลี่ยนรูปประจำตัว</a><br>
+		                     &nbsp;&nbsp;<a style="cursor: pointer;" class="label" id="gotoChangePwd">แก้ไขรหัสผ่าน</a><br>
+		                     &nbsp;&nbsp;<a style="cursor: pointer;" class="label" id="gotoPsearch">ค้นหาบุคคล</a><br>
+		                     &nbsp;&nbsp;<a style="cursor: pointer;" class="label" id="gotoExport" >ส่งออกข้อมูล</a><br>
+		                                                                        
+		                 </div>
+		                 </br>
+		          </td>
+		          
+		          <!--layout-content -->
+		          <td>   <a><?php echo $page_title ?></a>
+		                 <hr>
+		          		 <div id="layout-content">
+                           <?php //echo $this->Session->flash(); ?>
+                           <?php echo $this->fetch('content'); ?>
+		                 </div>
+		          </td>
+		       </tr>
+		    </table>
 		</div>
 	</div>
+		<div id="layout-footer">
+			<h1>footer</h1>
+		</div>
+	</div>
+	</br>
 	<?php
 		if(isset($footer_trace) && !empty($footer_trace)){
 			?><div>####### FOOTER TRACE #######<br /><pre><?php print_r($footer_trace); ?></pre></div><?php
@@ -99,5 +209,7 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 	    </table>
 	    &nbsp;
 	</div>
+	
 </body>
+</div>
 </html>

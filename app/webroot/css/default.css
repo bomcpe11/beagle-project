@@ -1,12 +1,26 @@
 @CHARSET "UTF-8";
+div#layout-container{
+	width: 1200px;
+	float:none;
+    margin:0 auto;
+}
 div#layout-header{
-	text-align: center;
+	height: 200px;
+	width: 1200px;
+	border:1px solid;
+    border-radius:5px;  
 }
 div#layout-header h1{
 	text-align: center;
 }
 div#layout-footer{
 	text-align: center;
+	height: 150px;
+	width: 1200px;
+	border:1px solid;
+    border-radius:5px;  
+    margin-left: auto ;
+    margin-right: auto ;
 }
 .ui-datepicker-trigger{
 	vertical-align: middle;
@@ -15,3 +29,37 @@ div#layout-footer{
 .ui-button-text-only .ui-button-text{
 	padding: .15em 1em;
 }
+div#layout-body{
+	width: 1200px;
+	border:1px solid;
+    border-radius:5px;  
+}
+div#profile-container{
+	width: 200px;
+	
+	border:1px solid;
+    border-radius:2px;  
+    float:none;
+    margin:0 auto;
+}
+div#profile-picture{
+	width: 150px;
+	height: 150px;
+	border:1px solid;
+    border-radius:2px;  
+    float:none;
+    margin:0 auto;
+    top:2px;
+    background-color: gray;
+}
+div#profile-desc{
+	width: 200px;
+    float:none;
+    margin:0 auto;
+}
+div#link-menu{
+	width: 200px;
+    float:none;
+    margin:0 auto;
+}
+.label{font-size:0.875em;}

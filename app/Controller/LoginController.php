@@ -68,7 +68,7 @@ class LoginController extends AppController {
 				$result = "";
 					
 				// set SESSION
-				$this->Session->write("objuser", $objuser);
+				$this->Session->write("objuser", $objuser[0]["profiles"]);
 		
 				// set COOKIE
 				if ( $rememberMe == "true" ) {

@@ -113,12 +113,31 @@ class Profile extends AppModel {
    			$this->query($strSql);
    			
    			$flag = true;
-   		} catch(Exception $e) {
+   		} catch ( Exception $e ) {
    			$this->log("exception => ".$e->getMessage());
    		}// try catch
    		
    		return $flag;
 	}// insert
+	/* ------------------------------------------------------------------------------------------------------- */
+	public function updatePassword($newPassword, $username) {
+		$flag = false;
+		$strSql = "UPDATE profiles";
+		$strSql .= " SET encrypt_password = '".$newPassword."'"; // varchar(40)
+		$strSql .= " WHERE login = '".$username."'"; // varchar(255)
+		$strSql .= ";";
+		$this->log("strSql => ".$strSql);
+		
+		try {
+			$this->query($strSql);
+			
+			$flag = true;
+		} catch ( Exception $e ) {
+			$this->log("exception => ".$e->getMessage());
+		}// try catch
+		
+		return $flag;
+	}// updatePassword
 	/* ------------------------------------------------------------------------------------------------------- */
 	public function checkLogin($username) {
 		$result = null;
@@ -127,7 +146,7 @@ class Profile extends AppModel {
 		
 		try {
    			$result = $this->query($strSql);
-   		} catch(Exception $e) {
+   		} catch ( Exception $e ) {
    			$this->log("exception => ".$e->getMessage());
    		}// try catch
 		
@@ -141,7 +160,7 @@ class Profile extends AppModel {
 		
 		try {
    			$result = $this->query($strSql);
-   		} catch(Exception $e) {
+   		} catch ( Exception $e ) {
    			$this->log("exception => ".$e->getMessage());
    		}// try catch
 		
@@ -155,7 +174,7 @@ class Profile extends AppModel {
 	
 		try {
    			$result = $this->query($strSql);
-   		} catch(Exception $e) {
+   		} catch ( Exception $e ) {
    			$this->log("exception => ".$e->getMessage());
    		}// try catch
 	
@@ -173,7 +192,7 @@ class Profile extends AppModel {
 	
 		try {
    			$result = $this->query($strSql);
-   		} catch(Exception $e) {
+   		} catch ( Exception $e ) {
    			$this->log("exception => ".$e->getMessage());
    		}// try catch
 	
@@ -191,7 +210,7 @@ class Profile extends AppModel {
 	
 		try {
    			$result = $this->query($strSql);
-   		} catch(Exception $e) {
+   		} catch ( Exception $e ) {
    			$this->log("exception => ".$e->getMessage());
    		}// try catch
 	

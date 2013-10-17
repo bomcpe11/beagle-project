@@ -58,9 +58,8 @@
 												, function(data) {
 													if ( data.status ) {	// logout success
 														//*** re login
-														var username = "<?php echo $objuser['login'];?>";
 														jQuery.post("<?php echo $this->Html->url('/login/loginAjax');?>"
-																, {"username":username
+																, {"username":"<?php echo $objuser['login'];?>"
 																	, "password":newPassword
 																	, "rememberMe":false}
 																, function(data) {

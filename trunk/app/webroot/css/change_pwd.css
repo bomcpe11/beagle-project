@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+.page_layout {
+	padding: 25px
+}
+/* ### table ### */
+.table_form {
+	padding-left: 100px;
+}
+.td_label {
+	text-align: right;
+}
+.td_data {
+	text-align: left;
+}
+/* ### font ### */
+.header1 {
+	font-weight: bold;
+	font-size: 24px;
+}

@@ -42,23 +42,70 @@
 			return false;
 		}// if
 
+		//*** update password
 		loading();
 		jQuery.post("<?php echo $this->Html->url('/changepwd/updatePasswordFnc');?>"
 				, {"oldPassword":oldPassword
 					, "newPassword":newPassword}
 				, function(data) {
-					jAlert(data.result 
-							, function(){ 
-								if ( data.result == "แก้ไขรหัสผ่าน เรียบร้อย" ) {
-									window.location.replace("<?php echo $this->webroot;?>login/index");
-								}// if
-							}//okFunc	
-							, function(){ 
-								unloading();
-							}//openFunc
-							, function(){ 		
-							}//closeFunc
-					);// jAlert
+						jAlert(data.result 
+								, function(){ 
+									if ( data.result == "แก้ไขรหัสผ่าน เรียบร้อย" ) {
+										//*** logout
+										loading();
+										jQuery.post("<?php echo $this->Html->url('/logout/logoutAjax');?>"
+												, {}
+												, function(data) {
+													if ( data.status ) {	// logout success
+														//*** re login
+														var username = "<?php echo $objuser['login'];?>";
+														jQuery.post("<?php echo $this->Html->url('/login/loginAjax');?>"
+																, {"username":username
+																	, "password":newPassword
+																	, "rememberMe":false}
+																, function(data) {
+																	if ( data.result ) {	// re login fail
+																		jAlert(data.result
+																				, function(){ 
+																				}//okFunc	
+																				, function(){ 
+																					unloading();
+																				}//openFunc
+																				, function(){ 		
+																				}//closeFunc
+																		);// jAlert
+																	} else {	// re login seccess
+																		window.location.replace("<?php echo $this->webroot;?>profile/index");
+
+																		unloading();
+																	}// if else
+																}// callback
+																, "json").error(function() {
+																}// error
+														);// jQuery.post
+													} else {	// logout fail
+														jAlert("ระบบขัดข้อง กรุณาติดต่อผู้ดูแลระบบ" 
+																, function(){ 
+																}//okFunc	
+																, function(){ 
+																	unloading();
+																}//openFunc
+																, function(){ 		
+																}//closeFunc
+														);// jAlert
+													}// if else
+												}// callback
+												, "json").error(function() {
+												}// error
+										);// jQuery.post
+									}// if
+								}//okFunc	
+								, function(){ 
+									unloading();
+								}//openFunc
+								, function(){ 		
+								}//closeFunc
+						);// jAlert
 				}// callback
 				, "json").error(function() {
 				}// error

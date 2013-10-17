@@ -30,11 +30,6 @@ class ChangepwdController extends AppController {
 			if ( $this->Profile->updatePassword(md5($newPassword) // $newPassword
 											, $this->getObjUser()["login"]) ) {	// $username
 				$result = "แก้ไขรหัสผ่าน เรียบร้อย";
-				
-				// set cookie
-				$this->Cookie->time = $cookieTimeOut;
-				$this->Cookie->write("cookieEncryptPassword", md5($newPassword));
-				$this->log("### write cookie complete ###");
 			} else {
 				$result = "แก้ไขรหัสผ่าน ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
 			}

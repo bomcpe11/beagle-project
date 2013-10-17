@@ -61,7 +61,7 @@ class LoginController extends AppController {
 			// delete cookie
 			$this->Cookie->delete("cookieUsername");
 			$this->Cookie->delete("cookieEncryptPassword");
-			$this->log("### delete cookie complete ###");
+			$this->log("delete cookie complete");
 		} else if ( count($objuser) == 1 ) { // username correct
 			// check password
 			if ( $encryptPassword == $objuser[0]["profiles"]["encrypt_password"] ) { // password correct
@@ -69,6 +69,7 @@ class LoginController extends AppController {
 					
 				// set SESSION
 				$this->Session->write("objuser", $objuser[0]["profiles"]);
+				$this->log("write session complete");
 		
 				// set COOKIE
 				if ( $rememberMe == "true" ) {
@@ -76,12 +77,12 @@ class LoginController extends AppController {
 					$this->Cookie->time = $cookieTimeOut;
 					$this->Cookie->write("cookieUsername", $username);
 					$this->Cookie->write("cookieEncryptPassword", $encryptPassword);
-					$this->log("### write cookie complete ###");
+					$this->log("write cookie complete");
 				} else {
 					// delete cookie
 					$this->Cookie->delete("cookieUsername");
 					$this->Cookie->delete("cookieEncryptPassword");
-					$this->log("### delete cookie complete ###");
+					$this->log("delete cookie complete");
 				}// if else
 			} else {	// password incorrect
 				$result = "รหัสผ่านไม่ถูกต้อง";
@@ -89,7 +90,7 @@ class LoginController extends AppController {
 				// delete cookie
 				$this->Cookie->delete("cookieUsername");
 				$this->Cookie->delete("cookieEncryptPassword");
-				$this->log("### delete cookie complete ###");
+				$this->log("delete cookie complete");
 			}// if else
 		} else if ( count($objuser) == 2 ) { // username incorrect
 			$result = "เกิดข้อผิดพลาด กรุณาแจ้งผู้ดูแลเว็บไซต์";
@@ -97,7 +98,7 @@ class LoginController extends AppController {
 			// delete cookie
 			$this->Cookie->delete("cookieUsername");
 			$this->Cookie->delete("cookieEncryptPassword");
-			$this->log("### delete cookie complete ###");
+			$this->log("delete cookie complete");
 		}// if else
 		//$this->log($this->Session->read("objuser"));
 		

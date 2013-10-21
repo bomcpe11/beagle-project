@@ -30,7 +30,7 @@
  */
 class WelcomeController extends AppController {
 
-	public $uses = array();
+	public $uses = array('Profile');
 
 	public function index(){
 		
@@ -47,7 +47,20 @@ class WelcomeController extends AppController {
 		$this->trace($this->Session->read('objuser'));
 		$this->trace($this->getObjUser());
 		$this->set("page_title","Welcome");
+		
+		$this->testStdObjectKeyValue();
 	}
 
+	private function testStdObjectKeyValue(){
+		#Ref : http://stackoverflow.com/questions/10992005/php-get-the-key-from-an-array-in-a-foreach-loop
+		$arr_results = $this->Profile->getProfiles();
+		
+		$result = $arr_results[0];
+		$this->log($result);
+		
+		foreach($result['profiles'] as $key => $item){
+			$this->log($key.'='.$item);
+		}
+	}
 	
 }

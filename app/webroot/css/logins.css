@@ -1,8 +1,11 @@
 @CHARSET "UTF-8";
 .tableLayout {
-	border: 3px solid #666666;
-	width: 50%;
-	background-color: #F5F5F0;
+	border: 1px solid #666666;
+/* 	width: 50%; */
+	width: 700px;
+	background-color: #FCFCFC;
+	border-radius:7px;
+	padding: 0 20px 0 20px;
 }
 .tableForm {
 }
@@ -10,6 +13,6 @@
 	padding-left: 50px;
 }
 .upperBar {
-    border-bottom: 3px solid #666666;
-    padding-bottom: 5px;
+    border-bottom: 1px solid #666666;
+    padding-bottom: 20px;
 }

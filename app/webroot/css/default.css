@@ -1,4 +1,29 @@
 @CHARSET "UTF-8";
+html {margin: 0px; padding: 0px;}
+body{
+	margin: 0px; padding: 0px;
+	font-family: verdana, sans-serif;
+	color: #7C410A;
+	font-size: 0.8em;
+}
+h1{
+/* 	color: #FFA900; */
+}
+h2{
+	color: #FFA900;
+}
+h3{
+	color: #FFA900;
+}
+h4{
+	margin: 10px;
+}
+p{
+	margin: 5px;
+}
+p, td{
+	
+}
 div#layout-container{
 	width: 1200px;
 	float:none;
@@ -7,20 +32,28 @@ div#layout-container{
 div#layout-header{
 	height: 200px;
 	width: 1200px;
-	border:1px solid;
-    border-radius:5px;  
+	background: url('../img/JstpHeader_v1.png');
+/* 	border:1px solid black; */
+/*     border-radius:5px;   */
 }
 div#layout-header h1{
 	text-align: center;
 }
 div#layout-footer{
 	text-align: center;
-	height: 150px;
+	height: 70px;
 	width: 1200px;
-	border:1px solid;
-    border-radius:5px;  
-    margin-left: auto ;
-    margin-right: auto ;
+	border:1px solid black;
+/*     border-radius:5px;   */
+    margin: 0 auto ;
+}
+td.layout-sub-container1{
+	border:1px solid black;
+	border-radius:5px;
+	background-color: #FDFDFE;
+}
+div#layout-content{
+	padding: 10px 0;
 }
 .ui-datepicker-trigger{
 	vertical-align: middle;
@@ -31,13 +64,14 @@ div#layout-footer{
 }
 div#layout-body{
 	width: 1200px;
-	border:1px solid;
-    border-radius:5px;  
+/* 	border:1px solid; */
+/*     border-radius:5px;   */
+	padding: 5px 0 5px 0;
 }
 div#profile-container{
 	width: 200px;
 	
-	border:1px solid;
+	border:1px solid black;
     border-radius:2px;  
     float:none;
     margin:0 auto;
@@ -45,7 +79,7 @@ div#profile-container{
 div#profile-picture{
 	width: 150px;
 	height: 150px;
-	border:1px solid;
+	border:1px solid black;
     border-radius:2px;  
     float:none;
     margin:0 auto;
@@ -62,4 +96,8 @@ div#link-menu{
     float:none;
     margin:0 auto;
 }
-.label{font-size:0.875em;}
+a.menu{
+/* 	font-size:0.875em; */
+	display: block;
+	padding: 0 0 5px 20px;
+}

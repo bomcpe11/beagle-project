@@ -127,16 +127,16 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 <body>
 	<div id="layout-container">
 		<div id="layout-header">
-			<h1>Header</h1>
+<!-- 			<h1>Header</h1> -->
 		</div>
 <div id="layout-body">
-		    <table border="1" width="100%" >
+		    <table border="0" width="100%" ﻿cellpadding="0" cellspacing="0" >
 		       <tr valign="top">
 		          <!--profile-menu -->
-		          <td width="20%">
+		          <td width="20%" class="layout-sub-container1">
 		          
 		                 <center>
-		                    <a>
+		                    <h4>
 		                     	<?php if(isset($position) && !empty($position)){
 		                     	        echo $position;
 		                     	      }else{
@@ -144,46 +144,41 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
   									  }
 								?>
 		                        <?php echo $nameth; ?>&nbsp;&nbsp;<?php echo $lastnameth; ?>
-		                    </a>
+		                    </h4>
 		                 </center>
-		                 
-		                 </br>
 		                 <div id="profile-container">
 		                    </br>
 		                    <div id="profile-picture">
 		                        <img width="150px" height="150px"  src="<?php echo $this->webroot.$image_file; ?>">
 		                    </div>
-		                     <center><a><?php echo $image_desc; ?></a></center>
+		                     <center><p><?php echo $image_desc; ?></p></center>
 		                 </div>
 		                 </br>
 		                 
 		                 <div id="profile-desc">
-		                     <a class="label">Username : <?php echo $login; ?></a> </br>
-		                     <a class="label"> เข้าระบบล่าสุด :  <?php echo $last_login_at; ?></a>
+		                     <p>Username : <?php echo $login; ?></p>
+		                     <p> เข้าระบบล่าสุด :  <?php echo $last_login_at; ?></p>
 		                 </div>
-		                 </br>
-		                 
 		                 <!--layout-menu -->
 		                 <div id="link-menu">
-		                     <a><b>เมนู</b></a><br>
-		                     &nbsp;&nbsp;<a style="cursor: pointer;" class="label" id="gotoProfile">ข้อมูลส่วนตัว </a><br>
-		                     &nbsp;&nbsp;<a style="cursor: pointer;" class="label" id="gotoChangePic" >เปลี่ยนรูปประจำตัว</a><br>
-		                     &nbsp;&nbsp;<a style="cursor: pointer;" class="label" id="gotoChangePwd">แก้ไขรหัสผ่าน</a><br>
-		                     &nbsp;&nbsp;<a style="cursor: pointer;" class="label" id="gotoPsearch">ค้นหาบุคคล</a><br>
-		                     &nbsp;&nbsp;<a style="cursor: pointer;" class="label" id="gotoExport" >ส่งออกข้อมูล</a><br>
-		                     &nbsp;&nbsp;<a style="cursor: pointer;" class="label" id="gotoLogout" >Logout</a><br>
+		                     <h3 style="margin-top:20px; margin-left:0;">เมนู</h3>
+		                     <a style="cursor: pointer;" class="menu" id="gotoProfile">ข้อมูลส่วนตัว </a>
+		                     <a style="cursor: pointer;" class="menu" id="gotoChangePic" >เปลี่ยนรูปประจำตัว</a>
+		                     <a style="cursor: pointer;" class="menu" id="gotoChangePwd">แก้ไขรหัสผ่าน</a>
+		                     <a style="cursor: pointer;" class="menu" id="gotoPsearch">ค้นหาบุคคล</a>
+		                     <a style="cursor: pointer;" class="menu" id="gotoExport" >ส่งออกข้อมูล</a>
+		                     <a style="cursor: pointer;" class="menu" id="gotoLogout" >ออกจากระบบ</a>
 		                                                                        
 		                 </div>
 		                 </br>
 		          </td>
-		          
+		          <td width="5"><div style="width:1px;height:1px;"></div></td>
 		          <!--layout-content -->
-		          <td>   <a><?php echo $page_title ?></a>
-		                 <hr>
-		          		 <div id="layout-content">
-                           <?php //echo $this->Session->flash(); ?>
-                           <?php echo $this->fetch('content'); ?>
-		                 </div>
+		          <td class="layout-sub-container1" style="padding:0 10px 10px 10px;">   
+			          <h2><?php echo $page_title ?></h2>
+						<div id="layout-content">
+							<?php echo $this->fetch('content'); ?>
+						</div>
 		          </td>
 		       </tr>
 		    </table>

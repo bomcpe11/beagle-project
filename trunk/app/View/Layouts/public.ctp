@@ -51,8 +51,7 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 <body>
 	<div id="layout-container">
 		<div id="layout-header">
-			<h1>Header</h1>
-			<hr />
+<!-- 			<h1>Header</h1> -->
 		</div>
 		<div id="layout-content">
 
@@ -61,7 +60,6 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 			<?php echo $this->fetch('content'); ?>
 		</div>
 		<div id="layout-footer">
-			<hr />
 			Footer...
 		</div>
 	</div>

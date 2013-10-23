@@ -74,8 +74,16 @@ class ChangepicController extends AppController {
 	}// submitDataFnc
 	/* --------------------------------------------------------------------------------- */
 	private function prepareDataFnc($flagUploadFile) {
+		$objUser = $this->getObjUser();
+		
+		// page title
 		$this->set("page_title","Picture profile uploader");
 		
+		// image
+		$pathImage = $this->ProfilePic->getStarByProfileId($objUser["id"]);	// $byProfileId
+		$this->set("pathImage", $pathImage);
+		
+		// eduStep
 		$eduStep = $this->Gvar->getVarcodeVardesc1ByVarname("EDUCATION_STEP");	// $byVarName
 		$this->set("eduStep", $eduStep);
 		

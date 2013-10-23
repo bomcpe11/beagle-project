@@ -73,6 +73,9 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 		//---------------------------------------------------------------------------------------------
 		jQuery("#gotoExport").click(function() {changePage("Export");});
 		//---------------------------------------------------------------------------------------------
+		jQuery("#gotoLogout").click(function() {changePage("Logout");});
+		//---------------------------------------------------------------------------------------------
+		
 	});
 
 	//-------------------------------------------------------------------------------------------------
@@ -82,25 +85,28 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 		switch(path)
 		{
 		case "Profile":
-		  link = '<?php echo Router::url(array("controller"=>"Profile","action"=>"index"));?>'
+	      window.location = "<?php echo $this->Html->url('/Profile/index');?>";
 		  break;
 		case "Changepic":
-		  link = '<?php echo Router::url(array("controller"=>"Changepic","action"=>"index"));?>'
+		  window.location = "<?php echo $this->Html->url('/Changepic/index');?>";
 		  break;
 		case "Changepwd":
-			  link = '<?php echo Router::url(array("controller"=>"Changepwd","action"=>"index"));?>'
-			  break;
+		  window.location = "<?php echo $this->Html->url('/Changepwd/index');?>";
+		  break;
 		case "Psearch":
-			  link = '<?php echo Router::url(array("controller"=>"Psearch","action"=>"index"));?>'
-			  break;
+		  window.location = "<?php echo $this->Html->url('/Psearch/index');?>";	
+		  break;
 		case "Export":
-			  link = '<?php echo Router::url(array("controller"=>"Export","action"=>"index"));?>'
-			  break;		  			    
+		  window.location = "<?php echo $this->Html->url('/Export/index');?>";	
+		  break;
+	    case "Logout":
+		  window.location = "<?php echo $this->Html->url('/Logout/index');?>";	
+		  break;	  		  			    
 		default:
-		  link = '<?php echo Router::url(array("controller"=>"Welcome","action"=>"index"));?>'
+		  window.location = "<?php echo $this->Html->url('/Welcome/index');?>";	
 		}
 		
-		jQuery.ajax({
+		/*jQuery.ajax({
 	           dataType: "html",
 	           type: "POST",
 	           evalScripts: true,
@@ -111,7 +117,7 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 	        	   jQuery("#layout").html(data);
 
 	           }
-	       });
+	       });*/
 	}       
 	//-------------------------------------------------------------------------------------------------
 </script>
@@ -145,7 +151,7 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 		                 <div id="profile-container">
 		                    </br>
 		                    <div id="profile-picture">
-		                        <img width="150px" height="150px"  src="<?php echo $image_file; ?>">
+		                        <img width="150px" height="150px"  src="<?php echo $this->webroot.$image_file; ?>">
 		                    </div>
 		                     <center><a><?php echo $image_desc; ?></a></center>
 		                 </div>
@@ -165,6 +171,7 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 		                     &nbsp;&nbsp;<a style="cursor: pointer;" class="label" id="gotoChangePwd">แก้ไขรหัสผ่าน</a><br>
 		                     &nbsp;&nbsp;<a style="cursor: pointer;" class="label" id="gotoPsearch">ค้นหาบุคคล</a><br>
 		                     &nbsp;&nbsp;<a style="cursor: pointer;" class="label" id="gotoExport" >ส่งออกข้อมูล</a><br>
+		                     &nbsp;&nbsp;<a style="cursor: pointer;" class="label" id="gotoLogout" >Logout</a><br>
 		                                                                        
 		                 </div>
 		                 </br>

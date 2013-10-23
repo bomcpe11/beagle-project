@@ -7,7 +7,7 @@
 	jQuery(document).ready(function() {
 			// set datepicker
 			setDatePicker(".datePicker");
-
+			
 			if ( flagUploadFile ) {
 				jAlert(flagUploadFile
 						, function() {
@@ -109,37 +109,17 @@
 <!-- Picture -->
 <div>	
 	<span class="header1">รูปภาพที่มีอยู่</span>
-	<table class="table_form_picture">
-		<tr>
-			<td>
-				<div class="div_picture">
-					<img class="img_picture"/>
-					<span class="span_picture_desc">Picture profile description</span>
-				</div>
-			</td>
-			<td>
-				<div class="div_picture">
-					<img class="img_picture"/>
-					<span class="span_picture_desc">Picture profile description</span>
-				</div>
-			</td>
-			<td>
-				<div class="div_picture">
-					<img class="img_picture"/>
-					<span class="span_picture_desc">Picture profile description</span>
-				</div>
-			</td>
-			<td>
-				<div class="div_picture">
-					<img class="img_picture"/>
-					<span class="span_picture_desc">Picture profile description</span>
-				</div>
-			</td>
-		</tr>
-	</table>
+	<div class="div_form_picture">
+		<?php for ( $i = 0; $i < count($pathImage); $i++ ) {?>
+			<div class="div_item_picture">
+				<img class="img_picture" src="<?php echo $this->webroot.$pathImage[$i]['profile_pics']['imgpath'];?>"/>
+				<span class="span_picture_desc"><?php echo $pathImage[$i]["profile_pics"]["imgdesc"];?></span>
+			</div>
+		<?php }?>
+	</div>
 </div>
 <!-- Data -->
-<div>
+<div style="margin-top: 20px">
 	<span class="header1">อัพโหลดรูปภาพเพิ่ม</span>
 	<form id="form_data" name="form_data" method="post" action="<?php echo $this->webroot;?>changepic/submitDataFnc" 
 		enctype="multipart/form-data" onSubmit="return validateData();">

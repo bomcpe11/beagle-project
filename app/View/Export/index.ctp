@@ -39,7 +39,6 @@ function doExportFile(){
 				if(data.status.id==1) {	
 					jAlert('ดำเนินการเรียบร้อย!', function(){
 						                        jQuery(window.location).attr('href',G_WEB_ROOT+"data.csv");
-						                        window.location.reload();
 						                  }
 	                                   ,function(){}
 	                                   ,function(){});

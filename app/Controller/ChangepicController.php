@@ -8,7 +8,7 @@ class ChangepicController extends AppController {
 	public function index(){
 		$this->log("START :: ChangepicController -> index()");
 		
-		$this->prepareDataFnc("");
+		$this->prepareDataFnc("");	// $flagUploadFile
 		
 		$this->log("END :: ChangepicController -> index()");
 	}// index
@@ -18,33 +18,53 @@ class ChangepicController extends AppController {
 		
 		//// local variables ////
 		$result = null;
-		$fileName = $_FILES["file_upload"]["name"];
-		$pathFile = "files/";
+		$objUser = $this->getObjUser();
 		$eduStep = $this->request->data["select_edustep"];
 		$imgDtm = $this->setFormatDate($this->request->data["text_imgdtm"]);
 		$imgDesc = $this->request->data["textarea_imgdesc"];
-
-		// check duplicate file
-		if ( file_exists($pathFile.$fileName) ) {
-			$result = "ชื่อไฟล์ ซ้ำ";
-		} else {
+		
+		//*** insert data
+		$dataSource = $this->ProfilePic->getdatasource();
+		$dataSource->begin();
+		if ( $this->ProfilePic->insertAll($objUser["id"]	// $proflieid
+				, ""	// $imgpath
+				, $imgDesc	// $imgdesc
+				, $eduStep	// $edustep
+				, $imgDtm	// $imgdtm
+				, "") ) {	// $uploaddtm
+			// gen directory
+			$directory = "profiles/".$objUser["id"];
+			// gen fileName
+			$lastInsertId = $this->ProfilePic->getLastInsert();
+			$extensionFile = ".".explode(".", $_FILES["file_upload"]["name"])[1];
+			$fileName = $lastInsertId[0][0]["last_index_id"].$extensionFile;
+			
 			//*** upload file
-			if ( move_uploaded_file($_FILES["file_upload"]["tmp_name"]	// temp_file
-									, $pathFile.$fileName) ) {	// path file
-				//*** insert data
-				if ( $this->ProfilePic->insertAll($this->getObjUser()["id"]	// $proflieid
-												, $pathFile.$fileName	// $imgpath
-												, $imgDesc	// $imgdesc
-												, $eduStep	// $edustep
-												, $imgDtm	// $imgdtm
-												, "") ) {	// $uploaddtm
-					$result = "อัพโหลดไฟล์ เรียบร้อย";
+			if ( $this->checkDirectory($directory) ) {
+				if ( move_uploaded_file($_FILES["file_upload"]["tmp_name"]	// temp_file
+						, $directory."/".$fileName) ) {	// path file
+					//*** update data(imgPath)
+					if ( $this->ProfilePic->updateImgPathById($directory."/".$fileName	// $imgPath
+									, $lastInsertId[0][0]["last_index_id"]) ) {	// $byId
+						$result = "บันทึกข้อมูล เรียบร้อย";
+					} else {
+						$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
+					}// if else
 				} else {
-					$result = "อัพโหลดไฟล์ ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
+					$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
 				}// if else
 			} else {
-				$result = "อัพโหลดไฟล์ ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
-			}// if else
+				$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
+			}// if
+		} else {
+			$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
+		}// if else
+			
+		// close transaction
+		if ( $result == "บันทึกข้อมูล เรียบร้อย" ) {
+			$dataSource->commit();
+		} else {
+			$dataSource->rollback();
 		}// if else
 		
 		$this->prepareDataFnc($result);
@@ -55,8 +75,10 @@ class ChangepicController extends AppController {
 	/* --------------------------------------------------------------------------------- */
 	private function prepareDataFnc($flagUploadFile) {
 		$this->set("page_title","Picture profile uploader");
+		
 		$eduStep = $this->Gvar->getVarcodeVardesc1ByVarname("EDUCATION_STEP");	// $byVarName
 		$this->set("eduStep", $eduStep);
+		
 		$this->set("flagUploadFile", $flagUploadFile);
 	}// prepareDataFnc
 	/* --------------------------------------------------------------------------------- */
@@ -71,4 +93,34 @@ class ChangepicController extends AppController {
 		
 		return ($result[2] - 543)."/".$result[1]."/".$result[0];
 	}// setFormatDate
+	/* --------------------------------------------------------------------------------- */
+	private function checkDirectory($directory) {
+		$flag = false;
+		
+		// check directory existing
+		if ( is_dir($directory) ) {
+			$flag = true;
+		} else {
+			$this->log("not have directory");
+				
+			if ( mkdir($directory) ) {
+				$this->log("make directory complete");
+				
+				#Ref : http://php.net/manual/en/function.chmod.php
+				// Changes file mode
+				// Read and write for owner, read for everybody else
+				if ( chmod($directory, 0744) ) {
+					$this->log("set permission complete");
+					
+					$flag = true;
+				} else {
+					$this->log("set permission fail");
+				}// if else
+			} else {
+				$this->log("make directory fail");
+			}// if else
+		}// if else
+		
+		return $flag;
+	}// checkDirectory
 }// ChangepicController

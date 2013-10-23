@@ -5,7 +5,7 @@ class ProfilePic extends AppModel {
 		$result = $this->query('select * from profile_pics');
 		return $result;
 	}
-	/*	---------------------------------------------------------------------------------- */
+	/* ---------------------------------------------------------------------------------- */
 	public function insertAll($proflieid
 								, $imgpath
 								, $imgdesc
@@ -44,4 +44,37 @@ class ProfilePic extends AppModel {
 		
 		return $flag;
 	}// insert
+	/* ---------------------------------------------------------------------------------- */
+	public function updateImgPathById($imgPath, $byId) {
+		$flag = false;
+		$strSql = "UPDATE profile_pics";
+		$strSql .= " SET";
+  		$strSql .= " imgpath = '".$imgPath."'"; // varchar(255)
+		$strSql .= " WHERE id = ".$byId; // int(11)"
+		$this->log("strSql => ".$strSql);
+		
+		try {
+			$this->query($strSql);
+			
+			$flag = true;
+		} catch ( Exception $e ) {
+			$this->log("Exception => ".$e.getMessage());
+		}// try catch
+		
+		return $flag;
+	}// updateImgPathById
+	/* ---------------------------------------------------------------------------------- */
+	public function getLastInsert() {
+		$result = null;
+		$strSql = "SELECT LAST_INSERT_ID() AS last_index_id;";
+		$this->log("strSql => ".$strSql);
+		
+		try {
+			$result = $this->query($strSql);
+		} catch ( Exception $e ) {
+			$this->log("Exception => ".$e.getMessage());
+		}// try catch
+		
+		return $result;
+	}// getLastInsert
 }// ProfilePic

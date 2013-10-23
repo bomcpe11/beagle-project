@@ -23,10 +23,11 @@
 	/* ------------------------------------------------------------------------------ */
 	function validateData() {
 		var fileUpload = jQuery("#file_upload").val();
+		var extensionFile = fileUpload.split(".").pop();
 		var eduStep = jQuery("#select_edustep").val();
 		var imgDtm = jQuery("#text_imgdtm").val();
 		var imgDesc = jQuery("#textarea_imgdesc").val();
-
+		
 		// validate fileUpload
 		if ( !fileUpload ) {
 			jAlert("กรุณาเลือก ไฟล์"
@@ -40,7 +41,25 @@
 
 			return false;
 		}// if
-
+		
+		// validate extenstion file
+		if ( extensionFile != "jpg"
+			&& extensionFile != "jpeg"
+			&& extensionFile != "jpe"
+			&& extensionFile != "gif"
+			&& extensionFile != "png" ) {
+			jAlert("ไฟล์ต้องเป็นชนิด jpg, jpeg, jpe, gif, png เท่านั้น "
+					, function() {
+					}// okFnc
+					, function() {
+					}// openFnc
+					, function() {
+					}// closeFnc
+			);// jAlert
+			
+			return false;
+		}// if
+		
 		// validate eduStep
 		if ( eduStep == -1 ) {
 			jAlert("กรุณาเลือก ระดับการศึกษา"

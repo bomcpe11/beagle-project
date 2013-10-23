@@ -77,4 +77,18 @@ class ProfilePic extends AppModel {
 		
 		return $result;
 	}// getLastInsert
+	/* ---------------------------------------------------------------------------------- */
+	public function getStarByProfileId($byProfileId) {
+		$result = null;
+		$strSql = "SELECT * FROM profile_pics WHERE proflieid = '".$byProfileId."';";
+		$this->log("strSql => ".$strSql);
+	
+		try {
+			$result = $this->query($strSql);
+		} catch ( Exception $e ) {
+			$this->log("Exception => ".$e.getMessage());
+		}// try catch
+	
+		return $result;
+	}// getStarByProfileId
 }// ProfilePic

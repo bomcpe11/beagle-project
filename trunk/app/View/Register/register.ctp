@@ -14,79 +14,52 @@
 	}// change_Captcha
 	/* --------------------------------------------------------------------------------------------------- */
 	function submitData() {
-		var cardtype = jQuery("#select_cardtype").val();
-		var cardid = jQuery("#text_cardid").val();
-		var titleth = jQuery("#select_titleth").val();
-		var nameth = jQuery("#text_nameth").val();
-		var lastnameth = jQuery("#text_lastnameth").val();
-		var titleen = jQuery("#select_titleen").val();
-		var nameeng = jQuery("#text_nameeng").val();
-		var lastnameeng = jQuery("#text_lastnameeng").val();
-		var nickname = jQuery("#text_nickname").val();
-		var generation = jQuery("#text_generation").val();
-		var birthday = jQuery("#text_birthday").val();
-		var nationality = jQuery("#text_nationality").val();
-		var religious = jQuery("#text_religious").val();
-		var socialstatus = jQuery("#text_socialstatus").val();
-		var studystatus = jQuery("#text_studystatus").val();
-		var address = jQuery("#textarea_address").val();
-		var telphone = jQuery("#text_telphone").val();
-		var celphone = jQuery("#text_celphone").val();
-		var email = jQuery("#text_email").val();
-		var position = jQuery("#text_position").val();
-		var blogaddress = jQuery("#text_blogaddress").val();
-		var username = jQuery("#text_username").val();
-		var password = jQuery("#text_password").val();
-		var confirm_password = jQuery("#text_confirm_password").val();
-		var captcha_code = jQuery("#captcha_code").val();
+		var accountRole			= jQuery("#select_account_role").val();
+		var cardtype 			= jQuery("#select_cardtype").val();
+		var cardid 				= jQuery("#text_cardid").val();
+		var titleth 			= jQuery("#select_titleth").val();
+		var nameth 				= jQuery("#text_nameth").val();
+		var lastnameth 			= jQuery("#text_lastnameth").val();
+		var titleen 			= jQuery("#select_titleen").val();
+		var nameeng 			= jQuery("#text_nameeng").val();
+		var lastnameeng 		= jQuery("#text_lastnameeng").val();
+		var nickname 			= jQuery("#text_nickname").val();
+		var generation 			= jQuery("#text_generation").val();
+		var birthday 			= jQuery("#text_birthday").val();
+		var nationality 		= jQuery("#text_nationality").val();
+		var religious 			= jQuery("#text_religious").val();
+		var socialstatus 		= jQuery("#text_socialstatus").val();
+		var studystatus 		= jQuery("#text_studystatus").val();
+		var address 			= jQuery("#textarea_address").val();
+		var telphone 			= jQuery("#text_telphone").val();
+		var celphone 			= jQuery("#text_celphone").val();
+		var email 				= jQuery("#text_email").val();
+		var position 			= jQuery("#text_position").val();
+		var blogaddress 		= jQuery("#text_blogaddress").val();
+		var username 			= jQuery("#text_username").val();
+		var password 			= jQuery("#text_password").val();
+		var confirm_password 	= jQuery("#text_confirm_password").val();
+		var captcha_code 		= jQuery("#captcha_code").val();
 		
 		// validate field *
-		if ( cardtype.length == 0
-				|| cardid.length == 0
-				|| titleth.length == 0
-				|| nameth.length == 0
-				|| lastnameth.length == 0
-				|| titleen.length == 0
-				|| nameeng.length == 0
-				|| lastnameeng.length == 0
-				|| nickname.length == 0
-				|| generation.length == 0
-				|| birthday.length == 0
-				|| email.length == 0
-				|| username.length == 0
-				|| password.length == 0
-				|| confirm_password.length == 0
-				|| captcha_code.length == 0 ) {
+		if ( !accountRole 
+			|| !cardtype 
+			|| !cardid
+			|| !titleth
+			|| !nameth
+			|| !lastnameth
+			|| !titleen
+			|| !nameeng
+			|| !lastnameeng
+			|| !nickname
+			|| !generation
+			|| !birthday
+			|| !email
+			|| !username
+			|| !password
+			|| !confirm_password
+			|| !captcha_code ) {
 			jAlert("กรุณากรอกข้อมูลช่องที่ * ให้ครบ" 
-					, function(){ 
-					}//okFunc	
-					, function(){ 
-					}//openFunc
-					, function(){ 		
-					}//closeFunc
-			);// jAlert
-			
-			return false;
-		}// if
-
-		// validate select_cardtype
-		if ( cardtype == "-1") {
-			jAlert("กรุณาเลือกประเภทของบัตร" 
-					, function(){ 
-					}//okFunc	
-					, function(){ 
-					}//openFunc
-					, function(){ 		
-					}//closeFunc
-			);// jAlert
-			
-			return false;
-		}// if
-		
-		// validate titlename
-		if ( titleth == "-1"
-				|| titleen == "-1" ) {
-			jAlert("กรุณาเลือกคำหน้านำชื่อ" 
 					, function(){ 
 					}//okFunc	
 					, function(){ 
@@ -141,9 +114,9 @@
 		}// if
 
 		loading();
-		
 		jQuery.post("<?php echo $this->Html->url('/register/insertFnc');?>"
-				, {"cardtype":cardtype
+				, {"accountRole":accountRole
+					, "cardtype":cardtype
 					, "cardid":cardid
 					, "titleth":titleth
 					, "nameth":nameth
@@ -203,7 +176,7 @@
 	/* --------------------------------------------------------------------------------------------------- */
 	function clearScreen() {
 		// clear select
-		jQuery("select").val("-1");
+		jQuery("select").val("");
 		// clear text box
 		jQuery("input[type='text']").val(null);
 		// clear text area
@@ -225,12 +198,23 @@
 		</td>
 	</tr>
 	<tr>
+		<td class="tdLabel">* สิทธิ์ในการใช้งานเว็บ : </td>
+		<td class="tdData" colspan="3">
+			<select id="select_account_role">
+				<option value="">---- กรุณาเลือก ----</option>
+			<?php for ( $i = 0; $i < count($accountRole); $i++ ) { ?>
+				<option value="<?php echo $accountRole[$i]['gvars']['varcode'];?>"><?php echo $accountRole[$i]['gvars']['vardesc1'];?></option>
+			<?php } ?>
+			</select>
+		</td>
+	</tr>
+	<tr>
 		<td class="tdLabel">* ประเภทของบัตร : </td>
 		<td class="tdData">
 			<select id="select_cardtype">
-				<option value='-1'>---- กรุณาเลือก ----</option>
+				<option value="">---- กรุณาเลือก ----</option>
 			<?php for ( $i = 0; $i < count($personalIdType); $i++ ) { ?>
-				<option value="<?php echo $personalIdType[$i]['gvars']['varcode'];?>"><?php echo $personalIdType[$i]["gvars"]["vardesc1"];?></option>
+				<option value="<?php echo $personalIdType[$i]['gvars']['varcode'];?>"><?php echo $personalIdType[$i]['gvars']['vardesc1'];?></option>
 			<?php } ?>
 			</select>
 		</td>
@@ -244,9 +228,9 @@
 		<td class="tdLabel">* คำนำหน้าชื่อ : </td>
 		<td colspan="3" class="tdData">
 			<select id="select_titleth">
-				<option value='-1'>---- กรุณาเลือก ----</option>
+				<option value="">---- กรุณาเลือก ----</option>
 			<?php for ( $i = 0; $i < count($namePrefixTh); $i++ ) { ?>
-				<option value="<?php echo $namePrefixTh[$i]['gvars']['vardesc1'];?>"><?php echo $namePrefixTh[$i]["gvars"]["vardesc1"];?></option>
+				<option value="<?php echo $namePrefixTh[$i]['gvars']['vardesc1'];?>"><?php echo $namePrefixTh[$i]['gvars']['vardesc1'];?></option>
 			<?php } ?>
 			</select>
 		</td>
@@ -266,9 +250,9 @@
 		<td class="tdLabel">* คำนำหน้าชื่อ : </td>
 		<td colspan="3" class="tdData">
 			<select id="select_titleen">
-				<option value='-1'>---- กรุณาเลือก ----</option>
+				<option value="">---- กรุณาเลือก ----</option>
 			<?php for ( $i = 0; $i < count($namePrefixEn); $i++ ) { ?>
-				<option value="<?php echo $namePrefixEn[$i]['gvars']['vardesc1'];?>"><?php echo $namePrefixEn[$i]["gvars"]["vardesc1"];?></option>
+				<option value="<?php echo $namePrefixEn[$i]['gvars']['vardesc1'];?>"><?php echo $namePrefixEn[$i]['gvars']['vardesc1'];?></option>
 			<?php } ?>
 			</select>
 		</td>

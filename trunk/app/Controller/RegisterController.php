@@ -12,14 +12,14 @@ class RegisterController extends AppController {
 		$this->log("START :: RegisterController -> index()");
 	
 		//// local variables ////
+		$accountRole 	= $this->Gvar->getVarcodeVardesc1ByVarnameVardesc2("ACCOUNT_ROLE"
+																		, "Y");
 		$personalIdType = $this->Gvar->getVarcodeVardesc1ByVarname("PERSONAL_ID_TYPE");
-		$namePrefixTh = $this->Gvar->getVarcodeVardesc1ByVarname("NAME_PREFIX_TH");
-		$namePrefixEn = $this->Gvar->getVarcodeVardesc1ByVarname("NAME_PREFIX_EN");
+		$namePrefixTh 	= $this->Gvar->getVarcodeVardesc1ByVarname("NAME_PREFIX_TH");
+		$namePrefixEn 	= $this->Gvar->getVarcodeVardesc1ByVarname("NAME_PREFIX_EN");
 		
 		// send data to view
-		$this->set("personalIdType", $personalIdType);
-		$this->set("namePrefixTh", $namePrefixTh);
-		$this->set("namePrefixEn", $namePrefixEn);
+		$this->set(compact("accountRole", "personalIdType", "namePrefixTh", "namePrefixEn"));
 		
 		$this->render("register");
 	
@@ -32,30 +32,31 @@ class RegisterController extends AppController {
 		//// local variables ////
 		$result = "";
 		/* request data */
-		$cardtype = $this->request->data["cardtype"];
-		$cardid = $this->request->data["cardid"];
-		$titleth = $this->request->data["titleth"];
-		$nameth = $this->request->data["nameth"];
-		$lastnameth = $this->request->data["lastnameth"];
-		$titleen = $this->request->data["titleen"];
-		$nameeng = $this->request->data["nameeng"];
-		$lastnameeng = $this->request->data["lastnameeng"];
-		$nickname = $this->request->data["nickname"];
-		$generation = $this->request->data["generation"];
-		$birthday = $this->request->data["birthday"];
-		$nationality = $this->request->data["nationality"];
-		$religious = $this->request->data["religious"];
-		$socialstatus = $this->request->data["socialstatus"];
-		$studystatus = $this->request->data["studystatus"];
-		$address = $this->request->data["address"];
-		$telphone = $this->request->data["telphone"];
-		$celphone = $this->request->data["celphone"];
-		$email = $this->request->data["email"];
-		$position = $this->request->data["position"];
-		$blogaddress = $this->request->data["blogaddress"];
-		$username = $this->request->data["username"];
-		$password = $this->request->data["password"];
-		$captcha_code = $this->request->data["captcha_code"];
+		$accountRole 	= $this->request->data["accountRole"];
+		$cardtype 		= $this->request->data["cardtype"];
+		$cardid 		= $this->request->data["cardid"];
+		$titleth 		= $this->request->data["titleth"];
+		$nameth 		= $this->request->data["nameth"];
+		$lastnameth 	= $this->request->data["lastnameth"];
+		$titleen 		= $this->request->data["titleen"];
+		$nameeng 		= $this->request->data["nameeng"];
+		$lastnameeng 	= $this->request->data["lastnameeng"];
+		$nickname 		= $this->request->data["nickname"];
+		$generation 	= $this->request->data["generation"];
+		$birthday 		= $this->request->data["birthday"];
+		$nationality 	= $this->request->data["nationality"];
+		$religious 		= $this->request->data["religious"];
+		$socialstatus 	= $this->request->data["socialstatus"];
+		$studystatus 	= $this->request->data["studystatus"];
+		$address 		= $this->request->data["address"];
+		$telphone 		= $this->request->data["telphone"];
+		$celphone 		= $this->request->data["celphone"];
+		$email 			= $this->request->data["email"];
+		$position 		= $this->request->data["position"];
+		$blogaddress 	= $this->request->data["blogaddress"];
+		$username 		= $this->request->data["username"];
+		$password 		= $this->request->data["password"];
+		$captcha_code 	= $this->request->data["captcha_code"];
 		/* session */
 		$sessionCaptchaCode = $this->Session->read("random_number");
 		/* cookie */
@@ -111,7 +112,7 @@ class RegisterController extends AppController {
 				 		, $position	// $position
 				 		, $username	// $login
 				  		, md5($password)	// $encrypt_password
-				  		, ""	// $role
+				  		, $accountRole	// $role
 				  		, ""	// $login_count
 				  		, ""	// $failed_login_count
 				 		, "") ) {

@@ -7,7 +7,6 @@ class Gvar extends AppModel {
 	}
 	/* ------------------------------------------------------------------------------------------------------- */
 	function getVarcodeVardesc1ByVarname($byVarName) {
-		// local variables
 		$result = null;
 		$strSql = "SELECT varcode, vardesc1";
 		$strSql .= " FROM gvars";
@@ -16,13 +15,31 @@ class Gvar extends AppModel {
 		$strSql .= ";";
 		$this->log("strSql => ".$strSql);
 		
-		// query $strSql
 		try {
 			$result = $this->query($strSql);
 		} catch ( Exception $e ) {
 			$this->log("Exception => ".$e.getMessage());
 		}// try catch
 		
+		return $result;
+	}// getVarCodeVarDesc1
+	/* ------------------------------------------------------------------------------------------------------- */
+	function getVarcodeVardesc1ByVarnameVardesc2($byVarName, $byVarDesc2) {
+		$result = null;
+		$strSql = "SELECT varcode, vardesc1";
+		$strSql .= " FROM gvars";
+		$strSql .= " WHERE varname='".$byVarName."'";
+		$strSql .= " AND vardesc2='".$byVarDesc2."'";
+		$strSql .= " ORDER BY varcode ASC";
+		$strSql .= ";";
+		$this->log("strSql => ".$strSql);
+	
+		try {
+			$result = $this->query($strSql);
+		} catch ( Exception $e ) {
+			$this->log("Exception => ".$e.getMessage());
+		}// try catch
+	
 		return $result;
 	}// getVarCodeVarDesc1
 }

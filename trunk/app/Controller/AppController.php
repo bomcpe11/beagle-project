@@ -41,17 +41,17 @@ class AppController extends Controller {
 		$this->objuser = $this->Session->read('objuser');
 		$this->set('objuser', $this->objuser);
 		
-		$dataProfile =  $this->getObjUser();
+// 		$dataProfile =  $this->getObjUser();
 	
-		$this->set("image_file",$dataProfile['image_file']);
-		$this->set("position",$dataProfile['position']);
-		$this->set("titleth",$dataProfile['titleth']);
-		$this->set("image_desc",$dataProfile['image_desc']);
-		$this->set("nameth", $dataProfile['nameth']);
-		$this->set("lastnameth",$dataProfile['lastnameth']);
-		$this->set("login",$dataProfile['login']);
-		$this->set("last_login_at",$this->DateThai($dataProfile['last_login_at']));
-		echo '555';
+// 		$this->set("image_file",$dataProfile['image_file']);
+// 		$this->set("position",$dataProfile['position']);
+// 		$this->set("titleth",$dataProfile['titleth']);
+// 		$this->set("image_desc",$dataProfile['image_desc']);
+// 		$this->set("nameth", $dataProfile['nameth']);
+// 		$this->set("lastnameth",$dataProfile['lastnameth']);
+// 		$this->set("login",$dataProfile['login']);
+// 		$this->set("last_login_at",$this->DateThai($dataProfile['last_login_at']));
+		
 	}
 	
 	protected function setTitle($msg){

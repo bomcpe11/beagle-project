@@ -51,7 +51,7 @@ class AppController extends Controller {
 		$this->set("lastnameth",$dataProfile['lastnameth']);
 		$this->set("login",$dataProfile['login']);
 		$this->set("last_login_at",$this->DateThai($dataProfile['last_login_at']));
-		
+		echo '555';
 	}
 	
 	protected function setTitle($msg){

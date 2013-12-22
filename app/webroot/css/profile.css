@@ -43,35 +43,66 @@
 }
 .container .section_profile .section_content .table {
 	width: 100%;
-	margin: 20px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
 }
-.container .section_profile .section_content .table button {
+.container .section_content button {
 	display: block;
 	margin: 10px auto 10px auto;
 }
 /* Table */
-div.table ul li {
+tr {
+	text-align: left;
+	line-height: 24px;
+}
+.table_form, .table_data, .table_data_item {
+	width: 100%;
+	border: 1px solid black;
+}
+.table_data_item {
+	width: 98%;
+	margin: 10px;
+}
+.table_data tr, .table_data th, .table_data td {
+	border: 1px solid black;
+}
+.td_link {
+	text-align: right;
+}
+#table-profile {
+	margin: 10px auto 0 auto;
+}
+.table ul {
 	width: 100%;
 	overflow: hidden;
 	list-style-type: none;
 	line-height: 24px;
+	padding: 0;
 }
-.table ul li span {
-	width: 50%;
-	float:left;
-}
-.table ul li span strong {
-}
-.table ul li span p {
-	display: inline;
-}
-.table ul li span input {
-	width: 40%;
+.table ul li {
+	overflow: hidden;
 }
 .table ul li .single {
-	width: 100%;
 	clear: both;
 }
-.table ul li .single input {
-	width: 40%;
+.table ul li.single p:first-child {
+	width: 25%
+}
+.table ul li.single p:last-child {
+	width: 75%
+}
+.table ul li p {
+	float: left;
+	margin: 0;
+	width: 25%;
+}
+.table ul li p strong {
+	display: block;
+	margin: 0 5px 0 0;
+	text-align: right;
+}
+.table ul li p input, .table ul li p select, .table ul li p textarea {
+	text-align: left;
+}
+.table ul li p textarea {
+	width: 98%;
 }

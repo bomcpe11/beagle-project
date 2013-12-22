@@ -120,6 +120,61 @@ class Profile extends AppModel {
    		return $flag;
 	}// insert
 	/* ------------------------------------------------------------------------------------------------------- */
+	public function updateProfile($profileId
+									,$titleTh
+									,$nameTh
+									,$lastnameTh
+									,$titleEng
+									,$nameEng
+									,$lastnameEng
+									,$nickname
+									,$generation
+									,$birthday
+									,$nationality
+									,$religious
+									,$socialStatus
+									,$studyStatus
+									,$address
+									,$telPhone
+									,$celPhone 
+									,$email
+									,$blogAddress) {
+		$flag = false;
+		$strSql = "UPDATE profiles";
+		$strSql .= " SET titleth = '".$titleTh."'";	// VARCHAR(255)
+		$strSql .= " ,nameth = '".$nameTh."'";	// VARCHAR(255)
+		$strSql .= " ,lastnameth = '".$lastnameTh."'";	// VARCHAR(255)
+		$strSql .= " ,titleen = '".$titleEng."'";	// VARCHAR(255)
+		$strSql .= " ,nameeng = '".$nameEng."'";	// VARCHAR(255)
+		$strSql .= " ,lastnameeng = '".$lastnameEng."'";	// VARCHAR(255)
+		$strSql .= " ,nickname = '".$nickname."'";	// VARCHAR(255)
+		$strSql .= " ,generation = '".$generation."'";	// VARCHAR(255)
+		$strSql .= " ,birthday = '".$birthday."'";	// DATE
+		$strSql .= " ,nationality = '".$nationality."'";	// VARCHAR(255)
+		$strSql .= " ,religious = '".$religious."'";	// VARCHAR(255)
+		$strSql .= " ,socialstatus = '".$socialStatus."'";	// VARCHAR(255)
+		$strSql .= " ,studystatus = '".$studyStatus."'";	// VARCHAR(255)
+		$strSql .= " ,address = '".$address."'";	// VARCHAR(1000)
+		$strSql .= " ,telphone = '".$telPhone."'";	// VARCHAR(255)
+		$strSql .= " ,celphone = '".$celPhone."'";	// VARCHAR(255)
+		$strSql .= " ,email = '".$email."'";	// VARCHAR(255)
+		$strSql .= " ,blogaddress = '".$blogAddress."'";	// VARCHAR(255)
+		$strSql .= " ,updated_at = sysdate()";	// DATETIME
+		$strSql .= " WHERE id = ".$profileId;
+		$strSql .= ";";
+		$this->log("strSql => ".$strSql);
+		
+		try {
+			$this->query($strSql);
+			
+			$flag = true;
+		} catch ( Exception $e ) {
+			$this->log("Exception => ".$e->getMessage());
+		}
+		
+		return $flag;
+	}
+	/* ------------------------------------------------------------------------------------------------------- */
 	public function updatePassword($newPassword, $username) {
 		$flag = false;
 		$strSql = "UPDATE profiles";

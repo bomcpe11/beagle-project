@@ -26,7 +26,7 @@ Birth Date :<input type="text" class="birthDatePicker" />
 <script type="text/javascript">
 	/*Syntax : void openPopupHtml(String title, String html, ObjectArray buttons, function openFunc, function closeFunc, boolean isPutCloseBtn=true)*/
 	jQuery('#jdialog1').click(function(){
-			var html = '<div style="width:500px;">\
+			var html = '<div id="jdialog1-container" style="width:500px;">\
 										<h4>Welcome to jQuery Dialog</h4>\
 										<div class="popup1">ABCDEFG</div>\
 									</div>';
@@ -44,6 +44,7 @@ Birth Date :<input type="text" class="birthDatePicker" />
 						alert('closed');
 					}
 			);
+			// Example to close with script ==> closePopup('#jdialog1-container');
 		});
 </script>
 

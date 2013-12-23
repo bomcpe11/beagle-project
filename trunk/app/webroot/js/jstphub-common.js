@@ -130,6 +130,11 @@ function openPopupHtml(title, html, buttons, openFunc, closeFunc, isPutCloseBtn)
         });
 }
 
+function closePopup(selector){
+	jQuery(selector).dialog("close"); 
+	jQuery(selector).remove();
+}
+
 function jAlert(msg, okFunc, openFunc, closeFunc){
 	var NewDialog = jQuery('<div style="width:300px;"><p>'+msg+'</p></div>');
 	NewDialog.dialog({

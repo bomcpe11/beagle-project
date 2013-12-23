@@ -30,7 +30,9 @@
  */
 class WelcomeController extends AppController {
 
+	public $names = "WelcomeController";
 	public $uses = array('Profile');
+	public $layout = "public";
 
 	public function index(){
 		
@@ -43,6 +45,8 @@ class WelcomeController extends AppController {
 		
 		//$this->Session->write('objuser', 'TEST SESSION');
 		//$this->log('SESSION.DETAIL='.print_r($_SESSION, true));
+		
+		return;
 		
 		$this->trace($this->Session->read('objuser'));
 		$this->trace($this->getObjUser());

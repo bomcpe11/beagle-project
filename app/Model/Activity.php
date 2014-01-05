@@ -2,7 +2,7 @@
 class Activity extends AppModel {
 	
 	public function getActivites(){
-		$result = $this->query('select * from activities where id in (1,2,3,4)');
+		$result = $this->query('select * from activities ');
 		return $result;
 	}
 	

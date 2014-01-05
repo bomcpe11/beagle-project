@@ -5,17 +5,14 @@ class ActivitylistController extends AppController {
 	
 	public function index() {
 		$this->setTitle('ข้อมูลกิจกรรม');
-
+		$this->getActivitylist();
 	}
 	
 	function getActivitylist(){
 		$this->log('Start :: ActivitylistController :: getActivitylist');
 		$result = $this->Activity->getActivites();
-		$this->log($result);
-		
-		$this->layout = "ajax";
-	    $this->set('message', json_encode(array("result"=>$result)));
-	    $this->render("response");
+		$this->log($result[0]["activities"]["name"]);
+		$this->set("result", $result);
 		 
 		$this->log("END :: ActivitylistController :: getActivitylist");
 		
@@ -24,29 +21,14 @@ class ActivitylistController extends AppController {
 	function deleteActivity(){
 		$this->log('Start :: ActivitylistController :: deleteActivity');
 		$id = $this->request->data["id"];
-		$this->log("IDDDDDDDDDD  -> ". $id);
-		//$rs = $this->Activity->deleteActivites($id);
-		//$status['id'] = $rs;
+		//$this->log("ID  -> ". $id ."  <- ");
+		$rs = $this->Activity->deleteActivites($id);
+		$this->log("RS  -> ". $rs ."  <- ");
+		$status['id'] = $rs;
+		$this->layout = "ajax";
+		$this->set('message', json_encode(array("status"=>$status)));
+		$this->render("response");
+		
 		$this->log("END :: ActivitylistController :: deleteActivity");
-	}
-	
-	private function testNuengNaja(){
-		$stt = array('01:00:00','00:00:00','04:00:00'); // must show 00:00-22:00
-		$edt = array('20:00:00','22:00:00','20:00:00');
-		$data = array();
-		$i=0;
-		foreach($stt as $rs){
-			array_push($data,array('start'=>$stt[$i],'end'=>$edt[$i]));
-			$i++;
-		}
-		
-		$j=0;
-		foreach($data as $pri){
-		
-			$showtime .= substr($data[$j]['start'],0,5).'-'. substr($data[$j]['end'],0,5).',';
-			$j++;
-		}
-		
-		echo $showtime;
 	}
 }

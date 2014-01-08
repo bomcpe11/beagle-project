@@ -97,3 +97,61 @@ Birth Date :<input type="text" class="birthDatePicker" />
 	});
 </script>
 
+<!-- ####################  IMAGE BUTTON  ########################################## -->
+<h3>- IMAGE BUTTON</h3>
+<table border="1" id="imgbutton1">
+	<tr>
+		<th>Head1</th>
+		<th>Head2</th>
+		<th>Head3</th>
+		<th>Edit</th>
+		<th>Delete</th>
+	</tr>
+	<tr>
+		<td>abc</td>
+		<td>abc</td>
+		<td>abc</td>
+		<td style="text-align: center;cursor:pointer;"><img src="<?php echo $this->Html->url('/img/icon_edit.png'); ?>" width="16" height="16" /></td>
+		<td style="text-align: center;cursor:pointer;"><img src="<?php echo $this->Html->url('/img/icon_del.png'); ?>" width="16" height="16" /></td>
+	</tr>
+	<tr>
+		<td>abc2</td>
+		<td>abc2</td>
+		<td>abc2</td>
+		<td style="text-align: center;cursor:pointer;"><img src="<?php echo $this->Html->url('/img/icon_edit.png'); ?>" width="16" height="16" /></td>
+		<td style="text-align: center;cursor:pointer;"><img src="<?php echo $this->Html->url('/img/icon_del.png'); ?>" width="16" height="16" /></td>
+	</tr>
+	<tr>
+		<td>abc3</td>
+		<td>abc3</td>
+		<td>abc3</td>
+		<td style="text-align: center;cursor:pointer;"><img src="<?php echo $this->Html->url('/img/icon_edit.png'); ?>" width="16" height="16" /></td>
+		<td style="text-align: center;cursor:pointer;"><img src="<?php echo $this->Html->url('/img/icon_del.png'); ?>" width="16" height="16" /></td>
+	</tr>
+	<tr>
+		<td colspan="5" style="text-align: center;"><input type="button" id="btnAddRow" value="Add another rows" /></td>
+	</tr>
+</table><br />
+<div style="border: 1px solid black;">
+<b>EXAMPLE</b><br />
+<b>Via PHP Syntax</b><br />
+&lt;img src=&quot;&lt;?php echo $this-&gt;Html-&gt;url('/img/icon_edit.png'); ?&gt;&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;<br/>&lt;img src=&quot;&lt;?php echo $this-&gt;Html-&gt;url('/img/icon_del.png'); ?&gt;&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;
+<br /><br />
+<b>Via Javascript Syntax</b><br />
+'&lt;img src=&quot;'+getURL('/img/icon_edit.png')+'&quot; width=&quot;16&quot; height=&quot;16&quot; /&gt;';
+</div>
+<script type="text/javascript">
+	jQuery('table#imgbutton1 input#btnAddRow').click(function(){
+		var tr = jQuery(this).parent().parent();
+		var html = '';
+		html += '<tr>' 
+			+ '<td>abc</td>'
+			+ '<td>abc</td>'
+			+ '<td>abc</td>'
+			+ '<td style="text-align: center;cursor:pointer;"><img src="'+getURL('/img/icon_edit.png')+'" width="16" height="16" /></td>'
+			+ '<td style="text-align: center;cursor:pointer;"><img src="'+getURL('/img/icon_del.png')+'" width="16" height="16" /></td>'
+			+ '</tr>';
+		tr.before(html);
+	});
+</script>
+

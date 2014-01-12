@@ -349,14 +349,14 @@
 		<table class="table_data">
 			<thead>
 				<tr>
-					<th>ความเกี่ยวข้อง</th>
-					<th>ชื่อ</th>
-					<th>นามสกุล</th>
-					<th>วุฒิการศึกษา</th>
-					<th>อาชีพ</th>
-					<th>ตำแหนง</th>
-					<th>Edit</th>
-					<th>Delete</th>
+					<th style="text-align:center;">ความเกี่ยวข้อง</th>
+					<th style="text-align:center;">ชื่อ</th>
+					<th style="text-align:center;">นามสกุล</th>
+					<th style="text-align:center;">วุฒิการศึกษา</th>
+					<th style="text-align:center;">อาชีพ</th>
+					<th style="text-align:center;">ตำแหนง</th>
+					<th style="text-align:center;">Edit</th>
+					<th style="text-align:center;">Delete</th>
 				</tr>
 			</thead>
 			<tbody>

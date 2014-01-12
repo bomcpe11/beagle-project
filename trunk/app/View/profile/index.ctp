@@ -1,4 +1,5 @@
 <?php echo $this->Html->css('profile.css');?>
+<?php include 'popup_family.ctp'?>
 <!-- ################################################################################### -->
 <script type="text/javascript">
 	jQuery(document).ready(function() {
@@ -354,23 +355,48 @@
 					<th>วุฒิการศึกษา</th>
 					<th>อาชีพ</th>
 					<th>ตำแหนง</th>
-					<th colspan="2"></th>
+					<th>Edit</th>
+					<th>Delete</th>
 				</tr>
-			<thead>
+			</thead>
 			<tbody>
-				<tr>
-					<td>dummy</td>
-					<td>dummy</td>
-					<td>dummy</td>
-					<td>dummy</td>
-					<td>dummy</td>
-					<td>dummy</td>
-					<td>ลบ</td>
-					<td>แก้</td>
-				</tr>
+			<?php $countListFamily = count($listFamily);
+				if( $countListFamily==0 ){?>
+					<tr>
+						<td colspan="8" style="text-align:center;">ไม่พบข้อมูล</td>
+					</tr>
+			<?php } else {
+					for($i=0; $i<$countListFamily; $i++){?>
+					<tr>
+						<td>
+							<input id="family_id" type="hidden" value="<?php echo $listFamily[$i]['families']['id'];?>"/>
+							<?php echo $listFamily[$i]['families']['relation'];?>
+						</td>
+						<td><?php echo $listFamily[$i]['families']['name'];?></td>
+						<td><?php echo $listFamily[$i]['families']['lastname'];?></td>
+						<td><?php echo $listFamily[$i]['families']['education'];?></td>
+						<td><?php echo $listFamily[$i]['families']['occupation'];?></td>
+						<td><?php echo $listFamily[$i]['families']['position'];?></td>
+						<td style="text-align:center; cursor:pointer">
+							<img src="<?php echo $this->Html->url('/img/icon_edit.png');?>" width="16" height="16"
+								onclick="openPopupFamily('<?php echo $listFamily[$i]['families']['id'];?>'
+													,'<?php echo $listFamily[$i]['families']['relation'];?>'
+													,'<?php echo $listFamily[$i]['families']['name'];?>'
+													,'<?php echo $listFamily[$i]['families']['lastname'];?>'
+													,'<?php echo $listFamily[$i]['families']['education'];?>'
+													,'<?php echo $listFamily[$i]['families']['occupation'];?>'
+													,'<?php echo $listFamily[$i]['families']['position'];?>')"/>
+						</td>
+						<td style="text-align:center; cursor:pointer">
+							<img src="<?php echo $this->Html->url('/img/icon_del.png');?>" width="16" height="16"
+								onclick="deleteFamily('<?php echo $listFamily[$i]['families']['id'];?>')"/>
+						</td>
+					</tr>
+			<?php }
+				} ?>
 			</tbody>
 		</table>
-		<button>เพิ่มข้อมูล ประวัติครอบครัว</button>
+		<button type="button" onclick="openPopupFamily('','','','','','','')">เพิ่มข้อมูล ประวัติครอบครัว</button>
 	</div>
 </div>
 <div class="container">

@@ -1,5 +1,6 @@
 <?php echo $this->Html->css('profile.css');?>
 <?php include 'popup_family.ctp'?>
+<?php include 'popup_education.ctp'?>
 <!-- ################################################################################### -->
 <script type="text/javascript">
 	jQuery(document).ready(function() {
@@ -377,7 +378,7 @@
 						<td><?php echo $listFamily[$i]['families']['education'];?></td>
 						<td><?php echo $listFamily[$i]['families']['occupation'];?></td>
 						<td><?php echo $listFamily[$i]['families']['position'];?></td>
-						<td style="text-align:center; cursor:pointer">
+						<td style="text-align:center">
 							<img src="<?php echo $this->Html->url('/img/icon_edit.png');?>" width="16" height="16"
 								onclick="openPopupFamily('<?php echo $listFamily[$i]['families']['id'];?>'
 													,'<?php echo $listFamily[$i]['families']['relation'];?>'
@@ -387,7 +388,7 @@
 													,'<?php echo $listFamily[$i]['families']['occupation'];?>'
 													,'<?php echo $listFamily[$i]['families']['position'];?>')"/>
 						</td>
-						<td style="text-align:center; cursor:pointer">
+						<td style="text-align:center">
 							<img src="<?php echo $this->Html->url('/img/icon_del.png');?>" width="16" height="16"
 								onclick="deleteFamily('<?php echo $listFamily[$i]['families']['id'];?>')"/>
 						</td>
@@ -402,22 +403,52 @@
 <div class="container">
 	<h1>ประวัติการศึกษา</h1>
 	<div class="section_content">
-		<table class="table_data_item">
-			<tr>
-				<td>ระดับ : dummy</td>
-				<td>ชื่อสถาบัน : dummy</td>
-				<td class="td_link">แก้ไข ลบ</td>
-			</tr>
-			<tr>
-				<td>คณะ : dummy</td>
-				<td colspan="2">สาขาวิชา : dummy</td>
-			</tr>
-			<tr>
-				<td>ปีการศึกษา : dummy</td>
-				<td colspan="2">เกรดเฉลี่ย : dummy</td>
-			</tr>
-		</table>
-		<button>เพิ่มข้อมูล ประวัติการศึกษา</button>
+		<?php 
+			$countListEducation = count($listEducation);
+			if( $countListEducation>0 ){
+				for($i=0; $i<$countListEducation; $i++){?>
+					<table class="table_data_item">
+						<tr>
+							<td style="width:30%">ระดับ : <?php echo $listEducation[$i]['educations']['edutype'];?></td>
+							<td style="width:60%">ชื่อสถาบัน : <?php echo $listEducation[$i]['educations']['name'];?></td>
+							<td style="width:10%" class="td_link">
+								<img src="<?php echo $this->Html->url('/img/icon_edit.png');?>" width="16" height="16"
+									onclick="openPopupEducation('<?php echo $listEducation[$i]['educations']['id'];?>'
+																,'<?php echo $listEducation[$i]['educations']['edutype'];?>'
+																,'<?php echo $listEducation[$i]['educations']['name'];?>'
+																,'<?php echo $listEducation[$i]['educations']['faculty'];?>'
+																,'<?php echo $listEducation[$i]['educations']['major'];?>'
+																,'<?php echo $listEducation[$i]['educations']['startyear'];?>'
+																,'<?php echo $listEducation[$i]['educations']['endyear'];?>'
+																,'<?php echo $listEducation[$i]['educations']['gpa'];?>')"/>
+								<img src="<?php echo $this->Html->url('/img/icon_del.png');?>" width="16" height="16"
+									onclick="deleteEducation('<?php echo $listEducation[$i]['educations']['id'];?>')"/>
+							</td>
+						</tr>
+						<tr>
+							<td>คณะ : <?php echo $listEducation[$i]['educations']['faculty'];?></td>
+							<td colspan="2">สาขาวิชา : <?php echo $listEducation[$i]['educations']['major'];?></td>
+						</tr>
+						<tr>
+							<td>ปีการศึกษา : <?php 
+											if($listEducation[$i]['educations']['isGraduate'] == 1){
+												echo ( intval($listEducation[$i]['educations']['startyear']) + 543 ).' - '.( intval($listEducation[$i]['educations']['endyear']) + 543 );
+											}else{
+												echo ( intval($listEducation[$i]['educations']['startyear']) + 543 ).' - '.( intval(date('Y')) + 543 );
+											}?></td>
+							<td colspan="2">เกรดเฉลี่ย : <?php echo $listEducation[$i]['educations']['gpa'];?></td>
+						</tr>
+					</table>
+		<?php }
+			}else{?>
+			<table class="table_data_item">
+				<tr style="text-align:center">
+					<td>ไม่พบข้อมูล</td>
+				</tr>
+			</table>
+		<?php }?>
+		
+		<button onclick=" openPopupEducation('','','','','','','','')">เพิ่มข้อมูล ประวัติการศึกษา</button>
 	</div>
 </div>
 <div class="container">

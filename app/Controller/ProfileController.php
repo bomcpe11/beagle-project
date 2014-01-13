@@ -5,7 +5,8 @@ class ProfileController extends AppController {
 	public $names = 'ProfileController';
 	public $uses = array('Gvar'
 						,'Profile'
-						,'Family');
+						,'Family'
+						,'Education');
 
 	public function index() {
 		$this->log('START :: ProfileController -> index()');
@@ -55,8 +56,15 @@ class ProfileController extends AppController {
 		$listFamily = $this->Family->getFamiliesByProfileId($objUser['id']);
 		//$this->log(print_r($listFamily, true));
 		
+		/* education */
+		$listEducation = $this->Education->getEducationByProfileId('1');
+		//$this->log(print_r($listEducation, true));
+		
 		/* set data to view*/
-		$this->set(compact('fullNameTh', 'birthday', 'age', 'namePrefixTh', 'namePrefixEn', 'listFamily'));
+		$this->set(compact('fullNameTh', 'birthday'
+							, 'age', 'namePrefixTh'
+							, 'namePrefixEn', 'listFamily'
+							, 'listEducation'));
 		$this->set("page_title","ข้อมูลส่วนตัว - " . $objUser["titleth"] . " " . $objUser["nameth"] . " " . $objUser["lastnameth"]);
 		
 		$this->log('END :: ProfileController -> index()');

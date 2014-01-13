@@ -106,3 +106,7 @@ tr {
 .table ul li p textarea {
 	width: 98%;
 }
+
+img {
+	cursor:pointer;
+}

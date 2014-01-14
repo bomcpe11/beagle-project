@@ -418,8 +418,9 @@
 																,'<?php echo $listEducation[$i]['educations']['name'];?>'
 																,'<?php echo $listEducation[$i]['educations']['faculty'];?>'
 																,'<?php echo $listEducation[$i]['educations']['major'];?>'
-																,'<?php echo $listEducation[$i]['educations']['startyear'];?>'
-																,'<?php echo $listEducation[$i]['educations']['endyear'];?>'
+																,'<?php echo $listEducation[$i]['educations']['isGraduate'];?>'
+																,'<?php echo ( intval($listEducation[$i]['educations']['startyear']) + 543 );?>'
+																,'<?php echo ( intval($listEducation[$i]['educations']['endyear']) + 543 );?>'
 																,'<?php echo $listEducation[$i]['educations']['gpa'];?>')"/>
 								<img src="<?php echo $this->Html->url('/img/icon_del.png');?>" width="16" height="16"
 									onclick="deleteEducation('<?php echo $listEducation[$i]['educations']['id'];?>')"/>
@@ -427,7 +428,7 @@
 						</tr>
 						<tr>
 							<td>คณะ : <?php echo $listEducation[$i]['educations']['faculty'];?></td>
-							<td colspan="2">สาขาวิชา : <?php echo $listEducation[$i]['educations']['major'];?></td>
+							<td colspan="2">สาขาวิชา : <?php echo ( empty($listEducation[$i]['educations']['major'])?'-':$listEducation[$i]['educations']['major'] );?></td>
 						</tr>
 						<tr>
 							<td>ปีการศึกษา : <?php 
@@ -436,7 +437,7 @@
 											}else{
 												echo ( intval($listEducation[$i]['educations']['startyear']) + 543 ).' - '.( intval(date('Y')) + 543 );
 											}?></td>
-							<td colspan="2">เกรดเฉลี่ย : <?php echo $listEducation[$i]['educations']['gpa'];?></td>
+							<td colspan="2">เกรดเฉลี่ย : <?php echo ( empty($listEducation[$i]['educations']['gpa'])?'-':$listEducation[$i]['educations']['gpa'] );?></td>
 						</tr>
 					</table>
 		<?php }
@@ -448,7 +449,7 @@
 			</table>
 		<?php }?>
 		
-		<button onclick=" openPopupEducation('','','','','','','','')">เพิ่มข้อมูล ประวัติการศึกษา</button>
+		<button onclick="openPopupEducation('','','','','','0','','','')">เพิ่มข้อมูล ประวัติการศึกษา</button>
 	</div>
 </div>
 <div class="container">

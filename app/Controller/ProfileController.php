@@ -57,7 +57,7 @@ class ProfileController extends AppController {
 		//$this->log(print_r($listFamily, true));
 		
 		/* education */
-		$listEducation = $this->Education->getEducationByProfileId('1');
+		$listEducation = $this->Education->getEducationByProfileId($objUser['id']);
 		//$this->log(print_r($listEducation, true));
 		
 		/* set data to view*/
@@ -137,10 +137,13 @@ class ProfileController extends AppController {
 		$occupation = $this->request->data['occupation'];
 		$position = $this->request->data['position'];
 		
+		$dataSource = $this->Family->getDataSource();
 		if( $this->Family->insertFamily($objUser['id'], $relation, $name
 										, $lastname, $education, $occupation, $position) ){
+			$dataSource->commit();
 			$message = 'บันทึกข้อมูล สำเร็จ';
 		}else{
+			$dataSource->rollback();
 			$message = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลส่วนตัว กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 		}
 		
@@ -188,9 +191,12 @@ class ProfileController extends AppController {
 		$message = '';
 		$id = $this->request->data['id'];
 		
+		$dataSource = $this->Family->getDataSource();
 		if( $this->Family->deleteFamily($id) ){
+			$dataSource->commit();
 			$message = 'ลบข้อมูล สำเร็จ';
 		}else{
+			$dataSource->rollback();
 			$message = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลส่วนตัว กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 		}
 		
@@ -199,6 +205,105 @@ class ProfileController extends AppController {
 		$this->render('response');
 		
 		$this->log('END :: ProfileController -> deleteFamily');
+	}
+	public function saveNewEducation(){
+		$this->log('START :: ProfileController -> saveNewEducation');
+		
+		$message = '';
+		$objUser = $this->getObjUser();
+		//$this->log($this->request->data);
+		$edutype = $this->request->data['edutype'];
+		$name = $this->request->data['name'];
+		$faculty = $this->request->data['faculty'];
+		$major = $this->request->data['major'];
+		$isGraduate = ( ($this->request->data['isGraduate']=='true')?'1':'0' );
+		$startyear = empty($this->request->data['startyear'])?'null':intval($this->request->data['startyear'])-543;
+		$endyear = empty($this->request->data['endyear'])?'null':intval($this->request->data['endyear'])-543;
+		$gpa = $this->request->data['gpa'];
+		
+		$dataSource = $this->Education->getDataSource();
+		if( $this->Education->insertEducation($name
+								, $faculty
+								, $major
+								, $gpa
+								, '00,00,'.$startyear
+								, '00,00,'.$endyear
+								, $edutype
+								, $objUser['id']
+								, $isGraduate) ){
+			$dataSource->commit();
+			$message = 'การแก้ไขข้อมูลประวัติการศึกษาเสร็จเรียบร้อย';
+		}else{
+			$dataSource->rollback();
+			$message = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต';
+		}
+		
+		$this->layout='ajax';
+		$this->set('message', json_encode(array('message'=>$message)));
+		$this->render('response');
+		
+		$this->log('END :: ProfileController -> saveNewEducation');
+	}
+	public function editEducation(){
+		$this->log('START :: ProfileController -> editEducation');
+		
+		$message = '';
+		$objUser = $this->getObjUser();
+		$this->log($this->request->data);
+		$id = $this->request->data['id'];
+		$edutype = $this->request->data['edutype'];
+		$name = $this->request->data['name'];
+		$faculty = $this->request->data['faculty'];
+		$major = $this->request->data['major'];
+		$isGraduate = ( ($this->request->data['isGraduate']=='true')?'1':'0' );
+		$startyear = empty($this->request->data['startyear'])?'null':intval($this->request->data['startyear'])-543;
+		$endyear = empty($this->request->data['endyear'])?'null':intval($this->request->data['endyear'])-543;
+		$gpa = $this->request->data['gpa'];
+		
+		$dataSource = $this->Education->getDataSource();
+		if( $this->Education->updateEducation($id
+												, $name
+												, $faculty
+												, $major
+												, $gpa
+												, '00,00,'.$startyear
+												, '00,00,'.$endyear
+												, $edutype
+												, $objUser['id']
+												, $isGraduate) ){
+			$dataSource->commit();
+			$message = 'การแก้ไขข้อมูลประวัติการศึกษาเสร็จเรียบร้อย';
+		}else{
+			$dataSource->rollback();
+			$message = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต';
+		}
+		
+		$this->layout='ajax';
+		$this->set('message', json_encode(array('message'=>$message)));
+		$this->render('response');
+		
+		$this->log('END :: ProfileController -> editEducation');
+	}
+	public function deleteEducation(){
+		$this->log('START :: ProfileController -> deleteEducation');
+		
+		$message = '';
+		$id = $this->request->data['id'];
+		
+		$dataSource = $this->Education->getDataSource();
+		if( $this->Education->deleteEducation($id) ){
+			$dataSource->commit();
+			$message = 'ลบข้อมูล สำเร็จ';
+		}else{
+			$dataSource->rollback();
+			$message = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลส่วนตัว กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+		}
+		
+		$this->layout='ajax';
+		$this->set('message', json_encode(array('message'=>$message)));
+		$this->render('response');
+		
+		$this->log('END :: ProfileController -> deleteEducation');
 	}
 	/* ------------------------------------------------------------------------------------------------------ */
 	public function changeFormatDate($data) {

@@ -6,10 +6,12 @@ class ProfileController extends AppController {
 	public $uses = array('Gvar'
 						,'Profile'
 						,'Family'
-						,'Education');
+						,'Education'
+						,'Research'
+						,'Comment');
 
-	public function index() {
-		$this->log('START :: ProfileController -> index()');
+	public function index(){
+		$this->log('---- ProfileController -> index ----');
 		
 		$objUser = $this->getObjUser();
 		//$this->log(print_r($objUser, true));
@@ -60,14 +62,19 @@ class ProfileController extends AppController {
 		$listEducation = $this->Education->getEducationByProfileId($objUser['id']);
 		//$this->log(print_r($listEducation, true));
 		
+		/* research */
+		$listResearch = $this->Research->getDataByProfileId('9');
+		
+		/* comment */
+		$listComment = $this->Comment->getDataByProfileId('1');
+		
 		/* set data to view*/
 		$this->set(compact('fullNameTh', 'birthday'
-							, 'age', 'namePrefixTh'
-							, 'namePrefixEn', 'listFamily'
-							, 'listEducation'));
+							,'age', 'namePrefixTh'
+							,'namePrefixEn', 'listFamily'
+							,'listEducation', 'listResearch'
+							,'listComment'));
 		$this->set("page_title","ข้อมูลส่วนตัว - " . $objUser["titleth"] . " " . $objUser["nameth"] . " " . $objUser["lastnameth"]);
-		
-		$this->log('END :: ProfileController -> index()');
 	}
 	/* ------------------------------------------------------------------------------------------------------- */
 	public function updateProfileAjax() {
@@ -304,6 +311,102 @@ class ProfileController extends AppController {
 		$this->render('response');
 		
 		$this->log('END :: ProfileController -> deleteEducation');
+	}
+	public function savedNewResearch(){
+		$this->log('---- savedNewResearch ----');
+		
+		$result = array();
+		$objUser = $this->getObjUser();
+		//$this->log($this->request->data);
+		$name = $this->request->data['name'];
+		$researchtype = $this->request->data['researchtype'];
+		$advisor = $this->request->data['advisor'];
+		$organization = $this->request->data['organization'];
+		$isnotfinish = ( ($this->request->data['isnotfinish']=='true')?'1':'0' );
+		$yearfinish = empty($this->request->data['yearfinish'])?'null':intval($this->request->data['yearfinish'])-543;
+		$dissemination = $this->request->data['dissemination'];
+
+		$dataSource = $this->Research->getDataSource();
+		if( $this->Research->insertData($name
+										,$researchtype
+										,$advisor
+										,$organization
+										,$objUser['id']
+										,$isnotfinish
+										,$yearfinish
+										,$dissemination) ){
+			$dataSource->commit();
+			$result['msg'] = 'การแก้ไขข้อมูลผลการวิจัยเสร็จเรียบร้อย';
+			$result['flag'] = 1;
+		}else{
+			$dataSource->rollback();
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต';
+			$result['flag'] = -1;
+		}
+		
+		$this->layout='ajax';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	}
+	public function editResearch(){
+		$this->log('---- editResearch ----');
+		
+		$result = array();
+		$objUser = $this->getObjUser();
+		//$this->log($this->request->data);
+		$id = $this->request->data['id'];
+		$name = $this->request->data['name'];
+		$researchtype = $this->request->data['researchtype'];
+		$advisor = $this->request->data['advisor'];
+		$organization = $this->request->data['organization'];
+		$isnotfinish = ( ($this->request->data['isnotfinish']=='true')?'1':'0' );
+		$yearfinish = empty($this->request->data['yearfinish'])?'null':intval($this->request->data['yearfinish'])-543;
+		$dissemination = $this->request->data['dissemination'];
+
+		$dataSource = $this->Research->getDataSource();
+		if( $this->Research->updateData($id
+										,$name
+										,$researchtype
+										,$advisor
+										,$organization
+										,$objUser['id']
+										,$isnotfinish
+										,$yearfinish
+										,$dissemination) ){
+			$dataSource->commit();
+			$result['msg'] = 'การแก้ไขข้อมูลผลการวิจัยเสร็จเรียบร้อย';
+			$result['flag'] = 1;
+		}else{
+			$dataSource->rollback();
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต';
+			$result['flag'] = -1;
+		}
+		
+		$this->layout='ajax';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	}
+	public function deletedResearch(){
+		$this->log('---- deletedResearch ----');
+		
+		$result = array();
+		//$this->log($this->request->data);
+		$id = $this->request->data['id'];
+
+		$dataSource = $this->Research->getDataSource();
+		if( $this->Research->deleteData($id) ){
+			$dataSource->commit();
+			$result['msg'] = 'การแก้ไขข้อมูลผลการวิจัยเสร็จเรียบร้อย';
+			$result['flag'] = 1;
+		}else{
+			$dataSource->rollback();
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต';
+			$result['flag'] = -1;
+		}
+		
+		$this->layout='ajax';
+		$this->set('message', json_encode($result));
+		$this->render('response');
 	}
 	/* ------------------------------------------------------------------------------------------------------ */
 	public function changeFormatDate($data) {

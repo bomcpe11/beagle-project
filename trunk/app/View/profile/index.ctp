@@ -1,6 +1,7 @@
 <?php echo $this->Html->css('profile.css');?>
 <?php include 'popup_family.ctp'?>
 <?php include 'popup_education.ctp'?>
+<?php include 'popup_research.ctp'?>
 <!-- ################################################################################### -->
 <script type="text/javascript">
 	jQuery(document).ready(function() {
@@ -419,8 +420,8 @@
 																,'<?php echo $listEducation[$i]['educations']['faculty'];?>'
 																,'<?php echo $listEducation[$i]['educations']['major'];?>'
 																,'<?php echo $listEducation[$i]['educations']['isGraduate'];?>'
-																,'<?php echo ( intval($listEducation[$i]['educations']['startyear']) + 543 );?>'
-																,'<?php echo ( intval($listEducation[$i]['educations']['endyear']) + 543 );?>'
+																,'<?php echo ( (empty($listEducation[$i]['educations']['startyear']))?'':intval($listEducation[$i]['educations']['startyear']) + 543 );?>'
+																,'<?php echo ( (empty($listEducation[$i]['educations']['endyear']))?'':intval($listEducation[$i]['educations']['endyear']) + 543 );?>'
 																,'<?php echo $listEducation[$i]['educations']['gpa'];?>')"/>
 								<img src="<?php echo $this->Html->url('/img/icon_del.png');?>" width="16" height="16"
 									onclick="deleteEducation('<?php echo $listEducation[$i]['educations']['id'];?>')"/>
@@ -432,11 +433,14 @@
 						</tr>
 						<tr>
 							<td>ปีการศึกษา : <?php 
-											if($listEducation[$i]['educations']['isGraduate'] == 1){
-												echo ( intval($listEducation[$i]['educations']['startyear']) + 543 ).' - '.( intval($listEducation[$i]['educations']['endyear']) + 543 );
-											}else{
-												echo ( intval($listEducation[$i]['educations']['startyear']) + 543 ).' - '.( intval(date('Y')) + 543 );
-											}?></td>
+											if( !empty($listEducation[$i]['educations']['startyear'])&&!empty($listEducation[$i]['educations']['endyear']) ){
+												if($listEducation[$i]['educations']['isGraduate'] == 1){
+													echo ( intval($listEducation[$i]['educations']['startyear']) + 543 ).' - '.( intval($listEducation[$i]['educations']['endyear']) + 543 );
+												}else{
+													echo ( intval($listEducation[$i]['educations']['startyear']) + 543 ).' - '.( intval(date('Y')) + 543 );
+												}
+											}
+											?></td>
 							<td colspan="2">เกรดเฉลี่ย : <?php echo ( empty($listEducation[$i]['educations']['gpa'])?'-':$listEducation[$i]['educations']['gpa'] );?></td>
 						</tr>
 					</table>
@@ -455,24 +459,47 @@
 <div class="container">
 	<h1>ผลงานวิจัย</h1>
 	<div class="section_content">
-		<table class="table_data_item">
-			<tr>
-				<td>ชื่อเรื่อง : dummy</td>
-				<td class="td_link">แก้ไข ลบ</td>
-			</tr>
-			<tr>
-				<td colspan="2">ประเภทของงานวิจัย : dummy</td>
-			</tr>
-			<tr>
-				<td>อาจารย์ที่ปรึกษา : dummy</td>
-				<td>หน่วยงาน : dummy</td>
-			</tr>
-			<tr>
-				<td>ปีที่เสร็จ : dummy</td>
-				<td>การเผยแพร่ : dummy</td>
-			</tr>
-		</table>
-		<button>เพิ่มข้อมูล ผลงานวิจัย</button>
+		<?php if( !empty($listResearch) ){
+				$countListResearch = count($listResearch);
+				for( $i=0;$i<$countListResearch;$i++ ){?>
+					<table class="table_data_item">
+						<tr>
+							<td>ชื่อเรื่อง : <?php echo $listResearch[$i]['researches']['name'];?></td>
+							<td class="td_link">
+								<img src="<?php echo $this->Html->url('/img/icon_edit.png');?>" width="16" height="16"
+									onclick="openPopupResearch('<?php echo $listResearch[$i]['researches']['id'];?>'
+																,'<?php echo $listResearch[$i]['researches']['name'];?>'
+																,'<?php echo $listResearch[$i]['researches']['researchtype'];?>'
+																,'<?php echo $listResearch[$i]['researches']['advisor'];?>'
+																,'<?php echo $listResearch[$i]['researches']['organization'];?>'
+																,'<?php echo $listResearch[$i]['researches']['isnotfinish'];?>'
+																,'<?php echo $listResearch[$i]['researches']['yearfinish'];?>'
+																,'DUMMY')"/>
+								<img src="<?php echo $this->Html->url('/img/icon_del.png');?>" width="16" height="16"
+									onclick="deletedResearch('<?php echo $listEducation[$i]['educations']['id'];?>')"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">ประเภทของงานวิจัย : <?php echo $listResearch[$i]['researches']['researchtype'];?></td>
+						</tr>
+						<tr>
+							<td>อาจารย์ที่ปรึกษา : <?php echo $listResearch[$i]['researches']['advisor'];?></td>
+							<td>หน่วยงาน : <?php echo $listResearch[$i]['researches']['organization'];?></td>
+						</tr>
+						<tr>
+							<td>ปีที่เสร็จ : <?php echo $listResearch[$i]['researches']['yearfinish'];?></td>
+							<td>การเผยแพร่ : dummy</td>
+						</tr>
+					</table>
+				<?php }?>
+			<?php }else{?>
+				<table class="table_data_item">
+					<tr style="text-align:center">
+						<td>ไม่พบข้อมูล</td>
+					</tr>
+				</table>
+			<?php }?>
+		<button onclick="openPopupResearch('','','','','','','','')">เพิ่มข้อมูล ผลงานวิจัย</button>
 	</div>
 </div>
 <div class="container">
@@ -528,20 +555,32 @@
 	
 	<h2>เพิ่มความคิดเห็น</h2>
 	<div class="section_content">
-		<table class="table_data_item">
-			<tr>
-				<td style="width: 20%;text-align: right;">หัวข้อ :</td>
-				<td style="width: 80%;">
-					<input type="text" style="width: 98%;"></input>
-				</td>
-			</tr>
-			<tr>
-				<td style="width: 20%;text-align: right;vertical-align: top;">ความคิดเห็น :</td>
-				<td style="width: 80%;">
-					<textarea type="text" style="width: 98%;height: 100px;"></textarea>
-				</td>
-			</tr>
-		</table>
+		<?php if( !empty($listComment) ){?>
+			<?php $countListComment = count($listComment);
+				for( $i=0;$i<$countListComment;$i++ ){ ?>
+					<table class="table_data_item">
+						<tr>
+							<td style="width: 20%;text-align: right;">หัวข้อ :</td>
+							<td style="width: 80%;">
+								<input type="text" style="width: 98%;" value="'<?php echo $listComment[$i]['comments']['title'];?>'"></input>
+							</td>
+						</tr>
+						<tr>
+							<td style="width: 20%;text-align: right;vertical-align: top;">ความคิดเห็น :</td>
+							<td style="width: 80%;">
+								<textarea type="text" style="width: 98%;height: 100px;"><?php echo $listComment[$i]['comments']['comment'];?></textarea>
+							</td>
+						</tr>
+					</table>
+				<?php }?>
+		<?php }else{ ?>
+			<table class="table_data_item">
+				<tr style="text-align:center">
+					<td>ไม่พบข้อมูล</td>
+				</tr>
+			</table>
+		<?php } ?>
+		
 		<button>เพิ่มข้อมูล ความคิดเห็น</button>
 	</div>
 </div>

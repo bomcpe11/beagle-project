@@ -35,9 +35,9 @@
 							</tr>\
 							<tr>\
 								<td style="text-align:right; vertical-align:top;">ปีการศึกษา :</td>\
-								<td><input id="education-startyear" style="width:50px" type="text" value=' + startyear +'>\
+								<td><input id="education-startyear" style="width:40px" type="text"  maxlength="4" value=' + startyear +'>\
 									ถึง\
-									<input id="education-endyear" style="width:50px" type="text" value=' + endyear +'>\
+									<input id="education-endyear" style="width:40px" type="text"  maxlength="4" value=' + endyear +'>\
 									<br/>\
 									กรุณากรอกเป็นปี พ.ศ.\
 								</td>\

@@ -63,13 +63,13 @@
 					<td align="left"><input type="text" id="text_username" class="textbox" maxlength="100"/></td>
 				</tr>
 				<tr>
-					<td align=""right"" class="tdLabel">Password :</td>
+					<td align="right" class="tdLabel">Password :</td>
 					<td align="left"><input type="password" id="text_password" maxlength="100"/></td>
 				</tr>
 				<tr>
 					<td></td>
 					<td align="left">
-						<input type="checkbox" id="checkbox_remem" value="remem"> Remember me</input>
+						<input type="checkbox" id="checkbox_remem" value="remem"/> Remember me
 					</td>
 					
 				</tr>

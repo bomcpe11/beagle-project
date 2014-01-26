@@ -271,5 +271,18 @@ class Profile extends AppModel {
 	
 		return $result;
 	}// checkNameEng
+	public function searchByStmtSql($stmt_sql){
+		$result = null;
+		$strSql = "SELECT * FROM profiles WHERE $stmt_sql";
+		$this->log("strSql => ".$strSql);
+	
+		try {
+   			$result = $this->query($strSql);
+   		} catch ( Exception $e ) {
+   			$this->log("exception => ".$e->getMessage());
+   		}
+	
+		return $result;
+	}
 }
 ?>

@@ -73,6 +73,10 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 		//---------------------------------------------------------------------------------------------
 		jQuery("#gotoExport").click(function() {changePage("Export");});
 		//---------------------------------------------------------------------------------------------
+		jQuery("#gotoActivityList").click(function() {changePage("ActivityList");});
+		//---------------------------------------------------------------------------------------------
+		jQuery("#gotoAsearch").click(function() {changePage("Asearch");});
+		//---------------------------------------------------------------------------------------------
 		jQuery("#gotoLogout").click(function() {changePage("Logout");});
 		//---------------------------------------------------------------------------------------------
 		
@@ -98,6 +102,12 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 		  break;
 		case "Export":
 		  window.location = "<?php echo $this->Html->url('/Export/index');?>";	
+		  break;
+		case "ActivityList":
+		  window.location = "<?php echo $this->Html->url('/Activitylist/index');?>";	
+		  break;
+		case "Asearch":
+		  window.location = "<?php echo $this->Html->url('/Asearch/index');?>";	
 		  break;
 	    case "Logout":
 		  window.location = "<?php echo $this->Html->url('/Logout/index');?>";	
@@ -162,13 +172,17 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 		                 <!--layout-menu -->
 		                 <div id="link-menu">
 		                     <h3 style="margin-top:20px; margin-left:0;">เมนู</h3>
-		                     <a style="cursor: pointer;" class="menu" id="gotoProfile">ข้อมูลส่วนตัว </a>
-		                     <a style="cursor: pointer;" class="menu" id="gotoChangePic" >เปลี่ยนรูปประจำตัว</a>
-		                     <a style="cursor: pointer;" class="menu" id="gotoChangePwd">แก้ไขรหัสผ่าน</a>
-		                     <a style="cursor: pointer;" class="menu" id="gotoPsearch">ค้นหาบุคคล</a>
-		                     <a style="cursor: pointer;" class="menu" id="gotoExport" >ส่งออกข้อมูล</a>
-		                     <a style="cursor: pointer;" class="menu" id="gotoLogout" >ออกจากระบบ</a>
-		                                                                        
+			                     <a style="cursor: pointer;" class="menu" id="gotoProfile">ข้อมูลส่วนตัว </a>
+			                     <a style="cursor: pointer;" class="menu" id="gotoChangePic" >เปลี่ยนรูปประจำตัว</a>
+			                     <a style="cursor: pointer;" class="menu" id="gotoChangePwd">แก้ไขรหัสผ่าน</a>
+			                     <a style="cursor: pointer;" class="menu" id="gotoPsearch">ค้นหาบุคคล</a>
+			                     <a style="cursor: pointer;" class="menu" id="gotoExport" >ส่งออกข้อมูล</a>
+		                     <h3 style="margin-top:20px; margin-left:0;">กิจกรรม</h3>
+		                     	 <a style="cursor: pointer;" class="menu" id="gotoActivityList">ข้อมูลกิจกรรม </a>
+		                     	 <a style="cursor: pointer;" class="menu" id="gotoAsearch">ค้นหากิจกรรม </a>  
+		                     <h3 style="margin-top:20px; margin-left:0;">
+		                     	<a style="cursor: pointer;" id="gotoLogout" >ออกจากระบบ</a>  
+		                     </h3>                         
 		                 </div>
 		                 </br>
 		          </td>

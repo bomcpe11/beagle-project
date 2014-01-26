@@ -20,9 +20,13 @@
 	width: 30%;
 }
 .container .section_profile .section_picture .picture {
-	border: 1px solid #666666;
 	width: 200px;
 	height: 200px;
+	
+	border: 1px solid #666666;
+	background-color: #FCFCFC;
+	border-radius:7px;
+	padding: 0 20px 0 20px;
 	margin: 20px auto 0px auto;
 	
 }
@@ -45,7 +49,7 @@
 	width: 100%;
 	margin: 0px 0px 0px 0px;
 }
-.container .section_content button {
+.container .section_content input[type="button"] {
 	display: block;
 	margin: 10px auto 10px auto;
 }
@@ -54,13 +58,23 @@ tr {
 	text-align: left;
 	line-height: 24px;
 }
-.table_form, .table_data, .table_data_item {
+.table_form {
+	border: 1px solid #666666;
+	background-color: #FCFCFC;
+	border-radius:7px;
+	padding: 0 20px 0 20px;
+}
+.table_data, .table_data_item {
 	width: 100%;
-	border: 1px solid black;
 }
 .table_data_item {
 	width: 98%;
 	margin: 10px;
+	
+	border: 1px solid #666666;
+	background-color: #FCFCFC;
+	border-radius:7px;
+	padding: 0 20px 0 20px;
 }
 .table_data tr, .table_data th, .table_data td {
 	border: 1px solid black;

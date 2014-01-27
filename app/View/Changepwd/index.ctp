@@ -1,6 +1,9 @@
 <?php echo $this->Html->css('change_pwd');?>
 <!-- ################################################################################### -->
 <script type="text/JavaScript">
+	jQuery(document).ready(function(){
+		jQuery('input[type="button"]').button();
+	});
 	/* ------------------------------------------------------------------------------- */
 	jQuery(document).keyup(function(e) {
 			if ( e.keyCode == 13 ) {
@@ -113,8 +116,8 @@
 	/* ------------------------------------------------------------------------------- */
 </script>
 <!-- ################################################################################### -->
-<div class="page_layout">
-	<table class="table_form">
+<div class="section-layout" style="width:97%">
+	<table>
 		<tr>
 			<td class="td_label">รหัสผ่านเดิม : </td>
 			<td class="td_data">

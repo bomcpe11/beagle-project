@@ -11,5 +11,18 @@ class Activity extends AppModel {
 		$result = $this->query($sql);
 		return $result;
 	}
+	public function getDataByStmtSql($stmt_sql){
+		$result = null;
+		$sql = "SELECT * FROM activities WHERE $stmt_sql";
+		$this->log($sql);
+		
+		try{
+			$result = $this->query($sql);
+		}catch(Exception $e){
+			$this->log($e->getMessage());
+		}
+		
+		return $result;
+	}
 }
 ?>

@@ -167,7 +167,8 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 		                 
 		                 <div id="profile-desc">
 		                     <p>Username : <?php echo $login; ?></p>
-		                     <p> เข้าระบบล่าสุด :  <?php echo $last_login_at; ?></p>
+		                     <p>เข้าระบบล่าสุด :  <?php echo $last_login_at; ?></p>
+		                     <p>ปรับปรุงข้อมูลล่าสุด :  <?php echo $last_updated_at; ?></p>
 		                 </div>
 		                 <!--layout-menu -->
 		                 <div id="link-menu">
@@ -177,6 +178,9 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 			                     <a style="cursor: pointer;" class="menu" id="gotoChangePwd">แก้ไขรหัสผ่าน</a>
 			                     <a style="cursor: pointer;" class="menu" id="gotoPsearch">ค้นหาบุคคล</a>
 			                     <a style="cursor: pointer;" class="menu" id="gotoExport" >ส่งออกข้อมูล</a>
+			                   	 <?php if( $objuser['role']==='1' ){
+			                   	 	echo "<a style=\"cursor: pointer;\" class=\"menu\" id=\"gotoApprove\">Approve</a>";
+			                   	 }?>
 		                     <h3 style="margin-top:20px; margin-left:0;">กิจกรรม</h3>
 		                     	 <a style="cursor: pointer;" class="menu" id="gotoActivityList">ข้อมูลกิจกรรม </a>
 		                     	 <a style="cursor: pointer;" class="menu" id="gotoAsearch">ค้นหากิจกรรม </a>  

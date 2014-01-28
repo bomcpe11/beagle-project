@@ -97,10 +97,10 @@
 						for( var i=0;i<count_data;i++ ){
 							html+='<tr title="เข้าร่วมกิจกรรมนี้" onclick="open_popup_activity('+data[i].activities.id+')">';
 							html+='<td>'+data[i].activities.name+'</td>';
-							html+='<td>'+( data[i].activities.startdtm?data[i].activities.startdtm:'' )+'</td>';
-							html+='<td>'+( data[i].activities.location?data[i].activities.location:'' )+'</td>';
-							html+='<td>'+( data[i].activities.ganname?data[i].activities.ganname:'' )+'</td>';
-							html+='<td>'+( data[i].activities.shortdesc?data[i].activities.shortdesc:'' )+'</td>';
+							html+='<td>'+change_format_date_db(data[i].activities.startdtm)+'</td>';
+							html+='<td>'+( data[i].activities.location?data[i].activities.location:'-' )+'</td>';
+							html+='<td>'+( data[i].activities.ganname?data[i].activities.ganname:'-' )+'</td>';
+							html+='<td>'+( data[i].activities.shortdesc?data[i].activities.shortdesc:'-' )+'</td>';
 							html+='</tr>';
 						}
 					}else{
@@ -117,6 +117,12 @@
 					unloading();			
 				}
 				,'json');
+	}
+	function change_format_date_db(date){
+		// yyyy-mm-dd
+		var split_date = date?date.split('-'):'';
+		
+		return split_date.length===3?split_date[2]+'/'+split_date[1]+'/'+(parseInt(split_date[0])+543):'-';
 	}
 </script>
 <?php 

@@ -40,6 +40,7 @@ class AppController extends Controller {
 	function beforeFilter(){
 		$this->objuser = $this->Session->read('objuser');
 		$this->set('objuser', $this->objuser);
+		//$this->log(print_r($this->objuser,true));
 		
 		$dataProfile =  $this->getObjUser();
 	
@@ -51,7 +52,7 @@ class AppController extends Controller {
 		$this->set("lastnameth",$dataProfile['lastnameth']);
 		$this->set("login",$dataProfile['login']);
 		$this->set("last_login_at",$this->DateThai($dataProfile['last_login_at']));
-		
+		$this->set('last_updated_at',$this->DateThai($dataProfile['updated_at']));
 	}
 	
 	protected function setTitle($msg){

@@ -17,18 +17,27 @@ class ActivitylistController extends AppController {
 		$this->log("END :: ActivitylistController :: getActivitylist");
 		
 	}
-	
+
 	function deleteActivity(){
-		$this->log('Start :: ActivitylistController :: deleteActivity');
-		$id = $this->request->data["id"];
-		//$this->log("ID  -> ". $id ."  <- ");
-		$rs = $this->Activity->deleteActivites($id);
-		$this->log("RS  -> ". $rs ."  <- ");
-		$status['id'] = $rs;
-		$this->layout = "ajax";
-		$this->set('message', json_encode(array("status"=>$status)));
-		$this->render("response");
+		$this->log('START :: ActivitylistController -> deleteActivity');
 		
-		$this->log("END :: ActivitylistController :: deleteActivity");
+		$rs;
+		$message = '';
+		$id = $this->request->data['id'];
+		
+		$dataSource = $this->Activity->getDataSource();
+		if( $rs = $this->Activity->deleteActivites($id) ){
+			$dataSource->commit();
+			$message = 'ลบข้อมูล สำเร็จ';
+		}else{
+			$dataSource->rollback();
+			$message = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลส่วนตัว กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+		}
+		$this->log('message='.$message);
+		$this->layout='ajax';
+		$this->set('message', json_encode(array('status'=>$rs,'message'=>$message)));
+		$this->render('response');
+		
+		$this->log('END :: ActivitylistController -> deleteActivity');
 	}
 }

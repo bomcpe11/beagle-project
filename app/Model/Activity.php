@@ -6,10 +6,25 @@ class Activity extends AppModel {
 		return $result;
 	}
 	
+// 	public function deleteActivites($idDelete){
+// 		$sql = 'delete from activities where id ='.$idDelete;
+// 		$result = $this->query($sql);
+// 		return $result;
+// 	}
+	
 	public function deleteActivites($idDelete){
+		$flag = false;
 		$sql = 'delete from activities where id ='.$idDelete;
-		$result = $this->query($sql);
-		return $result;
+		$this->log('sql => '.$sql);
+	
+		try{
+			$this->query($sql);
+			$flag = true;
+		}catch(Exception $e){
+			$this->log($e->getMessage());
+		}
+	
+		return $flag;
 	}
 	public function getDataByStmtSql($stmt_sql){
 		$result = null;

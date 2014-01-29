@@ -54,27 +54,25 @@
 		function deleteData(id){
 			jConfirm('ท่านต้องการลบข้อมูลกิจกรรมนี้ใช่หรือไม่?', 
 				function(){ //okFunc
-					jQuery.post("<?php echo $this->Html->url('/Activitylist/deleteActivity');?>"
-						, {"id":id}
-						, function(data) {
-							if ( data.status.id == 1 ) {
-								alert("เกิดข้อผิดพลาด กรุณาติดต่อผู้ดูแลระบบ");
+					loading();
+					jQuery.ajax({
+						type: "POST",
+						dataType: 'json',
+						url: '<?php echo $this->Html->url('/Activitylist/deleteActivity');?>',
+						data: {id:id},
+						success: function(data){
+							unloading();
+							if ( data.status ) {
+								jAlert(data.message, 
+									function(){
+										window.location.replace("<?php echo $this->webroot;?>Activitylist/index");
+									}
+								);
 							} else {
-								alert("ดำเนินการสำเร็จ");
-								window.location.replace("<?php echo $this->webroot;?>Activitylist/index");
+								jAlert(data.message);
 							}
 						}
-						, "json").error(function() {}
-					);
-				}, 
-				function(){ //cancelFunc
-					//alert('Cancel'); 
-				}, 
-				function(){ //openFunc
-					//alert('Open'); 
-				}, 
-				function(){ //closeFunc
-					//alert('Close'); 
+					});
 				}
 			);
 		}

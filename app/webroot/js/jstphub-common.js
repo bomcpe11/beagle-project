@@ -146,7 +146,7 @@ function jAlert(msg, okFunc, openFunc, closeFunc){
 	  width: NewDialog.width(),
       open: function(){
     	  jQuery(this).parent().find('button.ui-dialog-titlebar-close').hide();
-    	  openFunc(); 
+    	  if(openFunc!=undefined) openFunc(); 
       },
       close: closeFunc,
 	  buttons: [
@@ -166,7 +166,7 @@ function jConfirm(msg, okFunc, cancelFunc, openFunc, closeFunc){
 	  width: NewDialog.width(),
 	  open: function(){
     	  jQuery(this).parent().find('button.ui-dialog-titlebar-close').hide();
-    	  openFunc(); 
+    	  if(openFunc!=undefined) openFunc(); 
       },
       close: closeFunc,
 	  buttons: [

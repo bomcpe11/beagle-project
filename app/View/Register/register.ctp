@@ -4,8 +4,8 @@
 <script type="text/JavaScript">
 	/* --------------------------------------------------------------------------------------------------- */
 	jQuery(document).ready(function() {
-			// set datepicker
 			setBirthDatePicker(".datePicker");
+			jQuery('input[type="button"]').button();
 		}// function
 	);// jQuery.ready
 	/* --------------------------------------------------------------------------------------------------- */
@@ -174,19 +174,15 @@
         return pattern.test(email);
 	}// validateEmail
 	/* --------------------------------------------------------------------------------------------------- */
-	function clearScreen() {
-		// clear select
+	function clearScreen(){
 		jQuery("select").val("");
-		// clear text box
 		jQuery("input[type='text']").val(null);
-		// clear text area
 		jQuery("textarea").val(null);
-		// clear text password
 		jQuery("input[type='password']").val(null);
 	}// clearScreen
 </script>
 <!-- ###################################################################################################### -->
-<table align="center" class="tableLayout">
+<table class="section-layout" style="width:80%;margin:auto">
 	<tr>
 		<td colspan="4" style="height: 50px;">
 			<span class="header1">ลงทะเบียนเข้าร่วม</span>

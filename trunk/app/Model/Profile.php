@@ -271,10 +271,53 @@ class Profile extends AppModel {
 	
 		return $result;
 	}// checkNameEng
+	/* ------------------------------------------------------------------------------------------------------- */
 	public function searchByStmtSql($stmt_sql){
 		$result = null;
 		$strSql = "SELECT * FROM profiles WHERE $stmt_sql";
-		$this->log("strSql => ".$strSql);
+		//$this->log("strSql => ".$strSql);
+	
+		try {
+   			$result = $this->query($strSql);
+   		} catch ( Exception $e ) {
+   			$this->log("exception => ".$e->getMessage());
+   		}
+	
+		return $result;
+	}
+	/* ------------------------------------------------------------------------------------------------------- */
+	public function getDataByIsApprove($is_approve){
+		$result = null;
+		$strSql = "SELECT * FROM profiles WHERE is_approve='$is_approve'";
+		//$this->log("strSql => ".$strSql);
+	
+		try {
+   			$result = $this->query($strSql);
+   		} catch ( Exception $e ) {
+   			$this->log("exception => ".$e->getMessage());
+   		}
+	
+		return $result;
+	}
+	/* ------------------------------------------------------------------------------------------------------- */
+	public function getDataById($id){
+		$result = null;
+		$strSql = "SELECT * FROM profiles WHERE id='$id'";
+		//$this->log("strSql => ".$strSql);
+	
+		try {
+   			$result = $this->query($strSql);
+   		} catch ( Exception $e ) {
+   			$this->log("exception => ".$e->getMessage());
+   		}
+	
+		return $result;
+	}
+	/* ------------------------------------------------------------------------------------------------------- */
+	public function updateIsApprove($id,$is_approve){
+		$flag = false;
+		$strSql = "UPDATE profiles SET is_approve='$is_approve' WHERE id='$id'";
+		//$this->log("strSql => ".$strSql);
 	
 		try {
    			$result = $this->query($strSql);

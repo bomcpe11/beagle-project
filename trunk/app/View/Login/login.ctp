@@ -22,12 +22,22 @@
 	);// jQuery.ready
 	/* ------------------------------------------------------------------------------------------------- */
 	function loginFnc() {
-		loading();
-		
 		var username = jQuery("#text_username").val();
 		var password = jQuery("#text_password").val();
 		var rememberMe = jQuery("#checkbox_remem").is(":checked");
+
+		if( !username ){
+			jQuery('#span_error').html('* กรุณากรอก Username');
+			
+			return;
+		}
+		if( !password ){
+			jQuery('#span_error').html('* กรุณากรอก Password');
+
+			return;
+		}
 		
+		loading();
 		jQuery.post("<?php echo $this->Html->url('/login/loginAjax');?>"
 				, {"username":username
 					, "password":password

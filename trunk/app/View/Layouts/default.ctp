@@ -73,6 +73,8 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 		//---------------------------------------------------------------------------------------------
 		jQuery("#gotoExport").click(function() {changePage("Export");});
 		//---------------------------------------------------------------------------------------------
+		jQuery('#gotoApprove').click(function() {changePage("Approve");});
+		//---------------------------------------------------------------------------------------------
 		jQuery("#gotoActivityList").click(function() {changePage("ActivityList");});
 		//---------------------------------------------------------------------------------------------
 		jQuery("#gotoAsearch").click(function() {changePage("Asearch");});
@@ -85,7 +87,7 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 	//-------------------------------------------------------------------------------------------------
 	function changePage(path){
 		var link = "";
-		
+
 		switch(path)
 		{
 		case "Profile":
@@ -102,6 +104,9 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 		  break;
 		case "Export":
 		  window.location = "<?php echo $this->Html->url('/Export/index');?>";	
+		  break;
+		case "Approve":
+		  window.location = "<?php echo $this->Html->url('/Approve/index');?>";	
 		  break;
 		case "ActivityList":
 		  window.location = "<?php echo $this->Html->url('/Activitylist/index');?>";	

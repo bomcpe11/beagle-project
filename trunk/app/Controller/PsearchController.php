@@ -15,7 +15,7 @@ class PsearchController extends AppController {
 		$search_width = $this->request->data['search_width'];
 		
 		$result = $this->Profile->searchByStmtSql($search_width);
-		$this->log($result);
+		//$this->log($result);
 		
 		$this->layout="ajax";
 		$this->set("message", json_encode($result));

@@ -92,7 +92,7 @@ class LoginController extends AppController {
 				$this->Cookie->delete("cookieEncryptPassword");
 				$this->log("delete cookie complete");
 			}// if else
-		} else if ( count($objuser) == 2 ) { // username incorrect
+		} else if ( count($objuser)>1 ) { // username incorrect
 			$result = "เกิดข้อผิดพลาด กรุณาแจ้งผู้ดูแลเว็บไซต์";
 				
 			// delete cookie

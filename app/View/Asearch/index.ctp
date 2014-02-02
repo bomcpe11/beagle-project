@@ -2,7 +2,7 @@
 	<table class="section-layout" style="width:80%;">
 		<tr>
 			<td class="form-label">Key Word :</td>
-			<td><input id="key_word" type="text" /></td>
+			<td><input id="key_word" type="text" style="width:95%"/></td>
 		</tr>
 		<tr>
 			<td class="form-label">ค้นหาด้วย :</td>
@@ -77,9 +77,9 @@
 				,function(data){
 					var count_data = data?data.length:0;
 					var html='<table class="table-data">';
-					html+='<col style="width:25%">';
+					html+='<col style="width:30%">';
 					html+='<col style="width:10%">';
-					html+='<col style="width:25%">';
+					html+='<col style="width:20%">';
 					html+='<col style="width:10%">';
 					html+='<col style="width:30%">';
 					html+='<thead>';
@@ -97,7 +97,7 @@
 						for( var i=0;i<count_data;i++ ){
 							html+='<tr title="เข้าร่วมกิจกรรมนี้" onclick="open_popup_activity('+data[i].activities.id+')">';
 							html+='<td>'+data[i].activities.name+'</td>';
-							html+='<td>'+change_format_date_db(data[i].activities.startdtm)+'</td>';
+							html+='<td>'+( data[i].activities.startdtm?data[i].activities.startdtm:'-')+'</td>';
 							html+='<td>'+( data[i].activities.location?data[i].activities.location:'-' )+'</td>';
 							html+='<td>'+( data[i].activities.ganname?data[i].activities.ganname:'-' )+'</td>';
 							html+='<td>'+( data[i].activities.shortdesc?data[i].activities.shortdesc:'-' )+'</td>';

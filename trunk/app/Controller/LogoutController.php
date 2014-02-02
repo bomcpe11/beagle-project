@@ -2,6 +2,7 @@
 class LogoutController extends AppController {
 
 	public $uses = array();
+	public $components = array("Cookie");
 
 	public function index(){
 		$this->fncLogout();
@@ -22,6 +23,10 @@ class LogoutController extends AppController {
 	
 	private function fncLogout(){
 		$this->Session->delete('objuser');
+		
+		$this->Cookie->delete('cookieUsername');
+		$this->Cookie->delete('cookieEncryptPassword');
+			
 		$this->log('Logout successful');
 		return true;
 	}

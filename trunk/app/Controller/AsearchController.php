@@ -15,7 +15,16 @@ class AsearchController extends AppController{
 		$search_width = $this->request->data['search_width'];
 		
 		$result = $this->Activity->getDataByStmtSql($search_width);
-		//$this->log(print_r($result,true));
+		$countData = count($result);
+		for( $i=0;$i<$countData;$i++ ){
+			if( !empty($result[$i]['activities']['startdtm']) ){
+				$result[$i]['activities']['startdtm'] = $this->DateThai($result[$i]['activities']['startdtm']);
+			}else{
+				$result[$i]['activities']['startdtm']='';
+			}
+		}
+		$this->log(print_r($result,true));
+		
 		
 		$this->layout="ajax";
 		$this->set("message", json_encode($result));

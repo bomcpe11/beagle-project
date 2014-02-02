@@ -2,7 +2,7 @@
 	<table class="section-layout" style="width:50%;">
 		<tr>
 			<td class="form-label">Key Word :</td>
-			<td><input id="key_word" type="text" /></td>
+			<td><input id="key_word" type="text" style="width:95%"/></td>
 		</tr>
 		<tr>
 			<td class="form-label">ค้นหาด้วย :</td>

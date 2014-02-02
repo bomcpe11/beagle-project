@@ -316,16 +316,21 @@ class Profile extends AppModel {
 	/* ------------------------------------------------------------------------------------------------------- */
 	public function updateIsApprove($id,$is_approve){
 		$flag = false;
-		$strSql = "UPDATE profiles SET is_approve='$is_approve' WHERE id='$id'";
+		$strSql = "UPDATE profiles 
+					SET is_approve='$is_approve',
+					updated_at=now()
+					WHERE id='$id'";
 		//$this->log("strSql => ".$strSql);
 	
 		try {
-   			$result = $this->query($strSql);
+   			$this->query($strSql);
+   			
+   			$flag = true;
    		} catch ( Exception $e ) {
    			$this->log("exception => ".$e->getMessage());
    		}
 	
-		return $result;
+		return $flag;
 	}
 }
 ?>

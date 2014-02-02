@@ -55,7 +55,7 @@ class LoginController extends AppController {
 		
 		// check username
 		$objuser = $this->Profile->checkLogin($username);
-		if ( count($objuser) == 0 ) { // username incorrect
+		if ( count($objuser)===0||$objuser[0]['profiles']['is_approve']==0 ) { // username incorrect
 			$result = "ไม่พบ Username นี้";
 				
 			// delete cookie

@@ -80,5 +80,12 @@ class AppController extends Controller {
 		$strMonthThai=$strMonthCut[$strMonth];
 		return "$strDay $strMonthThai $strYear";
 	}
+	function getAge($strBirthday){
+		$now = date('Y-m-d');
+		$diffDate = abs(strtotime($now) - strtotime($strBirthday));
+		$age = floor($diffDate / (365*60*60*24)) . ' ปี';
+		
+		return $age;
+	}
 	
 }

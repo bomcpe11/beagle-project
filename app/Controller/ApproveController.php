@@ -9,9 +9,13 @@ class ApproveController extends AppController{
 		$this->setTitle('Approve');
 		$is_approve = 0;
 		$dataList = $this->Profile-> getDataByIsApprove($is_approve);
+		$countData = count($dataList);
+		for( $i=0;$i<$countData;$i++ ){
+			$dataList[$i]['profiles']['age'] = $this->getAge($dataList[$i]['profiles']['birthday']);
+		}
 		//$this->log(print_r($dataList,true));
 		
-		$this->set(compact('dataList'));
+		$this->set(compact('dataList', 'age'));
 	}
 	public function goApprove(){
 		$this->log('---- Approve->goApprvoe() ----');
@@ -20,8 +24,12 @@ class ApproveController extends AppController{
 		//$this->log(print_r($this->request,true));
 		$profile_id = $this->request->query['profile_id'];
 		$dataProfile = $this->Profile->getDataById($profile_id);
+		//$this->log(print_r($dataProfile,true));
 		
-		$this->set(compact('dataProfile'));
+		$birthday = $this->DateThai($dataProfile[0]['profiles']['birthday']);
+		$age = $this->getAge($dataProfile[0]['profiles']['birthday']);
+		
+		$this->set(compact('dataProfile', 'birthday', 'age'));
 		$this->render('go_approve');
 	}
 	public function doApprove(){
@@ -43,6 +51,7 @@ class ApproveController extends AppController{
 			$result['flg'] = -1;
 			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลส่วนตัว กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 		}
+		//$this->log(print_r($result,true));
 		
 		$this->layout='ajax';
 		$this->set('message', json_encode($result));

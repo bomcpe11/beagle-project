@@ -23,8 +23,7 @@ class AsearchController extends AppController{
 				$result[$i]['activities']['startdtm']='';
 			}
 		}
-		$this->log(print_r($result,true));
-		
+		//$this->log(print_r($result,true));
 		
 		$this->layout="ajax";
 		$this->set("message", json_encode($result));

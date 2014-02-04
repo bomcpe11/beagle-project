@@ -59,21 +59,34 @@
 		jQuery('input[type="button"]').button();
 	});
 	function do_approve(profile_id){
-		loading();
-		jQuery.post('<?php echo $this->Html->url('/Approve/doApprove');?>'
-				,{'data':{'profile_id':profile_id}}
-				,function(data){
-					jAlert(data.msg
-							, function(){
-							}//okFunc	
-							, function(){
-								unloading();
-							}//openFunc
-							, function(){ 		
-							}//closeFunc
-					);
+		jConfirm('กรุณายืนยัน', 
+				function(){ //okFunc
+					loading();
+					jQuery.post('<?php echo $this->Html->url('/Approve/doApprove');?>'
+							,{'data':{'profile_id':profile_id}}
+							,function(data){
+								jAlert(data.msg
+										, function(){
+											if(data.flg===1){
+												go_back();
+											}
+										}//okFunc	
+										, function(){
+											unloading();
+										}//openFunc
+										, function(){ 		
+										}//closeFunc
+								);
+							}
+							,'json');
+				}, 
+				function(){ //cancelFunc
+				}, 
+				function(){ //openFunc
+				}, 
+				function(){ //closeFunc
 				}
-				,'json');
+			);
 	}
 	function go_back(){
 		var path = '<?php echo $this->Html->url('/Approve/index');?>';

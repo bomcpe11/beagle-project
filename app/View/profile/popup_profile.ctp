@@ -20,11 +20,11 @@
 							<li>\
 								<p><strong>* ชื่อ(ภาษาไทย) :</strong></p>\
 								<p>\
-									<input id="text-name-th" type="text" value=<?php echo $objuser["nameth"];?>>\
+									<input id="text-name-th" type="text" value=<?php echo $objUser[0]['profiles']["nameth"];?>>\
 								</p>\
 								<p><strong>* นามสกุล(ภาษาอังกฤษ) :</strong></p>\
 								<p>\
-									<input id="text-lastname-th" type="text" value=<?php echo $objuser["lastnameth"];?>>\
+									<input id="text-lastname-th" type="text" value=<?php echo $objUser[0]['profiles']["lastnameth"];?>>\
 								</p>\
 							</li>\
 							<li class="single">\
@@ -33,7 +33,7 @@
 									<select id="select_title-name-eng">\
 										<option value="">---- กรุณาเลือก ----</option>\
 										<?php for ( $i = 0; $i < count($namePrefixEn); $i++ ) { ?>\
-											<?php if ( $namePrefixEn[$i]["gvars"]["vardesc1"] == $objuser["titleen"] ) { ?>\
+											<?php if ( $namePrefixEn[$i]["gvars"]["vardesc1"] == $objUser[0]['profiles']["titleen"] ) { ?>\
 												<option value=<?php echo $namePrefixEn[$i]["gvars"]["vardesc1"];?> selected><?php echo $namePrefixEn[$i]["gvars"]["vardesc1"];?></option>\
 											<?php } else { ?>\
 												<option value=<?php echo $namePrefixEn[$i]["gvars"]["vardesc1"];?>><?php echo $namePrefixEn[$i]["gvars"]["vardesc1"];?></option>\
@@ -45,21 +45,21 @@
 							<li>\
 								<p><strong>* ชื่อ(ภาษาอังกฤษ) :</strong></p>\
 								<p>\
-									<input id="text-name-eng" type="text" value=<?php echo $objuser["nameeng"];?>>\
+									<input id="text-name-eng" type="text" value=<?php echo $objUser[0]['profiles']["nameeng"];?>>\
 								</p>\
 								<p><strong>* นามสกุล(ภาษาอังกฤษ) :</strong></p>\
 								<p>\
-									<input id="text-last-name-eng" type="text" value=<?php echo $objuser["lastnameeng"];?>>\
+									<input id="text-last-name-eng" type="text" value=<?php echo $objUser[0]['profiles']["lastnameeng"];?>>\
 								</p>\
 							</li>\
 							<li>\
 								<p><strong>* ชื่อเล่น :</strong></p>\
 								<p>\
-									<input id="text-nickname" type="text" value=<?php echo $objuser["nickname"];?>>\
+									<input id="text-nickname" type="text" value=<?php echo $objUser[0]['profiles']["nickname"];?>>\
 								</p>\
 								<p><strong>* ชื่อรุ่น :</strong></p>\
 								<p>\
-									<input id="text-generation" type="text" value=<?php echo $objuser["generation"];?>>\
+									<input id="text-generation" type="text" value=<?php echo $objUser[0]['profiles']["generation"];?>>\
 								</p>\
 							</li>\
 							<li class="single">\
@@ -71,50 +71,50 @@
 							<li>\
 								<p><strong>สัญชาติ :</strong></p>\
 								<p>\
-									<input id="text-nationality" type="text" value=<?php echo $objuser["nationality"];?>>\
+									<input id="text-nationality" type="text" value=<?php echo $objUser[0]['profiles']["nationality"];?>>\
 								</p>\
 								<p><strong>ศาสนา :</strong></p>\
 								<p>\
-									<input id="text-religious" type="text" value=<?php echo $objuser["religious"];?>>\
+									<input id="text-religious" type="text" value=<?php echo $objUser[0]['profiles']["religious"];?>>\
 								</p>\
 							</li>\
 							<li>\
 								<p><strong>สถานะภาพ :</strong></p>\
 								<p>\
-									<input id="text-social-status" type="text" value=<?php echo $objuser["socialstatus"];?>>\
+									<input id="text-social-status" type="text" value=<?php echo $objUser[0]['profiles']["socialstatus"];?>>\
 								</p>\
 								<p><strong>สถานะภาพทางการศึกษา :</strong></p>\
 								<p>\
-									<input id="text-study-status" type="text" value=<?php echo $objuser["studystatus"];?>>\
+									<input id="text-study-status" type="text" value=<?php echo $objUser[0]['profiles']["studystatus"];?>>\
 								</p>\
 							</li>\
 							<li class="single">\
 								<p><strong>ที่อยู่ :</strong></p>\
 								<p>\
-									<textarea id="textarea-address" rows="3"><?php echo trim($objuser["address"]);?></textarea>\
+									<textarea id="textarea-address" rows="3"><?php echo trim($objUser[0]['profiles']["address"]);?></textarea>\
 								</p>\
 							</li>\
 							<li>\
 								<p><strong>โทรศัพท์ :</strong></p>\
 								<p>\
-									<input id="text-tel-phone" type="text" value=<?php echo $objuser["telphone"];?>>\
+									<input id="text-tel-phone" type="text" value=<?php echo $objUser[0]['profiles']["telphone"];?>>\
 								</p>\
 								<p><strong>โทรศัพท์มือถือ :</strong></p>\
 								<p>\
-									<input id="text-cel-phone" type="text" value=<?php echo $objuser["celphone"];?>>\
+									<input id="text-cel-phone" type="text" value=<?php echo $objUser[0]['profiles']["celphone"];?>>\
 								</p>\
 							</li>\
 							<li class="single">\
 								<p><strong>* อีเมล์ :</strong></p>\
 								<p>\
-									<input id="text-email" type="text" value=<?php echo $objuser["email"];?>>\
+									<input id="text-email" type="text" value=<?php echo $objUser[0]['profiles']["email"];?>>\
 								</p>\
 							</li>\
 							<li class="single">\
 								<p><strong>Sosial Media :</strong></p>\
 								<p>\
-									<input id="text-blog-address" type="text" value=<?php echo $objuser["blogaddress"];?>>\
-									<input id="hidden-profile-id" type="hidden" value=<?php echo $objuser["id"];?>>\
+									<input id="text-blog-address" type="text" value=<?php echo $objUser[0]['profiles']["blogaddress"];?>>\
+									<input id="hidden-profile-id" type="hidden" value=<?php echo $objUser[0]['profiles']["id"];?>>\
 								</p>\
 							</li>\
 						</ul>\

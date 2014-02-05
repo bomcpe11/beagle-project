@@ -18,7 +18,18 @@
 			</tr>\
 			<tr>\
 				<td style="text-align:right;">* ประเภทของงานวิจัย :</td>\
-				<td><select id="research-researchtype"><optio>---- กรุณาเลือก ----</option></select></td>\
+				<td>\
+					<select id="research-researchtype">\
+						<option value="-1">---- กรุณาเลือก ----</option>\
+						<?php 
+							$countListResearchType = count($listResearchType);
+							for( $i=0;$i<$countListResearchType;$i++ ){ 
+									echo "<option value=\"{$listResearchType[$i]['gvars']['varcode']}\">{$listResearchType[$i]['gvars']['vardesc1']}</option>";
+						
+							} 
+						?>\
+					</select>\
+				</td>\
 			</tr>\
 			<tr>\
 				<td style="text-align:right;">อาจารย์ที่ปรึกษา :</td>\
@@ -49,12 +60,13 @@
 									if(id){
 										editResearch();
 									}else{
-										savedResearch();
+										savedNewResearch();
 									}
 								}
 						}];
 		openPopupHtml('[เพิ่ม][แก้ไข]ผลงานวิจัย', html, buttons, 
 				function(){ //openFunc
+					jQuery('#research-researchtype').val(researchtype);
 				}, 
 				function(){ //closeFunc
 				}
@@ -76,7 +88,7 @@
 					
 					jAlert(data.msg
 							, function(){ 
-								if( data.flag === '1' ){
+								if( data.flag===1 ){
 									closePopup('#popup-research-container');
 									window.location.reload();
 								}
@@ -91,7 +103,7 @@
 		}
 	}
 	function editResearch(){
-		if( validateEducation() ){
+		if( validateResearch() ){
 			loading();
 			jQuery.post('<?php echo $this->Html->url('/Profile/editResearch');?>'
 					,{'data':{'id':jQuery('#research-id').val()
@@ -107,7 +119,7 @@
 						
 						jAlert(data.msg
 								, function(){ 
-									if( data.flag === '1' ){
+									if( data.flag===1 ){
 										closePopup('#popup-research-container');
 										window.location.reload();
 									}
@@ -122,7 +134,7 @@
 		}
 	}
 	function validateResearch(){
-		if( jQuery('#research-name').val() && jQuery('#research-researchtype').val() ){
+		if( jQuery('#research-name').val() && jQuery('#research-researchtype').val()!=='-1' ){
 				return true;
 		}else{
 			jAlert('คุณกรอกข้อมูล ไม่ครบ', 
@@ -147,7 +159,7 @@
 							unloading();
 							jAlert(data.msg
 									, function(){ 
-										if( data.flag==='1' ){
+										if( data.flag===1 ){
 											window.location.reload();
 										}
 									}//okFunc	

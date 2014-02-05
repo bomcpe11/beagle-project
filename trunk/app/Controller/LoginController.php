@@ -42,7 +42,7 @@ class LoginController extends AppController {
 		$result = $this->loginFnc($username, md5($password), $rememberMe);
 		
 		$this->layout = "ajax";
-		$this->set("message", json_encode(array("result" => $result)));
+		$this->set("message", json_encode($result));
 		$this->render("response");
 		
 		$this->log("END :: LoginController -> loginAjax()");
@@ -50,13 +50,14 @@ class LoginController extends AppController {
 	/* ------------------------------------------------------------------------------------------------------ */
 	private function loginFnc($username, $encryptPassword, $rememberMe) {
 		//// local variables ////
-		$result = "";
+		$result = array();
 		$cookieTimeOut = ((3600 * 24) * 30);  // or '1 month'
 		
 		// check username
 		$objuser = $this->Profile->checkLogin($username);
 		if ( count($objuser)===0||$objuser[0]['profiles']['is_approve']==0 ) { // username incorrect
-			$result = "ไม่พบ Username นี้";
+			$result['msg'] = 'ไม่พบ Username นี้';
+			$result['profile_id']=-1;
 				
 			// delete cookie
 			$this->Cookie->delete("cookieUsername");
@@ -65,8 +66,6 @@ class LoginController extends AppController {
 		} else if ( count($objuser) == 1 ) { // username correct
 			// check password
 			if ( $encryptPassword == $objuser[0]["profiles"]["encrypt_password"] ) { // password correct
-				$result = "";
-					
 				// set SESSION
 				$this->Session->write("objuser", $objuser[0]["profiles"]);
 				$this->log("write session complete");
@@ -84,8 +83,12 @@ class LoginController extends AppController {
 					$this->Cookie->delete("cookieEncryptPassword");
 					$this->log("delete cookie complete");
 				}// if else
+				
+				$result['msg'] = '';
+				$result['profile_id']=$objuser[0]['profiles']['id'];
 			} else {	// password incorrect
-				$result = "รหัสผ่านไม่ถูกต้อง";
+				$result['msg'] = 'รหัสผ่านไม่ถูกต้อง';
+				$result['profile_id']=-1;
 		
 				// delete cookie
 				$this->Cookie->delete("cookieUsername");
@@ -93,7 +96,8 @@ class LoginController extends AppController {
 				$this->log("delete cookie complete");
 			}// if else
 		} else if ( count($objuser)>1 ) { // username incorrect
-			$result = "เกิดข้อผิดพลาด กรุณาแจ้งผู้ดูแลเว็บไซต์";
+			$result['msg'] = "เกิดข้อผิดพลาด กรุณาแจ้งผู้ดูแลเว็บไซต์";
+			$result['profile_id']=-1;
 				
 			// delete cookie
 			$this->Cookie->delete("cookieUsername");

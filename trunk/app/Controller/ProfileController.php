@@ -1,7 +1,7 @@
 <?php
 session_start();
 class ProfileController extends AppController {
-
+	/* ------------------------------------------------------------------------------------------------ */
 	public $names = 'ProfileController';
 	public $uses = array('Gvar'
 						,'Profile'
@@ -9,74 +9,102 @@ class ProfileController extends AppController {
 						,'Education'
 						,'Research'
 						,'Comment');
-
+	/* ------------------------------------------------------------------------------------------------ */
 	public function index(){
 		$this->log('---- ProfileController -> index ----');
 		
-		$objUser = $this->getObjUser();
+		$get_profile_id = intval($this->request->query['profile_id']);
+		$objUser = $this->Profile->getDataById($get_profile_id);
 		//$this->log(print_r($objUser, true));
+		$isOwner = false;
 		$fullNameTh = null;
 		$birthday = null;
 		$age = null;
-		
-		/* fullName */
-		if( $objUser['position'] ){
-			$fullNameTh = $objUser['position'].' '.$objUser['nameth'].' '.$objUser['lastnameth'];
-		} else{
-			$fullNameTh = $objUser['titleth'].' '.$objUser['nameth'].' '.$objUser['lastnameth']; 
-		} 
-		
-		/* birthday */
-		$arrayBirthday = explode('-', $objUser['birthday']);	// <<< Y-m-d
-		$birthday .= $arrayBirthday[2];
-		switch ($arrayBirthday[1]) {
-			case "01":	$birthday .= " มกราคม"; break;
-			case "02":	$birthday .= " กุมภาพันธ์"; break;
-			case "03":	$birthday .= " มีนาคม"; break;
-			case "04":	$birthday .= " เมษายน"; break;
-			case "05":	$birthday .= " พฤษภาคม"; break;
-			case "06":	$birthday .= " มิถุนายน"; break;
-			case "07":	$birthday .= " กรกฏาคม"; break;
-			case "08":	$birthday .= " สิงหาคม"; break;
-			case "09":	$birthday .= " กันยายน"; break;
-			case "10":	$birthday .= " ตุลาคม"; break;
-			case "11":	$birthday .= " พฤศจิกายน"; break;
-			case "12":	$birthday .= " ธันวาคม"; break;
-		}// switch
-		$birthday .= " พ.ศ. " . ( intval($arrayBirthday[0]) + 543 );
-		
-		/* age */
-		$now = date('Y-m-d');
-		$diffDate = abs(strtotime($now) - strtotime($objUser['birthday']));
-		$age = floor($diffDate / (365*60*60*24)) . ' ปี';
-		
-		/* prefix name */
-		$namePrefixTh 	= $this->Gvar->getVarcodeVardesc1ByVarname('NAME_PREFIX_TH');
-		$namePrefixEn 	= $this->Gvar->getVarcodeVardesc1ByVarname('NAME_PREFIX_EN');
-		
-		/* families */
-		$listFamily = $this->Family->getFamiliesByProfileId($objUser['id']);
-		//$this->log(print_r($listFamily, true));
-		
-		/* education */
-		$listEducation = $this->Education->getEducationByProfileId($objUser['id']);
-		//$this->log(print_r($listEducation, true));
-		
-		/* research */
-		$listResearch = $this->Research->getDataByProfileId('9');
-		
-		/* comment */
-		$listComment = $this->Comment->getDataByProfileId('1');
+		$namePrefixTh = null;
+		$namePrefixEn = null;
+		$listFamily = null;
+		$listEducation = null;
+		$listResearchType = null;
+		$listResearch = null;
+		$listComment = null;
+		$pageTitle='ไม่พบข้อมูล';
+			
+		if( empty($objUser) ){
+			
+		}else{
+			/* owner profile */
+			if( $get_profile_id==$this->getObjUser()['id'] ){
+				$isOwner = true;
+			}
+			
+			/* fullName */
+			if( $objUser[0]['profiles']['position'] ){
+				$fullNameTh = $objUser[0]['profiles']['position'].' '.$objUser[0]['profiles']['nameth'].' '.$objUser[0]['profiles']['lastnameth'];
+			} else{
+				$fullNameTh = $objUser[0]['profiles']['titleth'].' '.$objUser[0]['profiles']['nameth'].' '.$objUser[0]['profiles']['lastnameth']; 
+			} 
+			
+			/* birthday */
+			$arrayBirthday = explode('-', $objUser[0]['profiles']['birthday']);	// <<< Y-m-d
+			$birthday .= $arrayBirthday[2];
+			switch ($arrayBirthday[1]) {
+				case "01":	$birthday .= " มกราคม"; break;
+				case "02":	$birthday .= " กุมภาพันธ์"; break;
+				case "03":	$birthday .= " มีนาคม"; break;
+				case "04":	$birthday .= " เมษายน"; break;
+				case "05":	$birthday .= " พฤษภาคม"; break;
+				case "06":	$birthday .= " มิถุนายน"; break;
+				case "07":	$birthday .= " กรกฏาคม"; break;
+				case "08":	$birthday .= " สิงหาคม"; break;
+				case "09":	$birthday .= " กันยายน"; break;
+				case "10":	$birthday .= " ตุลาคม"; break;
+				case "11":	$birthday .= " พฤศจิกายน"; break;
+				case "12":	$birthday .= " ธันวาคม"; break;
+			}// switch
+			$birthday .= " พ.ศ. " . ( intval($arrayBirthday[0]) + 543 );
+			
+			/* age */
+			$now = date('Y-m-d');
+			$diffDate = abs(strtotime($now) - strtotime($objUser[0]['profiles']['birthday']));
+			$age = floor($diffDate / (365*60*60*24)) . ' ปี';
+			
+			/* prefix name */
+			$namePrefixTh 	= $this->Gvar->getVarcodeVardesc1ByVarname('NAME_PREFIX_TH');
+			$namePrefixEn 	= $this->Gvar->getVarcodeVardesc1ByVarname('NAME_PREFIX_EN');
+			
+			/* families */
+			$listFamily = $this->Family->getFamiliesByProfileId($objUser[0]['profiles']['id']);
+			//$this->log(print_r($listFamily, true));
+			
+			/* education */
+			$listEducation = $this->Education->getEducationByProfileId($objUser[0]['profiles']['id']);
+			//$this->log(print_r($listEducation, true));
+			
+			/* research */
+			$listResearchType = $this->Gvar->getVarcodeVardesc1ByVarname('RESEARCH_TYPE');
+			$listResearch = $this->Research->getDataByProfileId($objUser[0]['profiles']['id']);
+			//$this->log(print_r($listResearch, true));
+			
+			/* comment */
+			$listComment = $this->Comment->getDataByProfileId($objUser[0]['profiles']['id']);
+			
+			$pageTitle = 'ข้อมูลส่วนตัว - '
+						. $objUser[0]['profiles']['titleth'] 
+						. ' '
+						. $objUser[0]['profiles']['nameth'] 
+						. ' '
+						. $objUser[0]['profiles']['lastnameth'];
+		}
 		
 		/* set data to view*/
-		$this->set(compact('fullNameTh', 'birthday'
+		$this->set(compact('isOwner', 'objUser', 'fullNameTh', 'birthday'
 							,'age', 'namePrefixTh'
 							,'namePrefixEn', 'listFamily'
-							,'listEducation', 'listResearch'
+							,'listEducation', 'listResearchType', 'listResearch'
 							,'listComment'));
-		$this->set("page_title","ข้อมูลส่วนตัว - " . $objUser["titleth"] . " " . $objUser["nameth"] . " " . $objUser["lastnameth"]);
+		$this->setTitle($pageTitle);
 	}
-	/* ------------------------------------------------------------------------------------------------------- */
+	/* ------------------------------------------------------------------------------------------------ */
 	public function updateProfileAjax() {
 		$this->log("START :: ProfileController -> updateProfileAjax()");
 		
@@ -131,6 +159,7 @@ class ProfileController extends AppController {
 												
 		$this->log("END :: ProfileController -> updateProfileAjax()");
 	}
+	/* ------------------------------------------------------------------------------------------------ */
 	public function saveNewFamily(){
 		$this->log('START :: ProfileController -> saveNewFamily');
 		
@@ -160,6 +189,7 @@ class ProfileController extends AppController {
 		
 		$this->log('END :: ProfileController -> saveNewFamily');
 	}
+	/* ------------------------------------------------------------------------------------------------ */
 	public function editFamily(){
 		$this->log('START :: ProfileController -> editFamily');
 		
@@ -192,6 +222,7 @@ class ProfileController extends AppController {
 		
 		$this->log('END :: ProfileController -> editFamily');
 	}
+	/* ------------------------------------------------------------------------------------------------ */
 	public function deleteFamily(){
 		$this->log('START :: ProfileController -> deleteFamily');
 		
@@ -213,6 +244,7 @@ class ProfileController extends AppController {
 		
 		$this->log('END :: ProfileController -> deleteFamily');
 	}
+	/* ------------------------------------------------------------------------------------------------ */
 	public function saveNewEducation(){
 		$this->log('START :: ProfileController -> saveNewEducation');
 		
@@ -251,6 +283,7 @@ class ProfileController extends AppController {
 		
 		$this->log('END :: ProfileController -> saveNewEducation');
 	}
+	/* ------------------------------------------------------------------------------------------------ */
 	public function editEducation(){
 		$this->log('START :: ProfileController -> editEducation');
 		
@@ -291,6 +324,7 @@ class ProfileController extends AppController {
 		
 		$this->log('END :: ProfileController -> editEducation');
 	}
+	/* ------------------------------------------------------------------------------------------------ */
 	public function deleteEducation(){
 		$this->log('START :: ProfileController -> deleteEducation');
 		
@@ -312,6 +346,7 @@ class ProfileController extends AppController {
 		
 		$this->log('END :: ProfileController -> deleteEducation');
 	}
+	/* ------------------------------------------------------------------------------------------------ */
 	public function savedNewResearch(){
 		$this->log('---- savedNewResearch ----');
 		
@@ -348,6 +383,7 @@ class ProfileController extends AppController {
 		$this->set('message', json_encode($result));
 		$this->render('response');
 	}
+	/* ------------------------------------------------------------------------------------------------ */
 	public function editResearch(){
 		$this->log('---- editResearch ----');
 		
@@ -386,6 +422,7 @@ class ProfileController extends AppController {
 		$this->set('message', json_encode($result));
 		$this->render('response');
 	}
+	/* ------------------------------------------------------------------------------------------------ */
 	public function deletedResearch(){
 		$this->log('---- deletedResearch ----');
 		
@@ -408,7 +445,7 @@ class ProfileController extends AppController {
 		$this->set('message', json_encode($result));
 		$this->render('response');
 	}
-	/* ------------------------------------------------------------------------------------------------------ */
+	/* ------------------------------------------------------------------------------------------------ */
 	public function changeFormatDate($data) {
 		/*
 		 * index of $explodeDate

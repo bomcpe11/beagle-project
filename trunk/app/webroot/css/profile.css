@@ -63,6 +63,8 @@ tr {
 	background-color: #FCFCFC;
 	border-radius:7px;
 	padding: 0 20px 0 20px;
+	margin: 20px auto 0 auto;
+	width: 100%;
 }
 .table_data, .table_data_item {
 	width: 100%;
@@ -81,9 +83,6 @@ tr {
 }
 .td_link {
 	text-align: right;
-}
-#table-profile {
-	margin: 10px auto 0 auto;
 }
 .table ul {
 	width: 100%;

@@ -38,20 +38,20 @@
 		}
 		
 		loading();
-		jQuery.post("<?php echo $this->Html->url('/login/loginAjax');?>"
-				, {"username":username
-					, "password":password
-					, "rememberMe":rememberMe}
+		jQuery.post('<?php echo $this->Html->url('/login/loginAjax');?>'
+				, {'username':username
+					, 'password':password
+					, 'rememberMe':rememberMe}
 				, function(data) {
-					if ( data.result.length > 0 ) {
-						jQuery("#span_error").html("* " + data.result);
+					if ( data.profile_id===-1 ) {
+						jQuery('#span_error').html('* ' + data.msg);
 					} else {
-						window.location.replace("<?php echo $this->webroot;?>profile/index");
+						window.location.replace('<?php echo $this->webroot;?>profile/index?profile_id='+data.profile_id);
 					}// if else
 
 					unloading();
 				}// function(data)
-				, "json").error(function() {
+				, 'json').error(function() {
 				}// function()
 		);// jQuery.post
 	}// submitValue

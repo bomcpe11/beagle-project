@@ -1,18 +1,23 @@
 <?php
 class Research extends AppModel {
-	
+	/* ------------------------------------------------------------------------------------------------ */
 	public function getResearches(){
 		$result = $this->query('select * from researches');
 		return $result;
 	}
+	/* ------------------------------------------------------------------------------------------------ */
 	public function getDataByProfileId($profile_id){
 		$result=null;
-		$sql="SELECT * FROM researches WHERE profile_id='$profile_id'";
+		$sql="SELECT r.*
+				,(SELECT vardesc1 FROM gvars g WHERE g.varname='RESEARCH_TYPE' AND g.varcode=r.researchtype) research_type
+				FROM researches r 
+				WHERE r.profile_id='$profile_id'";
 		
 		$result = $this->query($sql);
 		
 		return $result;
 	}
+	/* ------------------------------------------------------------------------------------------------ */
 	public function insertData($name
 								,$researchtype
 								,$advisor
@@ -23,7 +28,7 @@ class Research extends AppModel {
 								,$dissemination){
 		$flag=false;
 		$sql="INSERT INTO researches (
-							,name
+							name
 							,researchtype
 							,advisor
 							,organization
@@ -31,7 +36,8 @@ class Research extends AppModel {
 							,created_at
 							,updated_at
 							,isnotfinish
-							,yearfinish)
+							,yearfinish
+							,dissemination)
 					VALUES('$name'
 							,'$researchtype'
 							,'$advisor'
@@ -40,8 +46,9 @@ class Research extends AppModel {
 							,'$isnotfinish'
 							,now()
 							,now()
-							,'$yearfinish')";
-		$this->log($sql);
+							,'$yearfinish'
+							,'$dissemination')";
+		//$this->log($sql);
 		
 		try{
 			$this->query($sql);
@@ -52,6 +59,7 @@ class Research extends AppModel {
 		
 		return $flag;
 	}
+	/* ------------------------------------------------------------------------------------------------ */
 	public function updateData($id
 								,$name
 								,$researchtype
@@ -71,8 +79,9 @@ class Research extends AppModel {
 					,updated_at=now()
 					,isnotfinish='$isnotfinish'
 					,yearfinish='$yearfinish'
+					,dissemination='$dissemination'
 				WHERE id='$id'";
-		$this->log($sql);
+		//$this->log($sql);
 		
 		try{
 			$this->query($sql);
@@ -83,6 +92,7 @@ class Research extends AppModel {
 		
 		return $flag;
 	}
+	/* ------------------------------------------------------------------------------------------------ */
 	public function deleteData($id){
 		$flag=false;
 		$sql="DELETE FROM researches WHERE id='$id'";

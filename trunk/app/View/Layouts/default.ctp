@@ -91,7 +91,7 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 		switch(path)
 		{
 		case "Profile":
-	      window.location = "<?php echo $this->Html->url('/Profile/index');?>";
+	      window.location = "<?php echo $this->Html->url('/Profile/index').'?profile_id='.$objuser['id'];?>";
 		  break;
 		case "Changepic":
 		  window.location = "<?php echo $this->Html->url('/Changepic/index');?>";

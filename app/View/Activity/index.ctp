@@ -1,1 +1,77 @@
-TEST Activity detail.
+<?php
+?>
+<script type="text/javascript">
+		function activityAdd(){
+			//jConfirm('ท่านต้องการลบข้อมูลกิจกรรมนี้ใช่หรือไม่?', 
+				//function(){ //okFunc
+					//loading();
+					jQuery.ajax({
+						type: "POST",
+						dataType: 'json',
+						url: '<?php echo $this->Html->url('/Activity/addactivity');?>',
+						data: {},
+						success: function(data){
+							//unloading();
+							//if ( data.status ) {
+								//jAlert(data.message, 
+									//function(){
+										window.location.replace("<?php echo $this->webroot;?>Activity/addactivity");
+									//}
+								//);
+							//} else {
+								//jAlert(data.message);
+							//}
+						}
+					});
+				//}
+			//);
+		}
+</script>
+<table class="tableLayout" width="100%">
+	<tr align="left" style="">
+		<th>ชื่อกิจกรรม : <?php echo $result[0]["activities"]["name"] ?>
+		<input type="hidden" id="AcId" value="<?php echo $result[0]["activities"]["id"] ?>"/>
+		</th>
+	</tr>
+	<tr align="left" style="">
+		<th>วันที่จัดกิจกรรมเริ่มต้น : <?php echo $result[0]["activities"]["startdtm"] ?></th>
+	</tr>
+	<tr align="left" style="">
+		<th>วันที่จัดกิจกรรมสิ้นสุด : <?php echo $result[0]["activities"]["enddtm"] ?></th>
+	</tr>
+	<tr align="left" style="">
+		<th>สถานที่จัดกิจกรรม : <?php echo $result[0]["activities"]["location"] ?></th>
+	</tr>
+	<tr align="left" style="">
+		<th>ชื่อรุ่น : <?php echo $result[0]["activities"]["genname"] ?></th>
+	</tr>
+	<tr align="left" style="">
+		<th>รายละเอียดกิจกรรมอย่างย่อ : <?php echo $result[0]["activities"]["shortdesc"] ?></th>
+	</tr>
+	<tr align="left" style="">
+		<th>รายละเอียดกิจกรรม : <?php echo $result[0]["activities"]["shortdesc"] ?></th>
+	</tr>
+</table>
+<br/>
+<table class="tableLayout" width="100%">
+	<tr align="left" >
+		<th colspan="4"> ไฟล์แนบ</th>
+	</tr>
+	<tr align="left" >
+		<th>ชื่อไฟล์ไฟล์</th>
+		<th>คำอธิบาย</th>
+		<th>วันที่อัพโหลด</th>
+		<th>ลบไฟล์</th>
+	</tr>
+</table>
+
+<table class="tableLayout" width="100%">
+	<tr align="center" >
+		<td colspan="2"><input type="button" id="Add" onclick="javascript:activityAdd();" value="อัพโหลดไฟล์เพิ่ม"/>
+		</td>
+	</tr>
+	<tr>
+		<td align="right"><input type="button" id="Edit" value="แก้ไขกิจกรรมนี้"/></td>
+		<td align="left"><input type="button" id="Delete" value="ลบกิจกรรมนี้"/></td>
+	</tr>
+</table>

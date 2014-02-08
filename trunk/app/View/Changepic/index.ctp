@@ -1,16 +1,18 @@
 <?php echo $this->Html->css("change_pic");?>
 <!-- ################################################################################## -->
 <script type="text/JavaScript">
-	/* ------------------------------------------------------------------------------ */
+	/* ------------------------------------------------------------------------------------------------- */
 	var flagUploadFile = "<?php echo $flagUploadFile;?>";
-	/* ------------------------------------------------------------------------------ */
+	/* ------------------------------------------------------------------------------------------------- */
 	jQuery(document).ready(function() {
 			// set datepicker
 			setDatePicker(".datePicker");
+			jQuery('input[type="submit"]').button();
 			
 			if ( flagUploadFile ) {
 				jAlert(flagUploadFile
 						, function() {
+							window.location.replace('<?php echo $this->Html->url('/Changepic/index');?>');
 						}// okFnc
 						, function() {
 						}// openFnc
@@ -20,7 +22,7 @@
 			}// if
 		}// callback
 	);// jQuery.ready
-	/* ------------------------------------------------------------------------------ */
+	/* ------------------------------------------------------------------------------------------------- */
 	function validateData() {
 		var fileUpload = jQuery("#file_upload").val();
 		var extensionFile = fileUpload.split(".").pop();
@@ -104,18 +106,54 @@
 
 		return true;
 	}// validateData
+	/* ------------------------------------------------------------------------------------------------- */
+	function updateImgProfile(imgpath,imgdesc){
+		jConfirm('กรุณายืนยัน เพื่อเปลี่ยนรูปโปรไฟล์', 
+				function(){ //okFunc
+					loading();
+					jQuery.post('<?php echo $this->Html->url('/Changepic/updateImgProfile');?>'
+						,{'data':{'imgpath':imgpath
+									,'imgdesc':imgdesc}}
+						,function(data){
+							unloading();
+							jAlert(data.msg
+									, function(){ 
+										if( data.flg===1 ){
+											window.location.reload();
+										}
+									}//okFunc	
+									, function(){ 
+									}//openFunc
+									, function(){ 		
+									}//closeFunc
+							);
+						}
+						,'json');
+				}, 
+				function(){ //cancelFunc
+				}, 
+				function(){ //openFunc
+				}, 
+				function(){ //closeFunc
+				});
+	}
 </script>
 <!-- ################################################################################## -->
 <!-- Picture -->
 <div>	
 	<span class="header1">รูปภาพที่มีอยู่</span>
 	<div class="div_form_picture">
-		<?php for ( $i = 0; $i < count($pathImage); $i++ ) {?>
-			<div class="div_item_picture">
-				<img class="img_picture" src="<?php echo $this->webroot.$pathImage[$i]['profile_pics']['imgpath'];?>"/>
-				<span class="span_picture_desc"><?php echo $pathImage[$i]["profile_pics"]["imgdesc"];?></span>
-			</div>
-		<?php }?>
+		<?php 
+			$countPathImage = count($pathImage);
+			for ( $i=0;$i<$countPathImage;$i++ ) {
+				echo "<div class=\"div-item-picture\" title=\"ใช้รูปนี้เป็นรูป โปรไฟล์\">
+						<img class=\"img-picture\" src=\"$this->webroot{$pathImage[$i]['profile_pics']['imgpath']}\"
+							onclick=\"updateImgProfile('{$pathImage[$i]['profile_pics']['imgpath']}'
+														,'{$pathImage[$i]['profile_pics']['imgdesc']}')\"/>
+						<span class=\"span-picture-desc\">{$pathImage[$i]['profile_pics']['imgdesc']}</span>
+					</div>";
+			}
+		?>
 	</div>
 </div>
 <!-- Data -->

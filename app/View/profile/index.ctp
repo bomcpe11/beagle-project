@@ -7,6 +7,9 @@
 	include 'popup_family.ctp';
 	include 'popup_education.ctp';
 	include 'popup_research.ctp';
+	include 'popup_award.ctp';
+	include 'popup_workplace.ctp';
+	include 'change_activity.ctp'
 ?>
 <script type="text/javascript">
 	jQuery(document).ready(function() {
@@ -25,7 +28,7 @@
 <div id="tabs">
 	<ul>
 	    <li><a href="#profile">ข้อมูลส่วนตัว</a></li>
-	    <li><a href="#activity">Proin dolor</a></li>
+	    <li><a href="#activity">กิจกรรมที่เข้าร่วม</a></li>
 	</ul>
 	<div id="profile">
 		<div class="container">
@@ -121,7 +124,7 @@
 									</td>
 								</tr>
 						<?php }else{?>
-							<tr>
+							<tr class="no-found-data">
 								<td colspan="2">
 									ไม่พบข้อมูล
 								</td>
@@ -183,8 +186,8 @@
 					</table>
 				<?php }else {?>
 						<table class="table_data_item">
-							<tr>
-								<td style="text-align:center;">ไม่พบข้อมูล</td>
+							<tr class="no-found-data">
+								<td>ไม่พบข้อมูล</td>
 							</tr>
 						</table>
 				<?php }?>
@@ -238,7 +241,7 @@
 				<?php }
 					}else{?>
 					<table class="table_data_item">
-						<tr style="text-align:center">
+						<tr class="no-found-data">
 							<td>ไม่พบข้อมูล</td>
 						</tr>
 					</table>
@@ -289,7 +292,7 @@
 						<?php }?>
 				<?php }else{?>
 					<table class="table_data_item">
-						<tr style="text-align:center">
+						<tr class="no-found-data">
 							<td>ไม่พบข้อมูล</td>
 						</tr>
 					</table>
@@ -299,39 +302,93 @@
 			</div>
 		</div>
 		<div class="container">
-			<h2>รางวัลที่ได้รับ</h2>
+			<h2>ผลงานอื่นๆ</h2>
 			<div class="section_content">
 				<table class="table_data_item">
 					<tr>
 						<td>ชื่อผลงาน : dummy</td>
 						<td class="td_link">แก้ไข ลบ</td>
 					</tr>
-					<tr>
-						<td>ชื่อรางวัล : dummy</td>
-						<td>หน่วยงาน : dummy</td>
-					</tr>
 				</table>
 				
-				<input type="button" value="เเพิ่มข้อมูล รางวัลที่ได้รับ"/>
+				<input type="button" value="เเพิ่มข้อมูล ผลงานอื่นๆ"/>
+			</div>
+		</div>
+		<div class="container">
+			<h2>รางวัลที่ได้รับ</h2>
+			<div class="section_content">
+				<?php 
+					$countListAward = count($listAward);
+					if($countListAward>0){
+						for( $i=0;$i<$countListAward;$i++ ){
+							echo "<table class=\"table_data_item\">
+										<tr>
+											<td>ชื่อผลงาน : {$listAward[$i]['a']['name']}</td>
+											<td class=\"td_link\">
+												<img src=\"{$this->Html->url('/img/icon_edit.png')}\" width=\"16\" height=\"16\"
+														onclick=\"openPopupAward('{$listAward[$i]['a']['id']}'
+																				,'{$listAward[$i]['a']['name']}'
+																				,'{$listAward[$i]['a']['awardname']}'
+																				,'{$listAward[$i]['a']['organization']}')\" />
+												<img src=\"{$this->Html->url('/img/icon_del.png')}\" width=\"16\" height=\"16\"
+														onclick=\"deletedAward('{$listAward[$i]['a']['id']}')\" />
+											</td>
+										</tr>
+										<tr>
+											<td>ชื่อรางวัล : {$listAward[$i]['a']['awardname']}</td>
+											<td>หน่วยงาน : {$listAward[$i]['a']['organization']}</td>
+										</tr>
+									</table>";
+						}
+					} else { 	
+						echo "<table class=\"table_data_item\">
+								<tr class=\"no-found-data\">
+									<td>ไม่พบข้อมูล</td>
+								</tr>
+							</table>";
+					}
+				?>
+				<input type="button" value="เเพิ่มข้อมูล รางวัลที่ได้รับ" onclick="openPopupAward('','','','')"/>
 			</div>
 		</div>
 		<div class="container">
 			<h2>ประวัติการทำงาน</h2>
 			<div class="section_content">
-				<table class="table_data_item">
-					<tr>
-						<td>ตำแหน่ง : dummy</td>
-						<td>ชื่อสถานที่ทำงาน : dummy</td>
-						<td class="td_link">แก้ไข ลบ</td>
-					</tr>
-					<tr>
-						<td>โทรศัพท์ : dummy</td>
-						<td>วันที่ทำงาน : dummy</td>
-						<td>ถึงวันที่ : dummy</td>
-					</tr>
-				</table>
+				<?php 
+					$countListWorkplace = count($listWorkplace);
+					if( $countListWorkplace>0 ){
+						for( $i=0;$i<$countListWorkplace;$i++ ){
+							echo "<table class=\"table_data_item\">
+									<tr>
+										<td>ตำแหน่ง : {$listWorkplace[$i]['w']['position']}</td>
+										<td>ชื่อสถานที่ทำงาน : {$listWorkplace[$i]['w']['name']}</td>
+										<td class=\"td_link\">
+											<img src=\"{$this->Html->url('/img/icon_edit.png')}\" width=\"16\" height=\"16\"
+													onclick=\"openPopupAward('{$listAward[$i]['a']['id']}'
+																			,'{$listAward[$i]['a']['name']}'
+																			,'{$listAward[$i]['a']['awardname']}'
+																			,'{$listAward[$i]['a']['organization']}')\" />
+											<img src=\"{$this->Html->url('/img/icon_del.png')}\" width=\"16\" height=\"16\"
+													onclick=\"deletedAward('{$listAward[$i]['a']['id']}')\" />
+										</td>
+									</tr>
+									<tr>
+										<td>โทรศัพท์ : {$listWorkplace[$i]['w']['telephone']}</td>
+										<td>วันที่ทำงาน : {$listWorkplace[$i]['w']['startyear']}</td>
+										<td>ถึงวันที่ : {$listWorkplace[$i]['w']['endyear']}</td>
+									</tr>
+								</table>";
+						}
+					} else { 	
+							echo "<table class=\"table_data_item\">
+									<tr class=\"no-found-data\">
+										<td>ไม่พบข้อมูล</td>
+									</tr>
+								</table>";
+					}
+				?>
 				
-				<input type="button" value="เพิ่มข้อมูล ประวัติการทำงาน"/>
+				<input type="button" value="เพิ่มข้อมูล ประวัติการทำงาน" onclick=" openPopupWorkplace('','','','','','','')"/>
 			</div>
 		</div>
 		<div class="container">
@@ -373,7 +430,7 @@
 						<?php }?>
 				<?php }else{ ?>
 					<table class="table_data_item">
-						<tr style="text-align:center">
+						<tr class="no-found-data">
 							<td>ไม่พบข้อมูล</td>
 						</tr>
 					</table>
@@ -386,7 +443,52 @@
 		<div id="popup-profile">
 		</div>
 	</div>
-	<div id="activity">
-		Tabs Activity Na Jea
+	<div id="activity"> 
+		<div class="section_content">
+			<?php 
+				$countListActivity = count($listActivity);	
+				if( $countListActivity>0 ) {
+					echo "<table class=\"table_data\">
+							<thead>
+								<tr>
+									<th>ชื่อกิจกรรม</th>
+									<th>รับหน้าที่</th>
+									<th>วันที่กิจกรรม</th>
+									<th>สถานที่จัดกิจกกรม</th>
+									<th>ชื่อรุ่น</th>
+									<th>รายละเอียดอย่างย่อ</th>
+									<th>แก้ไข</th>
+									<th>ออกจากิจกกรม</th>
+								</tr>
+							</thead>
+							<tbody>";
+							for( $i=0;$i<$countListActivity;$i++ ){
+								echo "<tr>
+										<td>{$listActivity[$i]['a']['name']}</td>
+										<td>{$listActivity[$i]['ja']['position']}</td>
+										<td>{$listActivity[$i]['a']['startdtm']}</td>
+										<td>{$listActivity[$i]['a']['location']}</td>
+										<td>{$listActivity[$i]['a']['genname']}</td>
+										<td>{$listActivity[$i]['a']['shortdesc']}</td>
+										<td>
+											<img src=\"{$this->Html->url('/img/icon_edit.png')}\" width=\"16\" height=\"16\"
+												onclick=\"edit_activity({$listActivity[$i]['a']['id']})\" />
+										</td>
+										<td>
+											<img src=\"{$this->Html->url('/img/icon_del.png')}\" width=\"16\" height=\"16\"
+												onclick=\"delete_activity({$listActivity[$i]['a']['id']})\" />
+										</td>
+									<tr>";
+							}
+					echo 	"</tbody>
+						</table>";
+			} else { 
+				echo "<table class=\"table_data\">
+						<tr class=\"no-found-data\">
+							<td>ไม่พบข้อมูล</td>
+						</tr>
+					</table>";
+			} ?>
+		</div>
 	</div>
 </div>

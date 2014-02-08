@@ -20,20 +20,24 @@
 	height: 200px;
 	overflow-y: scroll;
 }
-.div_item_picture {
+.div-item-picture {
 	float: left;
 	margin: 10px 6px 10px 6px;
 	border: 1px solid #666666;
 	height: 200px;
 	width: 200px;
 }
-.img_picture {
+.div-item-picture:hover {
+	background-color: #B8E62E;
+}
+.img-picture {
 	display: block;
 	margin: 15px auto 0px auto;
     height: 150px;
 	width: 150px;
+	cursor: pointer;
 }
-.span_picture_desc {
+.span-picture-desc {
 	display: block;
 	margin: 10px 10px 0px 10px;
 	text-align: center;

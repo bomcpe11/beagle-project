@@ -37,7 +37,6 @@ class ActivitylistController extends AppController {
 		$this->layout='ajax';
 		$this->set('message', json_encode(array('status'=>$rs,'message'=>$message)));
 		$this->render('response');
-		
 		$this->log('END :: ActivitylistController -> deleteActivity');
 	}
 }

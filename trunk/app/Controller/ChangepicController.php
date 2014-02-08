@@ -1,10 +1,11 @@
 <?php
 session_start();
 class ChangepicController extends AppController {
-	/* --------------------------------------------------------------------------------- */
+	/* ------------------------------------------------------------------------------------------------- */
 	public $names = "ChangepicController";
-	public $uses = array("Gvar", "ProfilePic");
-	/* --------------------------------------------------------------------------------- */
+	public $uses = array('Gvar','ProfilePic','Profile');
+	var $components = array('Session');
+	/* ------------------------------------------------------------------------------------------------- */
 	public function index(){
 		$this->log("START :: ChangepicController -> index()");
 		
@@ -12,7 +13,7 @@ class ChangepicController extends AppController {
 		
 		$this->log("END :: ChangepicController -> index()");
 	}// index
-	/* --------------------------------------------------------------------------------- */
+	/* ------------------------------------------------------------------------------------------------- */
 	public function submitDataFnc() {
 		$this->log("START :: ChangepicController -> submitDataFnc()");
 		
@@ -26,14 +27,14 @@ class ChangepicController extends AppController {
 		//*** insert data
 		$dataSource = $this->ProfilePic->getdatasource();
 		$dataSource->begin();
-		if ( $this->ProfilePic->insertAll($objUser["id"]	// $proflieid
-				, ""	// $imgpath
-				, $imgDesc	// $imgdesc
-				, $eduStep	// $edustep
-				, $imgDtm	// $imgdtm
-				, "") ) {	// $uploaddtm
+		if ( $this->ProfilePic->insertAll($objUser["id"]
+				, ""
+				, $imgDesc
+				, $eduStep
+				, $imgDtm
+				, "") ) {
 			// gen directory
-			$directory = "profiles/".$objUser["id"];
+			$directory = "img/profiles/".$objUser["id"];
 			// gen fileName
 			$lastInsertId = $this->ProfilePic->getLastInsert();
 			$extensionFile = ".".explode(".", $_FILES["file_upload"]["name"])[1];
@@ -72,12 +73,12 @@ class ChangepicController extends AppController {
 		
 		$this->log("END :: ChangepicController -> submitDataFnc()");
 	}// submitDataFnc
-	/* --------------------------------------------------------------------------------- */
+	/* ------------------------------------------------------------------------------------------------- */
 	private function prepareDataFnc($flagUploadFile) {
 		$objUser = $this->getObjUser();
 		
 		// page title
-		$this->set("page_title","Picture profile uploader");
+		$this->setTitle('เปลี่ยนรูปประจำตัว');
 		
 		// image
 		$pathImage = $this->ProfilePic->getStarByProfileId($objUser["id"]);	// $byProfileId
@@ -89,7 +90,7 @@ class ChangepicController extends AppController {
 		
 		$this->set("flagUploadFile", $flagUploadFile);
 	}// prepareDataFnc
-	/* --------------------------------------------------------------------------------- */
+	/* ------------------------------------------------------------------------------------------------- */
 	private function setFormatDate($data) {
 		/*
 		 * index of explode
@@ -101,7 +102,7 @@ class ChangepicController extends AppController {
 		
 		return ($result[2] - 543)."/".$result[1]."/".$result[0];
 	}// setFormatDate
-	/* --------------------------------------------------------------------------------- */
+	/* ------------------------------------------------------------------------------------------------- */
 	private function checkDirectory($directory) {
 		$flag = false;
 		
@@ -131,4 +132,35 @@ class ChangepicController extends AppController {
 		
 		return $flag;
 	}// checkDirectory
+	/* ------------------------------------------------------------------------------------------------- */
+	public function updateImgProfile(){
+		$this->log('---- updateImgProfile ----');
+		
+		$result = array();
+		$objUser = $this->getObjUser();
+		$imgpath = $this->request->data['imgpath'];
+		$imgdesc = $this->request->data['imgdesc'];
+		$dataSource = $this->Profile->getDataSource();
+		
+		if( $this->Profile->updateImg($objUser['id']
+								,$imgpath
+								,$imgdesc) ){
+			$dataSource->commit();
+			
+			$newObjUser = $this->Profile->getDataById($objUser['id']);
+			$this->Session->delete('objuser');
+			$this->Session->write('objuser',$newObjUser[0]["profiles"]);
+			
+			$result['msg'] = 'การแก้ไขรูปภาพโปรไฟล์เสร็จเรียบร้อย';
+			$result['flg'] = 1;
+		}else{
+			$dataSource->rollback();
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต';
+			$result['flg'] = -1;
+		}
+		
+		$this->layout='ajax';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	}
 }// ChangepicController

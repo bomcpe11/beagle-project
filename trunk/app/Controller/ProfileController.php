@@ -8,7 +8,10 @@ class ProfileController extends AppController {
 						,'Family'
 						,'Education'
 						,'Research'
-						,'Comment');
+						,'Award'
+						,'Workplace'
+						,'Comment'
+						,'JoinActivity');
 	/* ------------------------------------------------------------------------------------------------ */
 	public function index(){
 		$this->log('---- ProfileController -> index ----');
@@ -16,6 +19,7 @@ class ProfileController extends AppController {
 		$get_profile_id = intval($this->request->query['profile_id']);
 		$objUser = $this->Profile->getDataById($get_profile_id);
 		//$this->log(print_r($objUser, true));
+		$pageTitle='ไม่พบข้อมูล';
 		$isOwner = false;
 		$fullNameTh = null;
 		$birthday = null;
@@ -26,12 +30,20 @@ class ProfileController extends AppController {
 		$listEducation = null;
 		$listResearchType = null;
 		$listResearch = null;
+		$listAward = null;
+		$listWorkplace = null;
 		$listComment = null;
-		$pageTitle='ไม่พบข้อมูล';
-			
-		if( empty($objUser) ){
-			
-		}else{
+		$listActivity = null;
+		
+		if( !empty($objUser) ){
+			/* page title */
+			$pageTitle = 'ข้อมูลส่วนตัว - '
+						. $objUser[0]['profiles']['titleth'] 
+						. ' '
+						. $objUser[0]['profiles']['nameth'] 
+						. ' '
+						. $objUser[0]['profiles']['lastnameth'];
+						
 			/* owner profile */
 			if( $get_profile_id==$this->getObjUser()['id'] ){
 				$isOwner = true;
@@ -85,24 +97,25 @@ class ProfileController extends AppController {
 			$listResearch = $this->Research->getDataByProfileId($objUser[0]['profiles']['id']);
 			//$this->log(print_r($listResearch, true));
 			
+			/* award */
+			$listAward = $this->Award->getDataByProfileId($objUser[0]['profiles']['id']);
+			//$this->log(print_r($listAward, true));
+			
 			/* comment */
 			$listComment = $this->Comment->getDataByProfileId($objUser[0]['profiles']['id']);
 			
-			$pageTitle = 'ข้อมูลส่วนตัว - '
-						. $objUser[0]['profiles']['titleth'] 
-						. ' '
-						. $objUser[0]['profiles']['nameth'] 
-						. ' '
-						. $objUser[0]['profiles']['lastnameth'];
+			/* activity */
+			$listActivity = $this->JoinActivity->getActivityForProfile($objUser[0]['profiles']['id']);
+			
+			/* work place */
+			$listWorkplace = $this->Workplace->getDataByProfileId($objUser[0]['profiles']['id']);
 		}
 		
 		/* set data to view*/
-		$this->set(compact('isOwner', 'objUser', 'fullNameTh', 'birthday'
-							,'age', 'namePrefixTh'
-							,'namePrefixEn', 'listFamily'
-							,'listEducation', 'listResearchType', 'listResearch'
-							,'listComment'));
 		$this->setTitle($pageTitle);
+		$this->set(compact('isOwner', 'objUser', 'fullNameTh', 'birthday' ,'age', 'namePrefixTh'
+							,'namePrefixEn', 'listFamily','listEducation', 'listResearchType'
+							, 'listResearch', 'listAward', 'listWorkplace','listComment', 'listActivity'));
 	}
 	/* ------------------------------------------------------------------------------------------------ */
 	public function updateProfileAjax() {
@@ -434,6 +447,123 @@ class ProfileController extends AppController {
 		if( $this->Research->deleteData($id) ){
 			$dataSource->commit();
 			$result['msg'] = 'การแก้ไขข้อมูลผลการวิจัยเสร็จเรียบร้อย';
+			$result['flag'] = 1;
+		}else{
+			$dataSource->rollback();
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต';
+			$result['flag'] = -1;
+		}
+		
+		$this->layout='ajax';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	}
+	/* ------------------------------------------------------------------------------------------------ */
+	public function savedNewAward(){
+		$this->log('---- savedNewAward ----');
+		
+		$result = array();
+		$objUser = $this->getObjUser();
+		//$this->log($this->request->data);
+		$name = $this->request->data['name'];
+		$awardname = $this->request->data['awardname'];
+		$organization = $this->request->data['organization'];
+	
+		$dataSource = $this->Award->getDataSource();
+		if( $this->Award->insertData($name
+								,$awardname
+								,$organization
+								,$objUser['id']
+								,'') ){
+			$dataSource->commit();
+			$result['msg'] = 'การแก้ไขข้อมูลรางวัลที่ได้รับเสร็จเรียบร้อย';
+			$result['flag'] = 1;
+		}else{
+			$dataSource->rollback();
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต';
+			$result['flag'] = -1;
+		}
+		
+		$this->layout='ajax';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	}
+	/* ------------------------------------------------------------------------------------------------ */
+	public function editAward(){
+		$this->log('---- editAward ----');
+		
+		$result = array();
+		$objUser = $this->getObjUser();
+		//$this->log($this->request->data);
+		$id = $this->request->data['id'];
+		$name = $this->request->data['name'];
+		$awardname = $this->request->data['awardname'];
+		$organization = $this->request->data['organization'];
+	
+		$dataSource = $this->Award->getDataSource();
+		if( $this->Award->updateData($id
+									,$name
+									,$awardname
+									,$organization
+									,'0000') ){
+			$dataSource->commit();
+			$result['msg'] = 'การแก้ไขข้อมูลรางวัลที่ได้รับเสร็จเรียบร้อย';
+			$result['flag'] = 1;
+		}else{
+			$dataSource->rollback();
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต';
+			$result['flag'] = -1;
+		}
+		
+		$this->layout='ajax';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	}
+	/* ------------------------------------------------------------------------------------------------ */
+	public function deletedAward(){
+		$this->log('---- deletedAward ----');
+		
+		$result = array();
+		//$this->log($this->request->data);
+		$id = $this->request->data['id'];
+
+		$dataSource = $this->Award->getDataSource();
+		if( $this->Award->dateData($id) ){
+			$dataSource->commit();
+			$result['msg'] = 'การแก้ไขข้อมูลผลการวิจัยเสร็จเรียบร้อย';
+			$result['flag'] = 1;
+		}else{
+			$dataSource->rollback();
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต';
+			$result['flag'] = -1;
+		}
+		
+		$this->layout='ajax';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	}
+	/* ------------------------------------------------------------------------------------------------ */
+	public function savedNewWorkplace(){
+		$this->log('---- savedNewWorkplace ----');
+		
+		$result = array();
+		$objUser = $this->getObjUser();
+		//$this->log($this->request->data);
+		$name = $this->request->data['name'];
+		$telephone = $this->request->data['telephone'];
+		$startyear = $this->changeFormatDate($this->request->data['startyear']);
+		$endyear = $this->changeFormatDate($this->request->data['endyear']);
+		$position = $this->request->data['position'];
+	
+		$dataSource = $this->Workplace->getDataSource();
+		if( $this->Workplace->insertData($name
+								,$telephone
+								,$startyear
+								,$endyear
+								,$position
+								,$objUser['id']) ){
+			$dataSource->commit();
+			$result['msg'] = 'การแก้ไขข้อมูลประวัติการทำงานเสร็จเรียบร้อย';
 			$result['flag'] = 1;
 		}else{
 			$dataSource->rollback();

@@ -21,13 +21,21 @@ class ActivityController extends AppController {
 		$this->log('END :: ActivityController :: addactivity');
 		$rs = "1111";
 		$message = "Test";
-		$this->log('message='.$message);
-		$this->layout='ajax';
-		$this->set('message', json_encode(array('status'=>$rs,'message'=>$message)));
-		$this->render('response');
+// 		$this->log('message='.$message);
+// 		$this->layout='ajax';
+// 		$this->set('message', json_encode(array('status'=>$rs,'message'=>$message)));
+// 		$this->render('response');
 	}
 	
 	public function editactivity(){
 		$this->setTitle('แก้ไขกิจกรรม');
+		$this->log('Start :: ActivityController :: editactivity');
+		$id = $_GET["id"];
+		$this->log('ActivityController :: index => ID ='.$id);
+		$sql = " id = ".$id;
+		$result = $this->Activity->getDataByStmtSql($sql);
+		$this->set("result", $result);
+		$this->log('ActivityController :: index => Result ='.$result[0]["activities"]["name"]);
+		$this->log('End :: ActivityController :: editactivity');
 	}
 }

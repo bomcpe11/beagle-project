@@ -175,17 +175,34 @@ class Profile extends AppModel {
 		return $flag;
 	}
 	/* ------------------------------------------------------------------------------------------------------- */
+	public function updateImg($id
+								,$image_file
+								,$image_desc){
+		$flag = false;
+		$sql = "UPDATE profiles
+					 SET image_file='$image_file'
+					 	,image_desc='$image_desc'
+					 WHERE id='$id'";
+		
+		try {
+			$this->query($sql);
+			$flag = true;
+		} catch (Exception $e) {
+			$this->log($e->getMessage());
+		}
+		
+		return $flag;
+	}
+	/* ------------------------------------------------------------------------------------------------------- */
 	public function updatePassword($newPassword, $username) {
 		$flag = false;
 		$strSql = "UPDATE profiles";
 		$strSql .= " SET encrypt_password = '".$newPassword."'"; // varchar(40)
 		$strSql .= " WHERE login = '".$username."'"; // varchar(255)
 		$strSql .= ";";
-		$this->log("strSql => ".$strSql);
 		
 		try {
 			$this->query($strSql);
-			
 			$flag = true;
 		} catch ( Exception $e ) {
 			$this->log("exception => ".$e->getMessage());

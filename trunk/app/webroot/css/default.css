@@ -149,3 +149,6 @@ a.menu{
 	display: table-cell;
 	border: 1px solid #98bf21;
 }
+.table_data tr.no-data{
+	text-align: center;
+}

@@ -54,10 +54,6 @@
 	margin: 10px auto 10px auto;
 }
 /* Table */
-tr {
-	text-align: left;
-	/*line-height: 24px;*/
-}
 .table_form {
 	border: 1px solid #666666;
 	background-color: #FCFCFC;
@@ -80,6 +76,9 @@ tr {
 }
 .table_data tr, .table_data th, .table_data td {
 	border: 1px solid black;
+}
+.no-found-data{
+	text-align: center;
 }
 .td_link {
 	text-align: right;

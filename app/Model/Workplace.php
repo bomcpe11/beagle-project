@@ -26,6 +26,47 @@ class Workplace extends AppModel {
 		
 		return $flag;
 	}
+	/* --------------------------------------------------------------------------------------------------- */
+	public function updateData($id
+								,$name
+								,$telephone
+								,$startyear
+								,$endyear
+								,$position){
+		$flag = false;
+		$sql = "UPDATE workplaces 
+				 SET name='$name'
+					 ,telephone='$telephone'
+					 ,startyear='$startyear'
+					 ,endyear='$endyear'
+					 ,position='$position'
+					 ,created_at=now()
+					 ,updated_at=now()
+				 WHERE id=$id";
+		
+		try{
+			$this->query($sql);
+			$flag = true;
+		}catch(Exception $e){
+			$this->log($e->getMessage());
+		}
+		
+		return $flag;
+	}
+	/* ------------------------------------------------------------------------------------------------- */
+	public function deleteData($id){
+		$flag = false;
+		$sql = "DELETE FROM workplaces WHERE id=$id";
+		
+		try{
+			$this->query($sql);
+			$flag = true;
+		}catch(Exception $e){
+			$this->log($e->getMessage());
+		}
+		
+		return $flag;
+	}
 	/* -------------------------------------------------------------------------------------------------- */
 	public function getDataByProfileId($profile_id){
 		$result = null;

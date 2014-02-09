@@ -80,8 +80,8 @@
 .no-found-data{
 	text-align: center;
 }
-.td_link {
-	text-align: right;
+.comment{
+	text-indent: 25px;
 }
 .table ul {
 	width: 100%;
@@ -119,6 +119,11 @@
 	width: 98%;
 }
 
-img {
-	cursor:pointer;
+.edit-delete{
+	text-align: right;
+}
+.edit-delete img{
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
 }

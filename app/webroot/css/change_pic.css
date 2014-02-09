@@ -5,6 +5,7 @@
 }
 .td_label {
 	text-align: right;
+	vertical-align: top;
 }
 .td_data {
 	text-align: left;
@@ -17,7 +18,7 @@
 /* Picture */
 .div_form_picture {
 	padding: 0px 25px 25px 25px;
-	height: 200px;
+	height: 205px;
 	overflow-y: scroll;
 }
 .div-item-picture {

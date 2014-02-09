@@ -39,5 +39,81 @@ class Activity extends AppModel {
 		
 		return $result;
 	}
+	
+	public function insertActivities(     $name
+										, $startdtm
+										, $enddtm
+										, $location
+										, $genname
+										, $shortdesc) {
+		$this->log("START MODEL  insertActivities ");
+		$flag = false;
+		$strSql = "INSERT INTO activities";
+		$strSql .= " (";
+		$strSql .= " name";
+		$strSql .= " ,startdtm";
+		$strSql .= " ,enddtm";
+		$strSql .= " ,location";
+		$strSql .= " ,genname";
+		$strSql .= " ,shortdesc";
+		$strSql .= " ,created_at";
+		$strSql .= " ,updated_at";
+		$strSql .= " )";
+		$strSql .= " VALUES";
+		$strSql .= " (";
+		$strSql .= " '".$name."'"; 
+		$strSql .= " ,'".$startdtm."'"; 
+		$strSql .= " ,'".$enddtm."'"; 
+		$strSql .= " ,'".$location."'"; 
+		$strSql .= " ,'".$genname."'"; 
+		$strSql .= " ,'".$shortdesc."'";
+		$strSql .= " ,sysdate()"; 
+		$strSql .= " ,sysdate()"; 
+		$strSql .= " )";
+		$strSql .= ";";
+		$this->log("strSql => ".$strSql);
+		 
+		try {
+			$this->query($strSql);
+	
+			$flag = true;
+		} catch ( Exception $e ) {
+			$this->log("exception => ".$e->getMessage());
+		}
+		 
+		return $flag;
+		$this->log("END MODEL  insertActivities ");
+	}
+
+	
+	public function updateActivity (  $id
+									, $name
+									, $startdtm
+									, $enddtm
+									, $location
+									, $genname
+									, $shortdesc) {
+		$flag = false;
+		$strSql = "UPDATE activities";
+		$strSql .= " SET name = '".$name."'";	
+		$strSql .= " ,startdtm = '".$startdtm."'";	
+		$strSql .= " ,enddtm = '".$enddtm."'";
+		$strSql .= " ,location = '".$location."'";	
+		$strSql .= " ,genname = '".$genname."'";
+		$strSql .= " ,shortdesc = '".$shortdesc."'";
+		$strSql .= " ,updated_at = sysdate()";		
+		$strSql .= " WHERE id = ".$id;
+		$strSql .= ";";
+		$this->log("strSql => ".$strSql);
+	
+		try {
+			$this->query($strSql);
+			$flag = true;
+		} catch ( Exception $e ) {
+			$this->log("Exception => ".$e->getMessage());
+		}
+	
+		return $flag;
+	}
 }
 ?>

@@ -31,7 +31,7 @@ class ActivitylistController extends AppController {
 			$message = 'ลบข้อมูล สำเร็จ';
 		}else{
 			$dataSource->rollback();
-			$message = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลส่วนตัว กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			$message = 'เกิดข้อผิดพลาดใน การลบข้อมูลกิจกรรม กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 		}
 		$this->log('message='.$message);
 		$this->layout='ajax';

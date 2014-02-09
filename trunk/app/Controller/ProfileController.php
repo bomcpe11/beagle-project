@@ -101,14 +101,32 @@ class ProfileController extends AppController {
 			$listAward = $this->Award->getDataByProfileId($objUser[0]['profiles']['id']);
 			//$this->log(print_r($listAward, true));
 			
+			/* work place */
+			$listWorkplace = $this->Workplace->getDataByProfileId($objUser[0]['profiles']['id']);
+			$countListWorkplace = count($listWorkplace);
+			for( $i=0;$i<$countListWorkplace;$i++ ){
+				$listWorkplace[$i]['w']['startyear'] = $this->DateThai($listWorkplace[$i]['w']['startyear']);
+				$listWorkplace[$i]['w']['endyear'] = $this->DateThai($listWorkplace[$i]['w']['endyear']);
+			}
+			
 			/* comment */
-			$listComment = $this->Comment->getDataByProfileId($objUser[0]['profiles']['id']);
+			$listComment = $this->Comment->getDataForProfile('1');
+			$countListComment = count($listComment);
+			$splitCreatedAt = array();
+			$splitUpdatedAt = array();
+			for( $i=0;$i<$countListComment;$i++ ){
+				// Ex. yyyy-MM-dd hh:mm:ss
+				$splitCreatedAt = explode(' ',$listComment[$i]['c']['created_at']);
+				$splitUpdatedAt = explode(' ',$listComment[$i]['c']['updated_at']);
+				
+				$listComment[$i]['c']['created_at'] = $this->DateThai($listComment[$i]['c']['created_at']).' เวลา '.$splitCreatedAt[1].' น.';
+				$listComment[$i]['c']['updated_at'] = $this->DateThai($listComment[$i]['c']['updated_at']).' เวลา '.$splitUpdatedAt[1].' น.';
+			}
+			//$this->log(print_r($listComment, true));
 			
 			/* activity */
 			$listActivity = $this->JoinActivity->getActivityForProfile($objUser[0]['profiles']['id']);
-			
-			/* work place */
-			$listWorkplace = $this->Workplace->getDataByProfileId($objUser[0]['profiles']['id']);
+			//$this->log(print_r($listActivity, true));
 		}
 		
 		/* set data to view*/
@@ -528,7 +546,7 @@ class ProfileController extends AppController {
 		$id = $this->request->data['id'];
 
 		$dataSource = $this->Award->getDataSource();
-		if( $this->Award->dateData($id) ){
+		if( $this->Award->deleteData($id) ){
 			$dataSource->commit();
 			$result['msg'] = 'การแก้ไขข้อมูลผลการวิจัยเสร็จเรียบร้อย';
 			$result['flag'] = 1;
@@ -562,6 +580,63 @@ class ProfileController extends AppController {
 								,$endyear
 								,$position
 								,$objUser['id']) ){
+			$dataSource->commit();
+			$result['msg'] = 'การแก้ไขข้อมูลประวัติการทำงานเสร็จเรียบร้อย';
+			$result['flag'] = 1;
+		}else{
+			$dataSource->rollback();
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต';
+			$result['flag'] = -1;
+		}
+		
+		$this->layout='ajax';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	}
+	/* ------------------------------------------------------------------------------------------------ */
+	public function editWorkplace(){
+		$this->log('---- editWorkplace ----');
+		
+		$result = array();
+		$objUser = $this->getObjUser();
+		//$this->log($this->request->data);
+		$id = $this->request->data['id'];
+		$name = $this->request->data['name'];
+		$telephone = $this->request->data['telephone'];
+		$startyear = $this->changeFormatDate($this->request->data['startyear']);
+		$endyear = $this->changeFormatDate($this->request->data['endyear']);
+		$position = $this->request->data['position'];
+	
+		$dataSource = $this->Workplace->getDataSource();
+		if( $this->Workplace->updateData($id
+										,$name
+										,$telephone
+										,$startyear
+										,$endyear
+										,$position) ){
+			$dataSource->commit();
+			$result['msg'] = 'การแก้ไขข้อมูลประวัติการทำงานเสร็จเรียบร้อย';
+			$result['flag'] = 1;
+		}else{
+			$dataSource->rollback();
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต';
+			$result['flag'] = -1;
+		}
+		
+		$this->layout='ajax';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	}
+	/* ------------------------------------------------------------------------------------------------ */
+	public function deletedWorkplace(){
+		$this->log('---- deletedWorkplace ----');
+		
+		$result = array();
+		//$this->log($this->request->data);
+		$id = $this->request->data['id'];
+
+		$dataSource = $this->Workplace->getDataSource();
+		if( $this->Workplace->deleteData($id) ){
 			$dataSource->commit();
 			$result['msg'] = 'การแก้ไขข้อมูลประวัติการทำงานเสร็จเรียบร้อย';
 			$result['flag'] = 1;

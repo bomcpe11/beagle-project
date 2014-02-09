@@ -1,5 +1,5 @@
 <?php echo $this->Html->css("change_pic");?>
-<!-- ################################################################################## -->
+<!-- #################################################################################################### -->
 <script type="text/JavaScript">
 	/* ------------------------------------------------------------------------------------------------- */
 	var flagUploadFile = "<?php echo $flagUploadFile;?>";
@@ -138,7 +138,7 @@
 				});
 	}
 </script>
-<!-- ################################################################################## -->
+<!-- #################################################################################################### -->
 <!-- Picture -->
 <div>	
 	<span class="header1">รูปภาพที่มีอยู่</span>
@@ -157,7 +157,7 @@
 	</div>
 </div>
 <!-- Data -->
-<div style="margin-top: 20px">
+<div class="section-layout" style="width:97% ;margin-top:20px">
 	<span class="header1">อัพโหลดรูปภาพเพิ่ม</span>
 	<form id="form_data" name="form_data" method="post" action="<?php echo $this->webroot;?>changepic/submitDataFnc" 
 		enctype="multipart/form-data" onSubmit="return validateData();">

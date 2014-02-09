@@ -9,6 +9,7 @@
 	include 'popup_research.ctp';
 	include 'popup_award.ctp';
 	include 'popup_workplace.ctp';
+	include 'popup_comment.ctp';
 	include 'change_activity.ctp'
 ?>
 <script type="text/javascript">
@@ -23,6 +24,62 @@
 			?>
 		}
 	);
+	/* -------------------------------------------------------------------------------------------------- */
+	function setFormatForDatePicker(strDate){
+		// Ex. 9 ก.พ. 2557
+		var splitDate = strDate.split(' ');
+		var result = '';
+
+		if( splitDate.length===3 ){
+			result = splitDate[0]+'/';
+			
+			switch(splitDate[1]){
+			case 'ม.ค.':
+				result += '01';
+				break;
+			case 'ก.พ.':
+				result += '02';
+				break;
+			case 'มี.ค.':
+				result += '03';
+				break;
+			case 'เม.ย.':
+				result += '04';
+				break;
+			case 'พ.ค.':
+				result += '05';
+				break;
+			case 'มิ.ย.':
+				result += '06';
+				break;
+			case 'ก.ค.':
+				result += '07';
+				break;
+			case 'ส.ค.':
+				result += '08';
+				break;
+			case 'ก.ย.':
+				result += '09';
+				break;
+			case 'ต.ค.':
+				result += '10';
+				break;
+			case 'พ.ย.':
+				result += '11';
+				break;
+			case 'ธ.ค.':
+				result += '12';
+				break;
+				default:
+				result += '';
+				break;
+			}
+
+			result += '/'+splitDate[2];
+		}
+		
+		return result;
+	}
 </script>
 <!-- ##################################################################################################### -->
 <div id="tabs">
@@ -167,7 +224,7 @@
 								<td><?php echo $listFamily[$i]['families']['occupation'];?></td>
 								<td><?php echo $listFamily[$i]['families']['position'];?></td>
 								<td style="text-align:center" class="edit-delete">
-									<img src="<?php echo $this->Html->url('/img/icon_edit.png');?>" width="16" height="16"
+									<img src="<?php echo $this->Html->url('/img/icon_edit.png');?>" 
 										onclick="openPopupFamily('<?php echo $listFamily[$i]['families']['id'];?>'
 															,'<?php echo $listFamily[$i]['families']['relation'];?>'
 															,'<?php echo $listFamily[$i]['families']['name'];?>'
@@ -177,7 +234,7 @@
 															,'<?php echo $listFamily[$i]['families']['position'];?>')"/>
 								</td>
 								<td style="text-align:center" class="edit-delete">
-									<img src="<?php echo $this->Html->url('/img/icon_del.png');?>" width="16" height="16"
+									<img class="delete" src="<?php echo $this->Html->url('/img/icon_del.png');?>"
 										onclick="deleteFamily('<?php echo $listFamily[$i]['families']['id'];?>')"/>
 								</td>
 							</tr>
@@ -206,8 +263,8 @@
 								<tr>
 									<td style="width:30%">ระดับ : <?php echo $listEducation[$i]['educations']['edutype'];?></td>
 									<td style="width:60%">ชื่อสถาบัน : <?php echo $listEducation[$i]['educations']['name'];?></td>
-									<td style="width:10%" class="td_link edit-delete">
-										<img src="<?php echo $this->Html->url('/img/icon_edit.png');?>" width="16" height="16"
+									<td style="width:10%" class="edit-delete">
+										<img src="<?php echo $this->Html->url('/img/icon_edit.png');?>"
 											onclick="openPopupEducation('<?php echo $listEducation[$i]['educations']['id'];?>'
 																		,'<?php echo $listEducation[$i]['educations']['edutype'];?>'
 																		,'<?php echo $listEducation[$i]['educations']['name'];?>'
@@ -217,7 +274,7 @@
 																		,'<?php echo ( (empty($listEducation[$i]['educations']['startyear']))?'':intval($listEducation[$i]['educations']['startyear']) + 543 );?>'
 																		,'<?php echo ( (empty($listEducation[$i]['educations']['endyear']))?'':intval($listEducation[$i]['educations']['endyear']) + 543 );?>'
 																		,'<?php echo $listEducation[$i]['educations']['gpa'];?>')"/>
-										<img src="<?php echo $this->Html->url('/img/icon_del.png');?>" width="16" height="16"
+										<img src="<?php echo $this->Html->url('/img/icon_del.png');?>"
 											onclick="deleteEducation('<?php echo $listEducation[$i]['educations']['id'];?>')"/>
 									</td>
 								</tr>
@@ -263,8 +320,8 @@
 								</colgroup>
 								<tr>
 									<td>ชื่อเรื่อง : <?php echo $listResearch[$i]['r']['name'];?></td>
-									<td class="td_link edit-delete">
-										<img src="<?php echo $this->Html->url('/img/icon_edit.png');?>" width="16" height="16"
+									<td class="edit-delete">
+										<img src="<?php echo $this->Html->url('/img/icon_edit.png');?>"
 											onclick="openPopupResearch('<?php echo $listResearch[$i]['r']['id'];?>'
 																		,'<?php echo $listResearch[$i]['r']['name'];?>'
 																		,'<?php echo $listResearch[$i]['r']['researchtype'];?>'
@@ -273,7 +330,7 @@
 																		,'<?php echo $listResearch[$i]['r']['isnotfinish'];?>'
 																		,'<?php echo $listResearch[$i]['r']['yearfinish'];?>'
 																		,'DUMMY')"/>
-										<img src="<?php echo $this->Html->url('/img/icon_del.png');?>" width="16" height="16"
+										<img src="<?php echo $this->Html->url('/img/icon_del.png');?>"
 											onclick="deletedResearch('<?php echo $listResearch[$i]['r']['id'];?>')"/>
 									</td>
 								</tr>
@@ -324,13 +381,13 @@
 							echo "<table class=\"table_data_item\">
 										<tr>
 											<td>ชื่อผลงาน : {$listAward[$i]['a']['name']}</td>
-											<td class=\"td_link\">
-												<img src=\"{$this->Html->url('/img/icon_edit.png')}\" width=\"16\" height=\"16\"
+											<td class=\"edit-delete\">
+												<img src=\"{$this->Html->url('/img/icon_edit.png')}\"
 														onclick=\"openPopupAward('{$listAward[$i]['a']['id']}'
 																				,'{$listAward[$i]['a']['name']}'
 																				,'{$listAward[$i]['a']['awardname']}'
 																				,'{$listAward[$i]['a']['organization']}')\" />
-												<img src=\"{$this->Html->url('/img/icon_del.png')}\" width=\"16\" height=\"16\"
+												<img src=\"{$this->Html->url('/img/icon_del.png')}\"
 														onclick=\"deletedAward('{$listAward[$i]['a']['id']}')\" />
 											</td>
 										</tr>
@@ -362,14 +419,16 @@
 									<tr>
 										<td>ตำแหน่ง : {$listWorkplace[$i]['w']['position']}</td>
 										<td>ชื่อสถานที่ทำงาน : {$listWorkplace[$i]['w']['name']}</td>
-										<td class=\"td_link\">
+										<td class=\"edit-delete\">
 											<img src=\"{$this->Html->url('/img/icon_edit.png')}\" width=\"16\" height=\"16\"
-													onclick=\"openPopupAward('{$listAward[$i]['a']['id']}'
-																			,'{$listAward[$i]['a']['name']}'
-																			,'{$listAward[$i]['a']['awardname']}'
-																			,'{$listAward[$i]['a']['organization']}')\" />
+													onclick=\"openPopupWorkplace('{$listWorkplace[$i]['w']['id']}'
+																					,'{$listWorkplace[$i]['w']['name']}'
+																					,'{$listWorkplace[$i]['w']['position']}'
+																					,'{$listWorkplace[$i]['w']['telephone']}'
+																					,'{$listWorkplace[$i]['w']['startyear']}'
+																					,'{$listWorkplace[$i]['w']['endyear']}')\" />
 											<img src=\"{$this->Html->url('/img/icon_del.png')}\" width=\"16\" height=\"16\"
-													onclick=\"deletedAward('{$listAward[$i]['a']['id']}')\" />
+													onclick=\"deletedWorkplace('{$listWorkplace[$i]['w']['id']}')\" />
 										</td>
 									</tr>
 									<tr>
@@ -394,50 +453,64 @@
 		<div class="container">
 			<h2>ความคิดเห็น</h2>
 			<div class="section_content">
-				<table class="table_data_item">
-					<tr>
-						<td>หัวข้อความคิดเห็นที่ : dummy</td>
-						<td class="td_link">แก้ไข ลบ</td>
-					</tr>
-					<tr>
-						<td colspan="2">dummy</td>
-					</tr>
-					<tr>
-						<td colspan="2">โดย dummy เมื่อวันที่ dummy</td>
-					</tr>
-				</table>
+				<?php 
+					$countListComment = count($listComment);
+					if( $countListComment>0 ){
+						for( $i=0;$i<$countListComment;$i++ ){
+							echo "<table class=\"table_data_item\">
+									<tr>
+										<td><b>หัวข้อความคิดเห็นที่ : $i {$listComment[$i]['c']['title']}</b></td>
+										<td class=\"edit-delete\">
+											<img src=\"{$this->Html->url('/img/icon_edit.png')}\" width=\"16\" height=\"16\"
+													onclick=\"\" />
+											<img src=\"{$this->Html->url('/img/icon_del.png')}\" width=\"16\" height=\"16\"
+													onclick=\"\" />
+										</td>
+									</tr>
+									<tr>
+										<td colspan=\"2\" class=\"comment\">{$listComment[$i]['c']['comment']}</td>
+									</tr>
+									<tr>
+										<td colspan=\"2\">โดย {$listComment[$i]['p']['login']} เมื่อวันที่ {$listComment[$i]['c']['created_at']}</td>
+									</tr>
+								</table>";
+						}
+					}else{
+						echo "<table class=\"table_data_item\">
+									<tr class=\"no-found-data\">
+										<td>ไม่พบข้อมูล</td>
+									</tr>
+								</table>";
+					}
+				?>
 			</div>
 			
-			<h2>เพิ่มความคิดเห็น</h2>
-			<div class="section_content">
-				<?php if( !empty($listComment) ){?>
-					<?php $countListComment = count($listComment);
-						for( $i=0;$i<$countListComment;$i++ ){ ?>
-							<table class="table_data_item">
-								<tr>
-									<td style="width: 20%;text-align: right;">หัวข้อ :</td>
-									<td style="width: 80%;">
-										<input type="text" style="width: 98%;" value="'<?php echo $listComment[$i]['comments']['title'];?>'"></input>
-									</td>
-								</tr>
-								<tr>
-									<td style="width: 20%;text-align: right;vertical-align: top;">ความคิดเห็น :</td>
-									<td style="width: 80%;">
-										<textarea type="text" style="width: 98%;height: 100px;"><?php echo $listComment[$i]['comments']['comment'];?></textarea>
-									</td>
-								</tr>
-							</table>
-						<?php }?>
-				<?php }else{ ?>
+			<?php if( $objuser['role']!=='10' && $objuser['role']!=='30' ){ //นักเรียน,นักศึกษา,วิทยากร ?>
+				<div class="section_content">
 					<table class="table_data_item">
-						<tr class="no-found-data">
-							<td>ไม่พบข้อมูล</td>
+						<tr>
+							<td><h3>เพิ่มความคิดเห็น</h3></td>
+						</tr>
+						<tr>
+							<td style="width: 20%;text-align: right;">หัวข้อ :</td>
+							<td style="width: 80%;">
+								<input type="text" style="width: 98%;" value=""></input>
+							</td>
+						</tr>
+						<tr>
+							<td style="width: 20%;text-align: right;vertical-align: top;">ความคิดเห็น :</td>
+							<td style="width: 80%;">
+								<textarea type="text" style="width: 98%;height: 100px;"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<input type="button" value="เพิ่มข้อมูล ความคิดเห็น"/>
+							</td>
 						</tr>
 					</table>
-				<?php } ?>
-				
-				<input type="button" value="เพิ่มข้อมูล ความคิดเห็น"/>
-			</div>
+				</div>
+			<?php }?>
 		</div>
 		<!-- Popup -->
 		<div id="popup-profile">
@@ -470,11 +543,11 @@
 										<td>{$listActivity[$i]['a']['location']}</td>
 										<td>{$listActivity[$i]['a']['genname']}</td>
 										<td>{$listActivity[$i]['a']['shortdesc']}</td>
-										<td>
+										<td class=\"edit-delete\">
 											<img src=\"{$this->Html->url('/img/icon_edit.png')}\" width=\"16\" height=\"16\"
 												onclick=\"edit_activity({$listActivity[$i]['a']['id']})\" />
 										</td>
-										<td>
+										<td class=\"edit-delete\">
 											<img src=\"{$this->Html->url('/img/icon_del.png')}\" width=\"16\" height=\"16\"
 												onclick=\"delete_activity({$listActivity[$i]['a']['id']})\" />
 										</td>

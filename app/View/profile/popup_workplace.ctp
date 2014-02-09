@@ -29,13 +29,13 @@
 				<tr>\
 					<td style="text-align:right;">* วันทึ่เริ่มทำงาน :</td>\
 					<td>\
-						<input id="workplace-startyear" class="birthDatePicker" type="text" value=' + startyear +'>\
+						<input id="workplace-startyear" class="datePicker" type="text" value="' + setFormatForDatePicker(startyear) +'">\
 					</td>\
 				</tr>\
 				<tr>\
 					<td style="text-align:right;">* ถึงวันที่ :</td>\
 					<td>\
-						<input id="workplace-endyear" class="birthDatePicker" type="text" value=' + endyear +'>\
+						<input id="workplace-endyear" class="datePicker" type="text" value="' + setFormatForDatePicker(endyear) +'">\
 					</td>\
 				</tr>\
 			</table>\
@@ -52,7 +52,7 @@
 			}];
 		openPopupHtml('[เพิ่ม][แก้ไข] ประวัติการทำงาน', html, buttons, 
 			function(){ //openFunc
-				setBirthDatePicker(".birthDatePicker");
+				setDatePicker('.datePicker');
 			}, 
 			function(){ //closeFunc
 			}
@@ -60,32 +60,112 @@
 	}
 	/* -------------------------------------------------------------------------------------------------- */
 	function saveNewWorkplace(){
-		loading();
-		jQuery.post('<?php echo $this->Html->url('/Profile/savedNewWorkplace');?>'
-					,{'data':{'name':jQuery('#workplace-name').val()
-							,'position':jQuery('#workplace-position').val()
-							,'telephone':jQuery('#workplace-telephone').val()
-							,'startyear':jQuery('#workplace-startyear').val()
-							,'endyear':jQuery('#workplace-endyear').val()}}
-					,function(data){
-						unloading();
-						
-						jAlert(data.msg
-								, function(){ 
-									if( data.flag===1 ){
-										closePopup('#popup-workplace-container');
-										window.location.reload();
-									}
-								}//okFunc	
-								, function(){ 
-								}//openFunc
-								, function(){ 		
-								}//closeFunc
-						);
-					}
-					,'json');
+		if( validateWorkplace() ){
+			loading();
+			jQuery.post('<?php echo $this->Html->url('/Profile/savedNewWorkplace');?>'
+						,{'data':{'name':jQuery('#workplace-name').val()
+								,'position':jQuery('#workplace-position').val()
+								,'telephone':jQuery('#workplace-telephone').val()
+								,'startyear':jQuery('#workplace-startyear').val()
+								,'endyear':jQuery('#workplace-endyear').val()}}
+						,function(data){
+							unloading();
+							
+							jAlert(data.msg
+									, function(){ 
+										if( data.flag===1 ){
+											closePopup('#popup-workplace-container');
+											window.location.reload();
+										}
+									}//okFunc	
+									, function(){ 
+									}//openFunc
+									, function(){ 		
+									}//closeFunc
+							);
+						}
+						,'json');
+		}
 	}
 	/* -------------------------------------------------------------------------------------------------- */
 	function editWorkplace(){
+		if( validateWorkplace() ){
+			loading();
+			jQuery.post('<?php echo $this->Html->url('/Profile/editWorkplace');?>'
+						,{'data':{'id':jQuery('#workplace-id').val()
+								,'name':jQuery('#workplace-name').val()
+								,'position':jQuery('#workplace-position').val()
+								,'telephone':jQuery('#workplace-telephone').val()
+								,'startyear':jQuery('#workplace-startyear').val()
+								,'endyear':jQuery('#workplace-endyear').val()}}
+						,function(data){
+							unloading();
+							
+							jAlert(data.msg
+									, function(){ 
+										if( data.flag===1 ){
+											closePopup('#popup-workplace-container');
+											window.location.reload();
+										}
+									}//okFunc	
+									, function(){ 
+									}//openFunc
+									, function(){ 		
+									}//closeFunc
+							);
+						}
+						,'json');
+		}
+	}
+	/* -------------------------------------------------------------------------------------------------- */
+	function validateWorkplace(){
+		if( jQuery('#workplace-name').val() 
+				&& jQuery('#workplace-position').val()
+				&& jQuery('#workplace-telephone').val() 
+				&& jQuery('#workplace-startyear').val() 
+				&& jQuery('#workplace-endyear').val() ){
+			return true;
+		}else{
+			jAlert('คุณกรอกข้อมูล ไม่ครบ', 
+					function(){ //okFunc
+					}, 
+					function(){ //openFunc
+					}, 
+					function(){ //closeFunc
+					}
+					);
+			
+			return false;
+		}
+	}
+	/* -------------------------------------------------------------------------------------------------- */
+	function deletedWorkplace(id){
+		jConfirm('กรุณายืนยัน เพื่อลบรายการ ', 
+				function(){ //okFunc
+					loading();
+					jQuery.post('<?php echo $this->Html->url('/Profile/deletedWorkplace');?>'
+						,{'data':{'id':id}}
+						,function(data){
+							unloading();
+							jAlert(data.msg
+									, function(){ 
+										if( data.flag===1 ){
+											window.location.reload();
+										}
+									}//okFunc	
+									, function(){ 
+									}//openFunc
+									, function(){ 		
+									}//closeFunc
+							);
+						}
+						,'json');
+				}, 
+				function(){ //cancelFunc
+				}, 
+				function(){ //openFunc
+				}, 
+				function(){ //closeFunc
+				});
 	}
 </script>

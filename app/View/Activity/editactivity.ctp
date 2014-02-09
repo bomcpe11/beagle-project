@@ -6,6 +6,47 @@
 			setDatePicker('.datePicker');
 			setBirthDatePicker('.birthDatePicker');
 		});
+		
+		function saveClick(){
+			var id = '<?php echo $result[0]["activities"]["id"] ?>';
+			var activityName = jQuery('#activityName').val();
+			var startDate = jQuery('#startDate').val();
+			var endDate = jQuery('#endDate').val();
+			var location = jQuery('#location').val();
+			var shortdesc = jQuery('#shortdesc').val();
+			var genname = jQuery('#genname').val();
+			
+			jConfirm('ท่านต้องการบันทึกข้อมูลกิจกรรมนี้ใช่หรือไม่?', 
+				function(){ //okFunc
+					loading();
+					jQuery.ajax({
+						type: "POST",
+						dataType: 'json',
+						url: '<?php echo $this->Html->url('/Activity/updateActivity');?>',
+						data: {id:id,
+							   activityName:activityName,
+						       startDate:startDate,
+						       endDate:endDate,
+						       location:location,
+						       shortdesc:shortdesc,
+						       genname:genname},
+						success: function(data){
+							unloading();
+							
+							if ( data.status == 1 ) {
+								jAlert(data.message, 
+									function(){
+										window.location.replace("<?php echo $this->webroot;?>Activity/index");
+									}
+								);
+							} else {
+								jAlert(data.message);
+							}
+						}
+					});
+				}
+			);
+		}
 </script>
 <table class="tableLayout" width="100%">
 	<tr align="left">
@@ -17,13 +58,19 @@
 	<tr align="left">
 		<th align="right" width="20%">วันที่จัดกิจกรรม เริ่มต้น : </th>
 		<td align="left">
-			<input type="text" class="datePicker" id="startDate" value=" <?php echo $result[0]["activities"]["startdtm"] ?>"  />
+		<?php 
+			$arr = explode("-", $result[0]["activities"]["startdtm"]);
+			$startDate = $arr[2]."/".$arr[1]."/".($arr[0]+543);
+			$arrEndDate = explode("-", $result[0]["activities"]["enddtm"]);
+			$enddtm = $arrEndDate[2]."/".$arrEndDate[1]."/".($arrEndDate[0]+543);
+		?>
+			<input type="text" class="datePicker" id="startDate" value=" <?php echo $startDate  ?>"  />
 		</td>
 	</tr>
 	<tr align="left">
 		<th align="right" width="20%">วันที่จัดกิจกรรม สิ้นสุด : </th>
 		<td align="left">
-			<input type="text" class="datePicker" id="endDate" value=" <?php echo $result[0]["activities"]["enddtm"] ?>" />
+			<input type="text" class="datePicker" id="endDate" value=" <?php echo $enddtm ?>" />
 		</td>
 	</tr>
 	<tr align="left">
@@ -52,7 +99,7 @@
 		<td><textarea id="" style="width: 700px;" rows="5" ></textarea></td>
 	</tr>
 	<tr align="left">
-		<td align="right" width="20%"><input type="button" id="save" value="บันทึก" /></td>
+		<td align="right" width="20%"><input type="button" id="save" value="บันทึก" onclick="saveClick();" /></td>
 		<td align="left"><input type="button" id="cancel" value="ยกเลิก" onclick="cancelClick('<?php echo $result[0]["activities"]["id"] ?>');" /></td>
 	</tr>
 </table>

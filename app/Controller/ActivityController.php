@@ -19,12 +19,49 @@ class ActivityController extends AppController {
 		$this->setTitle('เพิ่มกิจกรรม');
 		$this->log('Start :: ActivityController :: addactivity');
 		$this->log('END :: ActivityController :: addactivity');
-		$rs = "1111";
-		$message = "Test";
-// 		$this->log('message='.$message);
-// 		$this->layout='ajax';
-// 		$this->set('message', json_encode(array('status'=>$rs,'message'=>$message)));
-// 		$this->render('response');
+	}
+	
+	public function insertActivity(){
+		$this->log('Start :: ActivityController :: insertActivity');
+		$activityName = $this->request->data['activityName'];
+		$startDate = $this->request->data['startDate'];
+		$endDate = $this->request->data['endDate'];
+		$location = $this->request->data['location'];
+		$shortdesc = $this->request->data['shortdesc'];
+		$genname = $this->request->data['genname'];
+		
+		$this->log('activityName => '.$activityName);
+		$arr = explode("/", $startDate);
+		$startDate = ($arr[2]-543)."-".$arr[1]."-".$arr[0];
+		$arrEnddate = explode("/", $endDate);
+		$endDate = ($arrEnddate[2]-543)."-".$arrEnddate[1]."-".$arrEnddate[0];
+		$this->log('startDate => '.$startDate);
+		$this->log('endDate => '.$endDate);
+		$this->log('location => '.$location);
+		$this->log('shortdesc => '.$shortdesc);
+		$this->log('genname => '.$genname);
+		
+		$dataSource = $this->Activity->getDataSource();
+		if( $this->Activity->insertActivities($activityName,
+													  $startDate,
+						                              $endDate,
+													  $location,
+													  $shortdesc,
+													  $genname) ){
+			$dataSource->commit();
+			$status = 1;
+			$message = 'บันทึกข้อมูล สำเร็จ';
+		}else{
+			$dataSource->rollback();
+			$status = -1;
+			$message = 'เกิดข้อผิดพลาดใน การบันทึกข้อมูลกิจกรรม กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+		}
+		$this->log('message = '.$message);
+		$this->log('status = '.$status);
+		$this->layout='ajax';
+		$this->set('message', json_encode(array('status'=>$status,'message'=>$message)));
+		$this->render('response');
+		$this->log('END :: ActivityController :: insertActivity');
 	}
 	
 	public function editactivity(){
@@ -37,5 +74,48 @@ class ActivityController extends AppController {
 		$this->set("result", $result);
 		$this->log('ActivityController :: index => Result ='.$result[0]["activities"]["name"]);
 		$this->log('End :: ActivityController :: editactivity');
+	}
+	
+	public function updateActivity(){
+		$this->log('Start :: ActivityController :: editActivity');
+		$id = $this->request->data['id'];
+		$activityName = $this->request->data['activityName'];
+		$startDate = $this->request->data['startDate'];
+		$endDate = $this->request->data['endDate'];
+		$location = $this->request->data['location'];
+		$shortdesc = $this->request->data['shortdesc'];
+		$genname = $this->request->data['genname'];
+	
+		$this->log('id => '.$id);
+		$this->log('activityName => '.$activityName);
+		$arr = explode("/", $startDate);
+		$startDate = ($arr[2]-543)."-".$arr[1]."-".$arr[0];
+		$arrEnddate = explode("/", $endDate);
+		$endDate = ($arrEnddate[2]-543)."-".$arrEnddate[1]."-".$arrEnddate[0];
+		$this->log('startDate => '.$startDate);
+		$this->log('endDate => '.$endDate);
+		$this->log('location => '.$location);
+		$this->log('shortdesc => '.$shortdesc);
+		$this->log('genname => '.$genname);
+	
+		if( $this->Activity->updateActivity($id,
+											$activityName,
+											$startDate,
+											$endDate,
+											$location,
+											$shortdesc,
+											$genname) ){
+			$status = 1;
+			$message = 'บันทึกข้อมูล สำเร็จ';
+		}else{
+			$status = -1;
+			$message = 'เกิดข้อผิดพลาดใน การบันทึกข้อมูลกิจกรรม กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+		}
+		$this->log('message = '.$message);
+		$this->log('status = '.$status);
+		$this->layout='ajax';
+		$this->set('message', json_encode(array('status'=>$status,'message'=>$message)));
+		$this->render('response');
+		$this->log('END :: ActivityController :: editActivity');
 	}
 }

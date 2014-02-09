@@ -52,7 +52,7 @@ class Award extends AppModel {
 		return $flag;
 	}
 	/* ------------------------------------------------------------------------------------------------- */
-	public function dateData($id){
+	public function deleteData($id){
 		$flag = false;
 		$sql = "DELETE FROM awards WHERE id=$id";
 		

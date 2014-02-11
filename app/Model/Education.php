@@ -1,18 +1,19 @@
 <?php
 class Education extends AppModel {
-	
+	/* ------------------------------------------------------------------------------------------------- */
 	public function getEducations(){
 		$result = $this->query('select * from educations');
 		return $result;
 	}
+	/* ------------------------------------------------------------------------------------------------- */
 	public function getEducationByProfileId($profile_id){
 		$sql = "SELECT * FROM educations WHERE profile_id='$profile_id'";
-		$this->log($sql);
 		
 		$result = $this->query($sql);
 		
 		return $result;
 	}
+	/* ------------------------------------------------------------------------------------------------- */
 	public function insertEducation($name
 					, $faculty
 					, $major
@@ -47,7 +48,6 @@ class Education extends AppModel {
 					, now()
 					, now()
 					, $isGraduate)";
-		$this->log('sql => '.$sql);
 		
 		try{
 			$this->query($sql);
@@ -58,6 +58,7 @@ class Education extends AppModel {
 		
 		return $flag;
 	}
+	/* ------------------------------------------------------------------------------------------------- */
 	public function updateEducation($id
 					, $name
 					, $faculty
@@ -80,7 +81,6 @@ class Education extends AppModel {
 					, updated_at = now()
 					, isGraduate = $isGraduate 
 					WHERE id = '$id'";
-		$this->log('sql => '.$sql);
 		
 		try{
 			$this->query($sql);
@@ -91,10 +91,10 @@ class Education extends AppModel {
 		
 		return $flag;
 	}
+	/* ------------------------------------------------------------------------------------------------- */
 	public function deleteEducation($id){
 		$flag = false;
 		$sql = "DELETE FROM educations WHERE id='$id'";
-		$this->log('sql => '.$sql);
 		
 		try{
 			$this->query($sql);

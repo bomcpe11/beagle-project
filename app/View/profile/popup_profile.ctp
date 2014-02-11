@@ -131,6 +131,7 @@
 		openPopupHtml("แก้ไขข้อมูลส่วนตัว", strHtml, buttons, 
 				function(){ //openFunc
 					setBirthDatePicker(".birthDatePicker");
+					jQuery('#text-birthday').val(setFormatForDatePicker('<?php echo $birthday?>'));
 				}, 
 				function(){ //closeFunc
 				}

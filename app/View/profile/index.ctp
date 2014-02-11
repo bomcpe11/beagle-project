@@ -9,7 +9,7 @@
 	include 'popup_research.ctp';
 	include 'popup_award.ctp';
 	include 'popup_workplace.ctp';
-	include 'popup_comment.ctp';
+	include 'comment.ctp';
 	include 'change_activity.ctp'
 ?>
 <script type="text/javascript">
@@ -18,7 +18,14 @@
 			jQuery('input[type="button"]').button();
 			<?php 
 				if( !$isOwner ){
-					echo "jQuery('input[type=\"button\"]').remove();";
+					echo "jQuery('#button_edit_profile"
+									.",#button_add_family"
+									.",#button_add_education"
+									.",#button_add_research"
+									.",#button_add_award"
+									.",#button_add_other_award"
+									.",#button_add_workplace').remove();";
+					
 					echo "jQuery('.edit-delete').remove();";
 				}
 			?>
@@ -92,8 +99,16 @@
 			<div class="section_profile">
 				<div class="section_picture">
 					<div class="picture">
-						<img></img>
-						<p>Profile Picture Description</p>
+						<?php 
+							if( !empty($objUser[0]['profiles']['image_file']) && !empty($objUser[0]['profiles']['image_file'])  ){
+								echo "<img src=\"$this->webroot{$objUser[0]['profiles']['image_file']}\"></img>
+										<p>{$objUser[0]['profiles']['image_desc']}</p>";
+							}else{
+								echo "<img src=\"\"></img>
+										<p>ไม่พบขอ้มูล</p>";
+							}
+						?>
+						
 					</div>
 				</div>
 				<div class="section_content">
@@ -188,7 +203,7 @@
 							</tr>
 						<?php }?>
 					</table>
-					<input type="button" onclick="javascript:edit_profile();" value="แก้ไขข้อมูลส่วนตัว"/>
+					<input type="button" id="button_edit_profile" onclick="javascript:edit_profile();" value="แก้ไขข้อมูลส่วนตัว"/>
 				</div>
 			</div>
 		</div>
@@ -249,7 +264,7 @@
 						</table>
 				<?php }?>
 				
-				<input type="button" onclick="openPopupFamily('','','','','','','')" value="เพิ่มข้อมูล ประวัติครอบครัว"/>
+				<input type="button" id="button_add_family" onclick="openPopupFamily('','','','','','','')" value="เพิ่มข้อมูล ประวัติครอบครัว"/>
 			</div>
 		</div>
 		<div class="container">
@@ -290,6 +305,8 @@
 														}else{
 															echo ( intval($listEducation[$i]['educations']['startyear']) + 543 ).' - '.( intval(date('Y')) + 543 );
 														}
+													}else{
+														echo "-";
 													}
 													?></td>
 									<td colspan="2">เกรดเฉลี่ย : <?php echo ( empty($listEducation[$i]['educations']['gpa'])?'-':$listEducation[$i]['educations']['gpa'] );?></td>
@@ -304,7 +321,7 @@
 					</table>
 				<?php }?>
 				
-				<input type="button" onclick="openPopupEducation('','','','','','0','','','')" value="เพิ่มข้อมูล ประวัติการศึกษา"/>
+				<input type="button" id="button_add_education" onclick="openPopupEducation('','','','','','0','','','')" value="เพิ่มข้อมูล ประวัติการศึกษา"/>
 			</div>
 		</div>
 		<div class="container">
@@ -338,12 +355,12 @@
 									<td colspan="2">ประเภทของงานวิจัย : <?php echo $listResearch[$i][0]['research_type'];?></td>
 								</tr>
 								<tr>
-									<td>อาจารย์ที่ปรึกษา : <?php echo $listResearch[$i]['r']['advisor'];?></td>
-									<td>หน่วยงาน : <?php echo $listResearch[$i]['r']['organization'];?></td>
+									<td>อาจารย์ที่ปรึกษา : <?php echo $listResearch[$i]['r']['advisor']?$listResearch[$i]['r']['advisor']:'-';?></td>
+									<td>หน่วยงาน : <?php echo $listResearch[$i]['r']['organization']?$listResearch[$i]['r']['organization']:'-';?></td>
 								</tr>
 								<tr>
-									<td>ปีที่เสร็จ : <?php echo $listResearch[$i]['r']['yearfinish'];?></td>
-									<td>การเผยแพร่ : <?php echo $listResearch[$i]['r']['dissemination'];?></td>
+									<td>ปีที่เสร็จ : <?php echo $listResearch[$i]['r']['yearfinish']?intval($listResearch[$i]['r']['yearfinish'])+543:'-';?></td>
+									<td>การเผยแพร่ : <?php echo $listResearch[$i]['r']['dissemination']?$listResearch[$i]['r']['dissemination']:'-';?></td>
 								</tr>
 							</table>
 						<?php }?>
@@ -355,7 +372,7 @@
 					</table>
 				<?php }?>
 					
-				<input type="button" onclick="openPopupResearch('','','','','','','','')" value="เพิ่มข้อมูล ผลงานวิจัย"/>
+				<input type="button" id="button_add_research" onclick="openPopupResearch('','','-1','','','','','')" value="เพิ่มข้อมูล ผลงานวิจัย"/>
 			</div>
 		</div>
 		<div class="container">
@@ -368,7 +385,7 @@
 					</tr>
 				</table>
 				
-				<input type="button" value="เเพิ่มข้อมูล ผลงานอื่นๆ"/>
+				<input type="button" id="button_add_other_award" value="เเพิ่มข้อมูล ผลงานอื่นๆ"/>
 			</div>
 		</div>
 		<div class="container">
@@ -405,7 +422,7 @@
 							</table>";
 					}
 				?>
-				<input type="button" value="เเพิ่มข้อมูล รางวัลที่ได้รับ" onclick="openPopupAward('','','','')"/>
+				<input type="button" id="button_add_award" value="เเพิ่มข้อมูล รางวัลที่ได้รับ" onclick="openPopupAward('','','','')"/>
 			</div>
 		</div>
 		<div class="container">
@@ -447,7 +464,7 @@
 					}
 				?>
 				
-				<input type="button" value="เพิ่มข้อมูล ประวัติการทำงาน" onclick=" openPopupWorkplace('','','','','','','')"/>
+				<input type="button" id="button_add_workplace" value="เพิ่มข้อมูล ประวัติการทำงาน" onclick=" openPopupWorkplace('','','','','','','')"/>
 			</div>
 		</div>
 		<div class="container">
@@ -459,13 +476,7 @@
 						for( $i=0;$i<$countListComment;$i++ ){
 							echo "<table class=\"table_data_item\">
 									<tr>
-										<td><b>หัวข้อความคิดเห็นที่ : $i {$listComment[$i]['c']['title']}</b></td>
-										<td class=\"edit-delete\">
-											<img src=\"{$this->Html->url('/img/icon_edit.png')}\" width=\"16\" height=\"16\"
-													onclick=\"\" />
-											<img src=\"{$this->Html->url('/img/icon_del.png')}\" width=\"16\" height=\"16\"
-													onclick=\"\" />
-										</td>
+										<td><b>หัวข้อความคิดเห็น: {$listComment[$i]['c']['title']}</b></td>
 									</tr>
 									<tr>
 										<td colspan=\"2\" class=\"comment\">{$listComment[$i]['c']['comment']}</td>
@@ -492,20 +503,20 @@
 							<td><h3>เพิ่มความคิดเห็น</h3></td>
 						</tr>
 						<tr>
-							<td style="width: 20%;text-align: right;">หัวข้อ :</td>
+							<td style="width: 20%;text-align: right;"><b>หัวข้อ :</b></td>
 							<td style="width: 80%;">
-								<input type="text" style="width: 98%;" value=""></input>
+								<input type="text" id="comment_title" style="width: 98%;" value=""></input>
 							</td>
 						</tr>
 						<tr>
-							<td style="width: 20%;text-align: right;vertical-align: top;">ความคิดเห็น :</td>
+							<td style="width: 20%;text-align: right;vertical-align: top;"><b>ความคิดเห็น :</b></td>
 							<td style="width: 80%;">
-								<textarea type="text" style="width: 98%;height: 100px;"></textarea>
+								<textarea type="text" id="comment_detial" style="width: 98%;height: 100px;"></textarea>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="2">
-								<input type="button" value="เพิ่มข้อมูล ความคิดเห็น"/>
+								<input type="button" id="button_add_comment" value="เพิ่มข้อมูล ความคิดเห็น" onclick="addNewComment()"/>
 							</td>
 						</tr>
 					</table>

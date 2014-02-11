@@ -5,11 +5,13 @@ class PsearchController extends AppController {
 	public $uses = array('Profile');
 
 	public function index(){
-		$this->log('---- Psearch->index ----');
-		$this->set("page_title","ค้นหาบุคคล");
+		$this->log('---- Psearch -> index ----');
+		
+		$this->setTitle('ค้นหาบุคคล');
 	}
+	/* ------------------------------------------------------------------------------------------------ */
 	public function search_data(){
-		$this->log('---- Psearch->search_data ----');
+		$this->log('---- Psearch -> search_data ----');
 		
 		$result = array();
 		$search_width = $this->request->data['search_width'];

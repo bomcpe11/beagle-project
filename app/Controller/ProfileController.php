@@ -57,7 +57,8 @@ class ProfileController extends AppController {
 			} 
 			
 			/* birthday */
-			$arrayBirthday = explode('-', $objUser[0]['profiles']['birthday']);	// <<< Y-m-d
+			$birthday = $this->DateThai($objUser[0]['profiles']['birthday']);
+			/*$arrayBirthday = explode('-', $objUser[0]['profiles']['birthday']);	// <<< Y-m-d
 			$birthday .= $arrayBirthday[2];
 			switch ($arrayBirthday[1]) {
 				case "01":	$birthday .= " มกราคม"; break;
@@ -73,7 +74,7 @@ class ProfileController extends AppController {
 				case "11":	$birthday .= " พฤศจิกายน"; break;
 				case "12":	$birthday .= " ธันวาคม"; break;
 			}// switch
-			$birthday .= " พ.ศ. " . ( intval($arrayBirthday[0]) + 543 );
+			$birthday .= " พ.ศ. " . ( intval($arrayBirthday[0]) + 543 );*/
 			
 			/* age */
 			$now = date('Y-m-d');
@@ -110,7 +111,7 @@ class ProfileController extends AppController {
 			}
 			
 			/* comment */
-			$listComment = $this->Comment->getDataForProfile('1');
+			$listComment = $this->Comment->getDataForProfile($objUser[0]['profiles']['id']);
 			$countListComment = count($listComment);
 			$splitCreatedAt = array();
 			$splitUpdatedAt = array();
@@ -137,7 +138,7 @@ class ProfileController extends AppController {
 	}
 	/* ------------------------------------------------------------------------------------------------ */
 	public function updateProfileAjax() {
-		$this->log("START :: ProfileController -> updateProfileAjax()");
+		$this->log('---- ProfileController -> updateProfileAjax ----');
 		
 		$result 		= "";
 		$titleTh 		= $this->request->data["titleTh"];
@@ -187,12 +188,10 @@ class ProfileController extends AppController {
 		$this->layout = "ajax";
 		$this->set("message", json_encode(array("result" => $result)));
 		$this->render("response");
-												
-		$this->log("END :: ProfileController -> updateProfileAjax()");
 	}
 	/* ------------------------------------------------------------------------------------------------ */
 	public function saveNewFamily(){
-		$this->log('START :: ProfileController -> saveNewFamily');
+		$this->log('---- ProfileController -> saveNewFamily ----');
 		
 		$message = '';
 		$objUser = $this->getObjUser();
@@ -208,21 +207,19 @@ class ProfileController extends AppController {
 		if( $this->Family->insertFamily($objUser['id'], $relation, $name
 										, $lastname, $education, $occupation, $position) ){
 			$dataSource->commit();
-			$message = 'บันทึกข้อมูล สำเร็จ';
+			$message = 'การแก้ไขข้อมูลประวัติครอบครัวเสร็จเรียบร้อย';
 		}else{
 			$dataSource->rollback();
-			$message = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลส่วนตัว กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			$message = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติครอบครัว กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 		}
 		
 		$this->layout='ajax';
 		$this->set('message', json_encode(array('message'=>$message)));
 		$this->render('response');
-		
-		$this->log('END :: ProfileController -> saveNewFamily');
 	}
 	/* ------------------------------------------------------------------------------------------------ */
 	public function editFamily(){
-		$this->log('START :: ProfileController -> editFamily');
+		$this->log('---- ProfileController -> editFamily ----');
 		
 		$message = '';
 		$objUser = $this->getObjUser();
@@ -241,21 +238,19 @@ class ProfileController extends AppController {
 										, $education, $occupation
 										, $position, $family_id) ){
 			$dataSource->commit();
-			$message = 'แก้ไขข้อมูล สำเร็จ';
+			$message = 'การแก้ไขข้อมูลประวัติครอบครัวเสร็จเรียบร้อย';
 		}else{
 			$dataSource->rollback();
-			$message = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลส่วนตัว กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			$message = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติครอบครัว กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 		}
 		
 		$this->layout='ajax';
 		$this->set('message', json_encode(array('message'=>$message)));
 		$this->render('response');
-		
-		$this->log('END :: ProfileController -> editFamily');
 	}
 	/* ------------------------------------------------------------------------------------------------ */
 	public function deleteFamily(){
-		$this->log('START :: ProfileController -> deleteFamily');
+		$this->log('---- ProfileController -> deleteFamily ----');
 		
 		$message = '';
 		$id = $this->request->data['id'];
@@ -263,21 +258,19 @@ class ProfileController extends AppController {
 		$dataSource = $this->Family->getDataSource();
 		if( $this->Family->deleteFamily($id) ){
 			$dataSource->commit();
-			$message = 'ลบข้อมูล สำเร็จ';
+			$message = 'การแก้ไขข้อมูลประวัติครอบครัวเสร็จเรียบร้อย';
 		}else{
 			$dataSource->rollback();
-			$message = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลส่วนตัว กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			$message = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติครอบครัว กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 		}
 		
 		$this->layout='ajax';
 		$this->set('message', json_encode(array('message'=>$message)));
 		$this->render('response');
-		
-		$this->log('END :: ProfileController -> deleteFamily');
 	}
 	/* ------------------------------------------------------------------------------------------------ */
 	public function saveNewEducation(){
-		$this->log('START :: ProfileController -> saveNewEducation');
+		$this->log('---- ProfileController -> saveNewEducation ----');
 		
 		$message = '';
 		$objUser = $this->getObjUser();
@@ -305,18 +298,16 @@ class ProfileController extends AppController {
 			$message = 'การแก้ไขข้อมูลประวัติการศึกษาเสร็จเรียบร้อย';
 		}else{
 			$dataSource->rollback();
-			$message = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต';
+			$message = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 		}
 		
 		$this->layout='ajax';
 		$this->set('message', json_encode(array('message'=>$message)));
 		$this->render('response');
-		
-		$this->log('END :: ProfileController -> saveNewEducation');
 	}
 	/* ------------------------------------------------------------------------------------------------ */
 	public function editEducation(){
-		$this->log('START :: ProfileController -> editEducation');
+		$this->log('---- ProfileController -> editEducation ----');
 		
 		$message = '';
 		$objUser = $this->getObjUser();
@@ -346,7 +337,7 @@ class ProfileController extends AppController {
 			$message = 'การแก้ไขข้อมูลประวัติการศึกษาเสร็จเรียบร้อย';
 		}else{
 			$dataSource->rollback();
-			$message = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต';
+			$message = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 		}
 		
 		$this->layout='ajax';
@@ -357,7 +348,7 @@ class ProfileController extends AppController {
 	}
 	/* ------------------------------------------------------------------------------------------------ */
 	public function deleteEducation(){
-		$this->log('START :: ProfileController -> deleteEducation');
+		$this->log('---- ProfileController -> deleteEducation ----');
 		
 		$message = '';
 		$id = $this->request->data['id'];
@@ -365,21 +356,19 @@ class ProfileController extends AppController {
 		$dataSource = $this->Education->getDataSource();
 		if( $this->Education->deleteEducation($id) ){
 			$dataSource->commit();
-			$message = 'ลบข้อมูล สำเร็จ';
+			$message = 'การแก้ไขประวัติการศึกษาเสร็จเรียบร้อย';
 		}else{
 			$dataSource->rollback();
-			$message = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลส่วนตัว กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			$message = 'เกิดข้อผิดพลาดใน การแก้ไขประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 		}
 		
 		$this->layout='ajax';
 		$this->set('message', json_encode(array('message'=>$message)));
 		$this->render('response');
-		
-		$this->log('END :: ProfileController -> deleteEducation');
 	}
 	/* ------------------------------------------------------------------------------------------------ */
 	public function savedNewResearch(){
-		$this->log('---- savedNewResearch ----');
+		$this->log('---- ProfileController -> savedNewResearch ----');
 		
 		$result = array();
 		$objUser = $this->getObjUser();
@@ -406,7 +395,7 @@ class ProfileController extends AppController {
 			$result['flag'] = 1;
 		}else{
 			$dataSource->rollback();
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต';
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลผลการวิจัย กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 			$result['flag'] = -1;
 		}
 		
@@ -416,7 +405,7 @@ class ProfileController extends AppController {
 	}
 	/* ------------------------------------------------------------------------------------------------ */
 	public function editResearch(){
-		$this->log('---- editResearch ----');
+		$this->log('---- ProfileController -> editResearch ----');
 		
 		$result = array();
 		$objUser = $this->getObjUser();
@@ -445,7 +434,7 @@ class ProfileController extends AppController {
 			$result['flag'] = 1;
 		}else{
 			$dataSource->rollback();
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต';
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลผลการวิจัย กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 			$result['flag'] = -1;
 		}
 		
@@ -455,7 +444,7 @@ class ProfileController extends AppController {
 	}
 	/* ------------------------------------------------------------------------------------------------ */
 	public function deletedResearch(){
-		$this->log('---- deletedResearch ----');
+		$this->log('---- ProfileController -> deletedResearch ----');
 		
 		$result = array();
 		//$this->log($this->request->data);
@@ -468,7 +457,7 @@ class ProfileController extends AppController {
 			$result['flag'] = 1;
 		}else{
 			$dataSource->rollback();
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต';
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลผลการวิจัย กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 			$result['flag'] = -1;
 		}
 		
@@ -478,7 +467,7 @@ class ProfileController extends AppController {
 	}
 	/* ------------------------------------------------------------------------------------------------ */
 	public function savedNewAward(){
-		$this->log('---- savedNewAward ----');
+		$this->log('---- ProfileController -> savedNewAward ----');
 		
 		$result = array();
 		$objUser = $this->getObjUser();
@@ -498,7 +487,7 @@ class ProfileController extends AppController {
 			$result['flag'] = 1;
 		}else{
 			$dataSource->rollback();
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต';
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลรางวัลที่ได้รับ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 			$result['flag'] = -1;
 		}
 		
@@ -508,7 +497,7 @@ class ProfileController extends AppController {
 	}
 	/* ------------------------------------------------------------------------------------------------ */
 	public function editAward(){
-		$this->log('---- editAward ----');
+		$this->log('---- ProfileController -> editAward ----');
 		
 		$result = array();
 		$objUser = $this->getObjUser();
@@ -529,7 +518,7 @@ class ProfileController extends AppController {
 			$result['flag'] = 1;
 		}else{
 			$dataSource->rollback();
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต';
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลรางวัลที่ได้รับ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 			$result['flag'] = -1;
 		}
 		
@@ -539,7 +528,7 @@ class ProfileController extends AppController {
 	}
 	/* ------------------------------------------------------------------------------------------------ */
 	public function deletedAward(){
-		$this->log('---- deletedAward ----');
+		$this->log('---- ProfileController -> deletedAward ----');
 		
 		$result = array();
 		//$this->log($this->request->data);
@@ -552,7 +541,7 @@ class ProfileController extends AppController {
 			$result['flag'] = 1;
 		}else{
 			$dataSource->rollback();
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต';
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลผลการวิจัย กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 			$result['flag'] = -1;
 		}
 		
@@ -562,7 +551,7 @@ class ProfileController extends AppController {
 	}
 	/* ------------------------------------------------------------------------------------------------ */
 	public function savedNewWorkplace(){
-		$this->log('---- savedNewWorkplace ----');
+		$this->log('---- ProfileController -> savedNewWorkplace ----');
 		
 		$result = array();
 		$objUser = $this->getObjUser();
@@ -585,7 +574,7 @@ class ProfileController extends AppController {
 			$result['flag'] = 1;
 		}else{
 			$dataSource->rollback();
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต';
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการทำงาน กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 			$result['flag'] = -1;
 		}
 		
@@ -595,7 +584,7 @@ class ProfileController extends AppController {
 	}
 	/* ------------------------------------------------------------------------------------------------ */
 	public function editWorkplace(){
-		$this->log('---- editWorkplace ----');
+		$this->log('---- ProfileController -> editWorkplace ----');
 		
 		$result = array();
 		$objUser = $this->getObjUser();
@@ -619,7 +608,7 @@ class ProfileController extends AppController {
 			$result['flag'] = 1;
 		}else{
 			$dataSource->rollback();
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต';
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการทำงาน กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 			$result['flag'] = -1;
 		}
 		
@@ -629,7 +618,7 @@ class ProfileController extends AppController {
 	}
 	/* ------------------------------------------------------------------------------------------------ */
 	public function deletedWorkplace(){
-		$this->log('---- deletedWorkplace ----');
+		$this->log('---- ProfileController -> deletedWorkplace ----');
 		
 		$result = array();
 		//$this->log($this->request->data);
@@ -642,7 +631,37 @@ class ProfileController extends AppController {
 			$result['flag'] = 1;
 		}else{
 			$dataSource->rollback();
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต';
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการทำงาน กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			$result['flag'] = -1;
+		}
+		
+		$this->layout='ajax';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	}
+	/* ------------------------------------------------------------------------------------------------ */
+	public function saveNewComment(){
+		$this->log('---- ProfileController -> saveNewComment ----');
+		
+		$result = array();
+		$objUser = $this->getObjUser();
+		$commentTitle = $this->request->data['commentTitle'];
+		$commentDetial = $this->request->data['commentDetial'];
+		$profileId = $this->request->data['profileId'];
+		$commentableType = 'Profile';
+		
+		$dataSource = $this->Comment->getDataSource();
+		if( $this->Comment->insertData($commentTitle
+										,$commentDetial
+										,$objUser['id']
+										,$commentableType
+										,$profileId) ){
+			$dataSource->commit();
+			$result['msg'] = 'เพิ่มความคิดเห็นเสร็จเรียบร้อย';
+			$result['flag'] = 1;
+		}else{
+			$dataSource->rollback();
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การเพิ่มความคิดเห็น กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 			$result['flag'] = -1;
 		}
 		

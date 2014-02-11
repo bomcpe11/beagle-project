@@ -5,11 +5,11 @@ class AsearchController extends AppController{
 	public $uses = array('Activity','JoinActivity');
 	
 	public function index(){
-		$this->log('---- Asearch->index() ----');
-		$this->set('page_title', 'ค้นหากิจกรรม');
+		$this->log('---- Asearch -> index ----');
+		$this->setTitle('ค้นหากิจกรรม');
 	}
 	public function search(){
-		$this->log('---- Asearch->search() ----');
+		$this->log('---- Asearch -> search ----');
 		
 		$result = array();
 		$search_width = $this->request->data['search_width'];
@@ -30,7 +30,7 @@ class AsearchController extends AppController{
 		$this->render("response");
 	}
 	public function saveActivity(){
-		$this->log('---- Asearch->saveActivity() ----');
+		$this->log('---- Asearch -> saveActivity ----');
 		
 		$result = array();
 		$objUser = $this->getObjUser();

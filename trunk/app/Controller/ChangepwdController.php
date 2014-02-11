@@ -7,15 +7,13 @@ class ChangepwdController extends AppController {
 	public $components = array("Cookie");
 	/* -------------------------------------------------------------------------------- */
 	public function index(){
-		$this->log("START :: ChangepwdController -> index()");
+		$this->log('---- ChangepwdController -> index ----');
 		
-		$this->set("page_title","แก้ไขรหัสผ่าน");
-		
-		$this->log("END :: ChangepwdController -> index()");
+		$this->setTitle('แก้ไขรหัสผ่าน');
 	}// index
 	/* -------------------------------------------------------------------------------- */
 	public function updatePasswordFnc() {
-		$this->log("START :: ChangepwdController -> updatePasswordFnc()");
+		$this->log('---- ChangepwdController -> updatePasswordFnc ----');
 		
 		$result = null;
 		//$this->log($objUser);
@@ -38,7 +36,5 @@ class ChangepwdController extends AppController {
 		$this->layout = "ajax";
 		$this->set("message", json_encode(array("result" => $result)));
 		$this->render("response");
-		
-		$this->log("END :: ChangepwdController -> updatePasswordFnc()");
 	}// updatePasswordFnc
 }// ChangepwdController

@@ -118,4 +118,22 @@ class ActivityController extends AppController {
 		$this->render('response');
 		$this->log('END :: ActivityController :: editActivity');
 	}
+	
+	public function uploadImages(){
+		$this->log('Start :: ActivityController :: uploadImages');
+		//$this->log($_REQUEST);
+		//$this->log($_FILES);
+		$callback = $this->request->query['CKEditorFuncNum'];
+		
+		//TODO: Upload image file to /img/activities/
+		
+		$url='/jstphub/app/webroot/img/profiles/1/1.jpg';
+		$msg='';
+		$this->log('End :: ActivityController :: uploadImages');
+		//$this->set('message', json_encode(array('status'=>'1','message'=>'Success')));
+		$output = '<html><body><script type="text/javascript">window.parent.CKEDITOR.tools.callFunction('.$callback.', "'.$url.'","'.$msg.'");</script></body></html>';
+		$this->set('message', $output);
+		$this->layout='ajax';
+		$this->render('response');
+	}
 }

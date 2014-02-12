@@ -155,3 +155,41 @@ Birth Date :<input type="text" class="birthDatePicker" />
 	});
 </script>
 
+<!-- ####################  CKEDITOR & CKFINDER  ########################################## -->
+<h3>- CKEDITOR & CKFINDER</h3>
+<textarea id="ckeditor1">
+	This is my textarea to be replaced with CKEditor.
+</textarea><br />
+<input type="button" onclick="ckGetData()" value="getData()" /><br /><br />
+<div style="border: 1px solid black;">
+<b>Javascript Syntax Example</b><br />
+1. Insert textarea :<br />
+&lt;textarea id="ckeditor1" rows="10" cols="80"&gt;&lt;/textarea&gt;<br /><br />
+
+2. Use ckeditor :<br />
+CKEDITOR.replace( 'ckeditor1', {filebrowserImageUploadUrl : getURL('/activity/uploadImages')});<br /><br />
+
+3. Get html data for insert :<br />
+CKEDITOR.instances.ckeditor1.getData();
+</div>
+<script type="text/javascript">
+	CKEDITOR.replace( 'ckeditor1', {filebrowserImageUploadUrl : getURL('/activity/uploadImages')});
+	//CKEDITOR.instances.ckeditor1.insertHtml('<img src="xxx.jpg">');
+	//CKEDITOR.instances.ckeditor1.getData();
+	function ckGetData(){
+		alert(CKEDITOR.instances.ckeditor1.getData());
+	}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+

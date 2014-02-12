@@ -36,6 +36,7 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 		echo $this->Html->script('jquery/core/jquery-1.10.2.min');
 		echo $this->Html->script('jquery/ui/jquery-ui-1.10.3.custom.min');
 		echo $this->Html->script('jquery/ui/jquery.ui.1.10.3.datepicker.th');
+		echo $this->Html->script('ckeditor/ckeditor');
 		echo $this->Html->script('loading');
 		echo $this->Html->script('jstphub-common');
 

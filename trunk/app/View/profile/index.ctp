@@ -10,7 +10,7 @@
 	include 'popup_award.ctp';
 	include 'popup_workplace.ctp';
 	include 'comment.ctp';
-	include 'change_activity.ctp'
+	include 'popup_activity.ctp'
 ?>
 <script type="text/javascript">
 	jQuery(document).ready(function() {
@@ -554,13 +554,14 @@
 										<td>{$listActivity[$i]['a']['location']}</td>
 										<td>{$listActivity[$i]['a']['genname']}</td>
 										<td>{$listActivity[$i]['a']['shortdesc']}</td>
-										<td class=\"edit-delete\">
+										<td style=\"text-align:center\" class=\"edit-delete\">
 											<img src=\"{$this->Html->url('/img/icon_edit.png')}\" width=\"16\" height=\"16\"
-												onclick=\"edit_activity({$listActivity[$i]['a']['id']})\" />
+												onclick=\"openPopupActivity('{$listActivity[$i]['a']['id']}'
+																		,'{$listActivity[$i]['ja']['position']}')\" />
 										</td>
-										<td class=\"edit-delete\">
+										<td style=\"text-align:center\" class=\"edit-delete\">
 											<img src=\"{$this->Html->url('/img/icon_del.png')}\" width=\"16\" height=\"16\"
-												onclick=\"delete_activity({$listActivity[$i]['a']['id']})\" />
+												onclick=\"deleteActivity({$listActivity[$i]['a']['id']})\" />
 										</td>
 									<tr>";
 							}

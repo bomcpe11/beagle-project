@@ -16,7 +16,7 @@ class ProfileController extends AppController {
 	public function index(){
 		$this->log('---- ProfileController -> index ----');
 		
-		$get_profile_id = intval($this->request->query['profile_id']);
+		$get_profile_id = @intval($this->request->query['profile_id']);
 		$objUser = $this->Profile->getDataById($get_profile_id);
 		//$this->log(print_r($objUser, true));
 		$pageTitle='ไม่พบข้อมูล';

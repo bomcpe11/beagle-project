@@ -16,7 +16,7 @@ class ProfileController extends AppController {
 	public function index(){
 		$this->log('---- ProfileController -> index ----');
 		
-		$get_profile_id = @intval($this->request->query['profile_id']);
+		$get_profile_id = @intval($this->request->query['id']);
 		$objUser = $this->Profile->getDataById($get_profile_id);
 		//$this->log(print_r($objUser, true));
 		$pageTitle='ไม่พบข้อมูล';
@@ -662,6 +662,54 @@ class ProfileController extends AppController {
 		}else{
 			$dataSource->rollback();
 			$result['msg'] = 'เกิดข้อผิดพลาดใน การเพิ่มความคิดเห็น กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			$result['flag'] = -1;
+		}
+		
+		$this->layout='ajax';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	}
+	/* ------------------------------------------------------------------------------------------------ */
+	public function editActivity(){
+		$this->log('---- ProfileController -> editActivity ----');
+		
+		$result = array();
+		$objUser = $this->getObjUser();
+		$id = $this->request->data['id'];
+		$position = $this->request->data['position'];
+		
+		$dataSource = $this->JoinActivity->getDataSource();
+		if( $this->JoinActivity->updatePosition($objUser['id'], $id, $position) ){
+			$dataSource->commit();
+			$result['msg'] = 'การแก้ไขกิจกรรมที่เข้าร่วมเสร็จเรียบร้อย';
+			$result['flag'] = 1;
+		}else{
+			$dataSource->rollback();
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขกิจกรรมที่เข้าร่วม กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			$result['flag'] = -1;
+		}
+		
+		$this->layout='ajax';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	}
+	/* ------------------------------------------------------------------------------------------------ */
+	public function deletedActivity(){
+		$this->log('---- ProfileController -> deletedActivity ----');
+		
+		$result = array();
+		$objUser = $this->getObjUser();
+		//$this->log($this->request->data);
+		$id = $this->request->data['id'];
+
+		$dataSource = $this->JoinActivity->getDataSource();
+		if( $this->JoinActivity->deleteData($objUser['id'],$id) ){
+			$dataSource->commit();
+			$result['msg'] = 'การแก้ไขกิจกรรมที่เข้าร่วมเสร็จเรียบร้อย';
+			$result['flag'] = 1;
+		}else{
+			$dataSource->rollback();
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขกิจกรรมที่เข้าร่วมเ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 			$result['flag'] = -1;
 		}
 		

@@ -2,6 +2,53 @@
 class JoinActivity extends AppModel{
 	public $names = 'JoinActivity';
 	/* ------------------------------------------------------------------------------------------------ */
+	public function insertData($profile_id, $activity_id, $position){
+		$flag = false;
+		$sql = "INSERT INTO join_activities VALUES('$profile_id', '$activity_id', '$position')";
+		
+		try{
+			$this->query($sql);
+			$flag = true;
+		}catch(Exception $e){
+			$this->log($e->getMessage());
+		}
+		
+		return $flag;
+	}
+	/* ------------------------------------------------------------------------------------------------ */
+	public function updatePosition($profile_id, $activity_id, $position){
+		$flag = false;
+		$sql = "UPDATE join_activities 
+					SET position='$position'
+					WHERE profile_id=$profile_id
+						AND activity_id=$activity_id";
+		
+		try{
+			$this->query($sql);
+			$flag = true;
+		}catch(Exception $e){
+			$this->log($e->getMessage());
+		}
+		
+		return $flag;
+	}
+	/* ------------------------------------------------------------------------------------------------ */
+	public function deleteData($profile_id, $activity_id){
+		$flag = false;
+		$sql = "DELETE FROM join_activities 
+					WHERE profile_id=$profile_id
+						AND activity_id=$activity_id";
+		
+		try{
+			$this->query($sql);
+			$flag = true;
+		}catch(Exception $e){
+			$this->log($e->getMessage());
+		}
+		
+		return $flag;
+	}
+	/* ------------------------------------------------------------------------------------------------ */
 	public function getAll(){
 		$result = $this->query('select * from activities ');
 		return $result;
@@ -36,21 +83,6 @@ class JoinActivity extends AppModel{
 		}
 		
 		return $result;
-	}
-	/* ------------------------------------------------------------------------------------------------ */
-	public function insertData($profile_id, $activity_id, $position){
-		$flag = false;
-		$sql = "INSERT INTO join_activities VALUES('$profile_id', '$activity_id', '$position')";
-		//$this->log($sql);
-		
-		try{
-			$this->query($sql);
-			$flag = true;
-		}catch(Exception $e){
-			$this->log($e->getMessage());
-		}
-		
-		return $flag;
 	}
 	/* ------------------------------------------------------------------------------------------------ */
 }

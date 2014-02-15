@@ -289,13 +289,34 @@ class Profile extends AppModel {
 		return $result;
 	}// checkNameEng
 	/* ------------------------------------------------------------------------------------------------------- */
-	public function searchByStmtSql($stmt_sql){
+	public function getDataForPsearch($keyWord,$searchWidth,$flagActivity){
 		$result = null;
-		$strSql = "SELECT * FROM profiles WHERE $stmt_sql";
-		//$this->log("strSql => ".$strSql);
+		$nowYear = date('Y');
+		if( $flagActivity==='1' ){
+			$sql = "SELECT * 
+						FROM profiles p, join_activities ja, activities a
+						WHERE p.id=ja.profile_id
+							AND ja.activity_id=a.id";
+		}else{
+			$sql = "SELECT * 
+						FROM profiles p
+						WHERE 1=1";
+		}
+		
+		$countSearchWidth = count($searchWidth);
+		for( $i=0;$i<$countSearchWidth;$i++ ){
+			if( $searchWidth[$i]==='activities' ){
+				$sql .= " AND a.name LIKE '%$keyWord%'";
+			}else if( $searchWidth[$i]==='age' ){
+				$sql .= " AND YEAR(p.birthday) = $nowYear-$keyWord";
+			}else{
+				$sql .= " AND p.{$searchWidth[$i]} LIKE '%$keyWord%'";
+			}
+		}
+		//$this->log($sql);
 	
 		try {
-   			$result = $this->query($strSql);
+   			$result = $this->query($sql);
    		} catch ( Exception $e ) {
    			$this->log("exception => ".$e->getMessage());
    		}

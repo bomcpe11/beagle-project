@@ -27,7 +27,7 @@
 	}
 	/* ------------------------------------------------------------------------------------------------ */
 	function editActivity(){
-		if( validateResearch() ){
+		if( validateActivity() ){
 			loading();
 			jQuery.post('<?php echo $this->Html->url('/Profile/editActivity');?>'
 					,{'data':{'id':jQuery('#activity_id').val()
@@ -52,7 +52,7 @@
 		}
 	}
 	/* ------------------------------------------------------------------------------------------------ */
-	function validateResearch(){
+	function validateActivity(){
 		if( jQuery('#activity_position').val() ){
 				return true;
 		}else{

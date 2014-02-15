@@ -8,52 +8,52 @@
 								,yearfinish
 								,dissemination){
 		var html = '<div id="popup-research-container" style="width:500px;">\
-		<table style="width:100%;">\
-			<tr>\
-				<td style="width:35%; text-align:right;">* ชื่อเรื่อง :</td>\
-				<td style="width:65%;">\
-					<input id="research-id" type="hidden" value=' + id +'>\
-					<input id="research-name" type="text" value=' + name +'>\
-				</td>\
-			</tr>\
-			<tr>\
-				<td style="text-align:right;">* ประเภทของงานวิจัย :</td>\
-				<td>\
-					<select id="research-researchtype">\
-						<option value="-1">---- กรุณาเลือก ----</option>\
-						<?php 
-							$countListResearchType = count($listResearchType);
-							for( $i=0;$i<$countListResearchType;$i++ ){ 
-									echo "<option value=\"{$listResearchType[$i]['gvars']['varcode']}\">{$listResearchType[$i]['gvars']['vardesc1']}</option>";
-						
-							} 
-						?>\
-					</select>\
-				</td>\
-			</tr>\
-			<tr>\
-				<td style="text-align:right;">อาจารย์ที่ปรึกษา :</td>\
-				<td><input id="research-advisor" type="text" value=' + advisor +'></td>\
-			</tr>\
-			<tr>\
-				<td style="text-align:right; vertical-align:top;">หน่วยงาน :</td>\
-				<td>\
-					<input id="research-organization" type="text" value=' + organization +'>\
-					<br/>\
-					<input id="research-isnotfinish" type="checkbox" '+( (isnotfinish==='1')?'checked value="1"':'value="0"' )+'><label>ยังไม่สำเร็จ</label>\
-				</td>\
-			</tr>\
-			<tr>\
-				<td style="text-align:right; vertical-align:top;">ปีที่เสร็จ :</td>\
-				<td><input id="research-yearfinish" style="width:40px" type="text" maxlength="4" value="'+yearfinish+'" '+( (id)?'disabled':'' )+'> กรุณากรอกเป็นปี พ.ศ.\
-				</td>\
-			</tr>\
-			<tr>\
-				<td style="text-align:right;">การเผยแพร่ :</td>\
-				<td><input id="research-dissemination" type="text" value="'+dissemination+'" '+( (id)?'disabled':'' )+'></td>\
-			</tr>\
-		</table>\
-		</div>';
+						<table style="width:100%;">\
+							<tr>\
+								<td style="width:35%; text-align:right;">* ชื่อเรื่อง :</td>\
+								<td style="width:65%;">\
+									<input id="research-id" type="hidden" value=' + id +'>\
+									<input id="research-name" type="text" value=' + name +'>\
+								</td>\
+							</tr>\
+							<tr>\
+								<td style="text-align:right;">* ประเภทของงานวิจัย :</td>\
+								<td>\
+									<select id="research-researchtype">\
+										<option value="-1">---- กรุณาเลือก ----</option>\
+										<?php 
+											$countListResearchType = count($listResearchType);
+											for( $i=0;$i<$countListResearchType;$i++ ){ 
+													echo "<option value=\"{$listResearchType[$i]['gvars']['varcode']}\">{$listResearchType[$i]['gvars']['vardesc1']}</option>";
+										
+											} 
+										?>\
+									</select>\
+								</td>\
+							</tr>\
+							<tr>\
+								<td style="text-align:right;">อาจารย์ที่ปรึกษา :</td>\
+								<td><input id="research-advisor" type="text" value=' + advisor +'></td>\
+							</tr>\
+							<tr>\
+								<td style="text-align:right; vertical-align:top;">หน่วยงาน :</td>\
+								<td>\
+									<input id="research-organization" type="text" value=' + organization +'>\
+									<br/>\
+									<input id="research-isnotfinish" type="checkbox" '+( (isnotfinish==='1')?'checked value="1"':'value="0"' )+'><label>ยังไม่สำเร็จ</label>\
+								</td>\
+							</tr>\
+							<tr>\
+								<td style="text-align:right; vertical-align:top;">ปีที่เสร็จ :</td>\
+								<td><input id="research-yearfinish" style="width:40px" type="text" maxlength="4" value="'+yearfinish+'" '+( (id)?'disabled':'' )+'> กรุณากรอกเป็นปี พ.ศ.\
+								</td>\
+							</tr>\
+							<tr>\
+								<td style="text-align:right;">การเผยแพร่ :</td>\
+								<td><input id="research-dissemination" type="text" value="'+dissemination+'" '+( (id)?'disabled':'' )+'></td>\
+							</tr>\
+						</table>\
+					</div>';
 		
 		var buttons = [{text: "บันทึก"
 						, click: function(){
@@ -81,7 +81,7 @@
 						,'researchtype':jQuery('#research-researchtype').val()
 						,'advisor':jQuery('#research-advisor').val()
 						,'organization':jQuery('#research-organization').val()
-						,'isnotfinish':jQuery('#research-isnotfinish').val()
+						,'isnotfinish':jQuery('#research-isnotfinish').prop('checked')
 						,'yearfinish':jQuery('#research-yearfinish').val()
 						,'dissemination':jQuery('#research-dissemination').val()}}
 				,function(data){
@@ -113,7 +113,7 @@
 							,'researchtype':jQuery('#research-researchtype').val()
 							,'advisor':jQuery('#research-advisor').val()
 							,'organization':jQuery('#research-organization').val()
-							,'isnotfinish':jQuery('#research-isnotfinish').val()
+							,'isnotfinish':jQuery('#research-isnotfinish').prop('checked')
 							,'yearfinish':jQuery('#research-yearfinish').val()
 							,'dissemination':jQuery('#research-dissemination').val()}}
 					,function(data){
@@ -153,11 +153,11 @@
 		}
 	}
 	/* -------------------------------------------------------------------------------------------------- */
-	function deletedResearch(id){
+	function deleteResearch(id){
 		jConfirm('กรุณายืนยัน เพื่อลบรายการ ', 
 				function(){ //okFunc
 					loading();
-					jQuery.post('<?php echo $this->Html->url('/Profile/deletedResearch');?>'
+					jQuery.post('<?php echo $this->Html->url('/Profile/deleteResearch');?>'
 						,{'data':{'id':id}}
 						,function(data){
 							unloading();

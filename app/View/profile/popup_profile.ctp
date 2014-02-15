@@ -1,6 +1,6 @@
 <script>
 	function edit_profile() {
-		var strHtml = '<div class="table" style="width: 700px;">\
+		var strHtml = '<div id="popup_profile_container" class="table" style="width: 700px;">\
 						<ul>\
 							<li class="single">\
 								<p><strong>* คำนำหน้าชื่อ :</strong></p>\
@@ -65,7 +65,7 @@
 							<li class="single">\
 								<p><strong>* วันเกิด :</strong></p>\
 								<p>\
-									<input id="text-birthday" class="birthDatePicker" type="text" value="">\
+									<input id="text-birthday" class="birthDatePicker" type="text" value="'+setFormatForDatePicker('<?php echo $birthday; ?>')+'">\
 								</p>\
 							</li>\
 							<li>\
@@ -131,12 +131,12 @@
 		openPopupHtml("แก้ไขข้อมูลส่วนตัว", strHtml, buttons, 
 				function(){ //openFunc
 					setBirthDatePicker(".birthDatePicker");
-					jQuery('#text-birthday').val(setFormatForDatePicker('<?php echo $birthday?>'));
 				}, 
 				function(){ //closeFunc
 				}
 		);
 	}
+	/* -------------------------------------------------------------------------------------------------- */
 	function editProfile() {
 		var titleTh 		= jQuery("#select-title-name-th").val();
 		var nameTh 			= jQuery("#text-name-th").val();
@@ -217,11 +217,11 @@
 				, function(data) {
 					unloading();
 					
-					jAlert(data.result
+					jAlert(data.msg
 							, function(){ 
-								if ( data.result == "การแก้ไขข้อมูลส่วนตัวเสร็จเรียบร้อย" ) {
-									jQuery(this).dialog("close"); 
-									jQuery(this).remove();
+								if ( data.flg===1 ) {
+									closePopup('#popup_profile_container');
+									window.location.reload();
 								}
 							}//okFunc	
 							, function(){ 
@@ -232,6 +232,7 @@
 				}
 				, "json");
 	}
+	/* -------------------------------------------------------------------------------------------------- */
 	function validateEmail(email) { 
 	    var pattern = /^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/; 
 	    

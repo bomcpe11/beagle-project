@@ -54,6 +54,7 @@
 				}
 		);
 	}
+	/* -------------------------------------------------------------------------------------------------- */
 	function saveNewFamaily(){
 		if( validateFamily() ){
 			loading();
@@ -67,9 +68,9 @@
 							}}
 					,function(data){
 						unloading();
-						jAlert(data.message
+						jAlert(data.msg
 								, function(){ 
-									if( data.message === 'บันทึกข้อมูล สำเร็จ' ){
+									if( data.flg===1 ){
 										closePopup('#popup-family-container');
 										window.location.reload();
 									}
@@ -83,6 +84,7 @@
 					,'json');
 		}
 	}
+	/* -------------------------------------------------------------------------------------------------- */
 	function editFamily(){
 		if( validateFamily() ){
 			loading();
@@ -97,9 +99,9 @@
 							}}
 					,function(data){
 						unloading();
-						jAlert(data.message
+						jAlert(data.msg
 								, function(){ 
-									if( data.message === 'แก้ไขข้อมูล สำเร็จ' ){
+									if( data.flg===1 ){
 										closePopup('#popup-family-container');
 										window.location.reload();
 									}
@@ -113,6 +115,7 @@
 					,'json');
 		}
 	}
+	/* -------------------------------------------------------------------------------------------------- */
 	function validateFamily(){
 		if( jQuery('#family-relation').val() && jQuery('#family-name').val() && jQuery('#family-lastname').val() 
 				&& jQuery('#family-occupation').val() ){
@@ -130,17 +133,18 @@
 			return false;
 		}
 	}
+	/* -------------------------------------------------------------------------------------------------- */
 	function deleteFamily(family_id){
-		jConfirm('กรุณายืนยัน เพื่อลบรายการ  [ ชื่อ ] [ นามสกุล ]', 
+		jConfirm('กรุณายืนยัน เพื่อลบรายการ  [ชื่อ] [นามสกุล]', 
 				function(){ //okFunc
 					loading();
 					jQuery.post('<?php echo $this->Html->url('/profile/deleteFamily');?>'
 							,{'data':{'id':family_id}}
 							,function(data){
 								unloading();
-								jAlert(data.message
+								jAlert(data.msg
 										, function(){ 
-											if( data.message == 'ลบข้อมูล สำเร็จ' ){
+											if( data.flg===1 ){
 												window.location.reload();
 											}
 										}//okFunc	

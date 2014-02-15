@@ -18,7 +18,7 @@
 		</tr>
 		<tr>
 			<td></td>
-			<td><input type="button" value="ค้นหา" onclick="search_data()"/></td>
+			<td><input type="button" value="ค้นหา" onclick="searchData()"/></td>
 		</tr>
 	</table>
 	<div id="section_search" style="display:none">
@@ -31,31 +31,23 @@
 	jQuery(document).ready(function(){
 		jQuery('input[type="button"]').button();
 	});
-	function search_data(){
-		var key_word = jQuery('#key_word').val();
-		var serach_width = '';
-		var date = new Date();
-		var current_year = date.getFullYear();
+	/*	------------------------------------------------------------------------------------------------ */
+	function searchData(){
+		var keyWord = jQuery('#key_word').val();
+		var searchWidth = new Array();
+		var flagActivity = -1;	// -1 not have activity, 1 have activity
 
-		jQuery('input[name="search_width"]').each(function(index,value){
-			if( jQuery(this).is(':checked') ){
-				if( !serach_width ){
-					if( jQuery(this).val()==='age'){
-						serach_width = 'YEAR(birthday) = YEAR('+( isNaN(key_word)?0:(current_year-key_word) )+')';
-					}else{
-						serach_width = ''+jQuery(this).val()+' LIKE \'%'+key_word+'%\'';
-					}
-				}else{
-					if( jQuery(this).val()==='age'){
-						serach_width += ' AND YEAR(birthday) = YEAR('+( isNaN(key_word)?0:(current_year-key_word) )+')';
-					}else{
-						serach_width += ' AND '+jQuery(this).val()+' LIKE \'%'+key_word+'%\'';
-					}
+		jQuery('input[name="search_width"]').each(function(i,e){
+			if( jQuery(e).prop('checked') ){
+				searchWidth.push(jQuery(e).val());
+				if( jQuery(e).val()==='activities' ){
+					flagActivity = 1;
 				}
 			}
 		});
-		console.log(serach_width);
-		if( !key_word ){
+		//console.log(serach_width);
+		
+		if( !keyWord ){
 			jAlert('กรุณาระบุ Key Word', 
 					function(){ //okFunc
 					}, 
@@ -67,7 +59,7 @@
 
 			return;
 		}
-		if( !serach_width ){
+		if( !searchWidth ){
 			jAlert('กรุณาเลือก วิธีการค้นหา', 
 					function(){ //okFunc
 					}, 
@@ -82,10 +74,12 @@
 		
 
 		loading();
-		jQuery.post('<?php echo $this->Html->url('/Psearch/search_data');?>'
-				,{'data':{'search_width':serach_width}}
+		jQuery.post('<?php echo $this->Html->url('/Psearch/searchData');?>'
+				,{'data':{'keyWord':keyWord
+							,'searchWidth':searchWidth
+							,'flagActivity':flagActivity}}
 				,function(data){
-					var count_data = data?data.length:0;
+					var countData = data?data.length:0;
 					var html='<table class="table-data">';
 					html+='<thead>';
 					html+='<tr>';
@@ -99,15 +93,15 @@
 					html+='</thead>';
 					
 					html+='<tbody>';
-					if( count_data>0 ){
-						for( var i=0;i<count_data;i++ ){
-							html+='<tr onclick="go_profile(\''+data[i].profiles.id+'\')">';
-							html+='<td>'+data[i].profiles.nameth+'</td>';
-							html+='<td>'+data[i].profiles.lastnameth+'</td>';
-							html+='<td>'+data[i].profiles.nickname+'</td>';
-							html+='<td>'+data[i].profiles.login+'</td>';
-							html+='<td>'+get_age(data[i].profiles.birthday)+'</td>';
-							html+='<td>'+data[i].profiles.email+'</td>';
+					if( countData>0 ){
+						for( var i=0;i<countData;i++ ){
+							html+='<tr onclick="goProfile(\''+data[i].p.id+'\')">';
+							html+='<td>'+data[i].p.nameth+'</td>';
+							html+='<td>'+data[i].p.lastnameth+'</td>';
+							html+='<td>'+data[i].p.nickname+'</td>';
+							html+='<td>'+data[i].p.login+'</td>';
+							html+='<td>'+getAge(data[i].p.birthday)+'</td>';
+							html+='<td>'+data[i].p.email+'</td>';
 							html+='</tr>';
 						}
 					}else{
@@ -125,15 +119,17 @@
 				}
 				,'json');
 	}
-	function go_profile(id){
+	/*	------------------------------------------------------------------------------------------------ */
+	function goProfile(id){
 		window.location.assign('../Profile/index?id='+id);
 	}
-	function get_age(birth_day){
+	/*	------------------------------------------------------------------------------------------------ */
+	function getAge(birthDay){
 		// birth_dat => 2014-01-26
-		var split_birth_day = birth_day.split('-');
+		var splitBirthDay = birthDay.split('-');
 		var date = new Date();
-		var current_year = date.getFullYear();	// Ex. 2014
+		var currentYear = date.getFullYear();	// Ex. 2014
 
-		return current_year - split_birth_day[0];
+		return currentYear - splitBirthDay[0];
 	}
 </script>

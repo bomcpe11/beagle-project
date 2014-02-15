@@ -42,11 +42,11 @@ class Research extends AppModel {
 							,'$researchtype'
 							,'$advisor'
 							,'$organization'
-							,'$profile_id'
-							,'$isnotfinish'
+							,$profile_id
 							,now()
 							,now()
-							,'$yearfinish'
+							,$isnotfinish
+							,$yearfinish
 							,'$dissemination')";
 		//$this->log($sql);
 		
@@ -75,12 +75,12 @@ class Research extends AppModel {
 					,researchtype='$researchtype'
 					,advisor='$advisor'
 					,organization='$organization'
-					,profile_id='$profile_id'
+					,profile_id=$profile_id
 					,updated_at=now()
-					,isnotfinish='$isnotfinish'
-					,yearfinish='$yearfinish'
+					,isnotfinish=$isnotfinish
+					,yearfinish=$yearfinish
 					,dissemination='$dissemination'
-				WHERE id='$id'";
+				WHERE id=$id";
 		//$this->log($sql);
 		
 		try{

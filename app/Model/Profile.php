@@ -107,7 +107,7 @@ class Profile extends AppModel {
   		$strSql .= " ,'".$last_login_at."'"; // last_login_at - IN datetime
 		$strSql .= " )";
    		$strSql .= ";";
-   		$this->log("strSql => ".$strSql);
+   		//$this->log("strSql => ".$strSql);
    		
    		try {
    			$this->query($strSql);
@@ -162,7 +162,7 @@ class Profile extends AppModel {
 		$strSql .= " ,updated_at = sysdate()";	// DATETIME
 		$strSql .= " WHERE id = ".$profileId;
 		$strSql .= ";";
-		$this->log("strSql => ".$strSql);
+		//$this->log("strSql => ".$strSql);
 		
 		try {
 			$this->query($strSql);
@@ -214,7 +214,7 @@ class Profile extends AppModel {
 	public function checkLogin($username) {
 		$result = null;
 		$strSql = "SELECT * FROM profiles WHERE login = '".$username."';";
-		$this->log("strSql => ".$strSql);
+		//$this->log("strSql => ".$strSql);
 		
 		try {
    			$result = $this->query($strSql);
@@ -228,7 +228,7 @@ class Profile extends AppModel {
 	public function checkCardId($cardId) {
 		$result = null;
 		$strSql = "SELECT cardid FROM profiles WHERE cardid = '".$cardId."';";
-		$this->log("strSql => ".$strSql);
+		//$this->log("strSql => ".$strSql);
 		
 		try {
    			$result = $this->query($strSql);
@@ -242,7 +242,7 @@ class Profile extends AppModel {
 	public function checkEmail($email) {
 		$result = null;
 		$strSql = "SELECT email FROM profiles WHERE email = '".$email."';";
-		$this->log("strSql => ".$strSql);
+		//$this->log("strSql => ".$strSql);
 	
 		try {
    			$result = $this->query($strSql);
@@ -260,7 +260,7 @@ class Profile extends AppModel {
 		$strSql .= " WHERE nameth = '".$nameTh."'";
 		$strSql .= " AND lastnameth = '".$lastNameTh."'";
 		$strSql .= ";";
-		$this->log("strSql => ".$strSql);
+		//$this->log("strSql => ".$strSql);
 	
 		try {
    			$result = $this->query($strSql);
@@ -278,7 +278,7 @@ class Profile extends AppModel {
 		$strSql .= " WHERE nameeng = '".$nameEng."'";
 		$strSql .= " AND lastnameeng = '".$lastNameEng."'";
 		$strSql .= ";";
-		$this->log("strSql => ".$strSql);
+		//$this->log("strSql => ".$strSql);
 	
 		try {
    			$result = $this->query($strSql);

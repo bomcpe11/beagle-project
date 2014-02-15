@@ -43,7 +43,7 @@
 								</td>\
 							</tr>\
 							<tr>\
-								<td style="text-align:right;">เกรดเฉลี้ย :</td>\
+								<td style="text-align:right;">เกรดเฉลี่ย :</td>\
 								<td><input id="education-gpa" type="text" value=' + gpa +'></td>\
 							</tr>\
 						</table>\
@@ -65,6 +65,7 @@
 				}
 			);
 	}
+	/* -------------------------------------------------------------------------------------------------- */
 	function saveNewEducation(){
 		if( validateEducation() ){
 			loading();
@@ -73,7 +74,7 @@
 								,'name':jQuery('#education-name').val()
 								,'faculty':jQuery('#education-faculty').val()
 								,'major':jQuery('#education-major').val()
-								,'isGraduate':jQuery('#education-is-graduate').is(':checked')
+								,'isGraduate':jQuery('#education-is-graduate').prop('checked')
 								,'startyear':jQuery('#education-startyear').val()
 								,'endyear':jQuery('#education-endyear').val()
 								,'gpa':jQuery('#education-gpa').val()}}
@@ -96,6 +97,7 @@
 					,'json');
 		}
 	}
+	/* -------------------------------------------------------------------------------------------------- */
 	function editEducation(){
 		if( validateEducation() ){
 			loading();
@@ -105,7 +107,7 @@
 								,'name':jQuery('#education-name').val()
 								,'faculty':jQuery('#education-faculty').val()
 								,'major':jQuery('#education-major').val()
-								,'isGraduate':jQuery('#education-is-graduate').is(':checked')
+								,'isGraduate':jQuery('#education-is-graduate').prop('checked')
 								,'startyear':jQuery('#education-startyear').val()
 								,'endyear':jQuery('#education-endyear').val()
 								,'gpa':jQuery('#education-gpa').val()}}
@@ -128,6 +130,7 @@
 					,'json');
 		}
 	}
+	/* -------------------------------------------------------------------------------------------------- */
 	function validateEducation(){
 		if( jQuery('#education-edutype').val()
 				&& jQuery('#education-name').val()
@@ -146,17 +149,18 @@
 			return false;
 		}
 	}
+	/* -------------------------------------------------------------------------------------------------- */
 	function deleteEducation(id){
-		jConfirm('กรุณายืนยัน เพื่อลบรายการ  [ ระดับ ] [ คณะ ]', 
+		jConfirm('กรุณายืนยัน เพื่อลบรายการ  [ระดับ] [คณะ]', 
 				function(){ //okFunc
 					loading();
 					jQuery.post('<?php echo $this->Html->url('/Profile/deleteEducation');?>'
 							,{'data':{'id':id}}
 							,function(data){
 								unloading();
-								jAlert(data.message
+								jAlert(data.msg
 										, function(){ 
-											if( data.message == 'ลบข้อมูล สำเร็จ' ){
+											if( data.flg===1 ){
 												window.location.reload();
 											}
 										}//okFunc	

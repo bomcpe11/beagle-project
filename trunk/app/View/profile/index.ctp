@@ -8,6 +8,7 @@
 	include 'popup_education.ctp';
 	include 'popup_research.ctp';
 	include 'popup_award.ctp';
+	include 'popup_otherwork.ctp';
 	include 'popup_workplace.ctp';
 	include 'comment.ctp';
 	include 'popup_activity.ctp'
@@ -36,7 +37,7 @@
 		// Ex. 9 ก.พ. 2557
 		var splitDate = strDate.split(' ');
 		var result = '';
-
+		
 		if( splitDate.length===3 ){
 			result = splitDate[0]+'/';
 			
@@ -345,10 +346,10 @@
 																		,'<?php echo $listResearch[$i]['r']['advisor'];?>'
 																		,'<?php echo $listResearch[$i]['r']['organization'];?>'
 																		,'<?php echo $listResearch[$i]['r']['isnotfinish'];?>'
-																		,'<?php echo $listResearch[$i]['r']['yearfinish'];?>'
-																		,'DUMMY')"/>
+																		,'<?php echo empty($listResearch[$i]['r']['yearfinish'])?'':intval($listResearch[$i]['r']['yearfinish'])+543;?>'
+																		,'<?php echo $listResearch[$i]['r']['dissemination'];?>')"/>
 										<img src="<?php echo $this->Html->url('/img/icon_del.png');?>"
-											onclick="deletedResearch('<?php echo $listResearch[$i]['r']['id'];?>')"/>
+											onclick="deleteResearch('<?php echo $listResearch[$i]['r']['id'];?>')"/>
 									</td>
 								</tr>
 								<tr>
@@ -378,14 +379,47 @@
 		<div class="container">
 			<h2>ผลงานอื่นๆ</h2>
 			<div class="section_content">
-				<table class="table_data_item">
-					<tr>
-						<td>ชื่อผลงาน : dummy</td>
-						<td class="td_link">แก้ไข ลบ</td>
-					</tr>
-				</table>
+				<?php 
+					$countListOtherwork = count($listOtherwork);
+					if( $countListOtherwork>0 ){
+						for( $i=0;$i<$countListOtherwork;$i++ ){
+							$organization = empty($listOtherwork[$i]['o']['organization'])?'-':$listOtherwork[$i]['o']['organization'];
+							$yearFinish = empty($listOtherwork[$i]['o']['yearfinish'])?'-':intval($listOtherwork[$i]['o']['yearfinish']) + 543;
+							echo "<table class=\"table_data_item\">
+										<colgroup>
+											<col style=\"width:60%\">
+											<col style=\"width:40%\">
+										</colgroup>
+										<tr>
+											<td>ชื่อเรื่อง : {$listOtherwork[$i]['o']['name']}</td>
+											<td class=\"edit-delete\">
+												<img src=\"{$this->Html->url('/img/icon_edit.png')}\"
+														onclick=\"openPopupOtherwork('{$listOtherwork[$i]['o']['id']}'
+																					,'{$listOtherwork[$i]['o']['name']}'
+																					,'{$listOtherwork[$i]['o']['organization']}'
+																					,'{$listOtherwork[$i]['o']['isnotfinish']}'
+																					,'$yearFinish')\">
+												<img src=\"{$this->Html->url('/img/icon_del.png')}\"
+														onclick=\"deleteOtherwork('{$listOtherwork[$i]['o']['id']}')\">
+											</td>
+										</tr>
+										<tr>
+											<td>หนว่ยงาน : $organization</td>
+											<td>ปีที่เสร็จ : $yearFinish</td>
+										</tr>
+									</table>";
+						}
+					}else{
+						echo "<table class=\"table_data_item\">
+									<tr class=\"no-found-data\">
+										<td>ไม่พบข้อมูล</td>
+									</tr>
+								</table>";
+					}
+				?>
 				
-				<input type="button" id="button_add_other_award" value="เเพิ่มข้อมูล ผลงานอื่นๆ"/>
+				
+				<input type="button" id="button_add_other_award" value="เเพิ่มข้อมูล ผลงานอื่นๆ" onclick="openPopupOtherwork('','','','','')"/>
 			</div>
 		</div>
 		<div class="container">

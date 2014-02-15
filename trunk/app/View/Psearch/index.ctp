@@ -81,6 +81,15 @@
 				,function(data){
 					var countData = data?data.length:0;
 					var html='<table class="table-data">';
+					html+='<colgroup>';
+					html+='<col style="width:15%">';
+					html+='<col style="width:15%">';
+					html+='<col style="width:10%">';
+					html+='<col style="width:20%">';
+					html+='<col style="width:10%">';
+					html+='<col style="width:30%">';
+					html+='</colgroup>';
+					
 					html+='<thead>';
 					html+='<tr>';
 					html+='<th>ชื่อ</th>';

@@ -46,7 +46,7 @@
 					if ( data.profile_id===-1 ) {
 						jQuery('#span_error').html('* ' + data.msg);
 					} else {
-						jQuery('#span_error').html('');
+						jQuery('#span_error').html(data.msg);
 						window.location.replace('<?php echo $this->webroot;?>profile/index?id='+data.profile_id);
 					}// if else
 

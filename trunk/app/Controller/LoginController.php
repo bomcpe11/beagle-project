@@ -16,8 +16,10 @@ class LoginController extends AppController {
 		if( !empty($cookieUsername) && !empty($cookieEncryptPassword) ){
 			$result = $this->loginFnc($cookieUsername, $cookieEncryptPassword, true);
 			
-			if ( $result['profile_id']!==-1 ) {
-				$this->redirect(array("controller" => "profile", "action" => "index"));
+			if( $result['profile_id']!==-1 ){
+				$this->redirect( array("controller" => "profile"
+										,"action" => "index"
+										,"?" => array("id" => $result['profile_id'])) );
 			}
 		}
 		

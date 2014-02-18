@@ -7,30 +7,25 @@ class LoginController extends AppController {
 	public $components = array("Cookie");
 	/* ------------------------------------------------------------------------------------------------------ */
 	function index() {
-		$this->log("START :: LoginController -> index()");
+		$this->log('---- LoginController -> index ----');
 		
-		//// local variables ////
-		$result = "-1";
+		$result = array();
 		$cookieUsername = $this->Cookie->read("cookieUsername");
 		$cookieEncryptPassword = $this->Cookie->read("cookieEncryptPassword");
 		
-		// login
-		if ( $cookieUsername && $cookieEncryptPassword ) {
-			$result = $this->loginFnc($cookieUsername, $cookieEncryptPassword, true);	
-		}// if
+		if( !empty($cookieUsername) && !empty($cookieEncryptPassword) ){
+			$result = $this->loginFnc($cookieUsername, $cookieEncryptPassword, true);
+			
+			if ( $result['profile_id']!==-1 ) {
+				$this->redirect(array("controller" => "profile", "action" => "index"));
+			}
+		}
 		
-		// check $result
-		if ( strlen($result) == 0 ) {
-			$this->redirect(array("controller" => "profile", "action" => "index"));
-		} else {
-			$this->render("login");
-		}// if else
-		
-		$this->log("END :: LoginController -> index()");
+		$this->render("login");
 	}// index
 	/* ------------------------------------------------------------------------------------------------------ */
 	function loginAjax() {
-		$this->log("START :: LoginController -> loginAjax()");
+		$this->log('---- LoginController -> loginAjax ----');
 		
 		//// local variables ////
 		$result = null;
@@ -44,11 +39,11 @@ class LoginController extends AppController {
 		$this->layout = "ajax";
 		$this->set("message", json_encode($result));
 		$this->render("response");
-		
-		$this->log("END :: LoginController -> loginAjax()");
 	}// loginAjax
 	/* ------------------------------------------------------------------------------------------------------ */
 	private function loginFnc($username, $encryptPassword, $rememberMe) {
+		$this->log('---- LoginController -> loginFnc ----');
+		
 		//// local variables ////
 		$result = array();
 		$cookieTimeOut = ((3600 * 24) * 30);  // or '1 month'
@@ -59,10 +54,7 @@ class LoginController extends AppController {
 			$result['msg'] = 'ไม่พบ Username นี้';
 			$result['profile_id']=-1;
 				
-			// delete cookie
-			$this->Cookie->delete("cookieUsername");
-			$this->Cookie->delete("cookieEncryptPassword");
-			$this->log("delete cookie complete");
+			$this->deleteCookie();
 		} else if ( count($objuser) == 1 ) { // username correct
 			// check password
 			if ( $encryptPassword == $objuser[0]["profiles"]["encrypt_password"] ) { // password correct
@@ -78,10 +70,7 @@ class LoginController extends AppController {
 					$this->Cookie->write("cookieEncryptPassword", $encryptPassword);
 					$this->log("write cookie complete");
 				} else {
-					// delete cookie
-					$this->Cookie->delete("cookieUsername");
-					$this->Cookie->delete("cookieEncryptPassword");
-					$this->log("delete cookie complete");
+					$this->deleteCookie();
 				}// if else
 				
 				$result['msg'] = '';
@@ -90,22 +79,27 @@ class LoginController extends AppController {
 				$result['msg'] = 'รหัสผ่านไม่ถูกต้อง';
 				$result['profile_id']=-1;
 		
-				// delete cookie
-				$this->Cookie->delete("cookieUsername");
-				$this->Cookie->delete("cookieEncryptPassword");
-				$this->log("delete cookie complete");
+				$this->deleteCookie();
 			}// if else
 		} else if ( count($objuser)>1 ) { // username incorrect
 			$result['msg'] = "เกิดข้อผิดพลาด กรุณาแจ้งผู้ดูแลเว็บไซต์";
 			$result['profile_id']=-1;
 				
-			// delete cookie
-			$this->Cookie->delete("cookieUsername");
-			$this->Cookie->delete("cookieEncryptPassword");
-			$this->log("delete cookie complete");
-		}// if else
+			$this->deleteCookie();
+		}else{
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การเข้าสู่ระบบ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			$result['profile_id']=-1;
+		}
 		//$this->log($this->Session->read("objuser"));
 		
 		return $result;
 	}// loginFnc
+	/* ------------------------------------------------------------------------------------------------------ */
+	private function deleteCookie(){
+		$this->log('---- LoginController -> deleteCookie ----');
+		
+		$this->Cookie->delete("cookieUsername");
+		$this->Cookie->delete("cookieEncryptPassword");
+		$this->log("delete cookie complete");
+	}
 }// LoginController

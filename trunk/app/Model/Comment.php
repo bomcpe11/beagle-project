@@ -41,13 +41,14 @@ class Comment extends AppModel {
 		return $result;
 	}
 	/* ------------------------------------------------------------------------------------------------- */
-	public function getDataForProfile($profile_id){
+	public function getDataForProfile($profile_id,$commentable_id){
 		$result=null;
 		$sql="SELECT c.*
 					,p.login
 				FROM comments c,profiles p
 				WHERE c.commentable_id=p.id
-					AND profile_id='$profile_id'";
+					AND c.profile_id='$profile_id'
+					AND c.commentable_id='$commentable_id'";
 		//$this->log($sql);
 		
 		try{

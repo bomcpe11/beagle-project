@@ -7,7 +7,7 @@ class LoginController extends AppController {
 	public $components = array("Cookie");
 	/* ------------------------------------------------------------------------------------------------------ */
 	function index() {
-		$this->log('---- LoginController -> index ----');
+		$this->log("---- LoginController -> index ----");
 		
 		$result = array();
 		$cookieUsername = $this->Cookie->read("cookieUsername");
@@ -27,7 +27,7 @@ class LoginController extends AppController {
 	}// index
 	/* ------------------------------------------------------------------------------------------------------ */
 	function loginAjax() {
-		$this->log('---- LoginController -> loginAjax ----');
+		$this->log("---- LoginController -> loginAjax ----");
 		
 		//// local variables ////
 		$result = null;
@@ -44,7 +44,7 @@ class LoginController extends AppController {
 	}// loginAjax
 	/* ------------------------------------------------------------------------------------------------------ */
 	private function loginFnc($username, $encryptPassword, $rememberMe) {
-		$this->log('---- LoginController -> loginFnc ----');
+		$this->log("---- LoginController -> loginFnc ----");
 		
 		//// local variables ////
 		$result = array();
@@ -98,7 +98,7 @@ class LoginController extends AppController {
 	}// loginFnc
 	/* ------------------------------------------------------------------------------------------------------ */
 	private function deleteCookie(){
-		$this->log('---- LoginController -> deleteCookie ----');
+		$this->log("---- LoginController -> deleteCookie ----");
 		
 		$this->Cookie->delete("cookieUsername");
 		$this->Cookie->delete("cookieEncryptPassword");

@@ -116,7 +116,7 @@ class ProfileController extends AppController {
 			}
 			
 			/* comment */
-			$listComment = $this->Comment->getDataForProfile($objUser[0]['profiles']['id']);
+			$listComment = $this->Comment->getDataForProfile($objUser[0]['profiles']['id'],$this->getObjUser()['id']);
 			$countListComment = count($listComment);
 			$splitCreatedAt = array();
 			$splitUpdatedAt = array();

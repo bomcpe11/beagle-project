@@ -84,12 +84,12 @@ class LoginController extends AppController {
 				$this->deleteCookie();
 			}// if else
 		} else if ( count($objuser)>1 ) { // username incorrect
-			$result['msg'] = "เกิดข้อผิดพลาด กรุณาแจ้งผู้ดูแลเว็บไซต์";
+			$result['msg'] = "เกิดข้อผิดพลาดใน การเข้าสู่ระบบ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์";
 			$result['profile_id']=-1;
 				
 			$this->deleteCookie();
 		}else{
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การเข้าสู่ระบบ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			$result['msg'] = "เกิดข้อผิดพลาดใน การเข้าสู่ระบบ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์";
 			$result['profile_id']=-1;
 		}
 		//$this->log($this->Session->read("objuser"));

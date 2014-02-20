@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 class ChangepicController extends AppController {
 	/* ------------------------------------------------------------------------------------------------- */
 	public $names = "ChangepicController";

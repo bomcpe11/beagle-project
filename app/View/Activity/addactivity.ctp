@@ -1,10 +1,15 @@
 <script type="text/javascript">
+		function ckGetData(){
+			alert(CKEDITOR.instances.ckeditor1.getData());
+		}
+	
 		function cancelClick(){
-			window.location.replace("<?php echo $this->webroot;?>Activity/index");
+			window.location.replace("<?php echo $this->webroot;?>Activitylist/index");
 		}
 		jQuery(document).ready(function(){
 			setDatePicker('.datePicker');
 			setBirthDatePicker('.birthDatePicker');
+			CKEDITOR.replace( 'addCK', {filebrowserImageUploadUrl : getURL('/activity/uploadImages')});
 		});
 		
 		function saveClick(){
@@ -44,6 +49,8 @@
 				}
 			);
 		}
+		
+	
 </script>
 <table class="tableLayout" width="100%">
 	<tr align="left">
@@ -75,7 +82,7 @@
 	</tr>
 	<tr align="left">
 		<th align="right" width="20%"></th>
-		<td><textarea id="" style="width: 700px;" rows="5" ></textarea></td>
+		<td><textarea id="addCK" rows="10" cols="80"></textarea></td>
 	</tr>
 	<tr align="left">
 		<td align="right" width="20%"><input type="button" id="save" value="บันทึก" onclick="saveClick();" /></td>

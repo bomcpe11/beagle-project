@@ -42,13 +42,14 @@
 			<td><?php echo $result[$i]["activities"]["location"] ?></td>
 			<td><?php echo $result[$i]["activities"]["genname"] ?></td>
 			<td><?php echo $result[$i]["activities"]["shortdesc"] ?></td>
-			<td><img style="cursor: pointer; cursor: hand;" onclick="alert('555');" src="<?php echo $this->Html->url('/img/icon_edit.png'); ?>" width="16" height="16" /></td>
+			<td><img style="cursor: pointer; cursor: hand;" onclick="activityEdit('<?php echo $result[$i]["activities"]["id"] ?>');" src="<?php echo $this->Html->url('/img/icon_edit.png'); ?>" width="16" height="16" /></td>
 			<td>
 			<img style="cursor: pointer; cursor: hand;" onclick="deleteData('<?php echo $result[$i]["activities"]["id"] ?>');" src="<?php echo $this->Html->url('/img/icon_del.png'); ?>" width="16" height="16" />
 			<input type="hidden" id="idDelete" value="<?php echo $result[$i]["activities"]["id"] ?>"/>
 			</td>
 		</tr>
 		<?php } ?>
+		<tr><td colspan="5"><input type="button" id="addActivity" onClick="activityAdd();" value="เพิ่มกิจกรรม"  /></td></tr>
 	</table>
 <script type="text/javascript">
 		function deleteData(id){
@@ -76,5 +77,15 @@
 				}
 			);
 		}
+		
+
+	function activityAdd(){
+		window.location.replace("<?php echo $this->webroot;?>Activity/addactivity");
+	}
+
+	function activityEdit(id){
+		window.location.replace("<?php echo $this->webroot;?>Activity/editactivity?id="+id);
+	}
+		
 </script>
 

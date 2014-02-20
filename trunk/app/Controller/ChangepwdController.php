@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 class ChangepwdController extends AppController {
 	/* -------------------------------------------------------------------------------- */
 	public $names = "ChangepwdController";

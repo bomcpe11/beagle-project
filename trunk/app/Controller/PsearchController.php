@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 class PsearchController extends AppController {
 	/* ------------------------------------------------------------------------------------------------ */
 	public $uses = array('Profile');

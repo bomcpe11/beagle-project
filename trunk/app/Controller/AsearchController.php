@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 class AsearchController extends AppController{
 	public $names = 'Asearch';
 	public $uses = array('Activity','JoinActivity');

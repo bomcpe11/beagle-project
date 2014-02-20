@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 class ProfileController extends AppController {
 	/* ------------------------------------------------------------------------------------------------ */
 	public $names = 'ProfileController';

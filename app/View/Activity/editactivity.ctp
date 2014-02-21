@@ -105,8 +105,7 @@
 		<th align="right" width="20%">รายละเอียดกิจกรรม : </th>
 	</tr>
 	<tr align="left">
-		<th align="right" width="20%"></th>
-		<td>
+		<td colspan="2">
 			<textarea id="editCK" style="width: 700px;" rows="5" >
 				<?php echo $result[0]["activities"]["longdesc"] ?>
 			</textarea>

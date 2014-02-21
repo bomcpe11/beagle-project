@@ -1,6 +1,6 @@
 <script type="text/javascript">
 		function ckGetData(){
-			alert(CKEDITOR.instances.ckeditor1.getData());
+			alert(CKEDITOR.instances.longdesc.getData());
 		}
 	
 		function cancelClick(){
@@ -9,7 +9,7 @@
 		jQuery(document).ready(function(){
 			setDatePicker('.datePicker');
 			setBirthDatePicker('.birthDatePicker');
-			CKEDITOR.replace( 'addCK', {filebrowserImageUploadUrl : getURL('/activity/uploadImages')});
+			CKEDITOR.replace( 'longdesc', {filebrowserImageUploadUrl : getURL('/activity/uploadImages')});
 		});
 		
 		function saveClick(){
@@ -73,7 +73,9 @@
 	</tr>
 	<tr align="left">
 		<th align="right" width="20%">รายละเอียดกิจกรรม อย่างย่อ : </th>
-		<td align="left"><td><textarea id="shortdesc" rows="10" cols="80"></textarea></td></td>
+		<td align="left">
+		<textarea id="shortdesc" style="width: 700px;" rows="5" ></textarea>
+		</td>
 	</tr>
 	<tr align="left">
 		<th align="right" width="20%">ชื่อรุ่น : </th>
@@ -83,8 +85,7 @@
 		<th align="right" width="20%">รายละเอียดกิจกรรม : </th>
 	</tr>
 	<tr align="left">
-		<th align="right" width="20%"></th>
-		<td><textarea id="longdesc" rows="10" cols="80"></textarea></td>
+		<td colspan="2"><textarea id="longdesc" rows="10" cols="80"></textarea></td>
 	</tr>
 	<tr align="left">
 		<td align="right" width="20%"><input type="button" id="save" value="บันทึก" onclick="saveClick();" /></td>

@@ -9,6 +9,32 @@
 	}
 		
 </script>
+<?php 
+	if($result[0]["activities"]["startdtm"] != "" and  $result[0]["activities"]["enddtm"] != ""){
+		$startdtm = $result[0]["activities"]["startdtm"];
+		$enddtm = $result[0]["activities"]["enddtm"];
+		$dateArray=explode('-',$startdtm);
+		$enddateArray=explode('-',$enddtm);
+		$thai_month_arr=array(  "00"=>"",  
+							    "01"=>"มกราคม",  
+							    "02"=>"กุมภาพันธ์",  
+							    "03"=>"มีนาคม.",  
+							    "04"=>"เมษายน.",  
+							    "05"=>"พฤษภาคม",  
+							    "06"=>"มิถุนายน",   
+							    "07"=>"กรกฎาคม",  
+							    "08"=>"สิงหาคม",  
+							    "09"=>"กันยายน",  
+							    "10"=>"ตุลาคม",  
+							    "11"=>"พฤศจิกายน",  
+							    "12"=>"ธันวาคม");   
+		$startdtm = $dateArray[2].' '.$thai_month_arr[$dateArray[1]].' '.($dateArray[0]+543);
+		$enddtm = $enddateArray[2].' '.$thai_month_arr[$enddateArray[1]].' '.($enddateArray[0]+543);
+	}else{
+		$startdtm = "";
+		$enddtm = "";
+	}
+?>
 <table class="tableLayout" width="100%">
 	<tr align="left" >
 		<th>ชื่อกิจกรรม : <?php echo $result[0]["activities"]["name"] ?>
@@ -16,10 +42,10 @@
 		</th>
 	</tr>
 	<tr align="left" >
-		<th>วันที่จัดกิจกรรมเริ่มต้น : <?php echo $result[0]["activities"]["startdtm"] ?></th>
+		<th>วันที่จัดกิจกรรมเริ่มต้น : <?php echo $startdtm; ?></th>
 	</tr>
 	<tr align="left" >
-		<th>วันที่จัดกิจกรรมสิ้นสุด : <?php echo $result[0]["activities"]["enddtm"] ?></th>
+		<th>วันที่จัดกิจกรรมสิ้นสุด : <?php echo $enddtm; ?></th>
 	</tr>
 	<tr align="left">
 		<th>สถานที่จัดกิจกรรม : <?php echo $result[0]["activities"]["location"] ?></th>
@@ -28,7 +54,10 @@
 		<th>ชื่อรุ่น : <?php echo $result[0]["activities"]["genname"] ?></th>
 	</tr>
 	<tr align="left" >
-		<th>รายละเอียดกิจกรรมอย่างย่อ : <?php echo $result[0]["activities"]["shortdesc"] ?></th>
+		<th>รายละเอียดกิจกรรมอย่างย่อ : </th>
+	</tr>
+	<tr align="left" >
+		<th><?php echo $result[0]["activities"]["shortdesc"] ?></th>
 	</tr>
 	<tr align="left" style="">
 		<th>รายละเอียดกิจกรรม : <?php echo $result[0]["activities"]["longdesc"] ?></th>

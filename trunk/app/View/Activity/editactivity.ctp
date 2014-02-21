@@ -41,7 +41,7 @@
 							if ( data.status == 1 ) {
 								jAlert(data.message, 
 									function(){
-										window.location.replace("<?php echo $this->webroot;?>Activitylist");
+										window.location.replace("<?php echo $this->webroot;?>Activity?id="+id);
 									}
 								);
 							} else {

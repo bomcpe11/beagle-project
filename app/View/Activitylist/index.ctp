@@ -49,34 +49,35 @@
 			</td>
 		</tr>
 		<?php } ?>
-		<tr><td colspan="5"><input type="button" id="addActivity" onClick="activityAdd();" value="เพิ่มกิจกรรม"  /></td></tr>
+		<tr><td colspan="5" align="center"><input type="button" id="addActivity" onClick="activityAdd();" value="เพิ่มกิจกรรม"  /></td></tr>
 	</table>
 <script type="text/javascript">
-		function deleteData(id){
-			jConfirm('ท่านต้องการลบข้อมูลกิจกรรมนี้ใช่หรือไม่?', 
-				function(){ //okFunc
-					loading();
-					jQuery.ajax({
-						type: "POST",
-						dataType: 'json',
-						url: '<?php echo $this->Html->url('/Activitylist/deleteActivity');?>',
-						data: {id:id},
-						success: function(data){
-							unloading();
-							if ( data.status ) {
-								jAlert(data.message, 
-									function(){
-										window.location.replace("<?php echo $this->webroot;?>Activitylist/index");
-									}
-								);
-							} else {
-								jAlert(data.message);
-							}
+    
+	function deleteData(id){
+		jConfirm('ท่านต้องการลบข้อมูลกิจกรรมนี้ใช่หรือไม่?', 
+			function(){ //okFunc
+				loading();
+				jQuery.ajax({
+					type: "POST",
+					dataType: 'json',
+					url: '<?php echo $this->Html->url('/Activitylist/deleteActivity');?>',
+					data: {id:id},
+					success: function(data){
+						unloading();
+						if ( data.status ) {
+							jAlert(data.message, 
+								function(){
+									window.location.replace("<?php echo $this->webroot;?>Activitylist/index");
+								}
+							);
+						} else {
+							jAlert(data.message);
 						}
-					});
-				}
-			);
-		}
+					}
+				});
+			}
+		);
+	}
 		
 
 	function activityAdd(){

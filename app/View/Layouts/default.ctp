@@ -82,7 +82,10 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 		//---------------------------------------------------------------------------------------------
 		jQuery("#gotoLogout").click(function() {changePage("Logout");});
 		//---------------------------------------------------------------------------------------------
-		
+		jQuery("#gotoWebboard").click(function() {changePage("Webboard");});
+		//---------------------------------------------------------------------------------------------
+
+		jQuery('input[type="button"]').button();
 	});
 
 	//-------------------------------------------------------------------------------------------------
@@ -115,11 +118,14 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 		case "Asearch":
 		  window.location = "<?php echo $this->Html->url('/Asearch/index');?>";	
 		  break;
+	    case "Webboard":
+		  window.location = "<?php echo $this->Html->url('/Webboard/index');?>";	
+		  break;	
 	    case "Logout":
-		  window.location = "<?php echo $this->Html->url('/Logout/index');?>";	
-		  break;	  		  			    
+			  window.location = "<?php echo $this->Html->url('/Logout/index');?>";	
+			  break;  		  			    
 		default:
-		  window.location = "<?php echo $this->Html->url('/Welcome/index');?>";	
+		  window.location = "<?php echo $this->Html->url('/');?>";	
 		}
 		
 		/*jQuery.ajax({
@@ -184,6 +190,7 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 			                     <a style="cursor: pointer;" class="menu" id="gotoChangePwd">แก้ไขรหัสผ่าน</a>
 			                     <a style="cursor: pointer;" class="menu" id="gotoPsearch">ค้นหาบุคคล</a>
 			                     <a style="cursor: pointer;" class="menu" id="gotoExport" >ส่งออกข้อมูล</a>
+			                     <a style="cursor: pointer;" class="menu" id="gotoWebboard" >Webboard</a>
 			                   	 <?php if( $objuser['role']==='1' ){
 			                   	 	echo "<a style=\"cursor: pointer;\" class=\"menu\" id=\"gotoApprove\">Approve</a>";
 			                   	 }?>

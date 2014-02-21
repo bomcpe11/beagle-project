@@ -11,7 +11,7 @@ class ActivitylistController extends AppController {
 	function getActivitylist(){
 		$this->log('Start :: ActivitylistController :: getActivitylist');
 		$result = $this->Activity->getActivites();
-		$this->log($result[0]["activities"]["name"]);
+		//$this->log($result[0]["activities"]["name"]);
 		$this->set("result", $result);
 		 
 		$this->log("END :: ActivitylistController :: getActivitylist");

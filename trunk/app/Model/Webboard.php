@@ -6,6 +6,19 @@ class Webboard extends AppModel {
 		return $result;
 	}
 	/* ------------------------------------------------------------------------------------------------ */
+	public function getWebboardsLimit($start, $num){
+// 		$this->log('select * from webboards order by QuestionID DESC LIMIT '.$start.' , '.$num);
+		$result = $this->query('select * from webboards order by QuestionID DESC LIMIT '.$start.' , '.$num);
+		return $result;
+	}
+	/* ------------------------------------------------------------------------------------------------ */
+	public function countAllRecord(){
+// 		$this->log('select count(1) as count from webboards');
+		$result = $this->query('select count(1) as count from webboards');
+		$this->log($result);
+		return $result[0][0]['count'];
+	}
+	/* ------------------------------------------------------------------------------------------------ */
 	public function insertData($name
 								,$researchtype
 								,$advisor

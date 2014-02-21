@@ -45,7 +45,8 @@ class Activity extends AppModel {
 										, $enddtm
 										, $location
 										, $genname
-										, $shortdesc) {
+										, $shortdesc
+										, $longdesc) {
 		$this->log("START MODEL  insertActivities ");
 		$flag = false;
 		$strSql = "INSERT INTO activities";
@@ -56,6 +57,7 @@ class Activity extends AppModel {
 		$strSql .= " ,location";
 		$strSql .= " ,genname";
 		$strSql .= " ,shortdesc";
+		$strSql .= " ,longdesc";
 		$strSql .= " ,created_at";
 		$strSql .= " ,updated_at";
 		$strSql .= " )";
@@ -67,6 +69,7 @@ class Activity extends AppModel {
 		$strSql .= " ,'".$location."'"; 
 		$strSql .= " ,'".$genname."'"; 
 		$strSql .= " ,'".$shortdesc."'";
+		$strSql .= " ,'".$longdesc."'";
 		$strSql .= " ,sysdate()"; 
 		$strSql .= " ,sysdate()"; 
 		$strSql .= " )";
@@ -92,7 +95,8 @@ class Activity extends AppModel {
 									, $enddtm
 									, $location
 									, $genname
-									, $shortdesc) {
+									, $shortdesc
+									, $longdesc) {
 		$flag = false;
 		$strSql = "UPDATE activities";
 		$strSql .= " SET name = '".$name."'";	
@@ -101,6 +105,7 @@ class Activity extends AppModel {
 		$strSql .= " ,location = '".$location."'";	
 		$strSql .= " ,genname = '".$genname."'";
 		$strSql .= " ,shortdesc = '".$shortdesc."'";
+		$strSql .= " ,longdesc = '".$longdesc."'";
 		$strSql .= " ,updated_at = sysdate()";		
 		$strSql .= " WHERE id = ".$id;
 		$strSql .= ";";

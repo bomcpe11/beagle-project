@@ -1,6 +1,6 @@
 <script type="text/javascript">
 		function ckGetData(){
-			alert(CKEDITOR.instances.ckeditor1.getData());
+			alert(CKEDITOR.instances.editCK.getData());
 		}
 		function cancelClick(id){
 			window.location.replace("<?php echo $this->webroot;?>Activitylist/index");
@@ -19,7 +19,7 @@
 			var location = jQuery('#location').val();
 			var shortdesc = jQuery('#shortdesc').val();
 			var genname = jQuery('#genname').val();
-			
+			var longdesc = CKEDITOR.instances.editCK.getData();
 			jConfirm('ท่านต้องการบันทึกข้อมูลกิจกรรมนี้ใช่หรือไม่?', 
 				function(){ //okFunc
 					loading();
@@ -33,14 +33,15 @@
 						       endDate:endDate,
 						       location:location,
 						       shortdesc:shortdesc,
-						       genname:genname},
+						       genname:genname,
+						       longdesc:longdesc},
 						success: function(data){
 							unloading();
 							
 							if ( data.status == 1 ) {
 								jAlert(data.message, 
 									function(){
-										window.location.replace("<?php echo $this->webroot;?>Activity/index");
+										window.location.replace("<?php echo $this->webroot;?>Activitylist");
 									}
 								);
 							} else {
@@ -56,43 +57,48 @@
 	<tr align="left">
 		<th align="right" width="20%">ชื่อกิจกรรม : </th>
 		<td align="left">
-			<input type="text" id="activityName" style="width: 300px;" value=" <?php echo $result[0]["activities"]["name"] ?>" />
+			<input type="text" id="activityName" style="width: 300px;" value="<?php echo $result[0]["activities"]["name"] ?>" />
 		</td>
 	</tr>
 	<tr align="left">
 		<th align="right" width="20%">วันที่จัดกิจกรรม เริ่มต้น : </th>
 		<td align="left">
 		<?php 
-			$arr = explode("-", $result[0]["activities"]["startdtm"]);
-			$startDate = $arr[2]."/".$arr[1]."/".($arr[0]+543);
-			$arrEndDate = explode("-", $result[0]["activities"]["enddtm"]);
-			$enddtm = $arrEndDate[2]."/".$arrEndDate[1]."/".($arrEndDate[0]+543);
+			if($result[0]["activities"]["startdtm"] != "" and  $result[0]["activities"]["enddtm"] != ""){
+				$arr = explode("-", $result[0]["activities"]["startdtm"]);
+				$startDate = $arr[2]."/".$arr[1]."/".($arr[0]+543);
+				$arrEndDate = explode("-", $result[0]["activities"]["enddtm"]);
+				$enddtm = $arrEndDate[2]."/".$arrEndDate[1]."/".($arrEndDate[0]+543);
+			} else{
+				$startDate = "";
+				$enddtm = "";
+			}
 		?>
-			<input type="text" class="datePicker" id="startDate" value=" <?php echo $startDate  ?>"  />
+			<input type="text" class="datePicker" id="startDate" value="<?php echo $startDate  ?>"  />
 		</td>
 	</tr>
 	<tr align="left">
 		<th align="right" width="20%">วันที่จัดกิจกรรม สิ้นสุด : </th>
 		<td align="left">
-			<input type="text" class="datePicker" id="endDate" value=" <?php echo $enddtm ?>" />
+			<input type="text" class="datePicker" id="endDate" value="<?php echo $enddtm ?>" />
 		</td>
 	</tr>
 	<tr align="left">
 		<th align="right" width="20%">สถานที่จัดกิจกรรม : </th>
 		<td align="left">
-		<input type="text" id="location" style="width: 300px;" value=" <?php echo $result[0]["activities"]["location"] ?>" />
+		<input type="text" id="location" style="width: 300px;" value="<?php echo $result[0]["activities"]["location"] ?>" />
 		</td>
 	</tr>
 	<tr align="left">
 		<th align="right" width="20%">รายละเอียดกิจกรรม อย่างย่อ : </th>
 		<td align="left">
-		<input type="text" id="shortdesc" style="width: 300px;" value =" <?php echo $result[0]["activities"]["shortdesc"] ?>" />
+		<textarea id="shortdesc" style="width: 700px;" rows="5" ><?php echo $result[0]["activities"]["shortdesc"] ?></textarea>
 		</td>
 	</tr>
 	<tr align="left">
 		<th align="right" width="20%">ชื่อรุ่น : </th>
 		<td align="left">
-		<input type="text" id="genname" value=" <?php echo $result[0]["activities"]["genname"] ?>" />
+		<input type="text" id="genname" value="<?php echo $result[0]["activities"]["genname"] ?>" />
 		</td>
 	</tr>
 	<tr align="left">
@@ -100,7 +106,11 @@
 	</tr>
 	<tr align="left">
 		<th align="right" width="20%"></th>
-		<td><textarea id="editCK" style="width: 700px;" rows="5" ></textarea></td>
+		<td>
+			<textarea id="editCK" style="width: 700px;" rows="5" >
+				<?php echo $result[0]["activities"]["longdesc"] ?>
+			</textarea>
+		</td>
 	</tr>
 	<tr align="left">
 		<td align="right" width="20%"><input type="button" id="save" value="บันทึก" onclick="saveClick();" /></td>

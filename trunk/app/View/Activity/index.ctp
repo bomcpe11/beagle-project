@@ -31,7 +31,7 @@
 		<th>รายละเอียดกิจกรรมอย่างย่อ : <?php echo $result[0]["activities"]["shortdesc"] ?></th>
 	</tr>
 	<tr align="left" style="">
-		<th>รายละเอียดกิจกรรม : <?php echo $result[0]["activities"]["shortdesc"] ?></th>
+		<th>รายละเอียดกิจกรรม : <?php echo $result[0]["activities"]["longdesc"] ?></th>
 	</tr>
 </table>
 <br/>

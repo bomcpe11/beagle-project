@@ -9,7 +9,6 @@
 	});
 	
 </script>
-[WEBBOARD]
 <?php
 
 $Per_Page = 10;   // Per Page
@@ -20,26 +19,10 @@ $Per_Page = 10;   // Per Page
 // 	$Page=1;
 // }
 
-$Prev_Page = $Page-1;
-$Next_Page = $Page+1;
 
-$Page_Start = (($Per_Page*$Page)-$Per_Page);
-if($Num_Rows<=$Per_Page)
-{
-	$Num_Pages =1;
-}
-else if(($Num_Rows % $Per_Page)==0)
-{
-	$Num_Pages =($Num_Rows/$Per_Page) ;
-}
-else
-{
-	$Num_Pages =($Num_Rows/$Per_Page)+1;
-	$Num_Pages = (int)$Num_Pages;
-}
 
-$strSQL .=" order  by QuestionID DESC LIMIT $Page_Start , $Per_Page";
-$objQuery  = mysql_query($strSQL);
+//$strSQL .=" order  by QuestionID DESC LIMIT $Page_Start , $Per_Page";
+//$objQuery  = mysql_query($strSQL);
 ?>
 <table width="909" border="1">
   <tr>
@@ -51,16 +34,17 @@ $objQuery  = mysql_query($strSQL);
     <th width="47"> <div align="center">Reply</div></th>
   </tr>
 <?
-while($objResult = mysql_fetch_array($objQuery))
-{
+//while($objResult = mysql_fetch_array($objQuery))
+//{
+for($i=0; $i<count($webboard_result); $i++){
 ?>
   <tr>
-    <td><div align="center"><?=$objResult["QuestionID"];?></div></td>
-    <td><a href="ViewWebboard.php?QuestionID=<?=$objResult["QuestionID"];?>"><?=$objResult["Question"];?></a></td>
-    <td><?=$objResult["Name"];?></td>
-    <td><div align="center"><?=$objResult["CreateDate"];?></div></td>
-    <td align="right"><?=$objResult["View"];?></td>
-    <td align="right"><?=$objResult["Reply"];?></td>
+    <td><div align="center"><?=$webboard_result[$i]['webboards']["QuestionID"];?></div></td>
+    <td><a href="ViewWebboard.php?QuestionID=<?=$webboard_result[$i]['webboards']["QuestionID"];?>"><?=$webboard_result[$i]['webboards']["Question"];?></a></td>
+    <td><?=$webboard_result[$i]['webboards']["Name"];?></td>
+    <td><div align="center"><?=$webboard_result[$i]['webboards']["CreateDate"];?></div></td>
+    <td align="right"><?=$webboard_result[$i]['webboards']["View"];?></td>
+    <td align="right"><?=$webboard_result[$i]['webboards']["Reply"];?></td>
   </tr>
 <?
 }
@@ -72,20 +56,20 @@ Total <?= $Num_Rows;?> Record : <?=$Num_Pages;?> Page :
 <?
 if($Prev_Page)
 {
-	echo " <a href='$_SERVER[SCRIPT_NAME]?Page=$Prev_Page'><< Back</a> ";
+	echo ' <a href="'.$this->Html->url('/Webboard/index').'?Page='.$Prev_Page.'"><< Back</a> ';
 }
 
 for($i=1; $i<=$Num_Pages; $i++){
 	if($i != $Page)
 	{
-		echo "[ <a href='$_SERVER[SCRIPT_NAME]?Page=$i'>$i</a> ]";
+		echo '[ <a href="'.$this->Html->url('/Webboard/index').'?Page='.$i.'">'.$i.'</a> ]';
 	}
 	else
 	{
-		echo "<b> $i </b>";
+		echo '<b> '.$i.' </b>';
 	}
 }
 if($Page!=$Num_Pages)
 {
-	echo " <a href ='$_SERVER[SCRIPT_NAME]?Page=$Next_Page'>Next>></a> ";
+	echo ' <a href ="'.$this->Html->url('/Webboard/index').'?Page='.$Next_Page.'">Next>></a> ';
 }

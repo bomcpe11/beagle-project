@@ -156,7 +156,7 @@ Birth Date :<input type="text" class="birthDatePicker" />
 </script>
 
 <!-- ####################  CKEDITOR & CKFINDER  ########################################## -->
-<h3>- CKEDITOR & CKFINDER</h3>
+<h3>- CKEDITOR</h3>
 <textarea id="ckeditor1">
 	This is my textarea to be replaced with CKEditor.
 </textarea><br />

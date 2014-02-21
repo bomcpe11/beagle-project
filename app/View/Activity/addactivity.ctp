@@ -19,6 +19,7 @@
 			var location = jQuery('#location').val();
 			var shortdesc = jQuery('#shortdesc').val();
 			var genname = jQuery('#genname').val();
+			var longdesc = CKEDITOR.instances.longdesc.getData();
 			
 			jConfirm('ท่านต้องการบันทึกข้อมูลกิจกรรมนี้ใช่หรือไม่?', 
 				function(){ //okFunc
@@ -32,13 +33,14 @@
 						       endDate:endDate,
 						       location:location,
 						       shortdesc:shortdesc,
-						       genname:genname},
+						       genname:genname,
+						       longdesc:longdesc},
 						success: function(data){
 							unloading();
 							if ( data.status == 1 ) {
 								jAlert(data.message, 
 									function(){
-										window.location.replace("<?php echo $this->webroot;?>Activity/index");
+										window.location.replace("<?php echo $this->webroot;?>Activitylist");
 									}
 								);
 							} else {
@@ -71,7 +73,7 @@
 	</tr>
 	<tr align="left">
 		<th align="right" width="20%">รายละเอียดกิจกรรม อย่างย่อ : </th>
-		<td align="left"><input type="text" id="shortdesc" style="width: 300px;" /></td>
+		<td align="left"><td><textarea id="shortdesc" rows="10" cols="80"></textarea></td></td>
 	</tr>
 	<tr align="left">
 		<th align="right" width="20%">ชื่อรุ่น : </th>
@@ -82,7 +84,7 @@
 	</tr>
 	<tr align="left">
 		<th align="right" width="20%"></th>
-		<td><textarea id="addCK" rows="10" cols="80"></textarea></td>
+		<td><textarea id="longdesc" rows="10" cols="80"></textarea></td>
 	</tr>
 	<tr align="left">
 		<td align="right" width="20%"><input type="button" id="save" value="บันทึก" onclick="saveClick();" /></td>

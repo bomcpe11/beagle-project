@@ -35,7 +35,7 @@
 								    "11"=>"พ.ย.",  
 								    "12"=>"ธ.ค."                    
 								);  
-		    echo $dateArray[2].'/'.$thai_month_arr[$dateArray[1]].'/'.substr(($dateArray[0]+543),-2).'-'.$enddateArray[2].'/'.$thai_month_arr[$enddateArray[1]].'/'.substr(($enddateArray[0]+543),-2)
+		    echo $dateArray[2].' '.$thai_month_arr[$dateArray[1]].' '.substr(($dateArray[0]+543),-2).'-'.$enddateArray[2].' '.$thai_month_arr[$enddateArray[1]].' '.substr(($enddateArray[0]+543),-2)
 		    
 			?><?php } ?>
 			</td>

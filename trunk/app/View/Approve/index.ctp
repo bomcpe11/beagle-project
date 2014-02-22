@@ -18,7 +18,7 @@
 	<?php 
 		$countData = count($dataList);
 		for( $i=0;$i<$countData;$i++ ){
-			echo "<tr title='คลิ๊กเพื่อไปหน้า Approve' onclick='go_approve(".$dataList[$i]['profiles']['id'].")'>
+			echo "<tr class='hover' title='คลิ๊กเพื่อไปหน้า Approve' onclick='go_approve(".$dataList[$i]['profiles']['id'].")'>
 					<td style='text-align:center'>".($i + 1)."</td>
 					<td>".$dataList[$i]['profiles']['titleth']." ".$dataList[$i]['profiles']['nameth']." ".$dataList[$i]['profiles']['lastnameth']."</td>
 					<td>".$dataList[$i]['profiles']['nickname']."</td>

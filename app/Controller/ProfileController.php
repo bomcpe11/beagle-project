@@ -18,6 +18,7 @@ class ProfileController extends AppController {
 		$this->log('---- ProfileController -> index ----');
 		
 		$get_profile_id = @intval($this->request->query['id']);
+		$sssnObjUser = $this->getObjUser();
 		$objUser = $this->Profile->getDataById($get_profile_id);
 		//$this->log(print_r($objUser, true));
 		$pageTitle='ไม่พบข้อมูล';
@@ -47,7 +48,7 @@ class ProfileController extends AppController {
 						. $objUser[0]['profiles']['lastnameth'];
 						
 			/* owner profile */
-			if( $get_profile_id==$this->getObjUser()['id'] ){
+			if( $get_profile_id==$sssnObjUser['id'] ){
 				$isOwner = true;
 			}
 			
@@ -116,7 +117,7 @@ class ProfileController extends AppController {
 			}
 			
 			/* comment */
-			$listComment = $this->Comment->getDataForProfile($objUser[0]['profiles']['id'],$this->getObjUser()['id']);
+			$listComment = $this->Comment->getDataForProfile($objUser[0]['profiles']['id'],$sssnObjUser['id']);
 			$countListComment = count($listComment);
 			$splitCreatedAt = array();
 			$splitUpdatedAt = array();

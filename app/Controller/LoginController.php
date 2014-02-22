@@ -60,34 +60,40 @@ class LoginController extends AppController {
 		} else if ( count($objuser) == 1 ) { // username correct
 			// check password
 			if ( $encryptPassword == $objuser[0]["profiles"]["encrypt_password"] ) { // password correct
-				// set SESSION
-				$this->Session->write("objuser", $objuser[0]["profiles"]);
-				$this->log("write session complete");
-		
-				// set COOKIE
-				if ( $rememberMe == "true" ) {
-					// set cookie
-					$this->Cookie->time = $cookieTimeOut;
-					$this->Cookie->write("cookieUsername", $username);
-					$this->Cookie->write("cookieEncryptPassword", $encryptPassword);
-					$this->log("write cookie complete");
-				} else {
-					$this->deleteCookie();
-				}// if else
-				
-				$result['msg'] = '';
-				$result['profile_id']=$objuser[0]['profiles']['id'];
+				// update last_login_at
+				$this->Profile->getDataSource();
+				if( $this->Profile->updateLastLogin($objuser[0]['profiles']['id']) ){
+					$this->Profile->commit();
+					
+					// set SESSION
+					$this->Session->write("objuser", $objuser[0]["profiles"]);
+					$this->log("write session complete");
+			
+					// set COOKIE
+					if( $rememberMe == "true" ){
+						// set cookie
+						$this->Cookie->time = $cookieTimeOut;
+						$this->Cookie->write("cookieUsername", $username);
+						$this->Cookie->write("cookieEncryptPassword", $encryptPassword);
+						$this->log("write cookie complete");
+					} else {
+						$this->deleteCookie();
+					}// if else
+					
+					$result['msg'] = '';
+					$result['profile_id']=$objuser[0]['profiles']['id'];
+				}else{
+					$this->Profile->rollback();
+					
+					$result['msg'] = "เกิดข้อผิดพลาดใน การเข้าสู่ระบบ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์";
+					$result['profile_id']=-1;
+				}
 			} else {	// password incorrect
 				$result['msg'] = 'รหัสผ่านไม่ถูกต้อง';
 				$result['profile_id']=-1;
 		
 				$this->deleteCookie();
 			}// if else
-		} else if ( count($objuser)>1 ) { // username incorrect
-			$result['msg'] = "เกิดข้อผิดพลาดใน การเข้าสู่ระบบ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์";
-			$result['profile_id']=-1;
-				
-			$this->deleteCookie();
 		}else{
 			$result['msg'] = "เกิดข้อผิดพลาดใน การเข้าสู่ระบบ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์";
 			$result['profile_id']=-1;

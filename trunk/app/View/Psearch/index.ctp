@@ -104,7 +104,7 @@
 					html+='<tbody>';
 					if( countData>0 ){
 						for( var i=0;i<countData;i++ ){
-							html+='<tr onclick="goProfile(\''+data[i].p.id+'\')">';
+							html+='<tr class="hover" onclick="goProfile(\''+data[i].p.id+'\')">';
 							html+='<td>'+data[i].p.nameth+'</td>';
 							html+='<td>'+data[i].p.lastnameth+'</td>';
 							html+='<td>'+data[i].p.nickname+'</td>';

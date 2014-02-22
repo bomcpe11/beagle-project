@@ -135,7 +135,7 @@ a.menu{
 .table-data tr:nth-child(even){
 	background-color: #EAF2D3;
 }
-.table-data tr:hover{
+.table-data .hover:hover{
 	cursor: pointer;
 	background-color: #B8E62E;
 }

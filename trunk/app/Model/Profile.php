@@ -309,7 +309,7 @@ class Profile extends AppModel {
 		$result = null;
 		$nowYear = date('Y');
 		if( $flagActivity==='1' ){
-			$sql = "SELECT * 
+			$sql = "SELECT DISTINCT p.* 
 						FROM profiles p, join_activities ja, activities a
 						WHERE p.id=ja.profile_id
 							AND ja.activity_id=a.id
@@ -346,7 +346,7 @@ class Profile extends AppModel {
 			}
 		}
 		$sql = "$sql ( $sqlCondition )";
-		//$this->log($sql);
+		$this->log($sql);
 	
 		try {
    			$result = $this->query($sql);

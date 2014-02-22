@@ -15,26 +15,30 @@ class ChangepwdController extends AppController {
 	public function updatePasswordFnc() {
 		$this->log('---- ChangepwdController -> updatePasswordFnc ----');
 		
-		$result = null;
+		$result = array();
+		$objUser = $this->getObjUser();
 		//$this->log($objUser);
 		$oldPassword = $this->request->data["oldPassword"];
 		$newPassword = $this->request->data["newPassword"];
 		$cookieTimeOut = (3600 * 24) * 30;  // or '1 month'
 		
 		// check oldPassword
-		if ( md5($oldPassword) != $this->getObjUser()["encrypt_password"] ) {
-			$result = "รหัสผ่านเดิม ไม่ถูกต้อง";
-		} else {
-			if ( $this->Profile->updatePassword(md5($newPassword) // $newPassword
-											, $this->getObjUser()["login"]) ) {	// $username
-				$result = "แก้ไขรหัสผ่าน เรียบร้อย";
-			} else {
-				$result = "แก้ไขรหัสผ่าน ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
+		if( md5($oldPassword) != $objUser["encrypt_password"] ){
+			$result['flg'] = -1;
+			$result['msg'] = "รหัสผ่านเดิม ไม่ถูกต้อง";
+		}else{
+			if( $this->Profile->updatePassword(md5($newPassword)
+												, $objUser["login"]) ){
+				$result['flg'] = 1;								
+				$result['msg'] = "แก้ไขรหัสผ่าน เรียบร้อย";
+			}else{
+				$result['flg'] = -1;
+				$result['msg'] = "แก้ไขรหัสผ่าน ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
 			}
 		}// if else
 		
 		$this->layout = "ajax";
-		$this->set("message", json_encode(array("result" => $result)));
+		$this->set("message", json_encode($result));
 		$this->render("response");
 	}// updatePasswordFnc
 }// ChangepwdController

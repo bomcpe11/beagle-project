@@ -211,6 +211,22 @@ class Profile extends AppModel {
 		return $flag;
 	}// updatePassword
 	/* ------------------------------------------------------------------------------------------------------- */
+	public function updateLastLogin($id){
+		$flag = false;
+		$sql = "UPDATE profiles
+					SET last_login_at=now()
+					WHERE id=$id";
+		
+		try {
+			$this->query($sql);
+			$flag = true;
+		} catch ( Exception $e ) {
+			$this->log("exception => ".$e->getMessage());
+		}
+		
+		return $flag;
+	}
+	/* ------------------------------------------------------------------------------------------------------- */
 	public function checkLogin($username) {
 		$result = null;
 		$strSql = "SELECT * FROM profiles WHERE login = '".$username."';";
@@ -296,23 +312,40 @@ class Profile extends AppModel {
 			$sql = "SELECT * 
 						FROM profiles p, join_activities ja, activities a
 						WHERE p.id=ja.profile_id
-							AND ja.activity_id=a.id";
+							AND ja.activity_id=a.id
+							AND ";
 		}else{
 			$sql = "SELECT * 
 						FROM profiles p
-						WHERE 1=1";
+						WHERE ";
 		}
 		
+		$sqlCondition = "";
 		$countSearchWidth = count($searchWidth);
 		for( $i=0;$i<$countSearchWidth;$i++ ){
 			if( $searchWidth[$i]==='activities' ){
-				$sql .= " AND a.name LIKE '%$keyWord%'";
+				if( strlen($sqlCondition)===0 ){
+					$sqlCondition .= " a.name LIKE '%$keyWord%'";
+				}else{
+					$sqlCondition .= " OR a.name LIKE '%$keyWord%'";
+				}
 			}else if( $searchWidth[$i]==='age' ){
-				$sql .= " AND YEAR(p.birthday) = $nowYear-$keyWord";
+				if( is_numeric($keyWord) ){
+					if( strlen($sqlCondition)===0 ){
+						$sqlCondition .= " YEAR(p.birthday) = $nowYear-$keyWord";
+					}else{
+						$sqlCondition .= " OR YEAR(p.birthday) = $nowYear-$keyWord";
+					}
+				}
 			}else{
-				$sql .= " AND p.{$searchWidth[$i]} LIKE '%$keyWord%'";
+				if( strlen($sqlCondition)===0 ){
+					$sqlCondition .= " p.{$searchWidth[$i]} LIKE '%$keyWord%'";
+				}else{
+					$sqlCondition .= " OR p.{$searchWidth[$i]} LIKE '%$keyWord%'";
+				}
 			}
 		}
+		$sql = "$sql ( $sqlCondition )";
 		//$this->log($sql);
 	
 		try {

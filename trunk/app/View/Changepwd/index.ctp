@@ -51,9 +51,9 @@
 				, {"oldPassword":oldPassword
 					, "newPassword":newPassword}
 				, function(data) {
-						jAlert(data.result 
+						jAlert(data.msg 
 								, function(){ 
-									if ( data.result == "แก้ไขรหัสผ่าน เรียบร้อย" ) {
+									if ( data.flg===1 ) {
 										//*** logout
 										loading();
 										jQuery.post("<?php echo $this->Html->url('/logout/logoutAjax');?>"
@@ -66,8 +66,12 @@
 																	, "password":newPassword
 																	, "rememberMe":false}
 																, function(data) {
-																	if ( data.result ) {	// re login fail
-																		jAlert(data.result
+																	if ( data.profile_id!==-1 ) {	// re login seccess
+																		window.location.replace('<?php echo $this->webroot;?>profile/index?id='+data.profile_id);
+
+																		unloading();
+																	} else {	// re login fail
+																		jAlert(data.msg
 																				, function(){ 
 																				}//okFunc	
 																				, function(){ 
@@ -76,10 +80,6 @@
 																				, function(){ 		
 																				}//closeFunc
 																		);// jAlert
-																	} else {	// re login seccess
-																		window.location.replace("<?php echo $this->webroot;?>profile/index");
-
-																		unloading();
 																	}// if else
 																}// callback
 																, "json").error(function() {

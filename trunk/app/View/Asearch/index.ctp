@@ -40,7 +40,7 @@
 				if( !serach_width ){
 					serach_width = ''+jQuery(this).val()+' LIKE \'%'+key_word+'%\'';
 				}else{
-					serach_width += ' AND '+jQuery(this).val()+' LIKE \'%'+key_word+'%\'';
+					serach_width += ' OR '+jQuery(this).val()+' LIKE \'%'+key_word+'%\'';
 				}
 			}
 		});
@@ -77,11 +77,12 @@
 				,function(data){
 					var count_data = data?data.length:0;
 					var html='<table class="table-data">';
-					html+='<col style="width:30%">';
-					html+='<col style="width:10%">';
+					html+='<col style="width:24%">';
+					html+='<col style="width:11%">';
 					html+='<col style="width:20%">';
-					html+='<col style="width:10%">';
-					html+='<col style="width:30%">';
+					html+='<col style="width:5%">';
+					html+='<col style="width:25%">';
+					html+='<col style="width:15%">';
 					html+='<thead>';
 					html+='<tr>';
 					html+='<th>ชื่อกิจกรรม</th>';
@@ -89,18 +90,20 @@
 					html+='<th>สถานที่จัดกิจกรรม</th>';
 					html+='<th>ชื่อรุ่น</th>';
 					html+='<th>รายละเอียดอย่างย่อ</th>';
+					html+='<th></th>';
 					html+='</tr>';
 					html+='</thead>';
 					
 					html+='<tbody>';
 					if( count_data>0 ){
 						for( var i=0;i<count_data;i++ ){
-							html+='<tr title="เข้าร่วมกิจกรรมนี้" onclick="open_popup_activity('+data[i].activities.id+')">';
-							html+='<td>'+data[i].activities.name+'</td>';
-							html+='<td>'+( data[i].activities.startdtm?data[i].activities.startdtm:'-')+'</td>';
+							html+='<tr>';
+							html+='<td><a href="<?php echo $this->Html->url('/Activity/index'); ?>?id='+data[i].activities.id+'">'+data[i].activities.name+'<a></td>';
+							html+='<td>'+( (data[i].activities.startdtm && data[i].activities.enddtm)?data[i].activities.startdtm+'\n-'+data[i].activities.startdtm:'-')+'</td>';
 							html+='<td>'+( data[i].activities.location?data[i].activities.location:'-' )+'</td>';
 							html+='<td>'+( data[i].activities.ganname?data[i].activities.ganname:'-' )+'</td>';
 							html+='<td>'+( data[i].activities.shortdesc?data[i].activities.shortdesc:'-' )+'</td>';
+							html+='<td><input type="button" value="เข้าร่วมกิจกรรมนี้" onclick="open_popup_activity('+data[i].activities.id+')"/></td>';
 							html+='</tr>';
 						}
 					}else{
@@ -114,6 +117,8 @@
 					jQuery('#search_result').html(html);
 					jQuery('#section_search').show();
 
+					jQuery('input[type="button"]').button();
+					
 					unloading();			
 				}
 				,'json');

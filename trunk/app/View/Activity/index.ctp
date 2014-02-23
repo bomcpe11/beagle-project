@@ -1,3 +1,4 @@
+<?php include 'popup_join_activity.ctp'; ?>
 <script type="text/javascript">
 
 	function activityAdd(){
@@ -77,12 +78,16 @@
 </table>
 
 <table class="tableLayout" width="100%">
-	<tr align="center" >
-		<td colspan="2"><input type="button" id="Add" onclick="javascript:activityAdd();" value="อัพโหลดไฟล์เพิ่ม"/>
+	<tr align="center">
+		<td><input type="button" id="Add" onclick="javascript:activityAdd();" value="อัพโหลดไฟล์เพิ่ม"/>
 		</td>
 	</tr>
-	<tr>
-		<td align="right"><input type="button" id="Edit" onclick="activityEdit('<?php echo $result[0]["activities"]["id"] ?>');" value="แก้ไขกิจกรรมนี้"/></td>
-		<td align="left"><input type="button" id="Delete" value="ลบกิจกรรมนี้"/></td>
+	<tr style="text-align:center">
+		<td>
+			<input type="button" id="Edit" onclick="activityEdit('<?php echo $result[0]["activities"]["id"] ?>');" value="แก้ไขกิจกรรมนี้"/>
+			<input type="button" id="JoinActivity" onclick="openPopupActivity('<?php echo $result[0]["activities"]["id"] ?>');" 
+					value="เข้าร่วมกิจกรรมนี้" <?php echo ($flagJoinActivity===1)?'disabled':''; ?>/>
+			<input type="button" id="Delete" value="ลบกิจกรรมนี้"/>
+		</td>
 	</tr>
 </table>

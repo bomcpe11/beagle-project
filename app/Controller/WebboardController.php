@@ -2,7 +2,7 @@
 class WebboardController extends AppController {
 	/* ------------------------------------------------------------------------------------------------ */
 	public $names = 'WebboardController';
-	public $uses = array('Webboard');
+	public $uses = array('Webboard', 'WebboardReply');
 	/* ------------------------------------------------------------------------------------------------ */
 	public function index(){
 		$this->log('---- WebboardController -> index ----');
@@ -44,6 +44,78 @@ class WebboardController extends AppController {
 		$this->set('Num_Pages', $Num_Pages);
 		$this->set('Num_Rows', $Num_Rows);
 		$this->set('Page', $Page);
+	}
+	
+	public function newTopic(){
+		$this->log('---- WebboardController -> newTopic ----');
+		$this->setTitle('Webboard - New Topic');
+		
+	}
+	
+	public function viewWebboard(){
+		$this->log('---- WebboardController -> viewWebboard ----');
+		$this->setTitle('Webboard - View');
+		
+		$questionId = @$this->request->query['QuestionID'];
+		$webboard = array();
+		$replies = array();
+		
+		if($questionId){
+			$webboard = $this->Webboard->getWebboard($questionId);
+			$this->Webboard->incrementView($questionId);
+			$replies = $this->WebboardReply->getWebboardReplyQuestionId($questionId);
+		}else{
+			//When not find QuestionID
+		}
+		
+		$this->set('webboard', $webboard);
+		$this->set('replies', $replies);
+	}
+	
+	public function ajaxSubmitNewTopic(){
+		$this->log('---- WebboardController -> ajaxSubmitNewTopic ----');
+		
+		$txtQuestion = $this->request->data['txtQuestion'];
+		$txtDetails = $this->request->data['txtDetails'];
+		$txtName = $this->request->data['txtName'];
+		
+		$result = array();
+		
+		if($this->Webboard->insertData($txtQuestion, $txtDetails, $txtName)){
+			$result['flg'] = 1;
+			$result['msg'] = "Complete";
+		} else {
+			$result['flg'] = -1;
+			$result['msg'] = "เกิดข้อผิดพลาด กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์";
+		}
+		
+		$this->layout='ajax';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	}
+	
+	public function ajaxSubmitReply(){
+		$this->log('---- WebboardController -> ajaxSubmitReply ----');
+		
+// 		$this->log($this->request->data);
+		$hidQuestionID = $this->request->data['hidQuestionID'];
+		$txtDetails = $this->request->data['txtDetails'];
+		$txtName = $this->request->data['txtName'];
+		
+		$result = array();
+		
+		if($this->WebboardReply->insertData($hidQuestionID, $txtDetails, $txtName)){
+			$this->Webboard->incrementReply($hidQuestionID);
+			$result['flg'] = 1;
+			$result['msg'] = "Complete";								
+		} else {
+			$result['flg'] = -1;
+			$result['msg'] = "เกิดข้อผิดพลาด กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์";
+		}
+		
+		$this->layout='ajax';
+		$this->set('message', json_encode($result));
+		$this->render('response');
 	}
 	
 }// WebboardController

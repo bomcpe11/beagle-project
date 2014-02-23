@@ -174,6 +174,7 @@ class ProfileController extends AppController {
 		$telPhone 		= $this->request->data["telPhone"];
 		$celPhone	 	= $this->request->data["celPhone"];
 		$email 			= $this->request->data["email"];
+		$position		= $this->request->data["position"];
 		$blogAddress 	= $this->request->data["blogAddress"];
 		$profileId 		= $this->request->data["profileId"];
 		
@@ -195,6 +196,7 @@ class ProfileController extends AppController {
 												,$telPhone
 												,$celPhone 
 												,$email
+												,$position
 												,$blogAddress) ) {
 			$result['flg'] = 1;
 			$result['msg'] = "การแก้ไขข้อมูลส่วนตัวเสร็จเรียบร้อย";								

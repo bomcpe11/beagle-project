@@ -1,26 +1,30 @@
 <?php
 // session_start();
 class AsearchController extends AppController{
+	/* ------------------------------------------------------------------------------------------------ */
 	public $names = 'Asearch';
 	public $uses = array('Activity','JoinActivity');
-	
+	/* ------------------------------------------------------------------------------------------------ */
 	public function index(){
 		$this->log('---- Asearch -> index ----');
 		$this->setTitle('ค้นหากิจกรรม');
 	}
+	/* ------------------------------------------------------------------------------------------------ */
 	public function search(){
 		$this->log('---- Asearch -> search ----');
 		
 		$result = array();
+		$objUser = $this->getObjUser();
 		$search_width = $this->request->data['search_width'];
 		
-		$result = $this->Activity->getDataByStmtSql($search_width);
+		$result = $this->Activity->getDataForAsearch($objUser['id'],$search_width);
 		$countData = count($result);
 		for( $i=0;$i<$countData;$i++ ){
-			if( !empty($result[$i]['activities']['startdtm']) ){
-				$result[$i]['activities']['startdtm'] = $this->DateThai($result[$i]['activities']['startdtm']);
-			}else{
-				$result[$i]['activities']['startdtm']='';
+			if( !empty($result[$i]['a']['startdtm']) ){
+				$result[$i]['a']['startdtm'] = $this->DateThai($result[$i]['a']['startdtm']);
+			}
+			if( !empty($result[$i]['a']['enddtm']) ){
+				$result[$i]['a']['enddtm'] = $this->DateThai($result[$i]['a']['enddtm']);
 			}
 		}
 		//$this->log(print_r($result,true));
@@ -29,6 +33,7 @@ class AsearchController extends AppController{
 		$this->set("message", json_encode($result));
 		$this->render("response");
 	}
+	/* ------------------------------------------------------------------------------------------------ */
 	public function saveActivity(){
 		$this->log('---- Asearch -> saveActivity ----');
 		

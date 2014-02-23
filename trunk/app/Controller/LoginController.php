@@ -51,19 +51,22 @@ class LoginController extends AppController {
 		$cookieTimeOut = ((3600 * 24) * 30);  // or '1 month'
 		
 		// check username
-		$objuser = $this->Profile->checkLogin($username);
-		if ( count($objuser)===0||$objuser[0]['profiles']['is_approve']==0 ) { // username incorrect
+		$checkUser = $this->Profile->checkLogin($username);
+		if ( count($checkUser)===0 || $checkUser[0]['profiles']['is_approve']==0 ) { // username incorrect
 			$result['msg'] = 'ไม่พบ Username นี้';
 			$result['profile_id']=-1;
 				
 			$this->deleteCookie();
-		} else if ( count($objuser) == 1 ) { // username correct
+		} else if ( count($checkUser) == 1 ) { // username correct
 			// check password
-			if ( $encryptPassword == $objuser[0]["profiles"]["encrypt_password"] ) { // password correct
+			if ( $encryptPassword == $checkUser[0]["profiles"]["encrypt_password"] ) { // password correct
 				// update last_login_at
 				$this->Profile->getDataSource();
-				if( $this->Profile->updateLastLogin($objuser[0]['profiles']['id']) ){
+				if( $this->Profile->updateLastLogin($checkUser[0]['profiles']['id']) ){
 					$this->Profile->commit();
+					
+					// get objuser
+					$objuser = $this->Profile->getDataById($checkUser[0]['profiles']['id']);
 					
 					// set SESSION
 					$this->Session->write("objuser", $objuser[0]["profiles"]);

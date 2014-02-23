@@ -133,6 +133,15 @@ class ProfileController extends AppController {
 			
 			/* activity */
 			$listActivity = $this->JoinActivity->getActivityForProfile($objUser[0]['profiles']['id']);
+			$countListActivity = count($listActivity);
+			for( $i=0;$i<$countListActivity;$i++ ){
+				if( !empty($listActivity[$i]['a']['startdtm']) ){
+					$listActivity[$i]['a']['startdtm'] = $this->DateThai($listActivity[$i]['a']['startdtm']);
+				}
+				if( !empty($listActivity[$i]['a']['enddtm']) ){
+					$listActivity[$i]['a']['enddtm'] = $this->DateThai($listActivity[$i]['a']['enddtm']);
+				}
+			}
 			//$this->log(print_r($listActivity, true));
 		}
 		

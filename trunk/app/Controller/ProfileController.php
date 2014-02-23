@@ -41,7 +41,7 @@ class ProfileController extends AppController {
 		if( !empty($objUser) ){
 			/* page title */
 			$pageTitle = 'ข้อมูลส่วนตัว - '
-						. $objUser[0]['profiles']['titleth'] 
+						. ( !empty($objUser[0]['profiles']['position'])?$objUser[0]['profiles']['position']:$objUser[0]['profiles']['titleth'] )
 						. ' '
 						. $objUser[0]['profiles']['nameth'] 
 						. ' '

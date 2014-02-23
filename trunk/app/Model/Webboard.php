@@ -5,6 +5,10 @@ class Webboard extends AppModel {
 		$result = $this->query('select * from webboards');
 		return $result;
 	}
+	public function getWebboard($questionId){
+		$result = $this->query("select * from webboards where QuestionID='".$questionId."'");
+		return $result;
+	}
 	/* ------------------------------------------------------------------------------------------------ */
 	public function getWebboardsLimit($start, $num){
 // 		$this->log('select * from webboards order by QuestionID DESC LIMIT '.$start.' , '.$num);
@@ -19,17 +23,39 @@ class Webboard extends AppModel {
 		return $result[0][0]['count'];
 	}
 	/* ------------------------------------------------------------------------------------------------ */
-	public function insertData($name
-								,$researchtype
-								,$advisor
-								,$organization
-								,$profile_id
-								,$isnotfinish
-								,$yearfinish
-								,$dissemination){
+	public function incrementView($questionId){
+		$flag=false;
+		$sql = "UPDATE webboards SET View = View + 1 WHERE QuestionID = '".$questionId."' ";
+		try{
+			$this->query($sql);
+			$flag = true;
+		}catch(Exception $e){
+			$this->log($e->getMessage());
+		}
+		
+		return $flag;
+	}
+	/* ------------------------------------------------------------------------------------------------ */
+	public function incrementReply($questionId){
+		$flag=false;
+		$sql = "UPDATE webboards SET Reply = Reply + 1 WHERE QuestionID = '".$questionId."' ";
+		try{
+			$this->query($sql);
+			$flag = true;
+		}catch(Exception $e){
+			$this->log($e->getMessage());
+		}
+		
+		return $flag;
+	}
+	/* ------------------------------------------------------------------------------------------------ */
+	public function insertData($question
+								,$details
+								,$name){
 		$flag=false;
 		
-		//$sql="INSERT INTO webboards (QuestionID, CreateDate, Question, Details, Name, View, Reply) VALUES (NULL, '2014-02-20 20:16:17', 'ทดสอบ คำถาม Webboard 3', 'อยากทราบว่า AAAAAA?', 'name3', '0', '0')";
+		$sql="INSERT INTO webboards (QuestionID, CreateDate, Question, Details, Name, View, Reply) 
+				VALUES (NULL, now(), '".$question."', '".$details."', '".$name."', '0', '0')";
 		
 		try{
 			$this->query($sql);

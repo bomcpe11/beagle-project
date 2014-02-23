@@ -9,21 +9,7 @@
 	});
 	
 </script>
-<?php
-
-$Per_Page = 10;   // Per Page
-
-// $Page = $_GET["Page"];
-// if(!$_GET["Page"])
-// {
-// 	$Page=1;
-// }
-
-
-
-//$strSQL .=" order  by QuestionID DESC LIMIT $Page_Start , $Per_Page";
-//$objQuery  = mysql_query($strSQL);
-?>
+<a href="<?=$this->Html->url('/Webboard/newTopic')?>">+ New Topic</a>
 <table width="909" border="1">
   <tr>
     <th width="99"> <div align="center">QuestionID</div></th>
@@ -34,13 +20,11 @@ $Per_Page = 10;   // Per Page
     <th width="47"> <div align="center">Reply</div></th>
   </tr>
 <?
-//while($objResult = mysql_fetch_array($objQuery))
-//{
 for($i=0; $i<count($webboard_result); $i++){
 ?>
   <tr>
     <td><div align="center"><?=$webboard_result[$i]['webboards']["QuestionID"];?></div></td>
-    <td><a href="ViewWebboard.php?QuestionID=<?=$webboard_result[$i]['webboards']["QuestionID"];?>"><?=$webboard_result[$i]['webboards']["Question"];?></a></td>
+    <td><a href="<?=$this->Html->url('/Webboard/viewWebboard')?>?QuestionID=<?=$webboard_result[$i]['webboards']["QuestionID"];?>"><?=$webboard_result[$i]['webboards']["Question"];?></a></td>
     <td><?=$webboard_result[$i]['webboards']["Name"];?></td>
     <td><div align="center"><?=$webboard_result[$i]['webboards']["CreateDate"];?></div></td>
     <td align="right"><?=$webboard_result[$i]['webboards']["View"];?></td>

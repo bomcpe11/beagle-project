@@ -584,7 +584,7 @@
 								echo "<tr>
 										<td>{$listActivity[$i]['a']['name']}</td>
 										<td>{$listActivity[$i]['ja']['position']}</td>
-										<td>{$listActivity[$i]['a']['startdtm']}</td>
+										<td>{$listActivity[$i]['a']['startdtm']}-{$listActivity[$i]['a']['enddtm']}</td>
 										<td>{$listActivity[$i]['a']['location']}</td>
 										<td>{$listActivity[$i]['a']['genname']}</td>
 										<td>{$listActivity[$i]['a']['shortdesc']}</td>

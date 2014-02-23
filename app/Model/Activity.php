@@ -1,17 +1,17 @@
 <?php
 class Activity extends AppModel {
-	
+	/* ------------------------------------------------------------------------------------------------ */
 	public function getActivites(){
 		$result = $this->query('select * from activities ');
 		return $result;
 	}
-	
+	/* ------------------------------------------------------------------------------------------------ */
 // 	public function deleteActivites($idDelete){
 // 		$sql = 'delete from activities where id ='.$idDelete;
 // 		$result = $this->query($sql);
 // 		return $result;
 // 	}
-	
+	/* ------------------------------------------------------------------------------------------------ */
 	public function deleteActivites($idDelete){
 		$flag = false;
 		$sql = 'delete from activities where id ='.$idDelete;
@@ -26,6 +26,7 @@ class Activity extends AppModel {
 	
 		return $flag;
 	}
+	/* ------------------------------------------------------------------------------------------------ */
 	public function getDataByStmtSql($stmt_sql){
 		$result = null;
 		$sql = "SELECT * FROM activities WHERE $stmt_sql";
@@ -39,7 +40,23 @@ class Activity extends AppModel {
 		
 		return $result;
 	}
-	
+	/* ------------------------------------------------------------------------------------------------ */
+	public function getDataForAsearch($profile_id,$stmt_sql){
+		$result = null;
+		$sql = "SELECT * 
+					,(SELECT 1 FROM join_activities ja WHERE ja.activity_id=a.id AND ja.profile_id=$profile_id) AS flag_joind_activity
+					FROM activities a WHERE $stmt_sql";
+		$this->log($sql);
+		
+		try{
+			$result = $this->query($sql);
+		}catch(Exception $e){
+			$this->log($e->getMessage());
+		}
+		
+		return $result;
+	}
+	/* ------------------------------------------------------------------------------------------------ */
 	public function insertActivities(     $name
 										, $startdtm
 										, $enddtm
@@ -87,8 +104,7 @@ class Activity extends AppModel {
 		return $flag;
 		$this->log("END MODEL  insertActivities ");
 	}
-
-	
+	/* ------------------------------------------------------------------------------------------------ */
 	public function updateActivity (  $id
 									, $name
 									, $startdtm

@@ -8,7 +8,7 @@
 									<select id="select-title-name-th">\
 										<option value="">---- กรุณาเลือก ----</option>\
 										<?php for ( $i = 0; $i < count($namePrefixTh); $i++ ) { ?>\
-											<?php if ( $namePrefixTh[$i]["gvars"]["vardesc1"] == $objuser["titleth"]) { ?>\
+											<?php if ( $namePrefixTh[$i]["gvars"]["vardesc1"] == $objUser[0]['profiles']["titleth"]) { ?>\
 												<option value=<?php echo $namePrefixTh[$i]["gvars"]["vardesc1"];?> selected><?php echo $namePrefixTh[$i]["gvars"]["vardesc1"];?></option>\
 											<?php } else { ?>\
 												<option value=<?php echo $namePrefixTh[$i]["gvars"]["vardesc1"];?>><?php echo $namePrefixTh[$i]["gvars"]["vardesc1"];?></option>\

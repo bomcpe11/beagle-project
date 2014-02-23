@@ -138,6 +138,7 @@ class Profile extends AppModel {
 									,$telPhone
 									,$celPhone 
 									,$email
+									,$position
 									,$blogAddress) {
 		$flag = false;
 		$strSql = "UPDATE profiles";
@@ -158,8 +159,9 @@ class Profile extends AppModel {
 		$strSql .= " ,telphone = '".$telPhone."'";	// VARCHAR(255)
 		$strSql .= " ,celphone = '".$celPhone."'";	// VARCHAR(255)
 		$strSql .= " ,email = '".$email."'";	// VARCHAR(255)
+		$strSql .= " ,position = '".$position."'";	// VARCHAR(255)
 		$strSql .= " ,blogaddress = '".$blogAddress."'";	// VARCHAR(255)
-		$strSql .= " ,updated_at = sysdate()";	// DATETIME
+		$strSql .= " ,updated_at = now()";	// DATETIME
 		$strSql .= " WHERE id = ".$profileId;
 		$strSql .= ";";
 		//$this->log("strSql => ".$strSql);

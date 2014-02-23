@@ -8,7 +8,31 @@
 	function activityEdit(id){
 		window.location.replace("<?php echo $this->webroot;?>Activity/editactivity?id="+id);
 	}
-		
+	function deleteData(id){
+		jConfirm('ท่านต้องการลบข้อมูลกิจกรรมนี้ใช่หรือไม่?', 
+			function(){ //okFunc
+				loading();
+				jQuery.ajax({
+					type: "POST",
+					dataType: 'json',
+					url: '<?php echo $this->Html->url('/Activitylist/deleteActivity');?>',
+					data: {id:id},
+					success: function(data){
+						unloading();
+						if ( data.status ) {
+							jAlert(data.message, 
+								function(){
+									window.location.replace("<?php echo $this->webroot;?>Activitylist/index");
+								}
+							);
+						} else {
+							jAlert(data.message);
+						}
+					}
+				});
+			}
+		);
+	}	
 </script>
 <?php 
 	if($result[0]["activities"]["startdtm"] != "" and  $result[0]["activities"]["enddtm"] != ""){
@@ -37,35 +61,44 @@
 	}
 ?>
 <table class="tableLayout" width="100%">
-	<tr align="left" >
-		<th>ชื่อกิจกรรม : <?php echo $result[0]["activities"]["name"] ?>
+	<tr>
+		<th align="right" width="20%">ชื่อกิจกรรม : 
 		<input type="hidden" id="AcId" value="<?php echo $result[0]["activities"]["id"] ?>"/>
 		</th>
+		<td><?php echo $result[0]["activities"]["name"] ?></td>
 	</tr>
-	<tr align="left" >
-		<th>วันที่จัดกิจกรรมเริ่มต้น : <?php echo $startdtm; ?></th>
+	<tr>
+		<th align="right">วันที่จัดกิจกรรมเริ่มต้น : </th>
+		<td><?php echo $startdtm; ?></td>
 	</tr>
-	<tr align="left" >
-		<th>วันที่จัดกิจกรรมสิ้นสุด : <?php echo $enddtm; ?></th>
+	<tr>
+		<th align="right">วันที่จัดกิจกรรมสิ้นสุด : </th>
+		<td><?php echo $enddtm; ?></td>
 	</tr>
-	<tr align="left">
-		<th>สถานที่จัดกิจกรรม : <?php echo $result[0]["activities"]["location"] ?></th>
+	<tr>
+		<th align="right">สถานที่จัดกิจกรรม : </th>
+		<td><?php echo $result[0]["activities"]["location"] ?></td>
 	</tr>
-	<tr align="left" style="">
-		<th>ชื่อรุ่น : <?php echo $result[0]["activities"]["genname"] ?></th>
+	<tr>
+		<th align="right">ชื่อรุ่น : </th>
+		<td><?php echo $result[0]["activities"]["genname"] ?></td>
 	</tr>
-	<tr align="left" >
-		<th>รายละเอียดกิจกรรมอย่างย่อ : </th>
+	<tr>
+		<th align="right">รายละเอียดกิจกรรมอย่างย่อ : </th><td></td>
 	</tr>
-	<tr align="left" >
-		<th><?php echo $result[0]["activities"]["shortdesc"] ?></th>
+	<tr>
+		<th align="right"></th>
+		<td><?php echo $result[0]["activities"]["shortdesc"] ?></td>
 	</tr>
-	<tr align="left" style="">
-		<th>รายละเอียดกิจกรรม : <?php echo $result[0]["activities"]["longdesc"] ?></th>
+	<tr>
+		<th align="right">รายละเอียดกิจกรรม : </th><td></td>
+	</tr>
+	<tr>
+		<td colspan="2"><?php echo $result[0]["activities"]["longdesc"] ?></td>
 	</tr>
 </table>
 <br/>
-<table class="tableLayout" width="100%">
+<table class="tableLayout" width="100%" style="display:none;">
 	<tr align="left" >
 		<th colspan="4"> ไฟล์แนบ</th>
 	</tr>
@@ -75,19 +108,18 @@
 		<th>วันที่อัพโหลด</th>
 		<th>ลบไฟล์</th>
 	</tr>
+	<tr align="left" >
+		<th colspan="4"><input type="button" id="Add" onclick="javascript:activityAdd();" value="อัพโหลดไฟล์เพิ่ม"/></th>
+	</tr>
 </table>
 
 <table class="tableLayout" width="100%">
-	<tr align="center">
-		<td><input type="button" id="Add" onclick="javascript:activityAdd();" value="อัพโหลดไฟล์เพิ่ม"/>
-		</td>
-	</tr>
 	<tr style="text-align:center">
 		<td>
 			<input type="button" id="Edit" onclick="activityEdit('<?php echo $result[0]["activities"]["id"] ?>');" value="แก้ไขกิจกรรมนี้"/>
 			<input type="button" id="JoinActivity" onclick="openPopupActivity('<?php echo $result[0]["activities"]["id"] ?>');" 
 					value="เข้าร่วมกิจกรรมนี้" <?php echo ($flagJoinActivity===1)?'disabled':''; ?>/>
-			<input type="button" id="Delete" value="ลบกิจกรรมนี้"/>
+			<input type="button" id="Delete" onclick="deleteData('<?php echo $result[0]["activities"]["id"] ?>');" value="ลบกิจกรรมนี้"/>
 		</td>
 	</tr>
 </table>

@@ -96,6 +96,11 @@
 	<tr>
 		<td colspan="2"><?php echo $result[0]["activities"]["longdesc"] ?></td>
 	</tr>
+	<tr>
+		<td colspan="2">
+			<input type="button" id="Edit" onclick="activityEdit('<?php echo $result[0]["activities"]["id"] ?>');" value="แก้ไขกิจกรรมนี้"/>
+		</td>
+	</tr>
 </table>
 <br/>
 <table class="tableLayout" width="100%" style="display:none;">
@@ -116,10 +121,14 @@
 <table class="tableLayout" width="100%">
 	<tr style="text-align:center">
 		<td>
+		<?php if( $objuser['role']==='1' ){ ?>
 			<input type="button" id="Edit" onclick="activityEdit('<?php echo $result[0]["activities"]["id"] ?>');" value="แก้ไขกิจกรรมนี้"/>
+		<?php } ?>
 			<input type="button" id="JoinActivity" onclick="openPopupActivity('<?php echo $result[0]["activities"]["id"] ?>');" 
 					value="เข้าร่วมกิจกรรมนี้" <?php echo ($flagJoinActivity===1)?'disabled':''; ?>/>
+		<?php if( $objuser['role']==='1' ){ ?>
 			<input type="button" id="Delete" onclick="deleteData('<?php echo $result[0]["activities"]["id"] ?>');" value="ลบกิจกรรมนี้"/>
+		<?php } ?>
 		</td>
 	</tr>
 </table>

@@ -2,7 +2,7 @@
 class Activity extends AppModel {
 	/* ------------------------------------------------------------------------------------------------ */
 	public function getActivites(){
-		$result = $this->query('select * from activities ');
+		$result = $this->query('select * from activities order by id DESC');
 		return $result;
 	}
 	/* ------------------------------------------------------------------------------------------------ */
@@ -61,8 +61,8 @@ class Activity extends AppModel {
 										, $startdtm
 										, $enddtm
 										, $location
-										, $genname
 										, $shortdesc
+										, $genname
 										, $longdesc) {
 		$this->log("START MODEL  insertActivities ");
 		$flag = false;

@@ -1,16 +1,26 @@
 <?php
 class ActivityController extends AppController {
 	public $names = "ActivityController";
-	public $uses = array('Activity','Profile');
+	public $uses = array('Activity','Profile','JoinActivity');
 	
 	public function index() {
 		$this->setTitle('ข้อมูลกิจกรรม');
 		$this->log('Start :: ActivityController :: index');
+		
+		$objUser = $this->getObjUser();
 		$id = $_GET["id"];
 		$this->log('ActivityController :: index => ID ='.$id);
 		$sql = " id = ".$id;
+		
 		$result = $this->Activity->getDataByStmtSql($sql);
+		$flagJoinActivity = -1;
+		$checkJoinActivity = $this->JoinActivity->getDataByProfileIdActivityId($objUser["id"],$id);
+		if( count($checkJoinActivity)>0 ){
+			$flagJoinActivity = 1;
+		}
+		
 		$this->set("result", $result);
+		$this->set("flagJoinActivity", $flagJoinActivity);
 		$this->log('ActivityController :: index => Result ='.$result[0]["activities"]["name"]);
 		$this->log('End :: ActivityController :: index');
 	}
@@ -140,6 +150,41 @@ class ActivityController extends AppController {
 		$output = '<html><body><script type="text/javascript">window.parent.CKEDITOR.tools.callFunction('.$callback.', "'.$url.'","'.$msg.'");</script></body></html>';
 		$this->set('message', $output);
 		$this->layout='ajax';
+		$this->render('response');
+	}
+	
+	public function saveNewActivity(){
+		$this->log('---- Activity -> saveNewActivity ----');
+		
+		$result = array();
+		$objUser = $this->getObjUser();
+		//$this->log($this->request->data);
+		$activity_id = $this->request->data['activity_id'];
+		$position = $this->request->data['position'];
+		
+		$checkActivity = $this->JoinActivity->getDataByProfileIdActivityId($objUser['id'],$activity_id);
+		if( empty($checkActivity) ){
+			$dataSource = $this->JoinActivity->getDataSource();
+			if( $this->JoinActivity->insertData($objUser['id'], $activity_id, $position)){
+				$dataSource->commit();
+				
+				$result['flg'] = 1;
+				$result['msg'] = 'บันทึกการเข้าร่วมกิจกรรม สำเร็จ';
+			}else{
+				$dataSource->rollback();
+				
+				$result['flg'] = -1;
+				$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลส่วนตัว กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			}
+		}else{
+			$result['flg'] = 0;
+			$result['msg'] = 'คุณได้เข้าร่วมกิจกรรมนี้แล้ว';
+		}
+		
+		//$this->log(print_r($result,true));
+		
+		$this->layout='ajax';
+		$this->set('message', json_encode($result));
 		$this->render('response');
 	}
 }

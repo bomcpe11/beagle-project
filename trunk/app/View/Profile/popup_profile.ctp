@@ -1,6 +1,6 @@
 <script>
 	function edit_profile() {
-		var strHtml = '<div id="popup_profile_container" class="table" style="width: 700px;">\
+		var strHtml = '<div id="popup_profile_container" class="table" style="width: 725px;">\
 						<ul>\
 							<li class="single">\
 								<p><strong>* คำนำหน้าชื่อ :</strong></p>\
@@ -104,10 +104,14 @@
 									<input id="text-cel-phone" type="text" value=<?php echo $objUser[0]['profiles']["celphone"];?>>\
 								</p>\
 							</li>\
-							<li class="single">\
+							<li>\
 								<p><strong>* อีเมล์ :</strong></p>\
 								<p>\
 									<input id="text-email" type="text" value=<?php echo $objUser[0]['profiles']["email"];?>>\
+								</p>\
+								<p><strong>ตำแหน่งทางวิชาการ(ถ้ามี) :</strong></p>\
+								<p>\
+									<input id="text-position" type="text" value=<?php echo $objUser[0]['profiles']["position"];?>>\
 								</p>\
 							</li>\
 							<li class="single">\
@@ -155,6 +159,7 @@
 		var telPhone 		= jQuery("#text-tel-phone").val();
 		var celPhone 		= jQuery("#text-cel-phone").val();
 		var email 			= jQuery("#text-email").val();
+		var position		= jQuery("#text-position").val();
 		var blogAddress 	= jQuery("#text-blog-address").val();
 		var profileId 		= jQuery("#hidden-profile-id").val();
 	
@@ -212,6 +217,7 @@
 					,"telPhone":telPhone
 					,"celPhone":celPhone
 					,"email":email
+					,"position":position
 					,"blogAddress":blogAddress
 					,"profileId":profileId}
 				, function(data) {

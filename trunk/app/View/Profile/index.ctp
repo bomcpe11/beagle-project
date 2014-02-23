@@ -185,9 +185,13 @@
 									</td>
 								</tr>
 								<tr>
-									<td colspan="2">
+									<td>
 										<strong>อีเมล์ : </strong>
 										<span><?php echo $objUser[0]['profiles']['email'];?></span>
+									</td>
+									<td>
+										<strong>ตำแหน่งทางวิชาการ(ถ้ามี) : </strong>
+										<span><?php echo $objUser[0]['profiles']['position'];?></span>
 									</td>
 								</tr>
 								<tr>

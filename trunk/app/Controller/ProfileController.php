@@ -42,7 +42,6 @@ class ProfileController extends AppController {
 			/* page title */
 			$pageTitle = 'ข้อมูลส่วนตัว - '
 						. ( !empty($objUser[0]['profiles']['position'])?$objUser[0]['profiles']['position']:$objUser[0]['profiles']['titleth'] )
-						. ' '
 						. $objUser[0]['profiles']['nameth'] 
 						. ' '
 						. $objUser[0]['profiles']['lastnameth'];
@@ -54,9 +53,9 @@ class ProfileController extends AppController {
 			
 			/* fullName */
 			if( $objUser[0]['profiles']['position'] ){
-				$fullNameTh = $objUser[0]['profiles']['position'].' '.$objUser[0]['profiles']['nameth'].' '.$objUser[0]['profiles']['lastnameth'];
+				$fullNameTh = $objUser[0]['profiles']['position'].$objUser[0]['profiles']['nameth'].' '.$objUser[0]['profiles']['lastnameth'];
 			} else{
-				$fullNameTh = $objUser[0]['profiles']['titleth'].' '.$objUser[0]['profiles']['nameth'].' '.$objUser[0]['profiles']['lastnameth']; 
+				$fullNameTh = $objUser[0]['profiles']['titleth'].$objUser[0]['profiles']['nameth'].' '.$objUser[0]['profiles']['lastnameth']; 
 			} 
 			
 			/* birthday */

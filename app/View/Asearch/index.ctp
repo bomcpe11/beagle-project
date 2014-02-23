@@ -38,9 +38,9 @@
 		jQuery('input[name="search_width"]').each(function(index,value){
 			if( jQuery(this).is(':checked') ){
 				if( !serach_width ){
-					serach_width = ''+jQuery(this).val()+' LIKE \'%'+key_word+'%\'';
+					serach_width = 'a.'+jQuery(this).val()+' LIKE \'%'+key_word+'%\'';
 				}else{
-					serach_width += ' OR '+jQuery(this).val()+' LIKE \'%'+key_word+'%\'';
+					serach_width += ' OR a.'+jQuery(this).val()+' LIKE \'%'+key_word+'%\'';
 				}
 			}
 		});
@@ -98,12 +98,16 @@
 					if( count_data>0 ){
 						for( var i=0;i<count_data;i++ ){
 							html+='<tr>';
-							html+='<td><a href="<?php echo $this->Html->url('/Activity/index'); ?>?id='+data[i].activities.id+'">'+data[i].activities.name+'<a></td>';
-							html+='<td>'+( (data[i].activities.startdtm && data[i].activities.enddtm)?data[i].activities.startdtm+'\n-'+data[i].activities.startdtm:'-')+'</td>';
-							html+='<td>'+( data[i].activities.location?data[i].activities.location:'-' )+'</td>';
-							html+='<td>'+( data[i].activities.ganname?data[i].activities.ganname:'-' )+'</td>';
-							html+='<td>'+( data[i].activities.shortdesc?data[i].activities.shortdesc:'-' )+'</td>';
-							html+='<td><input type="button" value="เข้าร่วมกิจกรรมนี้" onclick="open_popup_activity('+data[i].activities.id+')"/></td>';
+							html+='<td><a href="<?php echo $this->Html->url('/Activity/index'); ?>?id='+data[i].a.id+'">'+data[i].a.name+'<a></td>';
+							html+='<td>'+( (data[i].a.startdtm && data[i].a.enddtm)?data[i].a.startdtm+'\n-'+data[i].a.enddtm:'-')+'</td>';
+							html+='<td>'+( data[i].a.location?data[i].a.location:'-' )+'</td>';
+							html+='<td>'+( data[i].a.ganname?data[i].a.ganname:'-' )+'</td>';
+							html+='<td>'+( data[i].a.shortdesc?data[i].a.shortdesc:'-' )+'</td>';
+							if( data[i][0].flag_joind_activity ){
+								html+='<td><input disabled id="btn_join_activity'+data[i].a.id+'" type="button" value="เข้าร่วมกิจกรรมนี้" onclick="open_popup_activity('+data[i].a.id+')"/></td>';
+							}else{
+								html+='<td><input id="btn_join_activity'+data[i].a.id+'" type="button" value="เข้าร่วมกิจกรรมนี้" onclick="open_popup_activity('+data[i].a.id+')"/></td>';
+							}
 							html+='</tr>';
 						}
 					}else{

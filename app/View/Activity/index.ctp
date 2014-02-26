@@ -97,8 +97,10 @@
 		<td colspan="2"><?php echo $result[0]["activities"]["longdesc"] ?></td>
 	</tr>
 	<tr>
-		<td colspan="2">
-			<input type="button" id="Edit" onclick="activityEdit('<?php echo $result[0]["activities"]["id"] ?>');" value="แก้ไขกิจกรรมนี้"/>
+		<td colspan="2" align="right">
+		<?php if( $objuser['role'] != '1' ){ ?>
+			<input type="button" id="Edit" onclick="activityEdit('<?php echo $result[0]["activities"]["id"] ?>');" value="แก้ไขรายละเอียดของกิจกรรมนี้"/>
+		<?php } ?>
 		</td>
 	</tr>
 </table>

@@ -57,7 +57,11 @@
 	<tr align="left">
 		<th align="right" width="20%">ชื่อกิจกรรม : </th>
 		<td align="left">
+		<?php if( $objuser['role'] == '1' ){ ?>
 			<input type="text" id="activityName" style="width: 300px;" value="<?php echo $result[0]["activities"]["name"] ?>" />
+		<?php }else{ 
+			 echo $result[0]["activities"]["name"]; 
+		} ?>
 		</td>
 	</tr>
 	<tr align="left">
@@ -74,31 +78,51 @@
 				$enddtm = "";
 			}
 		?>
+		<?php if( $objuser['role'] == '1' ){ ?>
 			<input type="text" class="datePicker" id="startDate" value="<?php echo $startDate  ?>"  />
+		<?php }else{
+			echo $startDate;
+		} ?>
 		</td>
 	</tr>
 	<tr align="left">
 		<th align="right" width="20%">วันที่จัดกิจกรรม สิ้นสุด : </th>
 		<td align="left">
+		<?php if( $objuser['role'] == '1' ){ ?>
 			<input type="text" class="datePicker" id="endDate" value="<?php echo $enddtm ?>" />
+		<?php }else{
+			echo $enddtm;
+		} ?>
 		</td>
 	</tr>
 	<tr align="left">
 		<th align="right" width="20%">สถานที่จัดกิจกรรม : </th>
 		<td align="left">
-		<input type="text" id="location" style="width: 300px;" value="<?php echo $result[0]["activities"]["location"] ?>" />
-		</td>
-	</tr>
-	<tr align="left">
-		<th align="right" width="20%">รายละเอียดกิจกรรม อย่างย่อ : </th>
-		<td align="left">
-		<textarea id="shortdesc" style="width: 700px;" rows="5" ><?php echo $result[0]["activities"]["shortdesc"] ?></textarea>
+		<?php if( $objuser['role'] == '1' ){ ?>
+			<input type="text" id="location" style="width: 300px;" value="<?php echo $result[0]["activities"]["location"] ?>" />
+		<?php }else{
+			echo $result[0]["activities"]["location"];
+		} ?>
 		</td>
 	</tr>
 	<tr align="left">
 		<th align="right" width="20%">ชื่อรุ่น : </th>
 		<td align="left">
-		<input type="text" id="genname" value="<?php echo $result[0]["activities"]["genname"] ?>" />
+		<?php if( $objuser['role'] == '1' ){ ?>
+			<input type="text" id="genname" value="<?php echo $result[0]["activities"]["genname"] ?>" />
+		<?php }else{
+			echo $result[0]["activities"]["genname"];
+		} ?>
+		</td>
+	</tr>
+	<tr align="left">
+		<th align="right" width="20%">รายละเอียดกิจกรรม อย่างย่อ : </th>
+		<td align="left">
+		<?php if( $objuser['role'] == '1' ){ ?>
+			<textarea id="shortdesc" style="width: 700px;" rows="5" ><?php echo $result[0]["activities"]["shortdesc"] ?></textarea>
+		<?php }else{
+			echo $result[0]["activities"]["shortdesc"];
+		} ?>
 		</td>
 	</tr>
 	<tr align="left">

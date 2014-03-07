@@ -39,7 +39,7 @@ class ChangepicController extends AppController {
 			$lastInsertId = $this->ProfilePic->getLastInsert();
 			// Format => Untitled.png
 			$splitFileName = explode(".", $_FILES["file_upload"]["name"]);
-			$extensionFile = ".".$splitFileName[1];
+			$extensionFile = ".".$splitFileName[count($splitFileName)-1];
 			$fileName = $lastInsertId[0][0]["last_index_id"].$extensionFile;
 			
 			//*** upload file

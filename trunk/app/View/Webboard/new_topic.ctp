@@ -7,6 +7,7 @@
 			
 	});
 function submitNewTopic(form){
+	if(!validate(form)) return;
 	loading();
 	jQuery.post('<?=$this->Html->url('/Webboard/ajaxSubmitNewTopic');?>'
 		,{'data':{'txtQuestion':form.txtQuestion.value
@@ -29,10 +30,25 @@ function submitNewTopic(form){
 		}
 		,'json');
 }
+function validate(form){
+	if(jQuery.trim(form.txtQuestion.value)!="" && jQuery.trim(form.txtDetails.value)!=""){
+		return true;
+	}else{
+		jAlert('คุณกรอกข้อมูล ไม่ครบ', 
+				function(){ //okFunc
+				}, 
+				function(){ //openFunc
+				}, 
+				function(){ //closeFunc
+				}
+				);
+		return false
+	}
+}
 </script>
 
 <form action="NewQuestion.php?Action=Save" method="post" name="frmMain" id="frmMain">
-  <table width="621" border="1" cellpadding="1" cellspacing="1">
+  <table width="621" border="1" cellpadding="1" cellspacing="1" bordercolor="#eeeeee">
     <tr>
       <td>Question</td>
       <td><input name="txtQuestion" type="text" id="txtQuestion" value="" size="70"></td>

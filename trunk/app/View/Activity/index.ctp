@@ -34,6 +34,20 @@
 		);
 	}	
 </script>
+<style type="text/css">
+#activity-longdesc, #activity-longdesc p, #activity-longdesc td, #activity-longdesc th, #activity-longdesc span, #activity-longdesc div{
+	color: black;
+}
+#activity-longdesc h1, #activity-longdesc h2, #activity-longdesc h3, #activity-longdesc h4, #activity-longdesc h5{
+	color: black;
+}
+#activity-longdesc{
+	border:1px solid black;
+	border-radius:5px;
+	background-color: #FDFDFE;
+	padding:2px;
+}
+</style>
 <?php 
 	if($result[0]["activities"]["startdtm"] != "" and  $result[0]["activities"]["enddtm"] != ""){
 		$startdtm = $result[0]["activities"]["startdtm"];
@@ -60,9 +74,9 @@
 		$enddtm = "";
 	}
 ?>
-<table class="tableLayout" width="100%">
+<table class="tableLayout" width="100%" border="0">
 	<tr>
-		<th align="right" width="20%">ชื่อกิจกรรม : 
+		<th align="right" width="170">ชื่อกิจกรรม : 
 		<input type="hidden" id="AcId" value="<?php echo $result[0]["activities"]["id"] ?>"/>
 		</th>
 		<td><?php echo $result[0]["activities"]["name"] ?></td>
@@ -87,14 +101,13 @@
 		<th align="right">รายละเอียดกิจกรรมอย่างย่อ : </th><td></td>
 	</tr>
 	<tr>
-		<th align="right"></th>
-		<td><?php echo $result[0]["activities"]["shortdesc"] ?></td>
+		<td colspan="2"><div style="padding-left:50px;"><?php echo $result[0]["activities"]["shortdesc"] ?></div></td>
 	</tr>
 	<tr>
 		<th align="right">รายละเอียดกิจกรรม : </th><td></td>
 	</tr>
 	<tr>
-		<td colspan="2"><?php echo $result[0]["activities"]["longdesc"] ?></td>
+		<td colspan="2"><div id="activity-longdesc"><?php echo $result[0]["activities"]["longdesc"] ?></div></td>
 	</tr>
 	<tr>
 		<td colspan="2" align="right">

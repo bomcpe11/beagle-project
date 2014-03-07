@@ -10,7 +10,7 @@
 	
 </script>
 <a href="<?=$this->Html->url('/Webboard/newTopic')?>">+ New Topic</a>
-<table width="909" border="1">
+<table width="909" border="1" bordercolor="#eeeeee">
   <tr>
     <th width="99"> <div align="center">QuestionID</div></th>
     <th width="458"> <div align="center">Question</div></th>

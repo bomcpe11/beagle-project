@@ -80,7 +80,7 @@ class DATABASE_CONFIG {
 		'host' => '61.19.247.206',
 		'login' => 'irh9608_jstphub',
 		'password' => 'jstphub_2013',
-		'database' => 'irh9608_jstphub',
+		'database' => 'irh9608_jstphubtest1',
 		'prefix' => '',
 		'encoding' => 'utf8',
 	);

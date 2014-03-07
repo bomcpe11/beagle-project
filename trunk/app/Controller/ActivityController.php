@@ -137,13 +137,37 @@ class ActivityController extends AppController {
 	
 	public function uploadImages(){
 		$this->log('Start :: ActivityController :: uploadImages');
+		
+		$objUser = $this->getObjUser();
+		
 		//$this->log($_REQUEST);
-		//$this->log($_FILES);
+// 		$this->log($_FILES);
+// 		$this->log($this->webroot);
 		$callback = $this->request->query['CKEditorFuncNum'];
 		
 		//TODO: Upload image file to /img/activities/
 		
-		$url='/jstphub/app/webroot/img/profiles/1/1.jpg';
+		// gen directory
+		$directory = "img/activities/".$objUser["id"];
+		
+		$splitFileName = explode(".", $_FILES["upload"]["name"]);
+		$extensionFile = ".".$splitFileName[count($splitFileName)-1];
+		$fileName = $objUser["id"].'-img-'.time().$extensionFile;
+		
+		$result = '';
+		//*** upload file
+		if ( $this->checkDirectory($directory) ) {
+			if ( move_uploaded_file($_FILES["upload"]["tmp_name"]	// temp_file
+					, $directory."/".$fileName) ) {	// path file
+			} else {
+				$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
+			}// if else
+		} else {
+			$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
+		}// if
+		
+// 		$url='/jstphub/app/webroot/img/profiles/'.$objUser['id'].'/'.$objUser['id'].'-xxxx.jpg';
+		$url=$this->webroot."app/webroot/".$directory."/".$fileName;
 		$msg='';
 		$this->log('End :: ActivityController :: uploadImages');
 		//$this->set('message', json_encode(array('status'=>'1','message'=>'Success')));
@@ -152,6 +176,78 @@ class ActivityController extends AppController {
 		$this->layout='ajax';
 		$this->render('response');
 	}
+	
+	public function uploadFiles(){
+		$this->log('Start :: ActivityController :: uploadFiles');
+	
+		$objUser = $this->getObjUser();
+	
+		//$this->log($_REQUEST);
+		// 		$this->log($_FILES);
+		// 		$this->log($this->webroot);
+		$callback = $this->request->query['CKEditorFuncNum'];
+	
+		//TODO: Upload image file to /img/activities/
+	
+		// gen directory
+		$directory = "img/activities/".$objUser["id"];
+	
+		$splitFileName = explode(".", $_FILES["upload"]["name"]);
+		$extensionFile = ".".$splitFileName[count($splitFileName)-1];
+		$fileName = $objUser["id"].'-img-'.time().$extensionFile;
+	
+		$result = '';
+		//*** upload file
+		if ( $this->checkDirectory($directory) ) {
+			if ( move_uploaded_file($_FILES["upload"]["tmp_name"]	// temp_file
+					, $directory."/".$fileName) ) {	// path file
+			} else {
+				$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
+			}// if else
+		} else {
+			$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
+		}// if
+	
+		// 		$url='/jstphub/app/webroot/img/profiles/'.$objUser['id'].'/'.$objUser['id'].'-xxxx.jpg';
+		$url=$this->webroot."app/webroot/".$directory."/".$fileName;
+		$msg='';
+		$this->log('End :: ActivityController :: uploadImages');
+		//$this->set('message', json_encode(array('status'=>'1','message'=>'Success')));
+		$output = '<html><body><script type="text/javascript">window.parent.CKEDITOR.tools.callFunction('.$callback.', "'.$url.'","'.$msg.'");</script></body></html>';
+		$this->set('message', $output);
+		$this->layout='ajax';
+		$this->render('response');
+	}
+	
+	private function checkDirectory($directory) {
+		$flag = false;
+	
+		// check directory existing
+		if ( is_dir($directory) ) {
+			$flag = true;
+		} else {
+			$this->log("not have directory");
+	
+			if ( mkdir($directory) ) {
+				$this->log("make directory complete");
+	
+				#Ref : http://php.net/manual/en/function.chmod.php
+				// Changes file mode
+				// Read and write for owner, read for everybody else
+				if ( chmod($directory, 0744) ) {
+				$this->log("set permission complete");
+			
+						$flag = true;
+				} else {
+						$this->log("set permission fail");
+				}// if else
+						} else {
+						$this->log("make directory fail");
+			}// if else
+		}// if else
+	
+		return $flag;
+	}// checkDirectory
 	
 	public function saveNewActivity(){
 		$this->log('---- Activity -> saveNewActivity ----');

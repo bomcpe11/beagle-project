@@ -7,6 +7,7 @@
 			
 	});
 function submitReply(form){
+	if(!validateReply(form)) return;
 	loading();
 	jQuery.post('<?=$this->Html->url('/Webboard/ajaxSubmitReply');?>'
 		,{'data':{'hidQuestionID':form.hidQuestionID.value
@@ -29,13 +30,28 @@ function submitReply(form){
 		}
 		,'json');
 }
+function validateReply(form){
+	if(jQuery.trim(form.txtDetails.value)!=""){
+		return true;
+	}else{
+		jAlert('คุณกรอกข้อมูล ไม่ครบ', 
+				function(){ //okFunc
+				}, 
+				function(){ //openFunc
+				}, 
+				function(){ //closeFunc
+				}
+				);
+		return false
+	}
+}
 </script>
 
 <?php 
 if(count($webboard)>0){
 ?>
 
-<table width="98%" border="1" cellpadding="1" cellspacing="1">
+<table width="98%" border="1" cellpadding="1" cellspacing="1" bordercolor="#eeeeee">
   <tr>
     <td colspan="2"><center><h1><?=$webboard[0]["webboards"]["Question"];?></h1></center></td>
   </tr>
@@ -52,7 +68,7 @@ if(count($webboard)>0){
 <?
 for($i=0; $i<count($replies); $i++){
 ?> No : <?=$i;?>
-<table width="98%" border="1" cellpadding="1" cellspacing="1">
+<table width="98%" border="1" cellpadding="1" cellspacing="1" bordercolor="#eeeeee">
   <tr>
     <td height="" colspan="2"><?=nl2br($replies[$i]["webboard_replies"]["Details"]);?></td>
   </tr>
@@ -71,7 +87,7 @@ for($i=0; $i<count($replies); $i++){
 <br>
 <form action="" method="post" name="frmMain" id="frmMain">
   <input type="hidden" name="hidQuestionID" value="<?=$webboard[0]["webboards"]["QuestionID"]?>" />
-  <table width="738" border="1" cellpadding="1" cellspacing="1">
+  <table width="738" border="1" cellpadding="1" cellspacing="1" bordercolor="#eeeeee">
     <tr>
       <td width="78">Details</td>
       <td><textarea name="txtDetails" cols="50" rows="5" id="txtDetails"></textarea></td>

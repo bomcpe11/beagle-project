@@ -85,7 +85,7 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 		jQuery("#gotoWebboard").click(function() {changePage("Webboard");});
 		//---------------------------------------------------------------------------------------------
 
-		jQuery('input[type="button"]').button();
+		jQuery('input:button, input:submit').button();
 	});
 
 	//-------------------------------------------------------------------------------------------------
@@ -216,7 +216,7 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 		</div>
 	</div>
 		<div id="layout-footer">
-			<h1>footer</h1>
+			footer
 		</div>
 	</div>
 	</br>

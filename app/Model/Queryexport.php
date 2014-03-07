@@ -67,6 +67,27 @@ class Queryexport extends AppModel {
 		return $rs;
 	}
 //-----------------------------------------------------------------------------------------------------	
+	function query($sql){
+		$this->log("START :: Queryexport -> genFileExport()");
+			
+		$ds = ConnectionManager::getDataSource('default');
+		$dsc = $ds->config;
+	
+		$dbLink = mysql_connect($dsc['host'], $dsc['login'], $dsc['password']);
+		mysql_select_db($dsc['database'], $dbLink);
+	
+		mysql_query("SET character_set_results=utf8");
+		mysql_query("SET character_set_client=utf8");
+		mysql_query("SET character_set_connection=utf8");
+	
+		$result = mysql_query($sql) or die(mysql_error());
+	
+		//increase max_execution_time to 10 min if data set is very large
+		ini_set('max_execution_time', 600);
+		
+		return $result;
+	}
+//-----------------------------------------------------------------------------------------------------	
 	function insertSelectData($id,$name,$strquery) {
 		$this->log("START :: Queryexport -> insertSelectData()");
 		

@@ -1,5 +1,8 @@
 <?php
 class WebboardController extends AppController {
+	/*
+	 * REFERENCE : http://www.thaicreate.com/free-web-script/php-create-webboard-mysql.html
+	 */
 	/* ------------------------------------------------------------------------------------------------ */
 	public $names = 'WebboardController';
 	public $uses = array('Webboard', 'WebboardReply');
@@ -8,7 +11,7 @@ class WebboardController extends AppController {
 		$this->log('---- WebboardController -> index ----');
 		$this->setTitle('Webboard');
 		
-		$Per_Page = 2;
+		$Per_Page = 10;
 		$Page = @$this->request->query['Page'];
 		if(!$Page){
 			$Page=1;

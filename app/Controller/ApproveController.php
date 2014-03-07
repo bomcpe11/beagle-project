@@ -3,6 +3,22 @@ class ApproveController extends AppController{
 	public $name='Approve';
 	public $uses=array('Profile');
 	
+	function beforeFilter(){
+		parent::beforeFilter();
+		$this->log('Start # ApproveController -> beforeFilter()');
+		
+		$dataProfile =  parent::getObjUser();
+// 		$this->log($dataProfile['role']);
+
+		$role = $dataProfile['role'];
+		if($role && $role=='1'){
+			
+		}else{
+			$this->redirect(array("controller" => "Login", "action" => "index"));
+		}
+		
+	}
+	
 	public function index(){
 		$this->log('---- Approve->index() ----');
 		

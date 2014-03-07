@@ -8,7 +8,25 @@
 		jQuery(document).ready(function(){
 			setDatePicker('.datePicker');
 			setBirthDatePicker('.birthDatePicker');
-			CKEDITOR.replace( 'editCK', {filebrowserImageUploadUrl : getURL('/activity/uploadImages')});
+			
+			var config = {
+					filebrowserImageUploadUrl : getURL('/activity/uploadImages'),
+					filebrowserUploadUrl : getURL('/activity/uploadImages')
+// 					toolbarCanCollapse : false,
+// 					colorButton_enableMore : false,
+// 					toolbar :
+// 					[
+// 						{ name: 'document',    items : [ 'Source' ] },
+// 						{ name: 'clipboard',   items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+// 						{ name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
+// 						{ name: 'paragraph',   items : [ 'Blockquote','CreateDiv','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'] },
+// 						{ name: 'colors',      items : [ 'TextColor','BGColor' ] },
+// 						{ name: 'insert',      items : [ 'Link', 'Image', 'addFile', 'addImage' ] },
+// 						{ name: 'tools',       items : [ 'Maximize', 'About' ] }
+// 					]
+				};
+			
+			CKEDITOR.replace( 'editCK', config);
 		});
 		
 		function saveClick(){

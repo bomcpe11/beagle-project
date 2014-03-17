@@ -180,21 +180,21 @@ class ActivityController extends AppController {
 	public function uploadFiles(){
 		$this->log('Start :: ActivityController :: uploadFiles');
 	
-		$objUser = $this->getObjUser();
+		//$objUser = $this->getObjUser();
 	
 		//$this->log($_REQUEST);
 		// 		$this->log($_FILES);
 		// 		$this->log($this->webroot);
-		$callback = $this->request->query['CKEditorFuncNum'];
+		//$callback = $this->request->query['CKEditorFuncNum'];
 	
 		//TODO: Upload image file to /img/activities/
 	
 		// gen directory
-		$directory = "img/activities/".$objUser["id"];
+		$directory = "files/activities/2/2"; //$objUser["id"];
 	
 		$splitFileName = explode(".", $_FILES["upload"]["name"]);
-		$extensionFile = ".".$splitFileName[count($splitFileName)-1];
-		$fileName = $objUser["id"].'-img-'.time().$extensionFile;
+		//$extensionFile = ".".$splitFileName[count($splitFileName)-1];
+		$fileName = '2-img-'.time();//.$extensionFile;
 	
 		$result = '';
 		//*** upload file

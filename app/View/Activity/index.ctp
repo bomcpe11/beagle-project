@@ -1,5 +1,11 @@
 <?php include 'popup_join_activity.ctp'; ?>
 <script type="text/javascript">
+    function addFile(){
+		jQuery('#uploadFile').css("display","block");
+	}
+	function cancel(){
+		jQuery('#uploadFile').css("display","none");
+	}
 
 	function activityAdd(){
 		window.location.replace("<?php echo $this->webroot;?>Activity/addactivity");
@@ -33,6 +39,32 @@
 			}
 		);
 	}	
+	
+	function uploadFile(){
+		jConfirm('ท่านต้องการอัพโหลดไฟล์เพิ่มใช่หรือไม่?', 
+			function(){ //okFunc
+				loading();
+				jQuery.ajax({
+					type: "POST",
+					dataType: 'json',
+					url: '<?php echo $this->Html->url('/Activitylist/uploadFiles');?>',
+					data: {id:""},
+					success: function(data){
+						unloading();
+						if ( data.status ) {
+							jAlert(data.message, 
+								function(){
+									window.location.replace("<?php echo $this->webroot;?>Activitylist/index");
+								}
+							);
+						} else {
+							jAlert(data.message);
+						}
+					}
+				});
+			}
+		);
+	}
 </script>
 <style type="text/css">
 #activity-longdesc, #activity-longdesc p, #activity-longdesc td, #activity-longdesc th, #activity-longdesc span, #activity-longdesc div{
@@ -118,21 +150,42 @@
 	</tr>
 </table>
 <br/>
-<table class="tableLayout" width="100%" style="display:none;">
+<table class="tableLayout" width="100%" style="display:block;">
 	<tr align="left" >
-		<th colspan="4"> ไฟล์แนบ</th>
+		<th colspan="2"> ไฟล์แนบ</th>
 	</tr>
-	<tr align="left" >
-		<th>ชื่อไฟล์ไฟล์</th>
-		<th>คำอธิบาย</th>
-		<th>วันที่อัพโหลด</th>
-		<th>ลบไฟล์</th>
+	<tr>
+		<th align="left" width="40%">ชื่อไฟล์</th>
+		<th align="right" width="40%">ลบไฟล์</th>
 	</tr>
+	<?php
+			$dir = opendir("files/activities/".$result[0]["activities"]["id"]);
+			while (($file = readdir($dir)) !== false)
+			{ 
+	?>
+	<tr>
+		<td align="left">
+			<?php echo "$file"; ?>
+		</td>
+		<td align="right">X</td>
+	</tr>
+	<?php   }
+			closedir($dir);
+			?> 
 	<tr align="left" >
-		<th colspan="4"><input type="button" id="Add" onclick="javascript:activityAdd();" value="อัพโหลดไฟล์เพิ่ม"/></th>
+		<th colspan="4"><input type="button" id="AddFile" onclick="addFile();" value="อัพโหลดไฟล์เพิ่ม"/></th>
 	</tr>
 </table>
-
+<table class="tableLayout" id="uploadFile" width="100%" style="display:none;">
+	<tr>
+		<td class="td_label">ไฟล์แนบ : </td>
+		<td class="td_data"><input type="file"  id="upload" name="file_upload"></td>
+	</tr>
+	<tr>
+		<td><input value="Submit" type="button" onclick="uploadFile();"></td>
+		<td><input value="Cancel" type="button" onclick="cancel();"></td>
+	</tr>
+</table>
 <table class="tableLayout" width="100%">
 	<tr style="text-align:center">
 		<td>

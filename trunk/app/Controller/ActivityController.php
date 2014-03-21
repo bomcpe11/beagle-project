@@ -135,88 +135,26 @@ class ActivityController extends AppController {
 		$this->log('END :: ActivityController :: editActivity');
 	}
 	
-	public function uploadImages(){
-		$this->log('Start :: ActivityController :: uploadImages');
-		
-		$objUser = $this->getObjUser();
-		
-		//$this->log($_REQUEST);
-// 		$this->log($_FILES);
-// 		$this->log($this->webroot);
-		$callback = $this->request->query['CKEditorFuncNum'];
-		
-		//TODO: Upload image file to /img/activities/
-		
-		// gen directory
-		$directory = "img/activities/".$objUser["id"];
-		
-		$splitFileName = explode(".", $_FILES["upload"]["name"]);
-		$extensionFile = ".".$splitFileName[count($splitFileName)-1];
-		$fileName = $objUser["id"].'-img-'.time().$extensionFile;
-		
-		$result = '';
-		//*** upload file
-		if ( $this->checkDirectory($directory) ) {
-			if ( move_uploaded_file($_FILES["upload"]["tmp_name"]	// temp_file
-					, $directory."/".$fileName) ) {	// path file
-			} else {
-				$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
-			}// if else
-		} else {
-			$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
-		}// if
-		
-// 		$url='/jstphub/app/webroot/img/profiles/'.$objUser['id'].'/'.$objUser['id'].'-xxxx.jpg';
-		$url=$this->webroot."app/webroot/".$directory."/".$fileName;
-		$msg='';
-		$this->log('End :: ActivityController :: uploadImages');
-		//$this->set('message', json_encode(array('status'=>'1','message'=>'Success')));
-		$output = '<html><body><script type="text/javascript">window.parent.CKEDITOR.tools.callFunction('.$callback.', "'.$url.'","'.$msg.'");</script></body></html>';
-		$this->set('message', $output);
-		$this->layout='ajax';
-		$this->render('response');
-	}
-	
 	public function uploadFiles(){
 		$this->log('Start :: ActivityController :: uploadFiles');
-	
-		//$objUser = $this->getObjUser();
-	
-		//$this->log($_REQUEST);
-		// 		$this->log($_FILES);
-		// 		$this->log($this->webroot);
-		//$callback = $this->request->query['CKEditorFuncNum'];
-	
-		//TODO: Upload image file to /img/activities/
-	
-		// gen directory
-		$directory = "files/activities/2/2"; //$objUser["id"];
-	
+		$directory = "files/activities/".$objUser["id"]."/";
 		$splitFileName = explode(".", $_FILES["upload"]["name"]);
-		//$extensionFile = ".".$splitFileName[count($splitFileName)-1];
-		$fileName = '2-img-'.time();//.$extensionFile;
-	
+		$extensionFile = ".".$splitFileName[count($splitFileName)-1];
+		$fileName = '2-img-'.time().$extensionFile;
+		$this->log('directory = '.$directory.'  fileName = '.$fileName);
 		$result = '';
-		//*** upload file
+		
 		if ( $this->checkDirectory($directory) ) {
+			$this->log('TEMP FILE = '.$_FILES["upload"]["tmp_name"]);
 			if ( move_uploaded_file($_FILES["upload"]["tmp_name"]	// temp_file
 					, $directory."/".$fileName) ) {	// path file
 			} else {
 				$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
-			}// if else
+			}
 		} else {
 			$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
-		}// if
-	
-		// 		$url='/jstphub/app/webroot/img/profiles/'.$objUser['id'].'/'.$objUser['id'].'-xxxx.jpg';
-		$url=$this->webroot."app/webroot/".$directory."/".$fileName;
-		$msg='';
-		$this->log('End :: ActivityController :: uploadImages');
-		//$this->set('message', json_encode(array('status'=>'1','message'=>'Success')));
-		$output = '<html><body><script type="text/javascript">window.parent.CKEDITOR.tools.callFunction('.$callback.', "'.$url.'","'.$msg.'");</script></body></html>';
-		$this->set('message', $output);
-		$this->layout='ajax';
-		$this->render('response');
+		}
+		$this->log('End :: ActivityController :: uploadFiles');
 	}
 	
 	private function checkDirectory($directory) {

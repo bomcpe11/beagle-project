@@ -40,21 +40,21 @@
 		);
 	}	
 	
-	function uploadFile(){
-		jConfirm('ท่านต้องการอัพโหลดไฟล์เพิ่มใช่หรือไม่?', 
+	function deleteData(id){
+		jConfirm('ท่านต้องการลบภาพนี้ใช่หรือไม่?', 
 			function(){ //okFunc
 				loading();
 				jQuery.ajax({
 					type: "POST",
 					dataType: 'json',
-					url: '<?php echo $this->Html->url('/Activitylist/uploadFiles');?>',
-					data: {id:""},
+					url: '<?php echo $this->Html->url('/Activitylist/deleteActivity');?>',
+					data: {id:id},
 					success: function(data){
 						unloading();
 						if ( data.status ) {
 							jAlert(data.message, 
 								function(){
-									window.location.replace("<?php echo $this->webroot;?>Activitylist/index");
+									window.location.replace("<?php echo $this->webroot;?>Activity/index");
 								}
 							);
 						} else {
@@ -106,6 +106,8 @@
 		$enddtm = "";
 	}
 ?>
+<form id="form_data" name="form_data" method="post" action="<?php echo $this->webroot;?>Activity/uploadFiles" 
+		enctype="multipart/form-data">
 <table class="tableLayout" width="100%" border="0">
 	<tr>
 		<th align="right" width="170">ชื่อกิจกรรม : 
@@ -167,7 +169,11 @@
 		<td align="left">
 			<?php echo "$file"; ?>
 		</td>
-		<td align="right">X</td>
+		<td align="right">
+		<img style="cursor: pointer; cursor: hand;" 
+		onclick="deleteData('<?php echo $result[0]["activities"]["id"] ?>');" 
+		src="<?php echo $this->Html->url('/img/icon_del.png'); ?>" width="16" height="16" />
+		</td>
 	</tr>
 	<?php   }
 			closedir($dir);
@@ -179,10 +185,10 @@
 <table class="tableLayout" id="uploadFile" width="100%" style="display:none;">
 	<tr>
 		<td class="td_label">ไฟล์แนบ : </td>
-		<td class="td_data"><input type="file"  id="upload" name="file_upload"></td>
+		<td class="td_data"><input type="file"  id="upload" name="upload"></td>
 	</tr>
 	<tr>
-		<td><input value="Submit" type="button" onclick="uploadFile();"></td>
+		<td><input value="Submit" type="submit"  ></td>
 		<td><input value="Cancel" type="button" onclick="cancel();"></td>
 	</tr>
 </table>
@@ -200,3 +206,4 @@
 		</td>
 	</tr>
 </table>
+</form>

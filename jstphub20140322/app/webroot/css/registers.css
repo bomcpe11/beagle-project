@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+.tableLayout {
+	border: 3px solid #666666;
+	background-color: #F5F5F0;
+	padding: 10px;
+}
+.tableForm {
+}
+.tdLabel {
+	padding-left: 50px;
+	text-align: right;
+}
+.tdData {
+	text-align: left;
+}
+.upperBar {
+    border-bottom: 3px solid #666666;
+    padding-bottom: 5px;
+}
+.header1 {
+	font-weight: bold;
+	font-size: 24px;
+}
+.header2 {
+	font-weight: bold;
+	font-size: 16px;
+}

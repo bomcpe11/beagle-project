@@ -1,0 +1,219 @@
+2014-02-23 17:24:42 Debug: [ActivityController.php:139] Start :: ActivityController :: uploadImages
+2014-02-23 17:24:42 Debug: [ActivityController.php:144] Array
+(
+    [upload] => Array
+        (
+            [name] => DSC_1034.JPG
+            [type] => image/jpeg
+            [tmp_name] => /Applications/MAMP/tmp/php/phpKvOY7n
+            [error] => 0
+            [size] => 1537837
+        )
+
+)
+
+2014-02-23 17:24:42 Debug: [ActivityController.php:171] End :: ActivityController :: uploadImages
+2014-02-23 17:25:24 Debug: [ActivityController.php:139] Start :: ActivityController :: uploadImages
+2014-02-23 17:25:24 Debug: [ActivityController.php:144] Array
+(
+    [upload] => Array
+        (
+            [name] => DSC_1034.JPG
+            [type] => image/jpeg
+            [tmp_name] => /Applications/MAMP/tmp/php/phpgPqqwa
+            [error] => 0
+            [size] => 1537837
+        )
+
+)
+
+2014-02-23 17:25:24 Debug: [ActivityController.php:171] End :: ActivityController :: uploadImages
+2014-02-23 17:28:20 Debug: [ActivityController.php:139] Start :: ActivityController :: uploadImages
+2014-02-23 17:28:20 Debug: [ActivityController.php:145] /jstphub/
+2014-02-23 17:28:20 Debug: [ActivityController.php:187] not have directory
+2014-02-23 17:28:20 Debug: [ActivityController.php:203] make directory fail
+2014-02-23 17:28:20 Debug: [ActivityController.php:172] End :: ActivityController :: uploadImages
+2014-02-23 17:30:12 Debug: [ActivityController.php:139] Start :: ActivityController :: uploadImages
+2014-02-23 17:30:12 Debug: [ActivityController.php:172] End :: ActivityController :: uploadImages
+2014-02-23 17:30:52 Debug: [ActivityController.php:93] Start :: ActivityController :: editActivity
+2014-02-23 17:30:52 Debug: [ActivityController.php:103] id => 1
+2014-02-23 17:30:52 Debug: [ActivityController.php:104] activityName => กิจกรรม ทดสอบ 1
+2014-02-23 17:30:52 Debug: [ActivityController.php:109] startDate => 2014-01-01
+2014-02-23 17:30:52 Debug: [ActivityController.php:110] endDate => 2014-04-30
+2014-02-23 17:30:52 Debug: [ActivityController.php:111] location => มจธ.
+2014-02-23 17:30:52 Debug: [ActivityController.php:112] shortdesc => รุ่นที่ 1
+2014-02-23 17:30:52 Debug: [ActivityController.php:113] genname => ทดสอบระบบครับ
+2014-02-23 17:30:52 Debug: [ActivityController.php:114] longdesc => <h2>XXCXXXXX</h2>
+
+<p>CCCCCC</p>
+
+<p>&nbsp;</p>
+
+<p><img alt="heart" src="http://localhost/jstphub/js/ckeditor/plugins/smiley/images/heart.png" style="height:23px; width:23px" title="heart" /></p>
+
+<p><img alt="" src="/jstphub/app/webroot/img/activities/11/11-img-1393173012.JPG" style="height:333px; width:500px" /></p>
+
+2014-02-23 17:30:52 Debug: [Activity.php:128] strSql => UPDATE activities SET name = 'กิจกรรม ทดสอบ 1' ,startdtm = '2014-01-01' ,enddtm = '2014-04-30' ,location = 'มจธ.' ,genname = 'ทดสอบระบบครับ' ,shortdesc = 'รุ่นที่ 1' ,longdesc = '<h2>XXCXXXXX</h2>
+
+<p>CCCCCC</p>
+
+<p>&nbsp;</p>
+
+<p><img alt="heart" src="http://localhost/jstphub/js/ckeditor/plugins/smiley/images/heart.png" style="height:23px; width:23px" title="heart" /></p>
+
+<p><img alt="" src="/jstphub/app/webroot/img/activities/11/11-img-1393173012.JPG" style="height:333px; width:500px" /></p>
+' ,updated_at = sysdate() WHERE id = 1;
+2014-02-23 17:30:54 Debug: [ActivityController.php:130] message = บันทึกข้อมูล สำเร็จ
+2014-02-23 17:30:54 Debug: [ActivityController.php:131] status = 1
+2014-02-23 17:30:54 Debug: [ActivityController.php:135] END :: ActivityController :: editActivity
+2014-02-23 17:30:55 Debug: [ActivityController.php:8] Start :: ActivityController :: index
+2014-02-23 17:30:55 Debug: [ActivityController.php:12] ActivityController :: index => ID =1
+2014-02-23 17:30:55 Debug: [Activity.php:33] SELECT * FROM activities WHERE  id = 1
+2014-02-23 17:30:59 Debug: [ActivityController.php:24] ActivityController :: index => Result =กิจกรรม ทดสอบ 1
+2014-02-23 17:30:59 Debug: [ActivityController.php:25] End :: ActivityController :: index
+2014-02-23 17:38:18 Debug: [ActivityController.php:8] Start :: ActivityController :: index
+2014-02-23 17:38:18 Debug: [ActivityController.php:12] ActivityController :: index => ID =1
+2014-02-23 17:38:18 Debug: [Activity.php:33] SELECT * FROM activities WHERE  id = 1
+2014-02-23 17:38:22 Debug: [ActivityController.php:24] ActivityController :: index => Result =กิจกรรม ทดสอบ 1
+2014-02-23 17:38:22 Debug: [ActivityController.php:25] End :: ActivityController :: index
+2014-02-23 17:40:40 Debug: [ActivityController.php:8] Start :: ActivityController :: index
+2014-02-23 17:40:40 Debug: [ActivityController.php:12] ActivityController :: index => ID =1
+2014-02-23 17:40:40 Debug: [Activity.php:33] SELECT * FROM activities WHERE  id = 1
+2014-02-23 17:40:42 Debug: [ActivityController.php:24] ActivityController :: index => Result =กิจกรรม ทดสอบ 1
+2014-02-23 17:40:42 Debug: [ActivityController.php:25] End :: ActivityController :: index
+2014-02-23 17:40:51 Debug: [ActivityController.php:8] Start :: ActivityController :: index
+2014-02-23 17:40:51 Debug: [ActivityController.php:12] ActivityController :: index => ID =1
+2014-02-23 17:40:51 Debug: [Activity.php:33] SELECT * FROM activities WHERE  id = 1
+2014-02-23 17:40:52 Debug: [ActivityController.php:24] ActivityController :: index => Result =กิจกรรม ทดสอบ 1
+2014-02-23 17:40:52 Debug: [ActivityController.php:25] End :: ActivityController :: index
+2014-02-23 17:41:06 Debug: [ActivityController.php:8] Start :: ActivityController :: index
+2014-02-23 17:41:06 Debug: [ActivityController.php:12] ActivityController :: index => ID =1
+2014-02-23 17:41:06 Debug: [Activity.php:33] SELECT * FROM activities WHERE  id = 1
+2014-02-23 17:41:10 Debug: [ActivityController.php:24] ActivityController :: index => Result =กิจกรรม ทดสอบ 1
+2014-02-23 17:41:10 Debug: [ActivityController.php:25] End :: ActivityController :: index
+2014-02-23 17:42:53 Debug: [ActivityController.php:8] Start :: ActivityController :: index
+2014-02-23 17:42:53 Debug: [ActivityController.php:12] ActivityController :: index => ID =1
+2014-02-23 17:42:53 Debug: [Activity.php:33] SELECT * FROM activities WHERE  id = 1
+2014-02-23 17:42:54 Debug: [ActivityController.php:24] ActivityController :: index => Result =กิจกรรม ทดสอบ 1
+2014-02-23 17:42:54 Debug: [ActivityController.php:25] End :: ActivityController :: index
+2014-02-23 17:43:08 Debug: [ActivityController.php:8] Start :: ActivityController :: index
+2014-02-23 17:43:08 Debug: [ActivityController.php:12] ActivityController :: index => ID =1
+2014-02-23 17:43:08 Debug: [Activity.php:33] SELECT * FROM activities WHERE  id = 1
+2014-02-23 17:43:10 Debug: [ActivityController.php:24] ActivityController :: index => Result =กิจกรรม ทดสอบ 1
+2014-02-23 17:43:10 Debug: [ActivityController.php:25] End :: ActivityController :: index
+2014-02-23 18:14:52 Debug: [ActivityController.php:8] Start :: ActivityController :: index
+2014-02-23 18:14:52 Debug: [ActivityController.php:12] ActivityController :: index => ID =1
+2014-02-23 18:14:52 Debug: [Activity.php:33] SELECT * FROM activities WHERE  id = 1
+2014-02-23 18:14:55 Debug: [ActivityController.php:24] ActivityController :: index => Result =กิจกรรม ทดสอบ 1
+2014-02-23 18:14:55 Debug: [ActivityController.php:25] End :: ActivityController :: index
+2014-02-23 18:15:00 Debug: [ActivitylistController.php:22] START :: ActivitylistController -> deleteActivity
+2014-02-23 18:15:02 Debug: [Activity.php:18] sql => delete from activities where id =1
+2014-02-23 18:15:03 Debug: [ActivitylistController.php:36] message=ลบข้อมูล สำเร็จ
+2014-02-23 18:15:03 Debug: [ActivitylistController.php:40] END :: ActivitylistController -> deleteActivity
+2014-02-23 18:15:05 Debug: [ActivitylistController.php:12] Start :: ActivitylistController :: getActivitylist
+2014-02-23 18:15:08 Debug: [ActivitylistController.php:17] END :: ActivitylistController :: getActivitylist
+2014-02-23 18:33:28 Debug: [WebboardController.php:11] ---- WebboardController -> index ----
+2014-02-23 18:33:29 Debug: [Webboard.php:22] Array
+(
+    [0] => Array
+        (
+            [0] => Array
+                (
+                    [count] => 4
+                )
+
+        )
+
+)
+
+2014-02-23 18:34:11 Debug: [ActivitylistController.php:12] Start :: ActivitylistController :: getActivitylist
+2014-02-23 18:34:11 Debug: [ActivitylistController.php:17] END :: ActivitylistController :: getActivitylist
+2014-02-23 18:35:41 Debug: [WebboardController.php:11] ---- WebboardController -> index ----
+2014-02-23 18:35:41 Debug: [Webboard.php:22] Array
+(
+    [0] => Array
+        (
+            [0] => Array
+                (
+                    [count] => 4
+                )
+
+        )
+
+)
+
+2014-02-23 18:35:49 Debug: [WebboardController.php:59] ---- WebboardController -> viewWebboard ----
+2014-02-23 18:36:00 Debug: [WebboardController.php:101] ---- WebboardController -> ajaxSubmitReply ----
+2014-02-23 18:36:02 Debug: [WebboardController.php:59] ---- WebboardController -> viewWebboard ----
+2014-02-23 18:42:13 Debug: [LogoutController.php:30] Logout successful
+2014-02-23 18:42:13 Debug: [LoginController.php:10] ---- LoginController -> index ----
+2014-02-23 18:42:13 Debug: [LoginController.php:10] ---- LoginController -> index ----
+2014-02-23 18:42:18 Debug: [LoginController.php:30] ---- LoginController -> loginAjax ----
+2014-02-23 18:42:18 Debug: [LoginController.php:47] ---- LoginController -> loginFnc ----
+2014-02-23 18:42:19 Debug: [LoginController.php:73] write session complete
+2014-02-23 18:42:19 Debug: [LoginController.php:110] ---- LoginController -> deleteCookie ----
+2014-02-23 18:42:19 Debug: [LoginController.php:114] delete cookie complete
+2014-02-23 18:42:19 Debug: [ProfileController.php:18] ---- ProfileController -> index ----
+2014-02-23 18:42:24 Debug: [WebboardController.php:11] ---- WebboardController -> index ----
+2014-02-23 18:42:24 Debug: [Webboard.php:22] Array
+(
+    [0] => Array
+        (
+            [0] => Array
+                (
+                    [count] => 4
+                )
+
+        )
+
+)
+
+2014-02-23 18:42:26 Debug: [WebboardController.php:53] ---- WebboardController -> newTopic ----
+2014-02-23 18:42:28 Debug: [WebboardController.php:53] ---- WebboardController -> newTopic ----
+2014-02-23 18:42:38 Debug: [WebboardController.php:79] ---- WebboardController -> ajaxSubmitNewTopic ----
+2014-02-23 18:42:39 Debug: [WebboardController.php:11] ---- WebboardController -> index ----
+2014-02-23 18:42:40 Debug: [Webboard.php:22] Array
+(
+    [0] => Array
+        (
+            [0] => Array
+                (
+                    [count] => 5
+                )
+
+        )
+
+)
+
+2014-02-23 18:43:35 Debug: [WebboardController.php:59] ---- WebboardController -> viewWebboard ----
+2014-02-23 18:43:37 Debug: [WebboardController.php:59] ---- WebboardController -> viewWebboard ----
+2014-02-23 18:43:43 Debug: [WebboardController.php:101] ---- WebboardController -> ajaxSubmitReply ----
+2014-02-23 18:43:45 Debug: [WebboardController.php:59] ---- WebboardController -> viewWebboard ----
+2014-02-24 04:22:08 Debug: [WebboardController.php:59] ---- WebboardController -> viewWebboard ----
+2014-02-24 04:22:21 Debug: [WebboardController.php:11] ---- WebboardController -> index ----
+2014-02-24 04:22:21 Debug: [Webboard.php:22] Array
+(
+    [0] => Array
+        (
+            [0] => Array
+                (
+                    [count] => 0
+                )
+
+        )
+
+)
+
+2014-02-24 04:22:21 Debug: [WebboardController.php:59] ---- WebboardController -> viewWebboard ----
+2014-03-12 14:11:28 Debug: [ProfileController.php:18] ---- ProfileController -> index ----
+2014-03-12 14:11:39 Debug: [LoginController.php:10] ---- LoginController -> index ----
+2014-03-12 14:12:05 Debug: [LoginController.php:30] ---- LoginController -> loginAjax ----
+2014-03-12 14:12:05 Debug: [LoginController.php:47] ---- LoginController -> loginFnc ----
+2014-03-12 14:12:09 Debug: [LoginController.php:73] write session complete
+2014-03-12 14:12:09 Debug: [LoginController.php:110] ---- LoginController -> deleteCookie ----
+2014-03-12 14:12:09 Debug: [LoginController.php:114] delete cookie complete
+2014-03-12 14:12:09 Debug: [ProfileController.php:18] ---- ProfileController -> index ----
+2014-03-12 14:12:47 Debug: [LogoutController.php:30] Logout successful
+2014-03-12 14:12:47 Debug: [LoginController.php:10] ---- LoginController -> index ----
+2014-03-12 14:13:08 Debug: [WelcomeController.php:41] Test Logger krafffffff!!!!ครับ
+2014-03-12 14:13:08 Debug: [WelcomeController.php:42] Test Logger krafffffff!!!!ค่ะ

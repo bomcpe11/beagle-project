@@ -1,0 +1,128 @@
+@CHARSET "utf-8";
+/* Layout */
+.container {
+	/*border: 1px solid #666666;*/
+	/*border-radius: 5px;*/
+	width: 100%;
+	overflow: hidden;
+	margin: 5px 0px 5px 0px;
+	clear: both;
+}
+.container .section_content {
+	width: 100%;
+}
+.container .section_profile {
+	width: 100%;
+	height: 100%;
+}
+.container .section_profile .section_picture {
+	float: left;
+	width: 30%;
+}
+.container .section_profile .section_picture .picture {
+	width: 200px;
+	height: 200px;
+	
+	border: 1px solid #666666;
+	background-color: #FCFCFC;
+	border-radius:7px;
+	padding: 0 20px 0 20px;
+	margin: 20px auto 0px auto;
+	
+}
+.container .section_profile .section_picture img {
+	display: block;
+	width: 150px;
+	height: 150px;
+	margin: 10px auto 0 auto;
+}
+.container .section_profile .section_picture p {
+	margin: 10px 0 0 0;
+	text-align: center;
+}
+.container .section_profile .section_content {
+	float: left;
+	width: 70%;
+}
+.container .section_profile .section_content .table {
+	width: 100%;
+	margin: 0px 0px 0px 0px;
+}
+.container .section_content input[type="button"] {
+	display: block;
+	margin: 10px auto 10px auto;
+}
+/* Table */
+.table_form {
+	border: 1px solid #666666;
+	background-color: #FCFCFC;
+	border-radius:7px;
+	padding: 0 20px 0 20px;
+	margin: 20px auto 0 auto;
+	width: 100%;
+}
+.table_data, .table_data_item {
+	width: 100%;
+}
+.table_data_item {
+	width: 98%;
+	margin: 10px;
+	
+	border: 1px solid #666666;
+	background-color: #FCFCFC;
+	border-radius:7px;
+	padding: 0 20px 0 20px;
+}
+.table_data tr, .table_data th, .table_data td {
+	border: 1px solid black;
+}
+.no-found-data{
+	text-align: center;
+}
+.comment{
+	text-indent: 25px;
+}
+.table ul {
+	width: 100%;
+	overflow: hidden;
+	list-style-type: none;
+	line-height: 24px;
+	padding: 0;
+}
+.table ul li {
+	overflow: hidden;
+}
+.table ul li .single {
+	clear: both;
+}
+.table ul li.single p:first-child {
+	width: 25%
+}
+.table ul li.single p:last-child {
+	width: 75%
+}
+.table ul li p {
+	float: left;
+	margin: 0;
+	width: 25%;
+}
+.table ul li p strong {
+	display: block;
+	margin: 0 5px 0 0;
+	text-align: right;
+}
+.table ul li p input, .table ul li p select, .table ul li p textarea {
+	text-align: left;
+}
+.table ul li p textarea {
+	width: 98%;
+}
+
+.edit-delete{
+	text-align: right;
+}
+.edit-delete img{
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+}

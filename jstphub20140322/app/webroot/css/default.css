@@ -1,0 +1,154 @@
+@CHARSET "UTF-8";
+html {margin: 0px; padding: 0px;}
+body{
+	margin: 0px; padding: 0px;
+	font-family: verdana, sans-serif;
+	color: #7C410A;
+	font-size: 0.8em;
+}
+h1{
+/* 	color: #FFA900; */
+}
+h2{
+	color: #FFA900;
+}
+h3{
+	color: #FFA900;
+}
+h4{
+	margin: 10px;
+}
+p{
+	margin: 5px;
+}
+p, td{
+	
+}
+div#layout-container{
+	width: 1200px;
+	float:none;
+    margin:0 auto;
+}
+div#layout-header{
+	height: 200px;
+	width: 1200px;
+	background: url('../img/JstpHeader_v2.png');
+/* 	border:1px solid black; */
+/*     border-radius:5px;   */
+}
+div#layout-header h1{
+	text-align: center;
+}
+div#layout-footer{
+	text-align: center;
+	height: 70px;
+	width: 1200px;
+	border:1px solid black;
+/*     border-radius:5px;   */
+    margin: 0 auto ;
+}
+td.layout-sub-container1{
+	border:1px solid black;
+	border-radius:5px;
+	background-color: #FDFDFE;
+}
+div#layout-content{
+	padding: 10px 0;
+}
+.ui-datepicker-trigger{
+	vertical-align: middle;
+	cursor: pointer;
+}
+.ui-button-text-only .ui-button-text{
+	padding: .15em 1em;
+}
+div#layout-body{
+	width: 1200px;
+/* 	border:1px solid; */
+/*     border-radius:5px;   */
+	padding: 5px 0 5px 0;
+}
+div#profile-container{
+	width: 200px;
+	
+	border:1px solid black;
+    border-radius:2px;  
+    float:none;
+    margin:0 auto;
+}
+div#profile-picture{
+	width: 150px;
+	height: 150px;
+	border:1px solid black;
+    border-radius:2px;  
+    float:none;
+    margin:0 auto;
+    top:2px;
+    background-color: gray;
+}
+div#profile-desc{
+	width: 215px;
+    float:none;
+    margin:0 auto;
+}
+div#link-menu{
+	width: 200px;
+    float:none;
+    margin:0 auto;
+}
+a.menu{
+/* 	font-size:0.875em; */
+	display: block;
+	padding: 0 0 5px 20px;
+}
+
+/* section-layout */
+.section-layout{
+	border: 1px solid #dfd9c3;
+	width: 100%;
+	background: #f5f3e5;
+	border-radius:7px;
+	padding:15px 10px 15px 10px;
+}
+
+/* alignment */
+.form-label{
+	vertical-align:top;
+	text-align:right;
+}
+
+/* table */
+.table-data{
+	width: 100%;
+	font-size: 1em;
+	display: table;
+	border-spacing: 2px;
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+.table-data tr{
+	display: table-row;
+}
+.table-data tr:nth-child(odd){
+	background-color: #FFFFFF;
+}
+.table-data tr:nth-child(even){
+	background-color: #EAF2D3;
+}
+.table-data .hover:hover{
+	cursor: pointer;
+	background-color: #B8E62E;
+}
+.table-data th{
+	display: table-cell;
+	background-color: #A7C942;
+	border: 1px solid #98bf21;
+	font-weight: bold;
+}
+.table-data td{
+	display: table-cell;
+	border: 1px solid #98bf21;
+}
+.table_data tr.no-data{
+	text-align: center;
+}

@@ -2,16 +2,16 @@
 	echo $this->Html->css('personal_info.css');
 ?>
 <style>
-/* Override Class of Jquery UI */
-.ui-state-default{
-	overflow: hidden
-}
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{
-	border: 0;
-}
-.ui-icon{
-	float: left;
-}
+	/* Override Class of Jquery UI */
+	.ui-state-default{
+		overflow: hidden
+	}
+	.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{
+		border: 0;
+	}
+	.ui-icon{
+		float: left;
+	}
 </style>
 <!-- ##################################################################################################### -->
 <div id="tabs">
@@ -297,7 +297,7 @@
 							</table>
 						<?php }?>
 				<?php }else{?>
-					<table class="table_data_item">
+					<table class="table-data-item">
 						<tr class="no-found-data">
 							<td>ไม่พบข้อมูล</td>
 						</tr>
@@ -341,7 +341,7 @@
 									</table>";
 						}
 					}else{
-						echo "<table class=\"table_data_item\">
+						echo "<table class=\"table-data-item\">
 									<tr class=\"no-found-data\">
 										<td>ไม่พบข้อมูล</td>
 									</tr>
@@ -380,7 +380,7 @@
 									</table>";
 						}
 					} else { 	
-						echo "<table class=\"table_data_item\">
+						echo "<table class=\"table-data-item\">
 								<tr class=\"no-found-data\">
 									<td>ไม่พบข้อมูล</td>
 								</tr>
@@ -562,11 +562,6 @@
 <script type="text/javascript">
 	jQuery(document).ready(function() {
 			jQuery('#tabs').tabs();
-			jQuery("#sortable_family").sortable({
-				update: function(event, ui) {
-					setFamilySeq();
-			    }
-			});
 			
 			<?php 
 				if( !$isOwner ){
@@ -579,6 +574,12 @@
 									.",#button_add_workplace').remove();";
 					
 					echo "jQuery('.edit-delete').remove();";
+				}else{
+					echo "jQuery('#sortable_family').sortable({
+								update: function(event, ui) {
+									setFamilySeq();
+							    }
+							});";
 				}
 			?>
 		}

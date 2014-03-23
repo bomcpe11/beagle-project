@@ -44,7 +44,10 @@ class Comment extends AppModel {
 	public function getDataForProfile($profile_id,$commentable_id){
 		$result=null;
 		$sql="SELECT c.*
-					,p.login
+					,CONCAT(if(LENGTH(p.position)>0,p.position,p.titleth)
+							,p.nameth
+							,' '
+							,p.lastnameth) as commentator
 				FROM comments c,profiles p
 				WHERE c.commentable_id=p.id
 					AND c.profile_id='$profile_id'

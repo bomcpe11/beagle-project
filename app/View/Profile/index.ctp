@@ -520,7 +520,7 @@
 										<td colspan=\"2\" class=\"comment\">{$listComment[$i]['c']['comment']}</td>
 									</tr>
 									<tr>
-										<td colspan=\"2\">โดย {$listComment[$i]['p']['login']} เมื่อวันที่ {$listComment[$i]['c']['created_at']}</td>
+										<td colspan=\"2\">โดย {$listComment[$i][0]['commentator']} เมื่อวันที่ {$listComment[$i]['c']['created_at']}</td>
 									</tr>
 								</table>";
 						}

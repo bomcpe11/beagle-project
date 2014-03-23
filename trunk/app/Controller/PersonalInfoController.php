@@ -838,6 +838,34 @@ class PersonalInfoController extends AppController {
 		$this->render('response');
 	}
 	/* ------------------------------------------------------------------------------------------------ */
+	public function setFamilySeq(){
+		$this->log('---- PersonalInfoController -> setFamilySeq ----');
+		
+		$result = array();
+		$data = $this->request->data['data'];
+		$countData = count($data);
+		//$this->log($data);
+		
+		$dataSource = $this->Family->getDataSource();
+		$dataSource->begin();
+		for( $i=0;$i<$countData;$i++ ){
+			if( $this->Family->updateFamilySeq($data[$i]['family_id']
+											,$data[$i]['family_seq']) ){
+				$dataSource->commit();
+				$result['msg'] = 'การแก้ไขลำดับประวัติครอบครัวเสร็จเรียบร้อย';
+				$result['flag'] = 1;						
+			}else{
+				$dataSource->rollback();
+				$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขกิจกรรมที่เข้าร่วมเ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+				$result['flag'] = 1;
+			}
+		}
+		
+		$this->layout='ajax';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	}
+	/* ------------------------------------------------------------------------------------------------ */
 	public function changeFormatDate($data) {
 		/*
 		 * index of $explodeDate

@@ -35,22 +35,33 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 <head>
 	<?php 
 		echo $this->Html->charset(); 
-
-		echo $this->fetch('meta');
 	?>
 	<title>
 		<?php echo $cakeDescription ?>:
 		<?php echo $title_for_layout; ?>
 	</title>
 	<?php
+		/* CSS */
 		echo $this->Html->css('reset-stylesheet');
 		echo $this->Html->css('jstphub-default');
-		echo $this->Html->css('jquery/ui/south-street/jquery-ui-1.10.3.custom.min');	
-
+		echo $this->Html->css('jquery/ui/south-street/jquery-ui-1.10.3.custom.min');
+		echo $this->Html->css('loading');
+	
+		/* JavaScript */
+		echo $this->Html->script('jquery/core/jquery-1.10.2.min');
+		echo $this->Html->script('jquery/ui/jquery-ui-1.10.3.custom.min');
+		echo $this->Html->script('jquery/ui/jquery.ui.1.10.3.datepicker.th');
+		echo $this->Html->script('ckeditor/ckeditor');
+		echo $this->Html->script('loading');
+		echo $this->Html->script('jstphub-common');
+		
+		echo $this->fetch('meta');
 		echo $this->fetch('css');
+		echo $this->fetch('script');
 	?>
 </head>
 <body>
+	
 	<!-- Header -->
 	<div id="header">
 		<div id="header_logo_wrapper">
@@ -58,10 +69,12 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 		</div>
 		<div id="header_search_wrapper">
 			<form>
-				<table>
+				<table style="width: 100%;">
 					<tr>
-						<td><input style="width:245px;" type="text" placeholder="Search Project"></td>
-						<td>
+						<td style="width: 90%;">
+							<input style="width: 98%;" type="text" placeholder="Search Project">
+						</td>
+						<td style="width: 10%;">
 							<input type="image" src="../img/search-icon.png" 
 								style="width: 20px;height: 20px;margin-left: 5px;" title="Search Project">
 						</td>
@@ -71,56 +84,99 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 		</div>
 	</div>
 	<!-- Body -->
-	<div id="body">
-		<div id="profile">
-			<div id="profile_picture">
+	<div id="page">
+		<div id="column_left">
+			<div id="profile">
+				<div id="profile_picture">
+					<img src="<?php echo $this->webroot.$image_file;?>"
+						alt="Profile Picture" >
+				</div>
+				<div id="profile_title">
+					<div id="profile_nickname">
+						<?php echo $nickname; ?>
+					</div>
+					<div id="profile_title_generation">
+						<p style="font-size: 1em;">JSTP</p>
+						<p style="font-size: 1.75em;">
+							<?php echo $generation; ?>
+						</p>
+					</div>
+				</div>
+				<div id="profile_detial">
+					<p><?php if(isset($position) && !empty($position)){
+		                     	        echo $position;
+		                     	      }else{
+  										echo $titleth;
+  									  }
+								?>
+		                     <?php echo $nameth; ?>&nbsp;&nbsp;<?php echo $lastnameth; ?></p>
+					<p><?php echo isset($address) && !empty($address)? $address: '-';?></p>
+					<p style="position: absolute;bottom: 10px;right: 10px;">สถานะโปรไฟล์</p>
+				</div>
 			</div>
-			<div id="profile_title">
-				<div id="profile_title_name">
+			<div id="content">
+				<div id="page_title">
+					<h1><?php echo $page_title ?></h1>
 				</div>
-				<div id="profile_title_generation">
-				</div>
-			</div>
-			<div id="profile_detial">
-			</div>
-		</div>
-		<div id="menu">
-			<div id="menu_group_wrapper">
-				<div class="menu-item">
-					<img src="../img/icon-personalinfo-01.png" 
-						alt="Personal Info" title="personal Info"></img>
-				</div>
-				<div class="menu-item">
-					<img src="../img/icon-resources-01.png" 
-						alt="Resources" title="Resources"></img>
-				</div>
-				<div class="menu-item">
-					<img src="../img/icon-project-01.png" 
-						alt="Project" title="Project"></img>
-				</div>
-				<div class="menu-item">
-					<img src="../img/icon-export-01.png" 
-						alt="Export" title="Export"></img>
-				</div>
-				<div class="menu-item">
-					<img src="../img/icon-customize-01.png" 
-						alt="Customize" title="Customize"></img>
-				</div>
-				<div class="menu-item">
-					<img src="../img/icon-archieve-01.png" 
-						alt="Archieve" title="Archieve"></img>
-				</div>
-				<div class="menu-item">
-					<img src="../img/icon-mentorexpert-01.png" 
-						alt="Mentor Expert" title="Mentor Expert"></img>
-				</div>
-				<div class="menu-item">
-					<img src="../img/icon-otherjstp-01.png" 
-						alt="Other JSTP" title="Other JSTP"></img>
+				<div id="content_page">
+					<?php echo $this->fetch('content'); ?>
 				</div>
 			</div>
 		</div>
-		<div id="content">Content</div>
+		<div id="column_right">
+			<div id="menu">
+				<div id="menu_group_wrapper">
+					<div class="menu-item-wrapper">
+						<a href="<?php echo $this->webroot;?>PersonalInfo/index?id=<?php echo $objuser['id'];?>">
+							<img src="../img/icon-personalinfo-01.png" 
+								alt="Personal Info" title="Personal Info"></img>
+						</a>
+					</div>
+					<div class="menu-item-wrapper">
+						<a href="#">
+							<img src="../img/icon-resources-01.png" 
+								alt="Resources" title="Resources"></img>
+						</a>
+					</div>
+					<div class="menu-item-wrapper">
+						<a href="#">
+							<img src="../img/icon-project-01.png" 
+								alt="Project" title="Project"></img>
+						</a>
+					</div>
+					<div class="menu-item-wrapper">
+						<a href="#">
+							<img src="../img/icon-export-01.png" 
+								alt="Export" title="Export"></img>
+						</a>
+					</div>
+					<div class="menu-item-wrapper">
+						<a href="#">
+							<img src="../img/icon-customize-01.png" 
+								alt="Customize" title="Customize"></img>
+						</a>
+					</div>
+					<div class="menu-item-wrapper">
+						<a href="#">
+							<img src="../img/icon-archieve-01.png" 
+								alt="Archieve" title="Archieve"></img>
+						</a>
+					</div>
+					<div class="menu-item-wrapper">
+						<a href="#">
+							<img src="../img/icon-mentorexpert-01.png" 
+								alt="Mentor Expert" title="Mentor Expert"></img>
+						</a>
+					</div>
+					<div class="menu-item-wrapper">
+						<a href="#">
+							<img src="../img/icon-otherjstp-01.png" 
+								alt="Other JSTP" title="Other JSTP"></img>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<!-- Footer -->
 	<div id="footer">
@@ -137,17 +193,51 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 				alt="Logo SUT" title="Logo SUT"></img>
 		</div>
 	</div>
-	
-	<?php 
-		/* jQuery Core*/
-		echo $this->Html->script('jquery/core/jquery-1.10.2.min');
-		/* jQuery UI */
-		echo $this->Html->script('jquery/ui/jquery-ui-1.10.3.custom.min');
-		
-		echo $this->fetch('script');
+	<?php
+		if(isset($footer_trace) && !empty($footer_trace)){
+			?><div>####### FOOTER TRACE #######<br /><pre><?php print_r($footer_trace); ?></pre></div><?php
+		}
 	?>
+	<div id="block-page" class="loading-unblock"><div id="block-page_hdn"></div></div>
+	<div id="div_loading" class="loading-invisible">
+	    &nbsp;
+	    <table border="0" style="margin-left: auto;margin-right: auto;">
+	        <tr>
+	            <td align="center" valign="middle">
+	            		<?php echo $this->Html->image('loading.gif', array('style'=>'border: 0;')); ?>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td align="center" valign="middle">
+	                <font size="2" color="#FFFFFF"><b><span class="message">Loading</span></b></font>
+	            </td>
+	        </tr>
+	    </table>
+	    &nbsp;
+	</div>
+	
 	<script type="text/javascript">
-		
+		jQuery.noConflict();
+		G_WEB_ROOT = '<?php echo $this->webroot; ?>';
+	
+		jQuery(document).ready(function(){
+			resizeContent();
+			
+			jQuery(window).resize(function(){
+				resizeContent();
+			});
+
+			jQuery('input:button, input:submit').button();
+		});
+
+		function resizeContent(){
+			var window_width = jQuery(window).width()-1;
+			var profile_width = jQuery('#profile').width();
+			var menu_width = jQuery('#menu').width();
+			var padding_left_right_width = 20;
+
+			jQuery('#content').width(window_width - profile_width - menu_width - padding_left_right_width);
+		}
 	</script>
 </body>
 </html>

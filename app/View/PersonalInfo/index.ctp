@@ -1,6 +1,18 @@
 <?php 
 	echo $this->Html->css('personal_info.css');
 ?>
+<style>
+/* Override Class of Jquery UI */
+.ui-state-default{
+	overflow: hidden
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{
+	border: 0;
+}
+.ui-icon{
+	float: left;
+}
+</style>
 <!-- ##################################################################################################### -->
 <div id="tabs">
 	<ul>
@@ -130,52 +142,59 @@
 		<div class="container">
 			<h2>ประวัติครอบครัว</h2>
 			<div class="section_content">
-				<?php 
-					$countListFamily = empty($listFamily)?0:count($listFamily);
-					if( $countListFamily>0 ){
-						for($i=0; $i<$countListFamily; $i++){
-							echo "<table class='table_data_item'>
-									<colgroup>
-										<col style='width:40%;'/>
-										<col style='width:40%;'/>
-										<col style='width:20%;'/>
-									</colgroup>
-									<tr>
-										<td><strong>ความเกี่ยวข้อง : </strong>
-											<input id='family_id' type='hidden' value='{$listFamily[$i]['families']['id']}'/>
-											{$listFamily[$i]['families']['relation']}
-										</td>
-										<td>
-											<strong>ชื่อ-นามสกุล : </strong>
-											{$listFamily[$i]['families']['name']} {$listFamily[$i]['families']['lastname']}
-										</td>
-										<td class='edit-delete'>
-											<img src=\"{$this->Html->url('/img/icon_edit.png')}\"
-												onclick=\"openPopupFamily('{$listFamily[$i]['families']['id']}'
-																	,'{$listFamily[$i]['families']['relation']}'
-																	,'{$listFamily[$i]['families']['name']}'
-																	,'{$listFamily[$i]['families']['lastname']}'
-																	,'{$listFamily[$i]['families']['education']}'
-																	,'{$listFamily[$i]['families']['occupation']}'
-																	,'{$listFamily[$i]['families']['position']}')\"/>
-											<img src=\"{$this->Html->url('/img/icon_del.png')}\"
-												onclick=\"deleteFamily('{$listFamily[$i]['families']['id']}')\"/>
-										</td>
-									</tr>
-									<tr>
-										<td><strong>วุฒิการศึกษา : </strong>{$listFamily[$i]['families']['education']}</td>
-										<td><strong>อาชีพ : </strong>{$listFamily[$i]['families']['occupation']}</td>
-										<td><strong>ตำแหน่ง : </strong>{$listFamily[$i]['families']['position']}</td>
-									</tr>
-							</table>";
-						}
-					 }else {
-						echo "<table class='table_data_item'>
-								<tr class='no-found-data'>
-									<td>ไม่พบข้อมูล</td>
-								</tr>
-							</table>";
-				}?>
+				<ul id="sortable_family">
+					<?php 
+						$countListFamily = empty($listFamily)?0:count($listFamily);
+						if( $countListFamily>0 ){
+							for($i=0; $i<$countListFamily; $i++){
+								echo "<li class=\"ui-state-default\">
+										<input type=\"hidden\" name=\"family_id\" value=\"{$listFamily[$i]['families']['id']}\">
+										<span class=\"ui-icon ui-icon-arrowthick-2-n-s\"></span>
+										<table class='table-data-item'>
+											<colgroup>
+												<col style='width:40%;'/>
+												<col style='width:40%;'/>
+												<col style='width:20%;'/>
+											</colgroup>
+											<tr>
+												<td><strong>ความเกี่ยวข้อง : </strong>
+													{$listFamily[$i]['families']['relation']}
+												</td>
+												<td>
+													<strong>ชื่อ-นามสกุล : </strong>
+													{$listFamily[$i]['families']['name']} {$listFamily[$i]['families']['lastname']}
+												</td>
+												<td class='edit-delete'>
+													<img src=\"{$this->Html->url('/img/icon_edit.png')}\"
+														onclick=\"openPopupFamily('{$listFamily[$i]['families']['id']}'
+																			,'{$listFamily[$i]['families']['relation']}'
+																			,'{$listFamily[$i]['families']['name']}'
+																			,'{$listFamily[$i]['families']['lastname']}'
+																			,'{$listFamily[$i]['families']['education']}'
+																			,'{$listFamily[$i]['families']['occupation']}'
+																			,'{$listFamily[$i]['families']['position']}')\"/>
+													<img src=\"{$this->Html->url('/img/icon_del.png')}\"
+														onclick=\"deleteFamily('{$listFamily[$i]['families']['id']}')\"/>
+												</td>
+											</tr>
+											<tr>
+												<td><strong>วุฒิการศึกษา : </strong>{$listFamily[$i]['families']['education']}</td>
+												<td><strong>อาชีพ : </strong>{$listFamily[$i]['families']['occupation']}</td>
+												<td><strong>ตำแหน่ง : </strong>{$listFamily[$i]['families']['position']}</td>
+											</tr>
+									</table>
+								</li>";
+							}
+						 }else {
+							echo "<li class=\"ui-state-default\">
+									<table class=\"table-data-item\">
+										<tr class=\"no-found-data\">
+											<td>ไม่พบข้อมูล</td>
+										</tr>
+									</table>
+								</li>";
+					}?>
+				</ul>
 				
 				<input type="button" id="button_add_family" onclick="openPopupFamily('','','','','','','')" value="เพิ่มข้อมูล ประวัติครอบครัว"/>
 			</div>
@@ -187,7 +206,7 @@
 					$countListEducation = empty($listEducation)?0:count($listEducation);
 					if( $countListEducation>0 ){
 						for($i=0; $i<$countListEducation; $i++){?>
-							<table class="table_data_item">
+							<table class="table-data-item">
 								<tr>
 									<td style="width:30%"><strong>ระดับ : </strong><?php echo $listEducation[$i]['educations']['edutype'];?></td>
 									<td style="width:60%"><strong>ชื่อสถาบัน : </strong><?php echo $listEducation[$i]['educations']['name'];?></td>
@@ -227,7 +246,7 @@
 							</table>
 				<?php }
 					}else{?>
-					<table class="table_data_item">
+					<table class="table-data-item">
 						<tr class="no-found-data">
 							<td>ไม่พบข้อมูล</td>
 						</tr>
@@ -243,7 +262,7 @@
 				<?php if( !empty($listResearch) ){
 						$countListResearch = empty($listResearch)?0:count($listResearch);
 						for( $i=0;$i<$countListResearch;$i++ ){?>
-							<table class="table_data_item">
+							<table class="table-data-item">
 								<colgroup>
 									<col style="width:45%;"/>
 									<col style="width:55%;"/>
@@ -341,7 +360,7 @@
 					$countListAward = count($listAward);
 					if($countListAward>0){
 						for( $i=0;$i<$countListAward;$i++ ){
-							echo "<table class=\"table_data_item\">
+							echo "<table class=\"table-data-item\">
 										<tr>
 											<td><strong>ชื่อผลงาน : </strong>{$listAward[$i]['a']['name']}</td>
 											<td class=\"edit-delete\">
@@ -381,7 +400,7 @@
 							$temp_start_year = $listWorkplace[$i]['w']['startyear']? $listWorkplace[$i]['w']['startyear']: '-';
 							$temp_end_year = $listWorkplace[$i]['w']['endyear']? $listWorkplace[$i]['w']['endyear']: '-';
 							
-							echo "<table class=\"table_data_item\">
+							echo "<table class=\"table-data-item\">
 									<tr>
 										<td><strong>ตำแหน่ง : </strong>{$listWorkplace[$i]['w']['position']}</td>
 										<td><strong>ชื่อสถานที่ทำงาน : </strong>{$listWorkplace[$i]['w']['name']}</td>
@@ -407,7 +426,7 @@
 								</table>";
 						}
 					} else { 	
-							echo "<table class=\"table_data_item\">
+							echo "<table class=\"table-data-item\">
 									<tr class=\"no-found-data\">
 										<td>ไม่พบข้อมูล</td>
 									</tr>
@@ -425,7 +444,7 @@
 					$countListComment = count($listComment);
 					if( $countListComment>0 ){
 						for( $i=0;$i<$countListComment;$i++ ){
-							echo "<table class=\"table_data_item\">
+							echo "<table class=\"table-data-item\">
 									<tr>
 										<td><strong>หัวข้อ : {$listComment[$i]['c']['title']}</strong></td>
 									</tr>
@@ -438,7 +457,7 @@
 								</table>";
 						}
 					}else{
-						echo "<table class=\"table_data_item\">
+						echo "<table class=\"table-data-item\">
 									<tr class=\"no-found-data\">
 										<td>ไม่พบข้อมูล</td>
 									</tr>
@@ -449,7 +468,7 @@
 			
 			<?php if( $objuser['role']!=='10' && $objuser['role']!=='30' ){ //นักเรียน,นักศึกษา,วิทยากร ?>
 				<div class="section_content">
-					<table class="table_data_item">
+					<table class="table-data-item">
 						<tr>
 							<td><h3>เพิ่มความคิดเห็น</h3></td>
 						</tr>
@@ -543,6 +562,12 @@
 <script type="text/javascript">
 	jQuery(document).ready(function() {
 			jQuery('#tabs').tabs();
+			jQuery("#sortable_family").sortable({
+				update: function(event, ui) {
+					setFamilySeq();
+			    }
+			});
+			
 			<?php 
 				if( !$isOwner ){
 					echo "jQuery('#button_edit_profile"
@@ -558,6 +583,31 @@
 			?>
 		}
 	);
+	/* -------------------------------------------------------------------------------------------------- */
+	function setFamilySeq(){
+		var data = new Array();
+		
+		jQuery('#sortable_family').find('li').each(function(i,e){
+			data.push({'family_id':jQuery(e).find('input[name="family_id"]').val()
+					 ,'family_seq':i});
+		});
+
+		loading();
+		jQuery.post('<?php echo $this->Html->url('/PersonalInfo/setFamilySeq');?>'
+				,{'data':{'data':data}}
+				,function(data){
+					unloading();
+					jAlert(data.msg, 
+							function(){ //okFunc
+							}, 
+							function(){ //openFunc
+							}, 
+							function(){ //closeFunc
+							}
+							);
+				}
+				,'json');
+	}
 	/* -------------------------------------------------------------------------------------------------- */
 	function setFormatForDatePicker(strDate){
 		// Ex. 9 ก.พ. 2557

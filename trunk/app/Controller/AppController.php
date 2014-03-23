@@ -50,6 +50,12 @@ class AppController extends Controller {
 		$this->set("image_desc",$dataProfile['image_desc']);
 		$this->set("nameth", $dataProfile['nameth']);
 		$this->set("lastnameth",$dataProfile['lastnameth']);
+		$this->set("nickname",$dataProfile['nickname']);
+		
+		$generation = is_numeric($dataProfile['generation'])? $dataProfile['generation']: '-';
+		$this->set("generation",$generation);
+		
+		$this->set("address",$dataProfile['address']);
 		$this->set("login",$dataProfile['login']);
 		$this->set("last_login_at",$this->DateThai($dataProfile['last_login_at']));
 		$this->set('last_updated_at',$this->DateThai($dataProfile['updated_at']));

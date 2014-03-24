@@ -40,21 +40,21 @@
 		);
 	}	
 	
-	function deleteData(id){
+	function deleteFile(path,id){
 		jConfirm('ท่านต้องการลบภาพนี้ใช่หรือไม่?', 
 			function(){ //okFunc
 				loading();
 				jQuery.ajax({
 					type: "POST",
 					dataType: 'json',
-					url: '<?php echo $this->Html->url('/Activitylist/deleteActivity');?>',
-					data: {id:id},
+					url: '<?php echo $this->Html->url('/Activity/deleteFile');?>',
+					data: {path:path},
 					success: function(data){
 						unloading();
 						if ( data.status ) {
 							jAlert(data.message, 
 								function(){
-									window.location.replace("<?php echo $this->webroot;?>Activity/index");
+									window.location.replace("<?php echo $this->webroot;?>Activity?id=" + id);
 								}
 							);
 						} else {
@@ -108,6 +108,7 @@
 ?>
 <form id="form_data" name="form_data" method="post" action="<?php echo $this->webroot;?>Activity/uploadFiles" 
 		enctype="multipart/form-data">
+<input type="hidden" name="idUpload" value="<?php echo $result[0]["activities"]["id"] ?>" />
 <table class="tableLayout" width="100%" border="0">
 	<tr>
 		<th align="right" width="170">ชื่อกิจกรรม : 
@@ -167,13 +168,14 @@
 	?>
 	<tr>
 		<td align="left">
-			<?php echo "$file"; ?>
+			<?php if(is_file("files/activities/".$result[0]["activities"]["id"]."/"."$file")){ echo "$file"; ?>
 		</td>
 		<td align="right">
 		<img style="cursor: pointer; cursor: hand;" 
-		onclick="deleteData('<?php echo $result[0]["activities"]["id"] ?>');" 
+		onclick="deleteFile('<?php echo  "files/activities/".$result[0]["activities"]["id"]."/"."$file" ?>','<?php echo $result[0]["activities"]["id"] ?>');"
 		src="<?php echo $this->Html->url('/img/icon_del.png'); ?>" width="16" height="16" />
 		</td>
+		<?php } ?>
 	</tr>
 	<?php   }
 			closedir($dir);

@@ -137,7 +137,8 @@ class ActivityController extends AppController {
 	
 	public function uploadFiles(){
 		$this->log('Start :: ActivityController :: uploadFiles');
-		$directory = "files/activities/".$objUser["id"]."/";
+		$id =$_POST["idUpload"];
+		$directory = "files/activities/".$id."/";
 		$splitFileName = explode(".", $_FILES["upload"]["name"]);
 		$extensionFile = ".".$splitFileName[count($splitFileName)-1];
 		$fileName = '2-img-'.time().$extensionFile;
@@ -154,7 +155,22 @@ class ActivityController extends AppController {
 		} else {
 			$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
 		}
+		$this->redirect(array("controller" => "Activity", "action" => "?id=".$id));
 		$this->log('End :: ActivityController :: uploadFiles');
+	}
+	
+	public function deleteFile(){
+		$this->log('Start :: ActivityController :: deleteFile');
+		$path = $this->request->data['path'];
+		unlink($path);
+		$status = 1;
+		$message = 'สำเร็จ';
+		$this->log('message = '.$message);
+		$this->log('status = '.$status);
+		$this->layout='ajax';
+		$this->set('message', json_encode(array('status'=>$status,'message'=>$message)));
+		$this->render('response');
+		$this->log('End :: ActivityController :: deleteFile');
 	}
 	
 	private function checkDirectory($directory) {

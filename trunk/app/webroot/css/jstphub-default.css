@@ -12,7 +12,7 @@ html{
 }
 body{
 	height: 100%;
-	min-width: 1009px;
+	width: 1009px;
 	width: 100%;
 	background-color: #E0E0D1;
 	font-family: verdana, sans-serif;
@@ -65,87 +65,13 @@ h3{
 	margin: auto;
 	background-color: #181818;
 }
-#column_left{
-	float: left;
-	background-color: #3C3B3C;
-}
-	#profile{
-		height: 450px;
-		min-width: 230px;
-		float: left;
-		margin-top: 80px;
-		background-color: #8AA44E;
-	}
-		#profile_picture{
-			height: 230px;
-			width: 100%;
-		}
-			#profile_picture img{
-				height: 100%;
-				width: 100%;
-			}
-		#profile_title{
-			height: 50px;
-			width: 100%;
-			background-color: #A3C357;
-		}
-			#profile_nickname{
-				height: 40px;
-				width: 161px;
-				float: left;
-				padding-top: 10px;
-				padding-left: 10px;
-				font-size: 2em;
-				font-weight: bold;
-				color: #526033;
-			}
-			#profile_title_generation{
-				height: 45px;
-				width: 69px;
-				float: left;
-				background-color: #B8DB4D;
-				padding-top: 5px;
-				text-align: center;
-			}
-				#profile_title_generation p{
-					font-weight: bold;
-					color: #526033;
-				}
-		#profile_detial{
-			height: 160px;
-			position:relative;
-			padding-top: 10px;
-			padding-right: 10px;
-			text-align: right;
-		}
-			#profile_detial p{
-				font-weight: bold;
-				color: #526033;
-			}
-	#content{
-		min-height: 600px;
-		min-width: 439px;
-		float: left;
-		padding-top: 10px;
-		padding-bottom: 10px;
-		padding-left: 10px;
-		padding-right: 10px;
-	}
-		#page_title{
-			height: 100%;
-			width: 100%;
-		}
-		#content_page{
-			height: 100%;
-			width: 100%;
-			padding-top: 10px;
-		}
 #column_right{
 	float: right;
+	width: 260px;
 }
 	#menu{
 		height: 100%;
-		min-width: 260px;
+		width: 100%;
 		overflow: hidden;
 		/*background-image: url('../img/background-right-side.png');*/
 	}
@@ -180,6 +106,81 @@ h3{
 				    bottom: 0;
 				    margin: auto;
 				}
+#column_left{
+	margin-right: 260px;
+	background-color: #3C3B3C;
+}
+	#profile{
+		height: 450px;
+		width: 230px;
+		float: left;
+		margin-top: 80px;
+		background-color: #8AA44E;
+	}
+		#profile_picture{
+			height: 230px;
+			width: 100%;
+		}
+			#profile_picture img{
+				height: 100%;
+				width: 100%;
+			}
+		#profile_title{
+			height: 50px;
+			width: 100%;
+			background-color: #A3C357;
+		}
+			#profile_nickname{
+				height: 40px;
+				width: 161px;
+				float: left;
+				padding-top: 10px;
+				padding-left: 10px;
+				font-size: 2em;
+				font-weight: bold;
+				color: #526033;
+			}
+			#profile_title_generation{
+				height: 45px;
+				width: 59px;
+				float: left;
+				background-color: #B8DB4D;
+				padding-top: 5px;
+				text-align: center;
+			}
+				#profile_title_generation p{
+					font-weight: bold;
+					color: #526033;
+				}
+		#profile_detial{
+			height: 160px;
+			position:relative;
+			padding-top: 10px;
+			padding-right: 10px;
+			text-align: right;
+		}
+			#profile_detial p{
+				font-weight: bold;
+				color: #526033;
+			}
+	#content{
+		height: auto;
+		width: auto;
+		margin-left: 230px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+		#page_title{
+			height: 100%;
+			width: 100%;
+		}
+		#content_page{
+			height: 100%;
+			width: 100%;
+			padding-top: 10px;
+		}
 #footer{
 	height: 60px;
 	width: 100%;

@@ -59,6 +59,7 @@ h3{
 		}
 		
 #page{
+	min-height: 600px;
 	height: auto;
 	width: 100%;
 	overflow: hidden;

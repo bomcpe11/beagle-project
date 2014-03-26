@@ -14,8 +14,25 @@ class Workplace extends AppModel {
 								,$profile_id){
 		$flag = false;
 		$sql = "INSERT INTO workplaces 
-				(name,telephone,startyear,endyear,position,profile_id,created_at,updated_at)
-				VALUES('$name','$telephone','$startyear','$endyear','$position','$profile_id',now(),now())";
+				(seq
+				,name
+				,telephone
+				,startyear
+				,endyear
+				,position
+				,profile_id
+				,created_at
+				,updated_at)
+				VALUES
+				((SELECT ifnull(max(w.seq),0)+1 AS seq FROM workplaces w WHERE w.profile_id=$profile_id)
+				,'$name'
+				,'$telephone'
+				,'$startyear'
+				,'$endyear'
+				,'$position'
+				,'$profile_id'
+				,now()
+				,now())";
 		
 		try{
 			$this->query($sql);
@@ -40,9 +57,26 @@ class Workplace extends AppModel {
 					 ,startyear='$startyear'
 					 ,endyear='$endyear'
 					 ,position='$position'
-					 ,created_at=now()
 					 ,updated_at=now()
 				 WHERE id=$id";
+		
+		try{
+			$this->query($sql);
+			$flag = true;
+		}catch(Exception $e){
+			$this->log($e->getMessage());
+		}
+		
+		return $flag;
+	}
+	/* --------------------------------------------------------------------------------------------------- */
+	public function updateSeq($id,$seq){
+		$flag = false;
+		$sql = "UPDATE workplaces 
+				 SET seq=$seq
+					 ,updated_at=now()
+				 WHERE id=$id";
+		//$this->log($sql);
 		
 		try{
 			$this->query($sql);
@@ -72,7 +106,8 @@ class Workplace extends AppModel {
 		$result = null;
 		$sql = "SELECT w.*
 				FROM workplaces w
-				WHERE w.profile_id='$profile_id'";
+				WHERE w.profile_id='$profile_id'
+				ORDER BY seq";
 		//$this->log($sql);
 		
 		try{

@@ -7,7 +7,10 @@ class Education extends AppModel {
 	}
 	/* ------------------------------------------------------------------------------------------------- */
 	public function getEducationByProfileId($profile_id){
-		$sql = "SELECT * FROM educations WHERE profile_id='$profile_id'";
+		$sql = "SELECT * 
+				FROM educations 
+				WHERE profile_id='$profile_id' 
+				ORDER BY seq ASC";
 		
 		$result = $this->query($sql);
 		
@@ -25,7 +28,8 @@ class Education extends AppModel {
 					, $isGraduate){
 		$flag = false;
 		$sql = "INSERT INTO educations 
-					(name
+					(seq
+					, name
 					, faculty
 					, major
 					, gpa
@@ -37,7 +41,8 @@ class Education extends AppModel {
 					, updated_at
 					, isGraduate) 
 				VALUES 
-					('$name'
+					( (SELECT ifnull(max(e.seq),0) + 1 AS seq FROM educations e WHERE e.profile_id=$profile_id)
+					,'$name'
 					, '$faculty'
 					, '$major'
 					, '$gpa'
@@ -81,6 +86,24 @@ class Education extends AppModel {
 					, updated_at = now()
 					, isGraduate = $isGraduate 
 					WHERE id = '$id'";
+		
+		try{
+			$this->query($sql);
+			$flag = true;
+		}catch(Exception $e){
+			$this->log($e->getMessage());
+		}
+		
+		return $flag;
+	}
+	/* ------------------------------------------------------------------------------------------------- */
+	public function updateSeq($id,$seq){
+		$flag = false;
+		$sql = "UPDATE educations 
+					SET seq = $seq
+					, updated_at = now()
+					WHERE id = '$id'";
+		//$this->log($sql);
 		
 		try{
 			$this->query($sql);

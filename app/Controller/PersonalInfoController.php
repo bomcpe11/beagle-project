@@ -838,21 +838,67 @@ class PersonalInfoController extends AppController {
 		$this->render('response');
 	}
 	/* ------------------------------------------------------------------------------------------------ */
-	public function setFamilySeq(){
-		$this->log('---- PersonalInfoController -> setFamilySeq ----');
+	public function updateSortableSeq(){
+		$this->log('---- PersonalInfoController -> updateSortableSeq ----');
 		
+		//$this->log($this->request->data);
 		$result = array();
+		$flagUpdateData = false;
+		$id = $this->request->data['sortable_id'];
 		$data = $this->request->data['data'];
 		$countData = count($data);
-		//$this->log($data);
 		
-		$dataSource = $this->Family->getDataSource();
-		$dataSource->begin();
-		for( $i=0;$i<$countData;$i++ ){
-			if( $this->Family->updateFamilySeq($data[$i]['family_id']
-											,$data[$i]['family_seq']) ){
+		if( $id==='family' ){
+			$dataSource = $this->Family->getDataSource();
+			$dataSource->begin();
+			for( $i=0;$i<$countData;$i++ ){
+				$flagUpdateData = $this->Family->updateFamilySeq($data[$i]['id']
+																	,$data[$i]['seq']);
+				if( !$flagUpdateData ){
+					break;
+				}
+			}
+			if( $flagUpdateData ){
 				$dataSource->commit();
-				$result['msg'] = 'การแก้ไขลำดับประวัติครอบครัวเสร็จเรียบร้อย';
+				$result['msg'] = 'การแก้ไขลำดับ ข้อมูลประวัติครอบครัวเสร็จเรียบร้อย';
+				$result['flag'] = 1;						
+			}else{
+				$dataSource->rollback();
+				$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขกิจกรรมที่เข้าร่วมเ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+				$result['flag'] = 1;
+			}
+		}else if( $id==='education' ){
+			$dataSource = $this->Education->getDataSource();
+			$dataSource->begin();
+			for( $i=0;$i<$countData;$i++ ){
+				$flagUpdateData = $this->Education->updateSeq($data[$i]['id']
+																,$data[$i]['seq']);
+				if( !$flagUpdateData ){
+					break;
+				}
+			}
+			if( $flagUpdateData ){
+				$dataSource->commit();
+				$result['msg'] = 'การแก้ไขลำดับ ข้อมูลประวัติการศึกษาเสร็จเรียบร้อย';
+				$result['flag'] = 1;						
+			}else{
+				$dataSource->rollback();
+				$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขกิจกรรมที่เข้าร่วมเ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+				$result['flag'] = 1;
+			}
+		}else if( $id==='workplace' ){
+			$dataSource = $this->Workplace->getDataSource();
+			$dataSource->begin();
+			for( $i=0;$i<$countData;$i++ ){
+				$flagUpdateData = $this->Workplace->updateSeq($data[$i]['id']
+																,$data[$i]['seq']);
+				if( !$flagUpdateData ){
+					break;
+				}
+			}
+			if( $flagUpdateData ){
+				$dataSource->commit();
+				$result['msg'] = 'การแก้ไขลำดับ ข้อมูลประวัติการทำงานเสร็จเรียบร้อย';
 				$result['flag'] = 1;						
 			}else{
 				$dataSource->rollback();

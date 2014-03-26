@@ -206,56 +206,64 @@
 		<div class="container">
 			<h2>ประวัติการศึกษา</h2>
 			<div class="section_content">
-				<?php 
-					$countListEducation = empty($listEducation)?0:count($listEducation);
-					if( $countListEducation>0 ){
-						for($i=0; $i<$countListEducation; $i++){?>
+				<ul id="sortable_education">
+					<?php 
+						$countListEducation = empty($listEducation)?0:count($listEducation);
+						if( $countListEducation>0 ){
+							for($i=0; $i<$countListEducation; $i++){?>
+								<li class="ui-state-default">
+									<input type="hidden" name="education_id" value="<?php echo $listEducation[$i]['educations']['id'];?>">
+									<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+									<table class="table-data-item">
+										<tr>
+											<td style="width:30%"><strong>ระดับ : </strong><?php echo $listEducation[$i]['educations']['edutype'];?></td>
+											<td style="width:60%"><strong>ชื่อสถาบัน : </strong><?php echo $listEducation[$i]['educations']['name'];?></td>
+											<td style="width:10%" class="edit-delete">
+												<img src="<?php echo $this->Html->url('/img/icon_edit.png');?>"
+													onclick="openPopupEducation('<?php echo $listEducation[$i]['educations']['id'];?>'
+																				,'<?php echo $listEducation[$i]['educations']['edutype'];?>'
+																				,'<?php echo $listEducation[$i]['educations']['name'];?>'
+																				,'<?php echo $listEducation[$i]['educations']['faculty'];?>'
+																				,'<?php echo $listEducation[$i]['educations']['major'];?>'
+																				,'<?php echo $listEducation[$i]['educations']['isGraduate'];?>'
+																				,'<?php echo ( (empty($listEducation[$i]['educations']['startyear']))?'':intval($listEducation[$i]['educations']['startyear']) + 543 );?>'
+																				,'<?php echo ( (empty($listEducation[$i]['educations']['endyear']))?'':intval($listEducation[$i]['educations']['endyear']) + 543 );?>'
+																				,'<?php echo $listEducation[$i]['educations']['gpa'];?>')"/>
+												<img src="<?php echo $this->Html->url('/img/icon_del.png');?>"
+													onclick="deleteEducation('<?php echo $listEducation[$i]['educations']['id'];?>')"/>
+											</td>
+										</tr>
+										<tr>
+											<td><strong>คณะ : </strong><?php echo $listEducation[$i]['educations']['faculty'];?></td>
+											<td colspan="2"><strong>สาขาวิชา : </strong><?php echo ( empty($listEducation[$i]['educations']['major'])?'-':$listEducation[$i]['educations']['major'] );?></td>
+										</tr>
+										<tr>
+											<td><strong>ปีการศึกษา : </strong><?php 
+															if( !empty($listEducation[$i]['educations']['startyear'])&&!empty($listEducation[$i]['educations']['endyear']) ){
+																if($listEducation[$i]['educations']['isGraduate'] == 1){
+																	echo ( intval($listEducation[$i]['educations']['startyear']) + 543 ).' - '.( intval($listEducation[$i]['educations']['endyear']) + 543 );
+																}else{
+																	echo ( intval($listEducation[$i]['educations']['startyear']) + 543 ).' - '.( intval(date('Y')) + 543 );
+																}
+															}else{
+																echo "-";
+															}
+															?></td>
+											<td colspan="2"><strong>เกรดเฉลี่ย : </strong><?php echo ( empty($listEducation[$i]['educations']['gpa'])?'-':$listEducation[$i]['educations']['gpa'] );?></td>
+										</tr>
+									</table>
+								</li>
+					<?php }
+						}else{?>
+						<li class="ui-state-default">
 							<table class="table-data-item">
-								<tr>
-									<td style="width:30%"><strong>ระดับ : </strong><?php echo $listEducation[$i]['educations']['edutype'];?></td>
-									<td style="width:60%"><strong>ชื่อสถาบัน : </strong><?php echo $listEducation[$i]['educations']['name'];?></td>
-									<td style="width:10%" class="edit-delete">
-										<img src="<?php echo $this->Html->url('/img/icon_edit.png');?>"
-											onclick="openPopupEducation('<?php echo $listEducation[$i]['educations']['id'];?>'
-																		,'<?php echo $listEducation[$i]['educations']['edutype'];?>'
-																		,'<?php echo $listEducation[$i]['educations']['name'];?>'
-																		,'<?php echo $listEducation[$i]['educations']['faculty'];?>'
-																		,'<?php echo $listEducation[$i]['educations']['major'];?>'
-																		,'<?php echo $listEducation[$i]['educations']['isGraduate'];?>'
-																		,'<?php echo ( (empty($listEducation[$i]['educations']['startyear']))?'':intval($listEducation[$i]['educations']['startyear']) + 543 );?>'
-																		,'<?php echo ( (empty($listEducation[$i]['educations']['endyear']))?'':intval($listEducation[$i]['educations']['endyear']) + 543 );?>'
-																		,'<?php echo $listEducation[$i]['educations']['gpa'];?>')"/>
-										<img src="<?php echo $this->Html->url('/img/icon_del.png');?>"
-											onclick="deleteEducation('<?php echo $listEducation[$i]['educations']['id'];?>')"/>
-									</td>
-								</tr>
-								<tr>
-									<td><strong>คณะ : </strong><?php echo $listEducation[$i]['educations']['faculty'];?></td>
-									<td colspan="2"><strong>สาขาวิชา : </strong><?php echo ( empty($listEducation[$i]['educations']['major'])?'-':$listEducation[$i]['educations']['major'] );?></td>
-								</tr>
-								<tr>
-									<td><strong>ปีการศึกษา : </strong><?php 
-													if( !empty($listEducation[$i]['educations']['startyear'])&&!empty($listEducation[$i]['educations']['endyear']) ){
-														if($listEducation[$i]['educations']['isGraduate'] == 1){
-															echo ( intval($listEducation[$i]['educations']['startyear']) + 543 ).' - '.( intval($listEducation[$i]['educations']['endyear']) + 543 );
-														}else{
-															echo ( intval($listEducation[$i]['educations']['startyear']) + 543 ).' - '.( intval(date('Y')) + 543 );
-														}
-													}else{
-														echo "-";
-													}
-													?></td>
-									<td colspan="2"><strong>เกรดเฉลี่ย : </strong><?php echo ( empty($listEducation[$i]['educations']['gpa'])?'-':$listEducation[$i]['educations']['gpa'] );?></td>
+								<tr class="no-found-data">
+									<td>ไม่พบข้อมูล</td>
 								</tr>
 							</table>
-				<?php }
-					}else{?>
-					<table class="table-data-item">
-						<tr class="no-found-data">
-							<td>ไม่พบข้อมูล</td>
-						</tr>
-					</table>
-				<?php }?>
+						</li>
+					<?php }?>
+				</ul>
 				
 				<input type="button" id="button_add_education" onclick="openPopupEducation('','','','','','0','','','')" value="เพิ่มข้อมูล ประวัติการศึกษา"/>
 			</div>
@@ -397,49 +405,57 @@
 		<div class="container">
 			<h2>ประวัติการทำงาน</h2>
 			<div class="section_content">
-				<?php 
-					$countListWorkplace = count($listWorkplace);
-					if( $countListWorkplace>0 ){
-						for( $i=0;$i<$countListWorkplace;$i++ ){
-							$temp_start_year = $listWorkplace[$i]['w']['startyear']? $listWorkplace[$i]['w']['startyear']: '-';
-							$temp_end_year = $listWorkplace[$i]['w']['endyear']? $listWorkplace[$i]['w']['endyear']: '-';
-							
-							echo "<table class=\"table-data-item\">
-									<tr>
-										<td><strong>ตำแหน่ง : </strong>{$listWorkplace[$i]['w']['position']}</td>
-										<td><strong>ชื่อสถานที่ทำงาน : </strong>{$listWorkplace[$i]['w']['name']}</td>
-										<td class=\"edit-delete\">
-											<img src=\"{$this->Html->url('/img/icon_edit.png')}\" width=\"16\" height=\"16\"
-													onclick=\"openPopupWorkplace('{$listWorkplace[$i]['w']['id']}'
-																					,'{$listWorkplace[$i]['w']['name']}'
-																					,'{$listWorkplace[$i]['w']['position']}'
-																					,'{$listWorkplace[$i]['w']['telephone']}'
-																					,'{$listWorkplace[$i]['w']['startyear']}'
-																					,'{$listWorkplace[$i]['w']['endyear']}')\" />
-											<img src=\"{$this->Html->url('/img/icon_del.png')}\" width=\"16\" height=\"16\"
-													onclick=\"deletedWorkplace('{$listWorkplace[$i]['w']['id']}')\" />
-										</td>
-									</tr>
-									<tr>
-										<td><strong>โทรศัพท์ : </strong>{$listWorkplace[$i]['w']['telephone']}</td>
-										<td>
-											<strong>ปีที่เริ่มงาน : </strong>$temp_start_year
-											<strong style=\"padding-left: 3px;padding-right: 3px;\"> ถึง  </strong>$temp_end_year
-										</td>
-									</tr>
-								</table>";
+				<ul id="sortable_workplace">
+					<?php 
+						$countListWorkplace = count($listWorkplace);
+						if( $countListWorkplace>0 ){
+							for( $i=0;$i<$countListWorkplace;$i++ ){
+								$temp_start_year = $listWorkplace[$i]['w']['startyear']? $listWorkplace[$i]['w']['startyear']: '-';
+								$temp_end_year = $listWorkplace[$i]['w']['endyear']? $listWorkplace[$i]['w']['endyear']: '-';
+								
+								echo "<li class=\"ui-state-default\">
+										<input type=\"hidden\" name=\"workplace_id\" value=\"{$listWorkplace[$i]['w']['id']}\">
+										<span class=\"ui-icon ui-icon-arrowthick-2-n-s\"></span>
+										<table class=\"table-data-item\">
+											<tr>
+												<td><strong>ตำแหน่ง : </strong>{$listWorkplace[$i]['w']['position']}</td>
+												<td><strong>ชื่อสถานที่ทำงาน : </strong>{$listWorkplace[$i]['w']['name']}</td>
+												<td class=\"edit-delete\">
+													<img src=\"{$this->Html->url('/img/icon_edit.png')}\" width=\"16\" height=\"16\"
+															onclick=\"openPopupWorkplace('{$listWorkplace[$i]['w']['id']}'
+																							,'{$listWorkplace[$i]['w']['name']}'
+																							,'{$listWorkplace[$i]['w']['position']}'
+																							,'{$listWorkplace[$i]['w']['telephone']}'
+																							,'{$listWorkplace[$i]['w']['startyear']}'
+																							,'{$listWorkplace[$i]['w']['endyear']}')\" />
+													<img src=\"{$this->Html->url('/img/icon_del.png')}\" width=\"16\" height=\"16\"
+															onclick=\"deletedWorkplace('{$listWorkplace[$i]['w']['id']}')\" />
+												</td>
+											</tr>
+											<tr>
+												<td><strong>โทรศัพท์ : </strong>{$listWorkplace[$i]['w']['telephone']}</td>
+												<td>
+													<strong>ปีที่เริ่มงาน : </strong>$temp_start_year
+													<strong style=\"padding-left: 3px;padding-right: 3px;\"> ถึง  </strong>$temp_end_year
+												</td>
+											</tr>
+										</table>
+									</li>";
+							}
+						} else { 	
+								echo "<li class=\"ui-state-default\">
+										<table class=\"table-data-item\">
+											<tr class=\"no-found-data\">
+												<td>ไม่พบข้อมูล</td>
+											</tr>
+										</table>
+									</li>";
 						}
-					} else { 	
-							echo "<table class=\"table-data-item\">
-									<tr class=\"no-found-data\">
-										<td>ไม่พบข้อมูล</td>
-									</tr>
-								</table>";
-					}
-				?>
-				
-				<input type="button" id="button_add_workplace" value="เพิ่มข้อมูล ประวัติการทำงาน" onclick=" openPopupWorkplace('','','','','','','')"/>
-			</div>
+					?>
+					
+					<input type="button" id="button_add_workplace" value="เพิ่มข้อมูล ประวัติการทำงาน" onclick=" openPopupWorkplace('','','','','','','')"/>
+				</div>
+			</ul>
 		</div>
 		<div class="container">
 			<h2>ความคิดเห็น</h2>
@@ -579,9 +595,15 @@
 					
 					echo "jQuery('.edit-delete').remove();";
 				}else{
-					echo "jQuery('#sortable_family').sortable({
+					echo "jQuery('#sortable_family"
+								.",#sortable_education"
+								.",#sortable_workplace').sortable({
 								update: function(event, ui) {
-									setFamilySeq();
+									// format => sortable_xxxx
+									var sortable_id = ui.item.parent('ul').prop('id').replace(/sortable_/gi,'');
+									//console.log(sortable_id);
+									
+									updateSortableSeq(sortable_id);
 							    }
 							});";
 				}
@@ -589,17 +611,18 @@
 		}
 	);
 	/* -------------------------------------------------------------------------------------------------- */
-	function setFamilySeq(){
+	function updateSortableSeq(sortable_id){
 		var data = new Array();
 		
-		jQuery('#sortable_family').find('li').each(function(i,e){
-			data.push({'family_id':jQuery(e).find('input[name="family_id"]').val()
-					 ,'family_seq':i});
+		jQuery('#sortable_'+sortable_id).find('li').each(function(i,e){
+			data.push({'id':jQuery(e).find('input[name="'+sortable_id+'_id"]').val()
+					 ,'seq':i});
 		});
 
 		loading();
-		jQuery.post('<?php echo $this->Html->url('/PersonalInfo/setFamilySeq');?>'
-				,{'data':{'data':data}}
+		jQuery.post('<?php echo $this->Html->url('/PersonalInfo/updateSortableSeq');?>'
+				,{'data':{'sortable_id':sortable_id
+							,'data':data}}
 				,function(data){
 					unloading();
 					jAlert(data.msg, 

@@ -35,6 +35,10 @@
 								<td style="text-align:right;">ตำแหนง :</td>\
 								<td><input id="family-position" type="text" value=' + position +'></td>\
 							</tr>\
+							<tr>\
+								<td style="text-align:right;">สถานะ :</td>\
+								<td><input  type="checkbox" value=></td>\
+							</tr>\
 						</table>\
 					</div>';
 

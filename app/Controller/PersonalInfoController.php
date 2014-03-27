@@ -7,12 +7,8 @@ class PersonalInfoController extends AppController {
 						,'Profile'
 						,'Family'
 						,'Education'
-						,'Research'
-						,'Award'
-						,'Otherwork'
 						,'Workplace'
-						,'Comment'
-						,'JoinActivity');
+						,'Comment');
 	public $layout = "default_new";
 	/* ------------------------------------------------------------------------------------------------ */
 	public function index(){
@@ -22,7 +18,6 @@ class PersonalInfoController extends AppController {
 		$sssnObjUser = $this->getObjUser();
 		$objUser = $this->Profile->getDataById($get_profile_id);
 		//$this->log(print_r($objUser, true));
-		$pageTitle='ไม่พบข้อมูล';
 		$isOwner = false;
 		$fullNameTh = null;
 		$birthday = null;
@@ -31,22 +26,10 @@ class PersonalInfoController extends AppController {
 		$namePrefixEn = null;
 		$listFamily = null;
 		$listEducation = null;
-		$listResearchType = null;
-		$listResearch = null;
-		$listAward = null;
-		$listOtherwork = null;
 		$listWorkplace = null;
 		$listComment = null;
-		$listActivity = null;
 		
 		if( !empty($objUser) ){
-			/* page title */
-			$pageTitle = 'ข้อมูลส่วนตัว - '
-						. ( !empty($objUser[0]['profiles']['position'])?$objUser[0]['profiles']['position']:$objUser[0]['profiles']['titleth'] )
-						. $objUser[0]['profiles']['nameth'] 
-						. ' '
-						. $objUser[0]['profiles']['lastnameth'];
-						
 			/* owner profile */
 			if( $get_profile_id==$sssnObjUser['id'] ){
 				$isOwner = true;
@@ -96,18 +79,6 @@ class PersonalInfoController extends AppController {
 			$listEducation = $this->Education->getEducationByProfileId($objUser[0]['profiles']['id']);
 			//$this->log(print_r($listEducation, true));
 			
-			/* research */
-			$listResearchType = $this->Gvar->getVarcodeVardesc1ByVarname('RESEARCH_TYPE');
-			$listResearch = $this->Research->getDataByProfileId($objUser[0]['profiles']['id']);
-			//$this->log(print_r($listResearch, true));
-			
-			/* award */
-			$listAward = $this->Award->getDataByProfileId($objUser[0]['profiles']['id']);
-			//$this->log(print_r($listAward, true));
-			
-			/* otherword */
-			$listOtherwork = $this->Otherwork->getDataByProfileId($objUser[0]['profiles']['id']);
-			
 			/* work place */
 			$listWorkplace = $this->Workplace->getDataByProfileId($objUser[0]['profiles']['id']);
 			$countListWorkplace = count($listWorkplace);
@@ -126,27 +97,11 @@ class PersonalInfoController extends AppController {
 				$listComment[$i]['c']['updated_at'] = $this->DateThai($listComment[$i]['c']['updated_at']).' เวลา '.$splitUpdatedAt[1].' น.';
 			}
 			//$this->log(print_r($listComment, true));
-			
-			/* activity */
-			$listActivity = $this->JoinActivity->getActivityForProfile($objUser[0]['profiles']['id']);
-			$countListActivity = count($listActivity);
-			for( $i=0;$i<$countListActivity;$i++ ){
-				if( !empty($listActivity[$i]['a']['startdtm']) ){
-					$listActivity[$i]['a']['startdtm'] = $this->DateThai($listActivity[$i]['a']['startdtm']);
-				}
-				if( !empty($listActivity[$i]['a']['enddtm']) ){
-					$listActivity[$i]['a']['enddtm'] = $this->DateThai($listActivity[$i]['a']['enddtm']);
-				}
-			}
-			//$this->log(print_r($listActivity, true));
 		}
 		
-		/* set data to view*/
-		$this->setTitle($pageTitle);
+		/* set data to view */
 		$this->set(compact('isOwner', 'objUser', 'fullNameTh', 'birthday' ,'age', 'namePrefixTh'
-							,'namePrefixEn', 'listFamily','listEducation', 'listResearchType'
-							,'listResearch', 'listAward','listOtherwork', 'listWorkplace','listComment'
-							,'listActivity'));
+							,'namePrefixEn', 'listFamily','listEducation', 'listWorkplace','listComment'));
 	}
 	/* ------------------------------------------------------------------------------------------------ */
 	public function updateProfileAjax() {
@@ -400,276 +355,6 @@ class PersonalInfoController extends AppController {
 		$this->render('response');
 	}
 	/* ------------------------------------------------------------------------------------------------ */
-	public function savedNewResearch(){
-		$this->log('---- PersonalInfoController -> savedNewResearch ----');
-		
-		$result = array();
-		$objUser = $this->getObjUser();
-		//$this->log($this->request->data);
-		$name = $this->request->data['name'];
-		$researchtype = $this->request->data['researchtype'];
-		$advisor = $this->request->data['advisor'];
-		$organization = $this->request->data['organization'];
-		$isnotfinish = ( ($this->request->data['isnotfinish']==='true')?'1':'0' );
-		$yearfinish = empty($this->request->data['yearfinish'])?'null':intval($this->request->data['yearfinish'])-543;
-		$dissemination = $this->request->data['dissemination'];
-
-		$dataSource = $this->Research->getDataSource();
-		if( $this->Research->insertData($name
-										,$researchtype
-										,$advisor
-										,$organization
-										,$objUser['id']
-										,$isnotfinish
-										,$yearfinish
-										,$dissemination) ){
-			$dataSource->commit();
-			$result['msg'] = 'การแก้ไขข้อมูลผลการวิจัยเสร็จเรียบร้อย';
-			$result['flag'] = 1;
-		}else{
-			$dataSource->rollback();
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลผลการวิจัย กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
-			$result['flag'] = -1;
-		}
-		
-		$this->layout='ajax';
-		$this->set('message', json_encode($result));
-		$this->render('response');
-	}
-	/* ------------------------------------------------------------------------------------------------ */
-	public function editResearch(){
-		$this->log('---- PersonalInfoController -> editResearch ----');
-		
-		$result = array();
-		$objUser = $this->getObjUser();
-		//$this->log($this->request->data);
-		$id = $this->request->data['id'];
-		$name = $this->request->data['name'];
-		$researchtype = $this->request->data['researchtype'];
-		$advisor = $this->request->data['advisor'];
-		$organization = $this->request->data['organization'];
-		$isnotfinish = ( ($this->request->data['isnotfinish']=='true')?'1':'0' );
-		$yearfinish = empty($this->request->data['yearfinish'])?'null':intval($this->request->data['yearfinish'])-543;
-		$dissemination = $this->request->data['dissemination'];
-
-		$dataSource = $this->Research->getDataSource();
-		if( $this->Research->updateData($id
-										,$name
-										,$researchtype
-										,$advisor
-										,$organization
-										,$objUser['id']
-										,$isnotfinish
-										,$yearfinish
-										,$dissemination) ){
-			$dataSource->commit();
-			$result['msg'] = 'การแก้ไขข้อมูลผลการวิจัยเสร็จเรียบร้อย';
-			$result['flag'] = 1;
-		}else{
-			$dataSource->rollback();
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลผลการวิจัย กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
-			$result['flag'] = -1;
-		}
-		
-		$this->layout='ajax';
-		$this->set('message', json_encode($result));
-		$this->render('response');
-	}
-	/* ------------------------------------------------------------------------------------------------ */
-	public function deleteResearch(){
-		$this->log('---- PersonalInfoController -> deleteResearch ----');
-		
-		$result = array();
-		//$this->log($this->request->data);
-		$id = $this->request->data['id'];
-
-		$dataSource = $this->Research->getDataSource();
-		if( $this->Research->deleteData($id) ){
-			$dataSource->commit();
-			$result['msg'] = 'การแก้ไขข้อมูลผลการวิจัยเสร็จเรียบร้อย';
-			$result['flag'] = 1;
-		}else{
-			$dataSource->rollback();
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลผลการวิจัย กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
-			$result['flag'] = -1;
-		}
-		
-		$this->layout='ajax';
-		$this->set('message', json_encode($result));
-		$this->render('response');
-	}
-	/* ------------------------------------------------------------------------------------------------ */
-	public function savedNewOtherwork(){
-		$this->log('---- PersonalInfoController -> savedNewOtherwork ----');
-		
-		$result = array();
-		$objUser = $this->getObjUser();
-		//$this->log($this->request->data);
-		$name = $this->request->data['name'];
-		$organization = $this->request->data['organization'];
-		$yearfinish = empty($this->request->data['yearfinish'])?'null':intval($this->request->data['yearfinish'])-543;
-		$isnotfinish = ( ($this->request->data['isnotfinish']==='true')?'1':'0' );
-
-		$dataSource = $this->Otherwork->getDataSource();
-		if( $this->Otherwork->insertData($name
-										,$organization
-										,$objUser['id']
-										,$yearfinish
-										,$isnotfinish) ){
-			$dataSource->commit();
-			$result['msg'] = 'การแก้ไขข้อมูลรางวัลอื่นๆเรียบร้อย';
-			$result['flag'] = 1;
-		}else{
-			$dataSource->rollback();
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลรางวัลอื่นๆ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
-			$result['flag'] = -1;
-		}
-		
-		$this->layout='ajax';
-		$this->set('message', json_encode($result));
-		$this->render('response');
-	}
-	/* ------------------------------------------------------------------------------------------------ */
-	public function editOtherwork(){
-		$this->log('---- PersonalInfoController -> editOtherwork ----');
-		
-		$result = array();
-		$objUser = $this->getObjUser();
-		//$this->log($this->request->data);
-		$id = $this->request->data['id'];
-		$name = $this->request->data['name'];
-		$organization = $this->request->data['organization'];
-		$yearfinish =  ($this->request->data['yearfinish']==='-')?'null':intval($this->request->data['yearfinish'])-543;
-		$isnotfinish = ( ($this->request->data['isnotfinish']==='true')?'1':'0' );
-		
-		$dataSource = $this->Otherwork->getDataSource();
-		if( $this->Otherwork->updateData($id
-										,$name
-										,$organization
-										,$objUser['id']
-										,$yearfinish
-										,$isnotfinish) ){
-			$dataSource->commit();
-			$result['msg'] = 'การแก้ไขข้อมูลรางวัลอื่นๆเรียบร้อย';
-			$result['flag'] = 1;
-		}else{
-			$dataSource->rollback();
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลรางวัลอื่นๆ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
-			$result['flag'] = -1;
-		}
-		
-		$this->layout='ajax';
-		$this->set('message', json_encode($result));
-		$this->render('response');
-	}
-	/* ------------------------------------------------------------------------------------------------ */
-	public function deleteOtherwork(){
-		$this->log('---- PersonalInfoController -> deleteOtherwork ----');
-		
-		$result = array();
-		//$this->log($this->request->data);
-		$id = $this->request->data['id'];
-
-		$dataSource = $this->Otherwork->getDataSource();
-		if( $this->Otherwork->deleteData($id) ){
-			$dataSource->commit();
-			$result['msg'] = 'การแก้ไขข้อมูลรางวัลอื่นๆเรียบร้อย';
-			$result['flag'] = 1;
-		}else{
-			$dataSource->rollback();
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลรางวัลอื่นๆ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
-			$result['flag'] = -1;
-		}
-		
-		$this->layout='ajax';
-		$this->set('message', json_encode($result));
-		$this->render('response');
-	}
-	/* ------------------------------------------------------------------------------------------------ */
-	public function savedNewAward(){
-		$this->log('---- PersonalInfoController -> savedNewAward ----');
-		
-		$result = array();
-		$objUser = $this->getObjUser();
-		//$this->log($this->request->data);
-		$name = $this->request->data['name'];
-		$awardname = $this->request->data['awardname'];
-		$organization = $this->request->data['organization'];
-	
-		$dataSource = $this->Award->getDataSource();
-		if( $this->Award->insertData($name
-								,$awardname
-								,$organization
-								,$objUser['id']
-								,'') ){
-			$dataSource->commit();
-			$result['msg'] = 'การแก้ไขข้อมูลรางวัลที่ได้รับเสร็จเรียบร้อย';
-			$result['flag'] = 1;
-		}else{
-			$dataSource->rollback();
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลรางวัลที่ได้รับ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
-			$result['flag'] = -1;
-		}
-		
-		$this->layout='ajax';
-		$this->set('message', json_encode($result));
-		$this->render('response');
-	}
-	/* ------------------------------------------------------------------------------------------------ */
-	public function editAward(){
-		$this->log('---- PersonalInfoController -> editAward ----');
-		
-		$result = array();
-		$objUser = $this->getObjUser();
-		//$this->log($this->request->data);
-		$id = $this->request->data['id'];
-		$name = $this->request->data['name'];
-		$awardname = $this->request->data['awardname'];
-		$organization = $this->request->data['organization'];
-	
-		$dataSource = $this->Award->getDataSource();
-		if( $this->Award->updateData($id
-									,$name
-									,$awardname
-									,$organization
-									,'0000') ){
-			$dataSource->commit();
-			$result['msg'] = 'การแก้ไขข้อมูลรางวัลที่ได้รับเสร็จเรียบร้อย';
-			$result['flag'] = 1;
-		}else{
-			$dataSource->rollback();
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลรางวัลที่ได้รับ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
-			$result['flag'] = -1;
-		}
-		
-		$this->layout='ajax';
-		$this->set('message', json_encode($result));
-		$this->render('response');
-	}
-	/* ------------------------------------------------------------------------------------------------ */
-	public function deletedAward(){
-		$this->log('---- PersonalInfoController -> deletedAward ----');
-		
-		$result = array();
-		//$this->log($this->request->data);
-		$id = $this->request->data['id'];
-
-		$dataSource = $this->Award->getDataSource();
-		if( $this->Award->deleteData($id) ){
-			$dataSource->commit();
-			$result['msg'] = 'การแก้ไขข้อมูลผลการวิจัยเสร็จเรียบร้อย';
-			$result['flag'] = 1;
-		}else{
-			$dataSource->rollback();
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลผลการวิจัย กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
-			$result['flag'] = -1;
-		}
-		
-		$this->layout='ajax';
-		$this->set('message', json_encode($result));
-		$this->render('response');
-	}
-	/* ------------------------------------------------------------------------------------------------ */
 	public function savedNewWorkplace(){
 		$this->log('---- PersonalInfoController -> savedNewWorkplace ----');
 		
@@ -790,47 +475,22 @@ class PersonalInfoController extends AppController {
 		$this->render('response');
 	}
 	/* ------------------------------------------------------------------------------------------------ */
-	public function editActivity(){
-		$this->log('---- PersonalInfoController -> editActivity ----');
+	public function deleteComment(){
+		$this->log('---- PersonalInfoController -> deleteComment ----');
 		
 		$result = array();
-		$objUser = $this->getObjUser();
-		$id = $this->request->data['id'];
-		$position = $this->request->data['position'];
-		
-		$dataSource = $this->JoinActivity->getDataSource();
-		if( $this->JoinActivity->updatePosition($objUser['id'], $id, $position) ){
-			$dataSource->commit();
-			$result['msg'] = 'การแก้ไขกิจกรรมที่เข้าร่วมเสร็จเรียบร้อย';
-			$result['flag'] = 1;
-		}else{
-			$dataSource->rollback();
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขกิจกรรมที่เข้าร่วม กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
-			$result['flag'] = -1;
-		}
-		
-		$this->layout='ajax';
-		$this->set('message', json_encode($result));
-		$this->render('response');
-	}
-	/* ------------------------------------------------------------------------------------------------ */
-	public function deletedActivity(){
-		$this->log('---- PersonalInfoController -> deletedActivity ----');
-		
-		$result = array();
-		$objUser = $this->getObjUser();
 		//$this->log($this->request->data);
 		$id = $this->request->data['id'];
 
-		$dataSource = $this->JoinActivity->getDataSource();
-		if( $this->JoinActivity->deleteData($objUser['id'],$id) ){
+		$dataSource = $this->Comment->getDataSource();
+		if( $this->Comment->deleteData($id) ){
 			$dataSource->commit();
-			$result['msg'] = 'การแก้ไขกิจกรรมที่เข้าร่วมเสร็จเรียบร้อย';
-			$result['flag'] = 1;
+			$result['flg'] = 1;
+			$result['msg'] = 'การแก้ไข ความคิดเห็นเสร็จเรียบร้อย';
 		}else{
 			$dataSource->rollback();
+			$result['flg'] = -1;
 			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขกิจกรรมที่เข้าร่วมเ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
-			$result['flag'] = -1;
 		}
 		
 		$this->layout='ajax';
@@ -852,7 +512,7 @@ class PersonalInfoController extends AppController {
 			$dataSource = $this->Family->getDataSource();
 			$dataSource->begin();
 			for( $i=0;$i<$countData;$i++ ){
-				$flagUpdateData = $this->Family->updateFamilySeq($data[$i]['id']
+				$flagUpdateData = $this->Family->updateSeq($data[$i]['id']
 																	,$data[$i]['seq']);
 				if( !$flagUpdateData ){
 					break;
@@ -860,12 +520,12 @@ class PersonalInfoController extends AppController {
 			}
 			if( $flagUpdateData ){
 				$dataSource->commit();
+				$result['flg'] = 1;
 				$result['msg'] = 'การแก้ไขลำดับ ข้อมูลประวัติครอบครัวเสร็จเรียบร้อย';
-				$result['flag'] = 1;						
 			}else{
 				$dataSource->rollback();
+				$result['flg'] = -1;
 				$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขกิจกรรมที่เข้าร่วมเ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
-				$result['flag'] = 1;
 			}
 		}else if( $id==='education' ){
 			$dataSource = $this->Education->getDataSource();
@@ -879,12 +539,12 @@ class PersonalInfoController extends AppController {
 			}
 			if( $flagUpdateData ){
 				$dataSource->commit();
+				$result['flg'] = 1;
 				$result['msg'] = 'การแก้ไขลำดับ ข้อมูลประวัติการศึกษาเสร็จเรียบร้อย';
-				$result['flag'] = 1;						
 			}else{
 				$dataSource->rollback();
+				$result['flg'] = -1;
 				$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขกิจกรรมที่เข้าร่วมเ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
-				$result['flag'] = 1;
 			}
 		}else if( $id==='workplace' ){
 			$dataSource = $this->Workplace->getDataSource();
@@ -898,13 +558,16 @@ class PersonalInfoController extends AppController {
 			}
 			if( $flagUpdateData ){
 				$dataSource->commit();
+				$result['flg'] = 1;	
 				$result['msg'] = 'การแก้ไขลำดับ ข้อมูลประวัติการทำงานเสร็จเรียบร้อย';
-				$result['flag'] = 1;						
 			}else{
 				$dataSource->rollback();
+				$result['flg'] = -1;
 				$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขกิจกรรมที่เข้าร่วมเ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
-				$result['flag'] = 1;
 			}
+		}else{
+			$result['flag'] = -1;
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขกิจกรรมที่เข้าร่วมเ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 		}
 		
 		$this->layout='ajax';

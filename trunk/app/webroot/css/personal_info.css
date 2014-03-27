@@ -30,7 +30,7 @@
 }
 .container .section_profile .section_picture img {
 	display: block;
-	width: 80%;
+/* 	width: 80%; */
 	height: 150px;
 	margin: 10px auto 0 auto;
 }

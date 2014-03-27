@@ -41,4 +41,35 @@
 			return false;
 		}
 	}
+	/* ------------------------------------------------------------------------------------------------- */
+	function deleteComment(id){
+		jConfirm('กรุณายืนยัน เพื่อลบความคิดเห็น', 
+				function(){ //okFunc
+					loading();
+					jQuery.post('<?php echo $this->Html->url('/PersonalInfo/deleteComment');?>'
+							,{'data':{'id':id}}
+							,function(data){
+								unloading();
+								jAlert(data.msg
+										, function(){ 
+											if( data.flg===1 ){
+												window.location.reload();
+											}
+										}//okFunc	
+										, function(){ 
+										}//openFunc
+										, function(){ 		
+										}//closeFunc
+								);
+							}
+							,'json');
+				}, 
+				function(){ //cancelFunc
+				}, 
+				function(){ //openFunc
+				}, 
+				function(){ //closeFunc
+				}
+			);
+	}
 </script>

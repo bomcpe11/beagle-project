@@ -3,7 +3,10 @@
 		var strHtml = '<div id="popup_profile_container" class="table" style="width: 850px;">\
 						<ul>\
 							<li class="single">\
-								<p><strong>* คำนำหน้าชื่อ :</strong></p>\
+								<p>\
+									<input id="hidden-profile-id" type="hidden" value=<?php echo $objUser[0]['profiles']["id"];?>>\
+									<strong>* คำนำหน้าชื่อ :</strong>\
+								</p>\
 								<p>\
 									<select id="select-title-name-th">\
 										<option value="">---- กรุณาเลือก ----</option>\
@@ -114,11 +117,14 @@
 									<input id="text-position" type="text" value=<?php echo $objUser[0]['profiles']["position"];?>>\
 								</p>\
 							</li>\
-							<li class="single">\
+							<li>\
 								<p><strong>Sosial Network :</strong></p>\
 								<p>\
 									<input id="text-blog-address" type="text" value=<?php echo $objUser[0]['profiles']["blogaddress"];?>>\
-									<input id="hidden-profile-id" type="hidden" value=<?php echo $objUser[0]['profiles']["id"];?>>\
+								</p>\
+								<p><strong>สถานะ :</strong></p>\
+								<p>\
+									<input id="text-position" type="checkbox" value=>\
 								</p>\
 							</li>\
 						</ul>\

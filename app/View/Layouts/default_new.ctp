@@ -61,7 +61,6 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 	?>
 </head>
 <body>
-	
 	<!-- Header -->
 	<div id="header">
 		<div id="header_logo_wrapper">
@@ -169,9 +168,6 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 				</div>
 			</div>
 			<div id="content">
-				<div id="page_title">
-					<h1><?php echo $page_title ?></h1>
-				</div>
 				<div id="content_page">
 					<?php echo $this->fetch('content'); ?>
 				</div>

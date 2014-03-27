@@ -11,7 +11,7 @@ class Family extends AppModel {
 		$sql = "SELECT *
 				 FROM families 
 				 WHERE profile_id = '$profile_id'
-				 ORDER BY family_seq ASC";
+				 ORDER BY seq ASC";
 		
 		try{
 			$result = $this->query($sql);
@@ -25,8 +25,8 @@ class Family extends AppModel {
 	public function insertFamily($profile_id, $relation, $name, $lastname, $education, $occupation, $position){
 		$flag = false;
 		$sql = "INSERT INTO families 
-				(profile_id
-				,family_seq
+				(seq
+				,profile_id
 				,relation
 				,name, lastname
 				,education
@@ -35,10 +35,10 @@ class Family extends AppModel {
 				,created_at
 				,updated_at) 
 				VALUES
-				('$profile_id'
-				,(SELECT ifnull(max(f.family_seq),0) + 1 as profile_seq 
+				((SELECT ifnull(max(f.seq),0) + 1 as seq 
 						FROM families f 
 						WHERE f.profile_id=$profile_id)
+				,'$profile_id'
 				,'$relation'
 				,'$name'
 				,'$lastname'
@@ -85,11 +85,11 @@ class Family extends AppModel {
 		return $flag;
 	}
 	/* ------------------------------------------------------------------------------------------------- */
-	public function updateFamilySeq($family_id, $family_seq){
+	public function updateSeq($id, $seq){
 		$flag = false;
 		$sql = "UPDATE families 
-				SET family_seq=$family_seq
-				WHERE id=$family_id";
+				SET seq=$seq
+				WHERE id=$id";
 		
 		try{
 			$this->query($sql);

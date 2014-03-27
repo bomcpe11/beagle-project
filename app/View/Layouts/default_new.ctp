@@ -65,7 +65,7 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 	<!-- Header -->
 	<div id="header">
 		<div id="header_logo_wrapper">
-			<img src="../img/logo-jstp.png"></img>
+			<img src="<?php echo $this->Html->url('/img/logo-jstp.png');?>"></img>
 		</div>
 		<div id="header_search_wrapper">
 			<form>
@@ -75,7 +75,7 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 							<input style="width: 98%;" type="text" placeholder="Search Project">
 						</td>
 						<td style="width: 10%;">
-							<input type="image" src="../img/search-icon.png" 
+							<input type="image" src="<?php echo $this->Html->url('/img/search-icon.png');?>" 
 								style="width: 20px;height: 20px;margin-left: 5px;" title="Search Project">
 						</td>
 					</tr>
@@ -90,49 +90,49 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 				<div id="menu_group_wrapper">
 					<div class="menu-item-wrapper">
 						<a href="<?php echo $this->webroot;?>PersonalInfo/index?id=<?php echo $objuser['id'];?>">
-							<img src="../img/icon-personalinfo-01.png" 
+							<img src="<?php echo $this->Html->url('/img/icon-personalinfo-01.png');?>" class="tooltip"
 								alt="Personal Info" title="Personal Info"></img>
 						</a>
 					</div>
 					<div class="menu-item-wrapper">
 						<a href="#">
-							<img src="../img/icon-resources-01.png" 
+							<img src="<?php echo $this->Html->url('/img/icon-resources-01.png');?>" class="tooltip"
 								alt="Resources" title="Resources"></img>
 						</a>
 					</div>
 					<div class="menu-item-wrapper">
 						<a href="#">
-							<img src="../img/icon-project-01.png" 
+							<img src="<?php echo $this->Html->url('/img/icon-project-01.png');?>" class="tooltip"
 								alt="Project" title="Project"></img>
 						</a>
 					</div>
 					<div class="menu-item-wrapper">
 						<a href="#">
-							<img src="../img/icon-export-01.png" 
+							<img src="<?php echo $this->Html->url('/img/icon-export-01.png');?>" class="tooltip"
 								alt="Export" title="Export"></img>
 						</a>
 					</div>
 					<div class="menu-item-wrapper">
 						<a href="#">
-							<img src="../img/icon-customize-01.png" 
+							<img src="<?php echo $this->Html->url('/img/icon-customize-01.png');?>" class="tooltip"
 								alt="Customize" title="Customize"></img>
 						</a>
 					</div>
 					<div class="menu-item-wrapper">
 						<a href="#">
-							<img src="../img/icon-archieve-01.png" 
+							<img src="<?php echo $this->Html->url('/img/icon-archieve-01.png');?>" class="tooltip"
 								alt="Archieve" title="Archieve"></img>
 						</a>
 					</div>
 					<div class="menu-item-wrapper">
 						<a href="#">
-							<img src="../img/icon-mentorexpert-01.png" 
+							<img src="<?php echo $this->Html->url('/img/icon-mentorexpert-01.png');?>" class="tooltip"
 								alt="Mentor Expert" title="Mentor Expert"></img>
 						</a>
 					</div>
 					<div class="menu-item-wrapper">
 						<a href="#">
-							<img src="../img/icon-otherjstp-01.png" 
+							<img src="<?php echo $this->Html->url('/img/icon-otherjstp-01.png');?>" class="tooltip"
 								alt="Other JSTP" title="Other JSTP"></img>
 						</a>
 					</div>
@@ -181,15 +181,15 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 	<!-- Footer -->
 	<div id="footer">
 		<div id="footer_icon_wrapper">
-			<img src="../img/logo-nstd-01.png" 
+			<img src="<?php echo $this->Html->url('/img/logo-nstd-01.png');?>"
 				alt="Logo NSTD" title="Logo NSTD"></img>
-			<img src="../img/logo-kmutt-01.png" 
+			<img src="<?php echo $this->Html->url('/img/logo-kmutt-01.png');?>" 
 				alt="Logo KMUTT" title="Logo KMUTT"></img>
-			<img src="../img/logo-cheangmai-01.png" 
+			<img src="<?php echo $this->Html->url('/img/logo-cheangmai-01.png');?>" 
 				alt="Logo CMU" title="Logo CMU"></img>
-			<img src="../img/logo-kasetsart-01.png" 
+			<img src="<?php echo $this->Html->url('/img/logo-kasetsart-01.png');?>" 
 				alt="Logo KU" title="Logo KU"></img>
-			<img src="../img/logo_sut-01.png" 
+			<img src="<?php echo $this->Html->url('/img/logo_sut-01.png');?>" 
 				alt="Logo SUT" title="Logo SUT"></img>
 		</div>
 	</div>
@@ -222,6 +222,7 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 	
 		jQuery(document).ready(function(){
 			jQuery('input:button, input:submit').button();
+			jQuery('.tooltip').tooltip();
 		});
 	</script>
 </body>

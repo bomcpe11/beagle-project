@@ -22,6 +22,21 @@ class Comment extends AppModel {
 		return $flag;
 	}
 	/* ------------------------------------------------------------------------------------------------- */
+	public function deleteData($id){
+		$flag = false;
+		$sql = "DELETE FROM comments WHERE id=$id";
+		//$this->log($sql);
+		
+		try{
+			$this->query($sql);
+			$flag = true;
+		}catch(Exception $e){
+			$this->log($e->getMessage());
+		}
+		
+		return $flag;
+	}
+	/* ------------------------------------------------------------------------------------------------- */
 	public function getComments(){
 		$result = $this->query('select * from comments');
 		return $result;

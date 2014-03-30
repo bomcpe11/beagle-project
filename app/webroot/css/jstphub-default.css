@@ -177,9 +177,10 @@ h3{
 			width: 100%;
 		}
 		#content_page{
-			min-height: 600px;
+			min-height: 800px;
 			height: auto;
 			width: 100%;
+			padding: 0.25em;
 			background-color: #f5f3e5;
 			border: 1px solid #dfd9c3;
 		}

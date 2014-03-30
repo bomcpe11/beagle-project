@@ -3,7 +3,10 @@ class Otherwork extends AppModel{
 	/* ------------------------------------------------------------------------------------------------- */
 	public function getDataByProfileId($profile_id){
 		$result=null;
-		$sql = "SELECT * FROM otherworks o WHERE profile_id='$profile_id'";
+		$sql = "SELECT o.* 
+					FROM otherworks o 
+					WHERE o.profile_id=$profile_id
+					ORDER BY o.seq ASC";
 		
 		try{
 			$result = $this->query($sql);
@@ -17,22 +20,30 @@ class Otherwork extends AppModel{
 	public function insertData($name
 								,$organization
 								,$profile_id
+								,$yearstart
 								,$yearfinish
 								,$isnotfinish){
 		$flag=false;
 		$sql="INSERT INTO otherworks (
-							name
+							seq
+							,name
 							,organization
 							,profile_id
 							,created_at
 							,updated_at
+							,yearstart
 							,yearfinish
 							,isnotfinish)
-					VALUES('$name'
+					VALUES(
+							(SELECT ifnull(max(o.seq),-1)+1 AS seq 
+								FROM otherworks o 
+								WHERE o.profile_id=$profile_id)
+							,'$name'
 							,'$organization'
 							,'$profile_id'
 							,now()
 							,now()
+							,$yearstart
 							,$yearfinish
 							,$isnotfinish)";
 		//$this->log($sql);
@@ -51,6 +62,7 @@ class Otherwork extends AppModel{
 								,$name
 								,$organization
 								,$profile_id
+								,$yearstart
 								,$yearfinish
 								,$isnotfinish){
 		$flag=false;
@@ -59,9 +71,28 @@ class Otherwork extends AppModel{
 					,organization='$organization'
 					,profile_id='$profile_id'
 					,updated_at=now()
+					,yearstart=$yearstart
 					,yearfinish=$yearfinish
 					,isnotfinish=$isnotfinish
 				WHERE id='$id'";
+		//$this->log($sql);
+		
+		try{
+			$this->query($sql);
+			$flag = true;
+		}catch(Exception $e){
+			$this->log($e->getMessage());
+		}
+		
+		return $flag;
+	}
+	/* --------------------------------------------------------------------------------------------------- */
+	public function updateSeq($id,$seq){
+		$flag = false;
+		$sql = "UPDATE otherworks 
+				 SET seq=$seq
+					 ,updated_at=now()
+				 WHERE id=$id";
 		//$this->log($sql);
 		
 		try{

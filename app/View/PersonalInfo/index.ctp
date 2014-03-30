@@ -1,18 +1,6 @@
 <?php 
 	echo $this->Html->css('personal_info.css');
 ?>
-<style>
-	/* Override Class of Jquery UI */
-	.ui-state-default{
-		overflow: hidden
-	}
-	.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{
-		border: 0;
-	}
-	.ui-icon{
-		float: left;
-	}
-</style>
 <!-- ##################################################################################################### -->
 <div id="personal_info" style="padding: 0.25em;">
 	<div class="container">
@@ -31,7 +19,7 @@
 					
 				</div>
 			</div>
-			<div class="section_content">
+			<div class="section-content">
 				<table id="table-profile" class="table_form">
 					<colgroup>
 						<col style="width: 50%;">
@@ -140,7 +128,7 @@
 	</div>
 	<div class="container">
 		<h2>ประวัติครอบครัว</h2>
-		<div class="section_content">
+		<div class="section-content">
 			<ul id="sortable_family">
 				<?php 
 					$countListFamily = empty($listFamily)?0:count($listFamily);
@@ -204,7 +192,7 @@
 	</div>
 	<div class="container">
 		<h2>ประวัติการศึกษา</h2>
-		<div class="section_content">
+		<div class="section-content">
 			<ul id="sortable_education">
 				<?php 
 					$countListEducation = empty($listEducation)?0:count($listEducation);
@@ -273,7 +261,7 @@
 	</div>
 	<div class="container">
 		<h2>ประวัติการทำงาน</h2>
-		<div class="section_content">
+		<div class="section-content">
 			<ul id="sortable_workplace">
 				<?php 
 					$countListWorkplace = count($listWorkplace);
@@ -337,7 +325,7 @@
 	</div>
 	<div class="container">
 		<h2>ความคิดเห็น</h2>
-		<div class="section_content">
+		<div class="section-content">
 			<?php 
 				$countListComment = count($listComment);
 				if( $countListComment>0 ){
@@ -369,7 +357,7 @@
 		</div>
 		
 		<?php if( $objuser['role']!=='10' && $objuser['role']!=='30' ){ //นักเรียน,นักศึกษา,วิทยากร ?>
-			<div class="section_content">
+			<div class="section-content">
 				<table class="table-data-item">
 					<colgroup>
 						<col style="width:20%;">

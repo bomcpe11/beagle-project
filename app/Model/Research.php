@@ -11,9 +11,14 @@ class Research extends AppModel {
 		$sql="SELECT r.*
 				,(SELECT vardesc1 FROM gvars g WHERE g.varname='RESEARCH_TYPE' AND g.varcode=r.researchtype) research_type
 				FROM researches r 
-				WHERE r.profile_id='$profile_id'";
+				WHERE r.profile_id='$profile_id'
+				ORDER BY r.seq ASC";
 		
-		$result = $this->query($sql);
+		try{
+			$result = $this->query($sql);
+		}catch(Exception $e){
+			$this->log($e->getMessage());
+		}
 		
 		return $result;
 	}
@@ -24,11 +29,13 @@ class Research extends AppModel {
 								,$organization
 								,$profile_id
 								,$isnotfinish
+								,$yearstart
 								,$yearfinish
 								,$dissemination){
 		$flag=false;
 		$sql="INSERT INTO researches (
-							name
+							seq
+							,name
 							,researchtype
 							,advisor
 							,organization
@@ -36,9 +43,14 @@ class Research extends AppModel {
 							,created_at
 							,updated_at
 							,isnotfinish
+							,yearstart
 							,yearfinish
 							,dissemination)
-					VALUES('$name'
+					VALUES(
+							(SELECT ifnull(max(r.seq),-1)+1 AS seq 
+								FROM researches r 
+								WHERE r.profile_id=$profile_id)
+							,'$name'
 							,'$researchtype'
 							,'$advisor'
 							,'$organization'
@@ -46,6 +58,7 @@ class Research extends AppModel {
 							,now()
 							,now()
 							,$isnotfinish
+							,$yearstart
 							,$yearfinish
 							,'$dissemination')";
 		//$this->log($sql);
@@ -67,6 +80,7 @@ class Research extends AppModel {
 								,$organization
 								,$profile_id
 								,$isnotfinish
+								,$yearstart
 								,$yearfinish
 								,$dissemination){
 		$flag=false;
@@ -78,9 +92,28 @@ class Research extends AppModel {
 					,profile_id=$profile_id
 					,updated_at=now()
 					,isnotfinish=$isnotfinish
+					,yearstart=$yearstart
 					,yearfinish=$yearfinish
 					,dissemination='$dissemination'
 				WHERE id=$id";
+		//$this->log($sql);
+		
+		try{
+			$this->query($sql);
+			$flag = true;
+		}catch(Exception $e){
+			$this->log($e->getMessage());
+		}
+		
+		return $flag;
+	}
+	/* --------------------------------------------------------------------------------------------------- */
+	public function updateSeq($id,$seq){
+		$flag = false;
+		$sql = "UPDATE researches 
+				 SET seq=$seq
+					 ,updated_at=now()
+				 WHERE id=$id";
 		//$this->log($sql);
 		
 		try{
@@ -96,7 +129,7 @@ class Research extends AppModel {
 	public function deleteData($id){
 		$flag=false;
 		$sql="DELETE FROM researches WHERE id='$id'";
-		$this->log($sql);
+		//$this->log($sql);
 		
 		try{
 			$this->query($sql);

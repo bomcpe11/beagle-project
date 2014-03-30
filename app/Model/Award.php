@@ -13,8 +13,25 @@ class Award extends AppModel {
 								,$yearaward){
 		$flag = false;
 		$sql = "INSERT INTO awards 
-				(name,awardname,organization,profile_id,created_at,updated_at,yearaward)
-				VALUES('$name','$awardname','$organization','$profile_id',now(),now(),'$yearaward')";
+					(seq
+					,name
+					,awardname
+					,organization
+					,profile_id
+					,created_at
+					,updated_at
+					,yearaward)
+				VALUES(
+					(SELECT ifnull(max(a.seq),-1)+1 AS seq 
+							FROM awards a
+							WHERE a.profile_id=$profile_id)
+					,'$name'
+					,'$awardname'
+					,'$organization'
+					,'$profile_id'
+					,now()
+					,now()
+					,'$yearaward')";
 		
 		try{
 			$this->query($sql);
@@ -51,6 +68,24 @@ class Award extends AppModel {
 		
 		return $flag;
 	}
+	/* --------------------------------------------------------------------------------------------------- */
+	public function updateSeq($id,$seq){
+		$flag = false;
+		$sql = "UPDATE awards 
+				 SET seq=$seq
+					 ,updated_at=now()
+				 WHERE id=$id";
+		//$this->log($sql);
+		
+		try{
+			$this->query($sql);
+			$flag = true;
+		}catch(Exception $e){
+			$this->log($e->getMessage());
+		}
+		
+		return $flag;
+	}
 	/* ------------------------------------------------------------------------------------------------- */
 	public function deleteData($id){
 		$flag = false;
@@ -70,7 +105,8 @@ class Award extends AppModel {
 		$result = null;
 		$sql = "SELECT a.*
 				FROM awards a
-				WHERE a.profile_id='$profile_id'";
+				WHERE a.profile_id=$profile_id
+				ORDER BY a.seq ASC";
 		//$this->log($sql);
 		
 		try{

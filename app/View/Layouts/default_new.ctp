@@ -100,7 +100,7 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 						</a>
 					</div>
 					<div class="menu-item-wrapper">
-						<a href="#">
+						<a href="<?php echo $this->webroot; ?>Project/index">
 							<img src="<?php echo $this->Html->url('/img/icon-project-01.png');?>" class="tooltip"
 								alt="Project" title="Project"></img>
 						</a>
@@ -118,9 +118,9 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 						</a>
 					</div>
 					<div class="menu-item-wrapper">
-						<a href="#">
+						<a href="<?php echo $this->webroot; ?>Achieve/index">
 							<img src="<?php echo $this->Html->url('/img/icon-archieve-01.png');?>" class="tooltip"
-								alt="Archieve" title="Archieve"></img>
+								alt="Achieve" title="Achieve"></img>
 						</a>
 					</div>
 					<div class="menu-item-wrapper">

@@ -10,7 +10,8 @@ class Award extends AppModel {
 								,$awardname
 								,$organization
 								,$profile_id
-								,$yearaward){
+								,$yearaward
+								,$detail){
 		$flag = false;
 		$sql = "INSERT INTO awards 
 					(seq
@@ -20,7 +21,8 @@ class Award extends AppModel {
 					,profile_id
 					,created_at
 					,updated_at
-					,yearaward)
+					,yearaward
+					,detail)
 				VALUES(
 					(SELECT ifnull(max(a.seq),-1)+1 AS seq 
 							FROM awards a
@@ -31,7 +33,8 @@ class Award extends AppModel {
 					,'$profile_id'
 					,now()
 					,now()
-					,'$yearaward')";
+					,'$yearaward'
+					,'$detail')";
 		
 		try{
 			$this->query($sql);
@@ -47,7 +50,8 @@ class Award extends AppModel {
 								,$name
 								,$awardname
 								,$organization
-								,$yearaward){
+								,$yearaward
+								,$detail){
 		$flag = false;
 		$sql = "UPDATE awards
 					SET name='$name'
@@ -56,6 +60,7 @@ class Award extends AppModel {
 						,created_at=now()
 						,updated_at=now()
 						,yearaward='$yearaward'
+						,detail='$detail'
 					WHERE id=$id";
 		//$this->log($sql);
 		

@@ -31,7 +31,8 @@ class Research extends AppModel {
 								,$isnotfinish
 								,$yearstart
 								,$yearfinish
-								,$dissemination){
+								,$dissemination
+								,$detail){
 		$flag=false;
 		$sql="INSERT INTO researches (
 							seq
@@ -45,7 +46,8 @@ class Research extends AppModel {
 							,isnotfinish
 							,yearstart
 							,yearfinish
-							,dissemination)
+							,dissemination
+							,detail)
 					VALUES(
 							(SELECT ifnull(max(r.seq),-1)+1 AS seq 
 								FROM researches r 
@@ -60,7 +62,8 @@ class Research extends AppModel {
 							,$isnotfinish
 							,$yearstart
 							,$yearfinish
-							,'$dissemination')";
+							,'$dissemination'
+							,'$detail')";
 		//$this->log($sql);
 		
 		try{
@@ -82,7 +85,8 @@ class Research extends AppModel {
 								,$isnotfinish
 								,$yearstart
 								,$yearfinish
-								,$dissemination){
+								,$dissemination
+								,$detail){
 		$flag=false;
 		$sql="UPDATE researches
 				SET name='$name'
@@ -95,6 +99,7 @@ class Research extends AppModel {
 					,yearstart=$yearstart
 					,yearfinish=$yearfinish
 					,dissemination='$dissemination'
+					,detail='$detail'
 				WHERE id=$id";
 		//$this->log($sql);
 		

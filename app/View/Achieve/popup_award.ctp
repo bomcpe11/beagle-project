@@ -2,12 +2,13 @@
 	function openPopupAward(id
 							,name
 							,awardname
-							,organization){
-		var html = '<div id="popup_award_container" style="width:500px;">\
+							,organization
+							,detail){
+		var html = '<div id="popup_award_container" style="width:600px;">\
 						<table style="width:100%;">\
 							<tr>\
-								<td style="width:35%; text-align:right;">* ชื่อผลงาน :</td>\
-								<td style="width:65%;">\
+								<td style="width:30%; text-align:right;">* ชื่อผลงาน :</td>\
+								<td style="width:60%;">\
 									<input id="award_id" type="hidden" value=' + id +'>\
 									<input id="award_name" type="text" value=' + name +'>\
 								</td>\
@@ -21,6 +22,10 @@
 							<tr>\
 								<td style="text-align:right;">* หน่วยงาน :</td>\
 								<td><input id="award_organization" type="text" value=' + organization +'></td>\
+							</tr>\
+							<tr>\
+								<td style="text-align: right;vertical-align: top;">รายละเอียด :</td>\
+								<td><textarea id="award_detail" class="popup-textarea">'+detail+'</textarea></td>\
 							</tr>\
 						</table>\
 					</div>';
@@ -49,7 +54,8 @@
 			jQuery.post('<?php echo $this->Html->url('/Achieve/savedNewAward');?>'
 						,{'data':{'name':jQuery('#award_name').val()
 									,'awardname':jQuery('#award_awardname').val()
-									,'organization':jQuery('#award_organization').val()}}
+									,'organization':jQuery('#award_organization').val()
+									,'detail':jQuery('#award_detail').val()}}
 						,function(data){
 							unloading();
 							
@@ -77,7 +83,8 @@
 						,{'data':{'id':jQuery('#award_id').val()
 									,'name':jQuery('#award_name').val()
 									,'awardname':jQuery('#award_awardname').val()
-									,'organization':jQuery('#award_organization').val()}}
+									,'organization':jQuery('#award_organization').val()
+									,'detail':jQuery('#award_detail').val()}}
 						,function(data){
 							unloading();
 							

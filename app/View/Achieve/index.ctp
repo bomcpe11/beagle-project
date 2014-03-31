@@ -26,7 +26,8 @@
 													onclick="openPopupAward('<?php echo $listAward[$i]['a']['id']; ?>'
 																			,'<?php echo $listAward[$i]['a']['name']; ?>'
 																			,'<?php echo $listAward[$i]['a']['awardname']; ?>'
-																			,'<?php echo $listAward[$i]['a']['organization']; ?>')" />
+																			,'<?php echo $listAward[$i]['a']['organization']; ?>'
+																			,'<?php echo $listAward[$i]['a']['detail']; ?>')" />
 											<img src="<?php echo $this->Html->url('/img/icon_del.png'); ?>"
 													onclick="deletedAward('<?php echo $listAward[$i]['a']['id']; ?>')" />
 										</td>
@@ -34,6 +35,9 @@
 									<tr>
 										<td><strong>ชื่อรางวัล : </strong><?php echo $listAward[$i]['a']['awardname']; ?></td>
 										<td><strong>หน่วยงาน : </strong><?php echo $listAward[$i]['a']['organization']; ?></td>
+									</tr>
+									<tr>
+										<td colspan="2"><strong>รายละเอียด : </strong><?php echo $listAward[$i]['a']['detail']? $listAward[$i]['a']['detail']: '-'; ?></td>
 									</tr>
 								</table>
 							</div>
@@ -52,7 +56,7 @@
 			<?php } ?>
 		</ul>
 			
-		<input type="button" id="button_add_award" value="เเพิ่มข้อมูล รางวัลที่ได้รับ" onclick="openPopupAward('','','','')"/>
+		<input type="button" id="button_add_award" value="เพิ่มข้อมูล รางวัลที่ได้รับ" onclick="openPopupAward('','','','','')"/>
 	</div>
 </div>
 <!-- ##################################################################################################### -->
@@ -61,7 +65,10 @@
 ?>
 <script type="text/javascript">
 	jQuery(document).ready(function() {
-		jQuery('#sortable_award').sortable({
+		var isOwner = '<?php echo $isOwner; ?>';
+
+		if( isOwner==='1' ){
+			jQuery('#sortable_award').sortable({
 				update: function(event, ui){
 					// format => sortable_xxxx
 					var sortable_id = ui.item.parent('ul').prop('id').replace(/sortable_/gi,'');
@@ -69,7 +76,11 @@
 					
 					updateSortableSeq(sortable_id);
 			    }
-		});
+			});
+		}else{
+			jQuery('input[type="button"]').remove();
+			jQuery('.edit-delete').remove();
+		}
 	});
 	/* -------------------------------------------------------------------------------------------------- */
 	function updateSortableSeq(sortable_id){

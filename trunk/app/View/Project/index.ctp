@@ -22,15 +22,16 @@
 										<td><strong>ชื่อเรื่อง : </strong><?php echo $listResearch[$i]['r']['name'];?></td>
 										<td class="edit-delete">
 											<img src="<?php echo $this->Html->url('/img/icon_edit.png');?>"
-												onclick="openPopupResearch('<?php echo $listResearch[$i]['r']['id'];?>'
-																			,'<?php echo $listResearch[$i]['r']['name'];?>'
-																			,'<?php echo $listResearch[$i]['r']['researchtype'];?>'
-																			,'<?php echo $listResearch[$i]['r']['advisor'];?>'
-																			,'<?php echo $listResearch[$i]['r']['organization'];?>'
-																			,'<?php echo $listResearch[$i]['r']['isnotfinish'];?>'
+												onclick="openPopupResearch('<?php echo $listResearch[$i]['r']['id']; ?>'
+																			,'<?php echo $listResearch[$i]['r']['name']; ?>'
+																			,'<?php echo $listResearch[$i]['r']['researchtype']; ?>'
+																			,'<?php echo $listResearch[$i]['r']['advisor']; ?>'
+																			,'<?php echo $listResearch[$i]['r']['organization']; ?>'
+																			,'<?php echo $listResearch[$i]['r']['isnotfinish']; ?>'
 																			,'<?php echo empty($listResearch[$i]['r']['yearstart'])?'':intval($listResearch[$i]['r']['yearstart'])+543; ?>'
 																			,'<?php echo empty($listResearch[$i]['r']['yearfinish'])?'':intval($listResearch[$i]['r']['yearfinish'])+543; ?>'
-																			,'<?php echo $listResearch[$i]['r']['dissemination'];?>')"/>
+																			,'<?php echo $listResearch[$i]['r']['dissemination']; ?>'
+																			,'<?php echo $listResearch[$i]['r']['detail']; ?>')"/>
 											<img src="<?php echo $this->Html->url('/img/icon_del.png');?>"
 												onclick="deleteResearch('<?php echo $listResearch[$i]['r']['id'];?>')"/>
 										</td>
@@ -50,6 +51,12 @@
 										</td>
 										<td><strong>การเผยแพร่ : </strong><?php echo $listResearch[$i]['r']['dissemination']?$listResearch[$i]['r']['dissemination']:'-';?></td>
 									</tr>
+									<tr>
+										<td colspan="2">
+											<strong>รายละเอียด : </strong>
+											<?php echo $listResearch[$i]['r']['detail']? $listResearch[$i]['r']['detail']: '-'; ?>
+										</td>
+									</tr>
 								</table>
 							</div>
 						</li>
@@ -67,7 +74,7 @@
 			<?php }?>
 		</ul>
 			
-		<input type="button" id="button_add_research" onclick="openPopupResearch('','','-1','','','','','','')" value="เพิ่มข้อมูล ผลงานวิจัย"/>
+		<input type="button" id="button_add_research" onclick="openPopupResearch('','','-1','','','','','','','')" value="เพิ่มข้อมูล ผลงานวิจัย"/>
 	</div>
 </div>
 <div class="container">
@@ -96,7 +103,8 @@
 																				,'<?php echo $listOtherwork[$i]['o']['organization']; ?>'
 																				,'<?php echo $listOtherwork[$i]['o']['isnotfinish']; ?>'
 																				,'<?php echo $listOtherwork[$i]['o']['yearstart']?(intval($listOtherwork[$i]['o']['yearstart']) + 543):''; ?>'
-																				,'<?php echo $listOtherwork[$i]['o']['yearfinish']?(intval($listOtherwork[$i]['o']['yearfinish']) + 543):''; ?>')">
+																				,'<?php echo $listOtherwork[$i]['o']['yearfinish']?(intval($listOtherwork[$i]['o']['yearfinish']) + 543):''; ?>'
+																				,'<?php echo $listOtherwork[$i]['o']['detail']; ?>')">
 											<img src="<?php echo $this->Html->url('/img/icon_del.png'); ?>"
 													onclick="deleteOtherwork('<?php echo $listOtherwork[$i]['o']['id']; ?>')">
 										</td>
@@ -105,8 +113,13 @@
 										<td><strong>หนว่ยงาน : </strong><?php echo empty($listOtherwork[$i]['o']['organization'])?'-':$listOtherwork[$i]['o']['organization']; ?></td>
 										<td>
 											<strong>ปีที่เริ่ม - ปีที่เสร็จ : </strong>
-											<?php echo $listOtherwork[$i]['o']['yearstart']?intval($listOtherwork[$i]['o']['yearstart']) + 543:'-'; ?>
-											<?php echo $listOtherwork[$i]['o']['yearfinish']?' - '.(intval($listOtherwork[$i]['o']['yearfinish']) + 543):''; ?>
+											<?php echo $listOtherwork[$i]['o']['yearstart']? intval($listOtherwork[$i]['o']['yearstart']) + 543: '-'; ?>
+											<?php echo $listOtherwork[$i]['o']['yearfinish']? ' - '.(intval($listOtherwork[$i]['o']['yearfinish']) + 543): ''; ?>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2"><strong>รายละเอียด : </strong>
+											<?php echo $listOtherwork[$i]['o']['detail']? $listOtherwork[$i]['o']['detail']: '-'; ?>
 										</td>
 									</tr>
 								</table>
@@ -126,7 +139,7 @@
 				<?php }?>
 		</ul>
 		
-		<input type="button" id="button_add_otherwork" value="เเพิ่มข้อมูล ผลงานอื่นๆ" onclick="openPopupOtherwork('','','','','','')"/>
+		<input type="button" id="button_add_otherwork" value="เพิ่มข้อมูล ผลงานอื่นๆ" onclick="openPopupOtherwork('','','','','','','')"/>
 	</div>
 </div>
 <!-- ##################################################################################################### -->
@@ -136,6 +149,9 @@
 ?>
 <script type="text/javascript">
 	jQuery(document).ready(function() {
+		var isOwner = '<?php echo $isOwner; ?>';
+
+		if( isOwner==='1' ){
 			jQuery('#sortable_research, #sortable_otherwork').sortable({
 					update: function(event, ui){
 						// format => sortable_xxxx
@@ -145,6 +161,10 @@
 						updateSortableSeq(sortable_id);
 				    }
 			});
+		}else{
+			jQuery('input[type="button"]').remove();
+			jQuery('.edit-delete').remove();
+		}
 	});
 	/* -------------------------------------------------------------------------------------------------- */
 	function updateSortableSeq(sortable_id){

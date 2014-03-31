@@ -4,12 +4,13 @@
 								,organization
 								,isnotfinish
 								,yearstart
-								,yearfinish){
-		var html = '<div id="popup_otherwork_container" style="width:500px;">\
+								,yearfinish
+								,detail){
+		var html = '<div id="popup_otherwork_container" style="width:600px;">\
 						<table style="width:100%;">\
 							<tr>\
-								<td style="width:35%; text-align:right;">* ชื่อเรื่อง :</td>\
-								<td style="width:65%;">\
+								<td style="width:30%; text-align:right;">* ชื่อเรื่อง :</td>\
+								<td style="width:60%;">\
 									<input id="otherwork_id" type="hidden" value=' + id +'>\
 									<input id="otherwork_name" type="text" value=' + name +'>\
 								</td>\
@@ -29,6 +30,12 @@
 									<span style="margin: 0 3px;">ปีที่เสร็จ</span>\
 									<input id="otherwork_yearfinish" style="width:40px" type="text" maxlength="4" value="'+yearfinish+'" '+( (id)?'disabled':'' )+'>\
 									<br>กรุณากรอกเป็นปี พ.ศ.\
+								</td>\
+							</tr>\
+							<tr>\
+								<td style="text-align: right;vertical-align: top;">รายละเอียด :</td>\
+								<td>\
+									<textarea id="otherwork_detail" class="popup-textarea">'+detail+'</textarea>\
 								</td>\
 							</tr>\
 						</table>\
@@ -61,7 +68,8 @@
 						,'organization':jQuery('#otherwork_organization').val()
 						,'yearstart':jQuery('#otherwork_yearstart').val()
 						,'yearfinish':jQuery('#otherwork_yearfinish').val()
-						,'isnotfinish':jQuery('#otherwork_isnotfinish').prop('checked')}}
+						,'isnotfinish':jQuery('#otherwork_isnotfinish').prop('checked')
+						,'detail':jQuery('#otherwork_detail').val()}}
 				,function(data){
 					unloading();
 					
@@ -91,7 +99,8 @@
 							,'organization':jQuery('#otherwork_organization').val()
 							,'yearstart':jQuery('#otherwork_yearstart').val()
 							,'yearfinish':jQuery('#otherwork_yearfinish').val()
-							,'isnotfinish':jQuery('#otherwork_isnotfinish').prop('checked')}}
+							,'isnotfinish':jQuery('#otherwork_isnotfinish').prop('checked')
+							,'detail':jQuery('#otherwork_detail').val()}}
 					,function(data){
 						unloading();
 						

@@ -7,12 +7,13 @@
 								,isnotfinish
 								,yearstart
 								,yearfinish
-								,dissemination){
-		var html = '<div id="popup_research_container" style="width:500px;">\
+								,dissemination
+								,detail){
+		var html = '<div id="popup_research_container" style="width:600px;">\
 						<table style="width:100%;">\
 							<tr>\
-								<td style="width:35%; text-align:right;">* ชื่อเรื่อง :</td>\
-								<td style="width:65%;">\
+								<td style="width:30%; text-align:right;">* ชื่อเรื่อง :</td>\
+								<td style="width:60%;">\
 									<input id="research_id" type="hidden" value=' + id +'>\
 									<input id="research_name" type="text" value=' + name +'>\
 								</td>\
@@ -57,6 +58,10 @@
 								<td style="text-align:right;">การเผยแพร่ :</td>\
 								<td><input id="research_dissemination" type="text" value="'+dissemination+'" '+( (id)?'disabled':'' )+'></td>\
 							</tr>\
+							<tr>\
+								<td style="text-align: right;vertical-align: top;">รายละเอียด :</td>\
+								<td><textarea id="research_detail" class="popup-textarea"></textarea></td>\
+							</tr>\
 						</table>\
 					</div>';
 		
@@ -89,7 +94,8 @@
 						,'isnotfinish':jQuery('#research_isnotfinish').prop('checked')
 						,'yearstart':jQuery('#research_yearstart').val()
 						,'yearfinish':jQuery('#research_yearfinish').val()
-						,'dissemination':jQuery('#research_dissemination').val()}}
+						,'dissemination':jQuery('#research_dissemination').val()
+						,'detail':jQuery('#research_detail').val()}}
 				,function(data){
 					unloading();
 					
@@ -122,7 +128,8 @@
 							,'isnotfinish':jQuery('#research_isnotfinish').prop('checked')
 							,'yearstart':jQuery('#research_yearstart').val()
 							,'yearfinish':jQuery('#research_yearfinish').val()
-							,'dissemination':jQuery('#research_dissemination').val()}}
+							,'dissemination':jQuery('#research_dissemination').val()
+							,'detail':jQuery('#research_detail').val()}}
 					,function(data){
 						unloading();
 						

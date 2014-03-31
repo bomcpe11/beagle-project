@@ -1,18 +1,21 @@
 <?php
 class ProjectController extends AppController {
 	public $names = 'ProjectController';
-	public $uses = array('Research','Otherwork','Gvar');
+	public $uses = array('Profile','Research','Otherwork','Gvar');
 	public $layout = 'default_new';
 	/* --------------------------------------------------------------------------------------------------- */
 	public function index(){
 		$this->log('---- ProjectController -> index ----');
 		
-		/*$get_profile_id = @intval($this->request->query['id']);
+		$get_profile_id = @intval($this->request->query['id']);
 		$sssnObjUser = $this->getObjUser();
-		$objUser = $this->Profile->getDataById($get_profile_id);*/
+		$objUser = $this->Profile->getDataById($get_profile_id);
 		//$this->log(print_r($objUser, true));
-		$objUser = $this->getObjUser();
-		$isOwner = false;
+		/*
+		 * -1 = not is owner profile
+		 * 1 = is owner profile
+		 */
+		$isOwner = '-1';
 		$fullNameTh = null;
 		$listResearchType = null;
 		$listResearch = null;
@@ -20,28 +23,36 @@ class ProjectController extends AppController {
 		
 		if( !empty($objUser) ){
 			/* owner profile */
-			/*if( $get_profile_id==$sssnObjUser['id'] ){
-				$isOwner = true;
-			}*/
+			if( $get_profile_id==$sssnObjUser['id'] ){
+				$isOwner = '1';
+			}
 			
 			/* fullName */
-			if( $objUser['position'] ){
-				$fullNameTh = $objUser['position'].$objUser['nameth'].' '.$objUser['lastnameth'];
+			if( $objUser[0]['profiles']['position'] ){
+				$fullNameTh = $objUser[0]['profiles']['position']
+								.$objUser[0]['profiles']['nameth']
+								.' '
+								.$objUser[0]['profiles']['lastnameth'];
 			} else{
-				$fullNameTh = $objUser['titleth'].$objUser['nameth'].' '.$objUser['lastnameth']; 
+				$fullNameTh = $objUser[0]['profiles']['titleth']
+								.$objUser[0]['profiles']['nameth']
+								.' '
+								.$objUser[0]['profiles']['lastnameth']; 
 			} 
 			
 			/* research */
 			$listResearchType = $this->Gvar->getVarcodeVardesc1ByVarname('RESEARCH_TYPE');
-			$listResearch = $this->Research->getDataByProfileId($objUser['id']);
+			$listResearch = $this->Research->getDataByProfileId($objUser[0]['profiles']['id']);
 			//$this->log(print_r($listResearch, true));
 			
 			/* otherword */
-			$listOtherwork = $this->Otherwork->getDataByProfileId($objUser['id']);
+			$listOtherwork = $this->Otherwork->getDataByProfileId($objUser[0]['profiles']['id']);
 		}
+		//$this->log(print_r($isOwner));
 		
 		/* set data to view*/
-		$this->set(compact('fullNameTh'
+		$this->set(compact('isOwner'
+							,'fullNameTh'
 							,'listResearchType'
 							,'listResearch'
 							,'listOtherwork'));
@@ -61,6 +72,7 @@ class ProjectController extends AppController {
 		$yearstart = empty($this->request->data['yearstart'])?'null':intval($this->request->data['yearstart'])-543;
 		$yearfinish = empty($this->request->data['yearfinish'])?'null':intval($this->request->data['yearfinish'])-543;
 		$dissemination = $this->request->data['dissemination'];
+		$detail = $this->request->data['detail'];
 
 		$dataSource = $this->Research->getDataSource();
 		if( $this->Research->insertData($name
@@ -71,7 +83,8 @@ class ProjectController extends AppController {
 										,$isnotfinish
 										,$yearstart
 										,$yearfinish
-										,$dissemination) ){
+										,$dissemination
+										,$detail) ){
 			$dataSource->commit();
 			$result['msg'] = 'การแก้ไขข้อมูลผลการวิจัยเสร็จเรียบร้อย';
 			$result['flag'] = 1;
@@ -101,6 +114,7 @@ class ProjectController extends AppController {
 		$yearstart = empty($this->request->data['yearstart'])?'null':intval($this->request->data['yearstart'])-543;
 		$yearfinish = empty($this->request->data['yearfinish'])?'null':intval($this->request->data['yearfinish'])-543;
 		$dissemination = $this->request->data['dissemination'];
+		$detail = $this->request->data['detail'];
 
 		$dataSource = $this->Research->getDataSource();
 		if( $this->Research->updateData($id
@@ -112,7 +126,8 @@ class ProjectController extends AppController {
 										,$isnotfinish
 										,$yearstart
 										,$yearfinish
-										,$dissemination) ){
+										,$dissemination
+										,$detail) ){
 			$dataSource->commit();
 			$result['msg'] = 'การแก้ไขข้อมูลผลการวิจัยเสร็จเรียบร้อย';
 			$result['flag'] = 1;
@@ -158,9 +173,10 @@ class ProjectController extends AppController {
 		//$this->log($this->request->data);
 		$name = $this->request->data['name'];
 		$organization = $this->request->data['organization'];
-		$yearstart = empty($this->request->data['yearstart'])?'null':intval($this->request->data['yearstart'])-543;
-		$yearfinish = empty($this->request->data['yearfinish'])?'null':intval($this->request->data['yearfinish'])-543;
+		$yearstart = empty($this->request->data['yearstart'])? 'null': intval($this->request->data['yearstart'])-543;
+		$yearfinish = empty($this->request->data['yearfinish'])? 'null': intval($this->request->data['yearfinish'])-543;
 		$isnotfinish = ( ($this->request->data['isnotfinish']==='true')?'1':'0' );
+		$detail = $this->request->data['detail'];
 
 		$dataSource = $this->Otherwork->getDataSource();
 		if( $this->Otherwork->insertData($name
@@ -168,7 +184,8 @@ class ProjectController extends AppController {
 										,$objUser['id']
 										,$yearstart
 										,$yearfinish
-										,$isnotfinish) ){
+										,$isnotfinish
+										,$detail) ){
 			$dataSource->commit();
 			$result['msg'] = 'การแก้ไขข้อมูลรางวัลอื่นๆเรียบร้อย';
 			$result['flag'] = 1;
@@ -192,9 +209,10 @@ class ProjectController extends AppController {
 		$id = $this->request->data['id'];
 		$name = $this->request->data['name'];
 		$organization = $this->request->data['organization'];
-		$yearstart = empty($this->request->data['yearstart'])?'null':intval($this->request->data['yearstart'])-543;
-		$yearfinish =  ($this->request->data['yearfinish']==='-')?'null':intval($this->request->data['yearfinish'])-543;
+		$yearstart = empty($this->request->data['yearstart'])? 'null': intval($this->request->data['yearstart'])-543;
+		$yearfinish =  empty($this->request->data['yearfinish'])? 'null': intval($this->request->data['yearfinish'])-543;
 		$isnotfinish = ( ($this->request->data['isnotfinish']==='true')?'1':'0' );
+		$detail = $this->request->data['detail'];
 		
 		$dataSource = $this->Otherwork->getDataSource();
 		if( $this->Otherwork->updateData($id
@@ -203,7 +221,8 @@ class ProjectController extends AppController {
 										,$objUser['id']
 										,$yearstart
 										,$yearfinish
-										,$isnotfinish) ){
+										,$isnotfinish
+										,$detail) ){
 			$dataSource->commit();
 			$result['msg'] = 'การแก้ไขข้อมูลรางวัลอื่นๆเรียบร้อย';
 			$result['flag'] = 1;

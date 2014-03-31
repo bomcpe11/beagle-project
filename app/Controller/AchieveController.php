@@ -1,37 +1,46 @@
 <?php
 class AchieveController extends AppController{
 	public $names = 'AchieveController';
-	public $uses = array('Award');
+	public $uses = array('Profile','Award');
 	public $layout = 'default_new';
 	/* ------------------------------------------------------------------------------------------------- */
 	public function index(){
 		$this->log('---- AchieveController -> index ----');
 		
-		/*$get_profile_id = @intval($this->request->query['id']);
+		$get_profile_id = @intval($this->request->query['id']);
 		$sssnObjUser = $this->getObjUser();
-		$objUser = $this->Profile->getDataById($get_profile_id);*/
-		$objUser = $this->getObjUser();
+		$objUser = $this->Profile->getDataById($get_profile_id);
 		//$this->log(print_r($objUser, true));
-		$isOwner = false;
+		/*
+		 * 	-1 	= not is owner profile
+		 * 	1 	= is owner profile
+		 */
+		$isOwner = '-1';
 		$fullNameTh = null;
 		$listAward = null;
 		
 		
 		if( !empty($objUser) ){
 			/* owner profile */
-			/*if( $get_profile_id==$sssnObjUser['id'] ){
-				$isOwner = true;
-			}*/
+			if( $get_profile_id==$sssnObjUser['id'] ){
+				$isOwner = '1';
+			}
 			
 			/* fullName */
-			if( $objUser['position'] ){
-				$fullNameTh = $objUser['position'].$objUser['nameth'].' '.$objUser['lastnameth'];
+			if( $objUser[0]['profiles']['position'] ){
+				$fullNameTh = $objUser[0]['profiles']['position']
+								.$objUser[0]['profiles']['nameth']
+								.' '
+								.$objUser[0]['profiles']['lastnameth'];
 			} else{
-				$fullNameTh = $objUser['titleth'].$objUser['nameth'].' '.$objUser['lastnameth']; 
+				$fullNameTh = $objUser[0]['profiles']['titleth']
+								.$objUser[0]['profiles']['nameth']
+								.' '
+								.$objUser[0]['profiles']['lastnameth']; 
 			} 
 			
 			/* award */
-			$listAward = $this->Award->getDataByProfileId($objUser['id']);
+			$listAward = $this->Award->getDataByProfileId($objUser[0]['profiles']['id']);
 			//$this->log(print_r($listAward, true));
 		}
 		
@@ -50,13 +59,15 @@ class AchieveController extends AppController{
 		$name = $this->request->data['name'];
 		$awardname = $this->request->data['awardname'];
 		$organization = $this->request->data['organization'];
+		$detail = $this->request->data['detail'];
 	
 		$dataSource = $this->Award->getDataSource();
 		if( $this->Award->insertData($name
 								,$awardname
 								,$organization
 								,$objUser['id']
-								,'') ){
+								,''
+								,$detail) ){
 			$dataSource->commit();
 			$result['msg'] = 'การแก้ไขข้อมูลรางวัลที่ได้รับเสร็จเรียบร้อย';
 			$result['flag'] = 1;
@@ -81,13 +92,15 @@ class AchieveController extends AppController{
 		$name = $this->request->data['name'];
 		$awardname = $this->request->data['awardname'];
 		$organization = $this->request->data['organization'];
+		$detail = $this->request->data['detail'];
 	
 		$dataSource = $this->Award->getDataSource();
 		if( $this->Award->updateData($id
 									,$name
 									,$awardname
 									,$organization
-									,'0000') ){
+									,'0000'
+									,$detail) ){
 			$dataSource->commit();
 			$result['msg'] = 'การแก้ไขข้อมูลรางวัลที่ได้รับเสร็จเรียบร้อย';
 			$result['flag'] = 1;

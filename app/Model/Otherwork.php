@@ -22,7 +22,8 @@ class Otherwork extends AppModel{
 								,$profile_id
 								,$yearstart
 								,$yearfinish
-								,$isnotfinish){
+								,$isnotfinish
+								,$detail){
 		$flag=false;
 		$sql="INSERT INTO otherworks (
 							seq
@@ -33,7 +34,8 @@ class Otherwork extends AppModel{
 							,updated_at
 							,yearstart
 							,yearfinish
-							,isnotfinish)
+							,isnotfinish
+							,detail)
 					VALUES(
 							(SELECT ifnull(max(o.seq),-1)+1 AS seq 
 								FROM otherworks o 
@@ -45,7 +47,8 @@ class Otherwork extends AppModel{
 							,now()
 							,$yearstart
 							,$yearfinish
-							,$isnotfinish)";
+							,$isnotfinish
+							,'$detail')";
 		//$this->log($sql);
 		
 		try{
@@ -64,7 +67,8 @@ class Otherwork extends AppModel{
 								,$profile_id
 								,$yearstart
 								,$yearfinish
-								,$isnotfinish){
+								,$isnotfinish
+								,$detail){
 		$flag=false;
 		$sql="UPDATE otherworks
 				SET name='$name'
@@ -74,6 +78,7 @@ class Otherwork extends AppModel{
 					,yearstart=$yearstart
 					,yearfinish=$yearfinish
 					,isnotfinish=$isnotfinish
+					,detail='$detail'
 				WHERE id='$id'";
 		//$this->log($sql);
 		

@@ -25,7 +25,8 @@ class EmailsenderController extends AppController{
 		//$this->log($this->request['data']);
 		$recipient = $this->request['data']['email_send_to'];
 		$subject = $this->request['data']['email_subject'];
-		$content = substr(trim($this->request['data']['email_text']), 3, -4);	// delete whitespace and <p></p>
+		//$content = substr(trim($this->request['data']['email_text']), 3, -4);	// delete whitespace and <p></p>
+		$content = trim($this->request['data']['email_text']);	// delete whitespace
 		
 		$db = $this->EmailHistory->getDataSource();
 		$db->begin();
@@ -34,7 +35,10 @@ class EmailsenderController extends AppController{
 											$subject,
 											$content) ){
 			try{
-				$email = new CakeEmail('jstpEmail');
+				$email = new CakeEmail();
+				$email->config('jstphubEmail');
+				$email->template('jstphub_email', 'jstphub_email');
+				$email->emailFormat('html');
 		        $email->from($objUser['email']);
 		        $email->to($recipient);
 		        $email->subject($subject);

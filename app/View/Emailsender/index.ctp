@@ -32,7 +32,8 @@
 				<tr>
 					<td class="right label">* Send to :</td>
 					<td>
-						<input id="email_send_to" name="email_send_to" class="full-width" type="text">
+						<input id="email_send_to" name="email_send_to" class="full-width" type="text"
+							maxlength="50">
 					</td>
 					<td>
 						<input class="full-width" type="submit" value="send">
@@ -41,7 +42,8 @@
 				<tr>
 					<td class="right label">* Subject :</td>
 					<td colspan="2">
-						<input id="email_subject" name="email_subject" class="full-width" type="text" >
+						<input id="email_subject" name="email_subject" class="full-width" type="text"
+							maxlength="100">
 					</td>
 				</tr>
 				<tr>

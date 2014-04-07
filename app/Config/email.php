@@ -89,7 +89,7 @@ class EmailConfig {
 		//'headerCharset' => 'utf-8',
 	);
 	
-	public $jstpEmail = array(
+	public $jstphubEmail = array(
 		'transport' => 'Smtp',
 		'from' => array('jstp@jstpdata.org' => 'My Site'),
 		'host' => 'mail.jstpdata.org',

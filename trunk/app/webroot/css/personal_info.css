@@ -136,9 +136,35 @@
 .block{
 	display: block;
 }
+.full-width{
+	width: 100%;
+}
+.top{
+	vertical-align: top;
+}
+.left{
+	text-align: left;
+}
+.right{
+	text-align: right;
+}
+.content-block{
+	height: 250px;
+	background-color: #FFFFFF;
+	border: 1px solid #000000;
+	overflow-y: auto;
+}
+.popup-table-layout{
+	width: 100%;
+	line-height: 1.75em;
+}
 .popup-textarea{
 	width: 350px;
 	height: 4.25em;
+}
+.label{
+	font-weight: bold;
+	font-size: 1em;
 }
 
 /* Override Class of Jquery UI */

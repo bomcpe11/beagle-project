@@ -3,11 +3,10 @@
 .container {
 	/*border: 1px solid #666666;*/
 	/*border-radius: 5px;*/
-	width: 100%;
-	overflow: hidden;
+	/*width: 100%;*/
+	/*overflow: hidden;*/
 	margin: auto;
-	padding-top: 10px;
-	padding-bottom: 20px;
+	padding: 20px 10px;
 	/*clear: both;*/
 }
 	.container .section_profile {

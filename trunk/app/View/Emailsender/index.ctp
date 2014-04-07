@@ -3,7 +3,7 @@
 ?>
 <style>
 	#email_historiy{
-		margin-left: 10.5%;
+		margin-left: 15.5%;
 		list-style-type: none;
 		background-color: #ffffff;
 		border: 1px solid #000000;
@@ -23,10 +23,10 @@
 		<form id="form_send_email" name="form_send_email"  
 				action="<?php echo $this->Html->url('/Emailsender/sendEmail'); ?>" 
 				method="post" onsubmit="return sendEmail()">
-			<table>
+			<table style="width: 100%;">
 				<colgroup>
-					<col style="width: 10%;">
-					<col style="width: 80%;">
+					<col style="width: 15%;">
+					<col style="width: 75%;">
 					<col style="width: 10%;">
 				</colgroup>
 				<tr>
@@ -54,7 +54,7 @@
 		</form>
 	</div>
 	<div class="section-content" style="margin-top: 30px;">
-		<p style="float: left;width: 10%;" class="right label">History :</p>
+		<p style="float: left;width: 15%;" class="right label">History :</p>
 		<ul id="email_historiy">
 			<?php 
 				$countEmailHistory = count($emailHistory); 

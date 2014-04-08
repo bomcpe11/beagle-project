@@ -64,7 +64,8 @@ class EmailsenderController extends AppController{
 		}
 		
 		$this->redirect(
-							array('action' => 'index',
+							array('controller' => 'emailsender',
+									'action' => 'index',
 									'?' => array('flg' => $result['flg']))
 						);
 	}

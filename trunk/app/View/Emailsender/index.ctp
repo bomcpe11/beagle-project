@@ -61,13 +61,10 @@
 			<?php 
 				$countEmailHistory = count($emailHistory); 
 				for( $i=0; $i<$countEmailHistory; $i++ ){ ?>
-					<li onclick="openPopupEmailHistory('<?php echo $emailHistory[$i]['eh']['created_at']; ?>',
-												'<?php echo $emailHistory[$i]['eh']['recipient']; ?>',
-												'<?php echo $emailHistory[$i]['eh']['subject']; ?>',
-												'<?php echo $emailHistory[$i]['eh']['content']; ?>')">
-						<?php echo $emailHistory[$i]['eh']['recipient']
+					<li onclick="openPopupEmailHistory('<?php echo $emailHistory[0]['eh']['id']; ?>')">
+						<?php echo $emailHistory[0]['eh']['recipient']
 							.' : '
-							.$emailHistory[$i]['eh']['subject']; ?>
+							.$emailHistory[0]['eh']['subject']; ?>
 					</li>
 			<?php }?>
 		</ul>
@@ -80,7 +77,7 @@
 <script type="text/javascript">
 	jQuery(document).ready(function(){
 		CKEDITOR.replace('email_text', {filebrowserImageUploadUrl : getURL('/activity/uploadImages')});
-
+		
 		$flg = '<?php echo $this->request->query('flg'); ?>';
 		if( $flg ){
 			$msg = '';

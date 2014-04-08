@@ -68,4 +68,18 @@ class EmailsenderController extends AppController{
 									'?' => array('flg' => $result['flg']))
 						);
 	}
+	/* -------------------------------------------------------------------------------------------------- */
+	/**
+	 * Ajax function
+	 */
+	public function getEmailById(){
+		$this->log('---- EmailsenderController -> getEmailById ----');
+		
+		$id = $this->request->data['id'];
+		$result = $this->EmailHistory->getDataById($id);
+		
+		$this->layout = 'ajax';
+		$this->set('message',json_encode($result));
+		$this->render('response');
+	}
 }

@@ -13,6 +13,7 @@ class ProfileController extends AppController {
 						,'Workplace'
 						,'Comment'
 						,'JoinActivity');
+	//public $layout = 'default_new';
 	/* ------------------------------------------------------------------------------------------------ */
 	public function index(){
 		$this->log('---- ProfileController -> index ----');

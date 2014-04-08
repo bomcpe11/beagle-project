@@ -61,10 +61,11 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 	?>
 </head>
 <body>
+	
 	<!-- Header -->
 	<div id="header">
 		<div id="header_logo_wrapper">
-			<img src="<?php echo $this->Html->url('/img/logo-jstp_v2.png');?>"></img>
+			<img src="<?php echo $this->Html->url('/img/logo-jstp.png');?>"></img>
 		</div>
 		<div id="header_search_wrapper">
 			<form>
@@ -82,16 +83,13 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 			</form>
 		</div>
 	</div>
-	<div id="header-bottom-border">
-		
-	</div>
 	<!-- Body -->
 	<div id="page">
 		<div id="column_right">
 			<div id="menu">
 				<div id="menu_group_wrapper">
 					<div class="menu-item-wrapper">
-						<a href="<?php echo $this->webroot;?>PersonalInfo/index?id=<?php echo isset($_GET['id'])? $_GET['id']: $objuser['id']; ?>">
+						<a href="<?php echo $this->webroot;?>PersonalInfo/index?id=<?php echo $objuser['id'];?>">
 							<img src="<?php echo $this->Html->url('/img/icon-personalinfo-01.png');?>" class="tooltip"
 								alt="Personal Info" title="Personal Info"></img>
 						</a>
@@ -103,7 +101,7 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 						</a>
 					</div>
 					<div class="menu-item-wrapper">
-						<a href="<?php echo $this->webroot; ?>Project/index?id=<?php echo isset($_GET['id'])? $_GET['id']: $objuser['id']; ?>">
+						<a href="#">
 							<img src="<?php echo $this->Html->url('/img/icon-project-01.png');?>" class="tooltip"
 								alt="Project" title="Project"></img>
 						</a>
@@ -121,9 +119,9 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 						</a>
 					</div>
 					<div class="menu-item-wrapper">
-						<a href="<?php echo $this->webroot; ?>Achieve/index?id=<?php echo isset($_GET['id'])? $_GET['id']: $objuser['id']; ?>">
+						<a href="#">
 							<img src="<?php echo $this->Html->url('/img/icon-archieve-01.png');?>" class="tooltip"
-								alt="Achieve" title="Achieve"></img>
+								alt="Archieve" title="Archieve"></img>
 						</a>
 					</div>
 					<div class="menu-item-wrapper">
@@ -171,6 +169,9 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 				</div>
 			</div>
 			<div id="content">
+				<div id="page_title">
+					<h1><?php echo $page_title ?></h1>
+				</div>
 				<div id="content_page">
 					<?php echo $this->fetch('content'); ?>
 				</div>

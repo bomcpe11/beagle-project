@@ -5,13 +5,31 @@ class EmailHistory extends AppModel{
 		$this->log('---- EmailHistory -> getDataByProfileId() ----');
 		
 		$result = null;
-		$sql = "select * from email_histories eh where profile_id=:profile_id";
+		$sql = "select * from email_histories eh where eh.profile_id=:profile_id";
 		//$this->log($sql);
 		
 		try{
 			$db = $this->getDataSource();
 			$result = $db->fetchAll($sql,
 									array('profile_id' => $profile_id));
+		}catch(Exception $e){
+			$this->log($e->getMessage());
+		}
+		
+		return $result;
+	}
+	/* --------------------------------------------------------------------------------------------------- */
+	public function getDataById($id){
+		$this->log('---- EmailHistory -> getDataById() ----');
+		
+		$result = null;
+		$sql = "select * from email_histories eh where eh.id=:id";
+		//$this->log($sql);
+		
+		try{
+			$db = $this->getDataSource();
+			$result = $db->fetchAll($sql,
+									array('id' => $id));
 		}catch(Exception $e){
 			$this->log($e->getMessage());
 		}

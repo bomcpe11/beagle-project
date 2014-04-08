@@ -61,10 +61,10 @@
 			<?php 
 				$countEmailHistory = count($emailHistory); 
 				for( $i=0; $i<$countEmailHistory; $i++ ){ ?>
-					<li onclick="openPopupEmailHistory('<?php echo $emailHistory[0]['eh']['id']; ?>')">
-						<?php echo $emailHistory[0]['eh']['recipient']
+					<li onclick="openPopupEmailHistory('<?php echo $emailHistory[$i]['eh']['id']; ?>')">
+						<?php echo $emailHistory[$i]['eh']['recipient']
 							.' : '
-							.$emailHistory[0]['eh']['subject']; ?>
+							.$emailHistory[$i]['eh']['subject']; ?>
 					</li>
 			<?php }?>
 		</ul>

@@ -17,8 +17,8 @@
 								<td>'+ data[0].eh.subject +'</td>\
 							</tr>\
 							<tr>\
-								<td class="right label">Text :</td>\
-								<td class="content-block">'+ data[0].eh.content +'</td>\
+								<td class="top right label">Text :</td>\
+								<td class="content-block" style="padding: 10px;">'+ data[0].eh.content +'</td>\
 							</tr>\
 						</table>\
 					</div>';

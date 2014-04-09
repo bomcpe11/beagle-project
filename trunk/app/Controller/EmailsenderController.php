@@ -46,8 +46,8 @@ class EmailsenderController extends AppController{
 				$email = new CakeEmail('gmail');
 				$email->template('jstphub_email', 'jstphub_email');
 				$email->emailFormat('html');
-				$email->to($recipient);
 				$email->from(array($objUser['email'] => $fullNameTh));
+				$email->to($recipient);
 		        $email->subject($subject);
 		        $email->send($content);
 		        

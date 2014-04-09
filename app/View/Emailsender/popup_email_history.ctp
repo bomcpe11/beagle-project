@@ -6,7 +6,7 @@
 				,function(data){
 					unloading();
 					
-					var html = '<div id="popup_email_history_container" style="width: 800px;">\
+					var html = '<div id="popup_email_history_container" style="width: 900px;">\
 						<table class="popup-table-layout">\
 							<tr>\
 								<td style="width:10%;" class="right label">Send to :</td>\

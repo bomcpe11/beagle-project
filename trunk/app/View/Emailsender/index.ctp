@@ -3,7 +3,7 @@
 ?>
 <style>
 	#email_historiy{
-		margin-left: 15.5%;
+		margin-left: 15.75%;
 		list-style-type: none;
 		background-color: #ffffff;
 		border: 1px solid #000000;
@@ -59,14 +59,19 @@
 		<p style="float: left;width: 15%;" class="right label">History :</p>
 		<ul id="email_historiy">
 			<?php 
-				$countEmailHistory = count($emailHistory); 
-				for( $i=0; $i<$countEmailHistory; $i++ ){ ?>
-					<li onclick="openPopupEmailHistory('<?php echo $emailHistory[$i]['eh']['id']; ?>')">
-						<?php echo $emailHistory[$i]['eh']['recipient']
-							.' : '
-							.$emailHistory[$i]['eh']['subject']; ?>
-					</li>
-			<?php }?>
+				$countEmailHistory = count($emailHistory);
+				if( $countEmailHistory>0 ){
+					for( $i=0; $i<$countEmailHistory; $i++ ){ ?>
+						<li onclick="openPopupEmailHistory('<?php echo $emailHistory[$i]['eh']['id']; ?>')">
+							<?php echo $emailHistory[$i]['eh']['recipient']
+								.' : '
+								.$emailHistory[$i]['eh']['subject']; ?>
+						</li>
+						
+				<?php }
+				} else { ?>
+					<li>ไม่พบข้อมูล</li>
+				<?php } ?>
 		</ul>
 	</div>
 </div>

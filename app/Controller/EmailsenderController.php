@@ -1,9 +1,11 @@
 <?php
 App::uses('CakeEmail', 'Network/Email');
+
 class EmailsenderController extends AppController{
 	/* -------------------------------------------------------------------------------------------------- */
 	public $names = 'EmailsenderController';
 	public $uses = array('Profile','EmailHistory');
+	public $components = array('Email');
 	public $layout = 'default_new';
 	/* -------------------------------------------------------------------------------------------------- */
 	public function index(){
@@ -22,7 +24,13 @@ class EmailsenderController extends AppController{
 		
 		$result = array();
 		$objUser = $this->getObjUser();
-		//$this->log($this->request['data']);
+		//$this->log($objUser);
+		/* fullName */
+		if( $objUser['position'] ){
+			$fullNameTh = $objUser['position'].$objUser['nameth'].' '.$objUser['lastnameth'];
+		} else{
+			$fullNameTh = $objUser['titleth'].$objUser['nameth'].' '.$objUser['lastnameth']; 
+		}
 		$recipient = $this->request['data']['email_send_to'];
 		$subject = $this->request['data']['email_subject'];
 		//$content = substr(trim($this->request['data']['email_text']), 3, -4);	// delete whitespace and <p></p>
@@ -35,12 +43,11 @@ class EmailsenderController extends AppController{
 											$subject,
 											$content) ){
 			try{
-				$email = new CakeEmail();
-				$email->config('jstphubEmail');
+				$email = new CakeEmail('gmail');
 				$email->template('jstphub_email', 'jstphub_email');
 				$email->emailFormat('html');
-		        $email->from($objUser['email']);
-		        $email->to($recipient);
+				$email->to($recipient);
+				$email->from(array($objUser['email'] => $fullNameTh));
 		        $email->subject($subject);
 		        $email->send($content);
 		        
@@ -49,11 +56,11 @@ class EmailsenderController extends AppController{
 			}catch(Exception $e){
 				$this->log($e->getMessage());
 				
-				$result['flg'] = '-1';
+				$result['flg'] = '2';
 		        $result['msg'] = 'เกิดข้อผิดพลาดในการส่ง Email กรุณาติดต่อผู้ดูแลระบบ';
 			}
 		}else{
-			$result['flg'] = '-1';
+			$result['flg'] = '2';
 			$result['msg'] = 'เกิดข้อผิดพลาดในการส่ง Email กรุณาติดต่อผู้ดูแลระบบ';
 		}
 		

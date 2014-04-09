@@ -91,7 +91,7 @@ class EmailConfig {
 	
 	public $jstphubEmail = array(
 		'transport' => 'Smtp',
-		'from' => array('jstp@jstpdata.org' => 'My Site'),
+		'from' => array('site@localhost' => 'My Site'),
 		'host' => 'mail.jstpdata.org',
 		'port' => 25,
 		'timeout' => 30,
@@ -101,6 +101,15 @@ class EmailConfig {
 		'log' => false,
 		//'charset' => 'utf-8',
 		//'headerCharset' => 'utf-8',
+	);
+	
+	public $gmail = array(
+		'host' => 'ssl://smtp.gmail.com',
+		'port' => 465,
+		'timeout' => 30,
+		'username' => 'jstp.email@gmail.com',
+		'password' => 'jstpemail',
+		'transport' => 'Smtp'
 	);
 
 }

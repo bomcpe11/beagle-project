@@ -43,7 +43,7 @@ class EmailsenderController extends AppController{
 											$subject,
 											$content) ){
 			try{
-				$email = new CakeEmail('gmail');
+				$email = new CakeEmail('jstpEmail');
 				$email->template('jstphub_email', 'jstphub_email');
 				$email->emailFormat('html');
 				$email->from(array($objUser['email'] => $fullNameTh));

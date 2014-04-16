@@ -89,7 +89,7 @@ class EmailConfig {
 		//'headerCharset' => 'utf-8',
 	);
 	
-	public $jstphubEmail = array(
+	/*public $jstphubEmail = array(
 		'transport' => 'Smtp',
 		'from' => array('site@localhost' => 'My Site'),
 		'host' => 'mail.jstpdata.org',
@@ -97,6 +97,19 @@ class EmailConfig {
 		'timeout' => 30,
 		'username' => 'admin@jstpdata.org',
 		'password' => 'jstphub_2013',
+		'client' => null,
+		'log' => false,
+		//'charset' => 'utf-8',
+		//'headerCharset' => 'utf-8',
+	);*/
+	
+	public $jstpEmail = array(
+		'transport' => 'Smtp',
+		'host' => 'mail.myjstp.org',
+		'port' => 25,
+		'timeout' => 30,
+		'username' => 'admin@myjstp.org',
+		'password' => 'u(@E*gW^2',
 		'client' => null,
 		'log' => false,
 		//'charset' => 'utf-8',

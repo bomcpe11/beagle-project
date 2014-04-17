@@ -109,7 +109,7 @@ class EmailConfig {
 		'port' => 25,
 		'timeout' => 30,
 		'username' => 'admin@myjstp.org',
-		'password' => 'u(@E*gW^2',
+		'password' => 'jstphub_2013',
 		'client' => null,
 		'log' => false,
 		//'charset' => 'utf-8',

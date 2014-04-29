@@ -2,7 +2,7 @@
 class AchieveController extends AppController{
 	public $names = 'AchieveController';
 	public $uses = array('Profile','Award');
-	public $layout = 'default_new';
+// 	public $layout = 'default_new';
 	/* ------------------------------------------------------------------------------------------------- */
 	public function index(){
 		$this->log('---- AchieveController -> index ----');

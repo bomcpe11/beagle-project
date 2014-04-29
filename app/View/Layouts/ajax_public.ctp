@@ -17,17 +17,4 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 ?>
-<?php 
-//######### Check $_SESSION for user loged-in #############
-	if(isset($objuser) && !empty($objuser)){
-		//TODO: it have objuser.
-	}else{
-		//TODO: not found objuser, not loged-in., Redirect t LginController
-		// 	$this->redirect(array('controller' => 'orders'));
-// 		header( "location: ".$this->webroot."login" );
-		echo "Error : Your authentication failed!!!";
-		exit(0);
-		return;
-	}
-?>
 <?php echo $this->fetch('content'); ?>

@@ -4,7 +4,7 @@
 if(isset($objuser) && !empty($objuser)){
 	//TODO: it have objuser.
 }else{
-	//TODO: not found objuser, not loged-in., Redirect to LoginController
+	//TODO: not found objuser, not loged-in., Redirect t LginController
 // 	$this->redirect(array('controller' => 'orders'));
 	header( "location: ".$this->webroot."login" );
 	exit(0);
@@ -29,197 +29,173 @@ if(isset($objuser) && !empty($objuser)){
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = __d('cake_dev', 'Jstp hub ');
+$cakeDescription = __d('cake_dev', 'My JSTP');
 ?><!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<?php echo $this->Html->charset(); ?>
+	<?php 
+		echo $this->Html->charset(); 
+	?>
 	<title>
-		<?php echo $cakeDescription ?>:
+		<?php echo $cakeDescription ?> :
 		<?php echo $title_for_layout; ?>
 	</title>
 	<?php
-		//echo $this->Html->meta('icon');
-
+		/* CSS */
+		echo $this->Html->css('reset-stylesheet');
+		echo $this->Html->css('jstphub-default');
 		echo $this->Html->css('jquery/ui/south-street/jquery-ui-1.10.3.custom.min');
 		echo $this->Html->css('loading');
-		echo $this->Html->css('default');
-
+	
+		/* JavaScript */
 		echo $this->Html->script('jquery/core/jquery-1.10.2.min');
 		echo $this->Html->script('jquery/ui/jquery-ui-1.10.3.custom.min');
 		echo $this->Html->script('jquery/ui/jquery.ui.1.10.3.datepicker.th');
 		echo $this->Html->script('ckeditor/ckeditor');
 		echo $this->Html->script('loading');
 		echo $this->Html->script('jstphub-common');
-
+		
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
-				
 	?>
-
-<script type="text/javascript">
-	jQuery.noConflict();
-	G_WEB_ROOT = '<?php echo $this->webroot; ?>';
-	
-	jQuery(document).ready(function(){
-		//---------------------------------------------------------------------------------------------
-		jQuery("#gotoProfile").click(function() {changePage("Profile");});
-		//---------------------------------------------------------------------------------------------
-		jQuery("#gotoChangePic").click(function() {changePage("Changepic");});
-		//---------------------------------------------------------------------------------------------
-		jQuery("#gotoChangePwd").click(function() {changePage("Changepwd");});
-		//---------------------------------------------------------------------------------------------
-		jQuery("#gotoPsearch").click(function() {changePage("Psearch");});
-		//---------------------------------------------------------------------------------------------
-		jQuery("#gotoExport").click(function() {changePage("Export");});
-		//---------------------------------------------------------------------------------------------
-		jQuery('#gotoApprove').click(function() {changePage("Approve");});
-		//---------------------------------------------------------------------------------------------
-		jQuery("#gotoActivityList").click(function() {changePage("ActivityList");});
-		//---------------------------------------------------------------------------------------------
-		jQuery("#gotoAsearch").click(function() {changePage("Asearch");});
-		//---------------------------------------------------------------------------------------------
-		jQuery("#gotoLogout").click(function() {changePage("Logout");});
-		//---------------------------------------------------------------------------------------------
-		jQuery("#gotoWebboard").click(function() {changePage("Webboard");});
-		//---------------------------------------------------------------------------------------------
-
-		jQuery('input:button, input:submit').button();
-	});
-
-	//-------------------------------------------------------------------------------------------------
-	function changePage(path){
-		var link = "";
-
-		switch(path)
-		{
-		case "Profile":
-	      window.location = "<?php echo $this->Html->url('/Profile/index').'?id='.$objuser['id'];?>";
-		  break;
-		case "Changepic":
-		  window.location = "<?php echo $this->Html->url('/Changepic/index');?>";
-		  break;
-		case "Changepwd":
-		  window.location = "<?php echo $this->Html->url('/Changepwd/index');?>";
-		  break;
-		case "Psearch":
-		  window.location = "<?php echo $this->Html->url('/Psearch/index');?>";	
-		  break;
-		case "Export":
-		  window.location = "<?php echo $this->Html->url('/Export/index');?>";	
-		  break;
-		case "Approve":
-		  window.location = "<?php echo $this->Html->url('/Approve/index');?>";	
-		  break;
-		case "ActivityList":
-		  window.location = "<?php echo $this->Html->url('/Activitylist/index');?>";	
-		  break;
-		case "Asearch":
-		  window.location = "<?php echo $this->Html->url('/Asearch/index');?>";	
-		  break;
-	    case "Webboard":
-		  window.location = "<?php echo $this->Html->url('/Webboard/index');?>";	
-		  break;	
-	    case "Logout":
-			  window.location = "<?php echo $this->Html->url('/Logout/index');?>";	
-			  break;  		  			    
-		default:
-		  window.location = "<?php echo $this->Html->url('/');?>";	
-		}
-		
-		/*jQuery.ajax({
-	           dataType: "html",
-	           type: "POST",
-	           evalScripts: true,
-	           url: link,
-	           data: ({type:'original'}),
-	           success: function (data, textStatus){
-	        	   jQuery("#layout").html();
-	        	   jQuery("#layout").html(data);
-
-	           }
-	       });*/
-	}       
-	//-------------------------------------------------------------------------------------------------
-</script>
-
 </head>
-<div id="layout">
 <body>
-	<div id="layout-container">
-		<div id="layout-header">
-<!-- 			<h1>Header</h1> -->
+	<!-- Header -->
+	<div id="header">
+		<div id="header_logo_wrapper">
+			<img src="<?php echo $this->Html->url('/img/logo-jstp_v2.png');?>"></img>
 		</div>
-<div id="layout-body">
-		    <table border="0" width="100%" ﻿cellpadding="0" cellspacing="0" >
-		       <tr valign="top">
-		          <!--profile-menu -->
-		          <td width="20%" class="layout-sub-container1">
-		          
-		                 <center>
-		                    <h4>
-		                     	<?php if(isset($position) && !empty($position)){
+		<div id="header_search_wrapper">
+			<form>
+				<table style="width: 100%;">
+					<tr>
+						<td style="width: 40%;">
+							<button type="button" id="btn-mainmenu">Main menu</button>
+							<button type="button" id="btn-logout">Log off</button>
+						</td>
+						<td style="width: 50%;">
+							<input class="txt-search" type="text" placeholder="Search...">
+						</td>
+						<td style="width: 10%;">
+							<input type="image" src="<?php echo $this->Html->url('/img/search-icon.png');?>" 
+								style="width: 20px;height: 20px;margin-left: 5px;" title="Search Project">
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+	<div id="header-bottom-border">
+		
+	</div>
+	<!-- Body -->
+	<div id="page">
+		<div id="column_right">
+			<div id="menu">
+				<div id="menu_group_wrapper">
+					<div class="menu-item-wrapper">
+						<a href="<?php echo $this->webroot;?>PersonalInfo/index?id=<?php echo isset($_GET['id'])? $_GET['id']: $objuser['id']; ?>">
+							<img src="<?php echo $this->Html->url('/img/icon-personalinfo-01.png');?>" class="tooltip"
+								alt="Personal Info" title="Personal Info"></img>
+						</a>
+					</div>
+					<div class="menu-item-wrapper">
+						<a href="#">
+							<img src="<?php echo $this->Html->url('/img/icon-resources-01.png');?>" class="tooltip"
+								alt="Resources" title="Resources"></img>
+						</a>
+					</div>
+					<div class="menu-item-wrapper">
+						<a href="<?php echo $this->webroot; ?>Project/index?id=<?php echo isset($_GET['id'])? $_GET['id']: $objuser['id']; ?>">
+							<img src="<?php echo $this->Html->url('/img/icon-project-01.png');?>" class="tooltip"
+								alt="Project" title="Project"></img>
+						</a>
+					</div>
+					<div class="menu-item-wrapper">
+						<a href="#">
+							<img src="<?php echo $this->Html->url('/img/icon-export-01.png');?>" class="tooltip"
+								alt="Export" title="Export"></img>
+						</a>
+					</div>
+					<div class="menu-item-wrapper">
+						<a href="<?php echo $this->webroot; ?>Customize">
+							<img src="<?php echo $this->Html->url('/img/icon-customize-01.png');?>" class="tooltip"
+								alt="Customize" title="Customize"></img>
+						</a>
+					</div>
+					<div class="menu-item-wrapper">
+						<a href="<?php echo $this->webroot; ?>Achieve/index?id=<?php echo isset($_GET['id'])? $_GET['id']: $objuser['id']; ?>">
+							<img src="<?php echo $this->Html->url('/img/icon-archieve-01.png');?>" class="tooltip"
+								alt="Achieve" title="Achieve"></img>
+						</a>
+					</div>
+					<div class="menu-item-wrapper">
+						<a href="#">
+							<img src="<?php echo $this->Html->url('/img/icon-mentorexpert-01.png');?>" class="tooltip"
+								alt="Mentor Expert" title="Mentor Expert"></img>
+						</a>
+					</div>
+					<div class="menu-item-wrapper">
+						<a href="#">
+							<img src="<?php echo $this->Html->url('/img/icon-otherjstp-01.png');?>" class="tooltip"
+								alt="Other JSTP" title="Other JSTP"></img>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="column_left">
+			<div id="profile">
+				<div id="profile_picture">
+					<img src="<?php echo $this->webroot.$image_file;?>"
+						alt="Profile Picture" >
+				</div>
+				<div id="profile_title">
+					<div id="profile_nickname">
+						<?php echo $nickname; ?>
+					</div>
+					<div id="profile_title_generation">
+						<p style="font-size: 1em;">JSTP</p>
+						<p style="font-size: 1.75em;">
+							<?php echo $generation; ?>
+						</p>
+					</div>
+				</div>
+				<div id="profile_detial">
+					<p><?php if(isset($position) && !empty($position)){
 		                     	        echo $position;
 		                     	      }else{
   										echo $titleth;
   									  }
 								?>
-		                        <?php echo $nameth; ?>&nbsp;&nbsp;<?php echo $lastnameth; ?>
-		                    </h4>
-		                 </center>
-		                 <div id="profile-container">
-		                    </br>
-		                    <div id="profile-picture">
-		                        <img width="150px" height="150px"  src="<?php echo $this->webroot.$image_file; ?>">
-		                    </div>
-		                     <center><p><?php echo $image_desc; ?></p></center>
-		                 </div>
-		                 </br>
-		                 
-		                 <div id="profile-desc">
-		                     <p>Username : <?php echo $login; ?></p>
-		                     <p>เข้าระบบล่าสุด :  <?php echo $last_login_at; ?></p>
-		                     <p>ปรับปรุงข้อมูลล่าสุด :  <?php echo $last_updated_at; ?></p>
-		                 </div>
-		                 <!--layout-menu -->
-		                 <div id="link-menu">
-		                     <h3 style="margin-top:20px; margin-left:0;">เมนู</h3>
-			                     <a style="cursor: pointer;" class="menu" id="gotoProfile">ข้อมูลส่วนตัว </a>
-			                     <a style="cursor: pointer;" class="menu" id="gotoChangePic" >เปลี่ยนรูปประจำตัว</a>
-			                     <a style="cursor: pointer;" class="menu" id="gotoChangePwd">แก้ไขรหัสผ่าน</a>
-			                     <a style="cursor: pointer;" class="menu" id="gotoPsearch">ค้นหาบุคคล</a>
-			                     <a style="cursor: pointer;" class="menu" id="gotoExport" >ส่งออกข้อมูล</a>
-			                     <a style="cursor: pointer;" class="menu" id="gotoWebboard" >Webboard</a>
-			                   	 <?php if( $objuser['role']==='1' ){
-			                   	 	echo "<a style=\"cursor: pointer;\" class=\"menu\" id=\"gotoApprove\">Approve</a>";
-			                   	 }?>
-		                     <h3 style="margin-top:20px; margin-left:0;">กิจกรรม</h3>
-		                     	 <a style="cursor: pointer;" class="menu" id="gotoActivityList">ข้อมูลกิจกรรม </a>
-		                     	 <a style="cursor: pointer;" class="menu" id="gotoAsearch">ค้นหากิจกรรม </a>  
-		                     <h3 style="margin-top:20px; margin-left:0;">
-		                     	<a style="cursor: pointer;" id="gotoLogout" >ออกจากระบบ</a>  
-		                     </h3>                         
-		                 </div>
-		                 </br>
-		          </td>
-		          <td width="5"><div style="width:1px;height:1px;"></div></td>
-		          <!--layout-content -->
-		          <td class="layout-sub-container1" style="padding:0 10px 10px 10px;">   
-			          <h2><?php echo $page_title ?></h2>
-						<div id="layout-content">
-							<?php echo $this->fetch('content'); ?>
-						</div>
-		          </td>
-		       </tr>
-		    </table>
+		                     <?php echo $nameth; ?>&nbsp;&nbsp;<?php echo $lastnameth; ?></p>
+					<p><?php echo isset($address) && !empty($address)? $address: '-';?></p>
+					<p style="position: absolute;bottom: 10px;right: 10px;">สถานะโปรไฟล์</p>
+				</div>
+			</div>
+			<div id="content">
+				<div id="content_page">
+					<?php echo $this->fetch('content'); ?>
+				</div>
+			</div>
 		</div>
 	</div>
-		<div id="layout-footer">
-			footer
+	<!-- Footer -->
+	<div id="footer">
+		<div id="footer_icon_wrapper">
+			<img src="<?php echo $this->Html->url('/img/logo-nstd-01.png');?>"
+				alt="Logo NSTD" title="Logo NSTD"></img>
+			<img src="<?php echo $this->Html->url('/img/logo-kmutt-01.png');?>" 
+				alt="Logo KMUTT" title="Logo KMUTT"></img>
+			<img src="<?php echo $this->Html->url('/img/logo-cheangmai-01.png');?>" 
+				alt="Logo CMU" title="Logo CMU"></img>
+			<img src="<?php echo $this->Html->url('/img/logo-kasetsart-01.png');?>" 
+				alt="Logo KU" title="Logo KU"></img>
+			<img src="<?php echo $this->Html->url('/img/logo_sut-01.png');?>" 
+				alt="Logo SUT" title="Logo SUT"></img>
 		</div>
 	</div>
-	</br>
 	<?php
 		if(isset($footer_trace) && !empty($footer_trace)){
 			?><div>####### FOOTER TRACE #######<br /><pre><?php print_r($footer_trace); ?></pre></div><?php
@@ -228,7 +204,7 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 	<div id="block-page" class="loading-unblock"><div id="block-page_hdn"></div></div>
 	<div id="div_loading" class="loading-invisible">
 	    &nbsp;
-	    <table border="0" align="center">
+	    <table border="0" style="margin-left: auto;margin-right: auto;">
 	        <tr>
 	            <td align="center" valign="middle">
 	            		<?php echo $this->Html->image('loading.gif', array('style'=>'border: 0;')); ?>
@@ -243,6 +219,26 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 	    &nbsp;
 	</div>
 	
+	<script type="text/javascript">
+		jQuery.noConflict();
+		G_WEB_ROOT = '<?php echo $this->webroot; ?>';
+	
+		jQuery(document).ready(function(){
+			jQuery('input:button, input:submit').button();
+			jQuery('.tooltip').tooltip();
+		});
+
+		jQuery('#btn-logout').button({
+		      icons: {
+		          primary: "ui-icon-locked"
+		        }
+		      }).click(function(){
+		    	  window.location.replace('<?php echo $this->Html->url('/Logout'); ?>');
+		      });
+
+		jQuery('#btn-mainmenu').button().click(function(){
+	    	  window.location.replace('<?php echo $this->Html->url('/Mainmenu'); ?>');
+			});
+	</script>
 </body>
-</div>
 </html>

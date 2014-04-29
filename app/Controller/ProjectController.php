@@ -2,7 +2,7 @@
 class ProjectController extends AppController {
 	public $names = 'ProjectController';
 	public $uses = array('Profile','Research','Otherwork','Gvar');
-	public $layout = 'default_new';
+// 	public $layout = 'default_new';
 	/* --------------------------------------------------------------------------------------------------- */
 	public function index(){
 		$this->log('---- ProjectController -> index ----');

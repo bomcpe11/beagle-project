@@ -139,9 +139,10 @@ class ActivityController extends AppController {
 		$this->log('Start :: ActivityController :: uploadFiles');
 		$id =$_POST["idUpload"];
 		$directory = "files/activities/".$id."/";
-		$splitFileName = explode(".", $_FILES["upload"]["name"]);
-		$extensionFile = ".".$splitFileName[count($splitFileName)-1];
-		$fileName = '2-img-'.time().$extensionFile;
+// 		$splitFileName = explode(".", $_FILES["upload"]["name"]);
+// 		$extensionFile = ".".$splitFileName[count($splitFileName)-1];
+// 		$fileName = '2-img-'.time().$extensionFile;
+		$fileName = $_FILES["upload"]["name"];
 		$this->log('directory = '.$directory.'  fileName = '.$fileName);
 		$result = '';
 		

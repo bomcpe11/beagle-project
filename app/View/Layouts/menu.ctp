@@ -29,7 +29,7 @@ if(isset($objuser) && !empty($objuser)){
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = __d('cake_dev', 'Jstp hub ');
+$cakeDescription = __d('cake_dev', 'My JSTP');
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,13 +37,13 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 		echo $this->Html->charset(); 
 	?>
 	<title>
-		<?php echo $cakeDescription ?>:
+		<?php echo $cakeDescription ?> :
 		<?php echo $title_for_layout; ?>
 	</title>
 	<?php
 		/* CSS */
 		echo $this->Html->css('reset-stylesheet');
-		echo $this->Html->css('jstphub-default');
+		echo $this->Html->css('jstphub-menu');
 		echo $this->Html->css('jquery/ui/south-street/jquery-ui-1.10.3.custom.min');
 		echo $this->Html->css('loading');
 	
@@ -61,18 +61,20 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 	?>
 </head>
 <body>
-	
 	<!-- Header -->
 	<div id="header">
 		<div id="header_logo_wrapper">
-			<img src="<?php echo $this->Html->url('/img/logo-jstp.png');?>"></img>
+			<img src="<?php echo $this->Html->url('/img/logo-jstp_v2.png');?>"></img>
 		</div>
 		<div id="header_search_wrapper">
 			<form>
 				<table style="width: 100%;">
 					<tr>
-						<td style="width: 90%;">
-							<input style="width: 98%;" type="text" placeholder="Search Project">
+						<td style="width: 28%;">
+							<button type="button" id="btn-logout">Log off</button>
+						</td>
+						<td style="width: 62%;">
+							<input class="txt-search" type="text" placeholder="Search...">
 						</td>
 						<td style="width: 10%;">
 							<input type="image" src="<?php echo $this->Html->url('/img/search-icon.png');?>" 
@@ -83,62 +85,11 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 			</form>
 		</div>
 	</div>
+	<div id="header-bottom-border">
+		
+	</div>
 	<!-- Body -->
 	<div id="page">
-		<div id="column_right">
-			<div id="menu">
-				<div id="menu_group_wrapper">
-					<div class="menu-item-wrapper">
-						<a href="<?php echo $this->webroot;?>PersonalInfo/index?id=<?php echo $objuser['id'];?>">
-							<img src="<?php echo $this->Html->url('/img/icon-personalinfo-01.png');?>" class="tooltip"
-								alt="Personal Info" title="Personal Info"></img>
-						</a>
-					</div>
-					<div class="menu-item-wrapper">
-						<a href="#">
-							<img src="<?php echo $this->Html->url('/img/icon-resources-01.png');?>" class="tooltip"
-								alt="Resources" title="Resources"></img>
-						</a>
-					</div>
-					<div class="menu-item-wrapper">
-						<a href="#">
-							<img src="<?php echo $this->Html->url('/img/icon-project-01.png');?>" class="tooltip"
-								alt="Project" title="Project"></img>
-						</a>
-					</div>
-					<div class="menu-item-wrapper">
-						<a href="#">
-							<img src="<?php echo $this->Html->url('/img/icon-export-01.png');?>" class="tooltip"
-								alt="Export" title="Export"></img>
-						</a>
-					</div>
-					<div class="menu-item-wrapper">
-						<a href="#">
-							<img src="<?php echo $this->Html->url('/img/icon-customize-01.png');?>" class="tooltip"
-								alt="Customize" title="Customize"></img>
-						</a>
-					</div>
-					<div class="menu-item-wrapper">
-						<a href="#">
-							<img src="<?php echo $this->Html->url('/img/icon-archieve-01.png');?>" class="tooltip"
-								alt="Archieve" title="Archieve"></img>
-						</a>
-					</div>
-					<div class="menu-item-wrapper">
-						<a href="#">
-							<img src="<?php echo $this->Html->url('/img/icon-mentorexpert-01.png');?>" class="tooltip"
-								alt="Mentor Expert" title="Mentor Expert"></img>
-						</a>
-					</div>
-					<div class="menu-item-wrapper">
-						<a href="#">
-							<img src="<?php echo $this->Html->url('/img/icon-otherjstp-01.png');?>" class="tooltip"
-								alt="Other JSTP" title="Other JSTP"></img>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
 		<div id="column_left">
 			<div id="profile">
 				<div id="profile_picture">
@@ -169,9 +120,6 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 				</div>
 			</div>
 			<div id="content">
-				<div id="page_title">
-					<h1><?php echo $page_title ?></h1>
-				</div>
 				<div id="content_page">
 					<?php echo $this->fetch('content'); ?>
 				</div>
@@ -224,6 +172,14 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 			jQuery('input:button, input:submit').button();
 			jQuery('.tooltip').tooltip();
 		});
+
+		jQuery('#btn-logout').button({
+		      icons: {
+		          primary: "ui-icon-locked"
+		        }
+		      }).click(function(){
+		    	  window.location.replace('<?php echo $this->Html->url('/Logout'); ?>');
+		      });
 	</script>
 </body>
 </html>

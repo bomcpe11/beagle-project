@@ -41,7 +41,7 @@
 	}	
 	
 	function deleteFile(path,id){
-		jConfirm('ท่านต้องการลบภาพนี้ใช่หรือไม่?', 
+		jConfirm('ท่านต้องการลบไฟล์นี้?', 
 			function(){ //okFunc
 				loading();
 				jQuery.ajax({

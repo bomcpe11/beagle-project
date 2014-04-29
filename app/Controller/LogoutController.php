@@ -14,7 +14,7 @@ class LogoutController extends AppController {
 	
 		$result = $this->fncLogout();
 	
-		$this->layout = "ajax";
+		$this->layout = "ajax_public";
 		$this->set("message", json_encode(array("status" => $result)));
 		$this->render("response");
 	

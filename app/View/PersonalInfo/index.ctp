@@ -107,7 +107,7 @@
 							</tr>
 							<tr>
 								<td>
-									<strong>Sosial Network : </strong>
+									<strong>Social Network : </strong>
 									<span><?php echo $objUser[0]['profiles']['blogaddress'];?></span>
 								</td>
 								<td>

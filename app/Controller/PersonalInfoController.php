@@ -2,14 +2,14 @@
 // session_start();
 class PersonalInfoController extends AppController {
 	/* ------------------------------------------------------------------------------------------------ */
-	public $names = 'PersonalInfo';
+	public $names = 'PersonalInfoController';
 	public $uses = array('Gvar'
 						,'Profile'
 						,'Family'
 						,'Education'
 						,'Workplace'
 						,'Comment');
-	public $layout = "default_new";
+// 	public $layout = "default_new";
 	/* ------------------------------------------------------------------------------------------------ */
 	public function index(){
 		$this->log('---- PersonalInfoController -> index ----');

@@ -60,7 +60,7 @@ h3{
 		}
 	#header_search_wrapper{
 		height: 30px;
-		width: 500px;
+		width: 320px;
 		float: right;
 		margin-top: 40px;
 		margin-right: 10px;
@@ -118,15 +118,15 @@ h3{
 				    margin: auto;
 				}
 #column_left{
-	margin-right: 260px;
-	background-color: #3C3B3C;
+/* 	margin-right: 260px; */
+	background-color: #E7EAEC;
 }
 	#profile{
 		height: 450px;
 		width: 230px;
 		float: left;
 		margin-top: 80px;
-		background-color: #8AA44E;
+		background-color: #C4D0C9;
 	}
 		#profile_picture{
 			height: 230px;
@@ -139,7 +139,7 @@ h3{
 		#profile_title{
 			height: 50px;
 			width: 100%;
-			background-color: #A3C357;
+			background-color: #B6C2BA;
 		}
 			#profile_nickname{
 				height: 40px;
@@ -149,13 +149,13 @@ h3{
 				padding-left: 10px;
 				font-size: 2em;
 				font-weight: bold;
-				color: #526033;
+/* 				color: #B6C2BA; */
 			}
 			#profile_title_generation{
 				height: 45px;
 				width: 59px;
 				float: left;
-				background-color: #B8DB4D;
+				background-color: #A3ADA7;
 				padding-top: 5px;
 				text-align: center;
 			}
@@ -188,11 +188,12 @@ h3{
 			width: 100%;
 		}
 		#content_page{
-			min-height: 800px;
+			min-height: 530px;
 			height: auto;
 			width: 100%;
-			background-color: #f5f3e5;
-			border: 1px solid #dfd9c3;
+/* 			background-color: #f5f3e5; */
+/* 			border: 1px solid #dfd9c3; */
+			margin-left: 20px;
 		}
 #footer{
 	height: 60px;
@@ -230,15 +231,62 @@ h3{
 	border-radius: 15px;
 	padding: 0 15px 0 15px;
 }
-
-div.framecontainer{
-	display:none;
+ul.main-menu{
+	margin-top: 75px;
+	width: 800px;
+}
+ul.main-menu li{
+	display:block;
+	list-style-type: none;
+	float:left;
+	width: 150px;
+	height: 150px;
+/* 	background-color: #EEE; */
+/* 	border: 1px solid white; */
+}
+ul.main-menu a{
+	color:black;
+}
+ul.main-menu li.active{
+	cursor: pointer;
+}
+ul.main-menu li.active div.caption{
+	text-align: center;
+	padding-top: 125px;
 }
 
-a.framebtn{
-	margin: 2px;
-}
+ul.main-menu li#menu-personal-info{
+/* 	background-color: #00D1A0; */
+	background: #00D1A0 url("../img/menu_personalinfo.png") no-repeat center 18px;
+}ul.main-menu li#menu-personal-info.hover{background-color: #CCC;}
 
-div.input fieldset{
-	margin: 5px 15px;
-}
+ul.main-menu li#menu-project{
+	background: #2BAD99 url("../img/menu_project.png") no-repeat center 19px;
+}ul.main-menu li#menu-project.hover{background-color: #CCC;}
+
+ul.main-menu li#menu-resources{
+	background: #FF7051 url("../img/menu_resources.png") no-repeat center 14px;
+}ul.main-menu li#menu-resources.hover{background-color: #CCC;}
+
+ul.main-menu li#menu-customize{
+	background: #D282A9 url("../img/menu_customize.png") no-repeat center 18px;
+}ul.main-menu li#menu-customize.hover{background-color: #CCC;}
+
+ul.main-menu li#menu-export{
+	background: #F4A278 url("../img/menu_export.png") no-repeat center 18px;
+}ul.main-menu li#menu-export.hover{background-color: #CCC;}
+
+ul.main-menu li#menu-mentor{
+	background: #74AF5B url("../img/menu_mentor.png") no-repeat center 18px;
+}ul.main-menu li#menu-mentor.hover{background-color: #CCC;}
+
+ul.main-menu li#menu-otherjstp{
+	background: #A3C30E url("../img/menu_otherjstp.png") no-repeat center 18px;
+}ul.main-menu li#menu-otherjstp.hover{background-color: #CCC;}
+
+ul.main-menu li#menu-achieve{
+	background: #FF9ABC url("../img/menu_achieve.png") no-repeat center 18px;
+}ul.main-menu li#menu-achieve.hover{background-color: #CCC;}
+
+
+

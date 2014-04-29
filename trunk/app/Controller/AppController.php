@@ -37,6 +37,7 @@ class AppController extends Controller {
 	private $is_AllowFooterTrace = true;
 	private $objuser = null;
 	
+	
 	function beforeFilter(){
 		$this->objuser = $this->Session->read('objuser');
 		$this->set('objuser', $this->objuser);
@@ -51,6 +52,8 @@ class AppController extends Controller {
 		$this->set("nameth", $dataProfile['nameth']);
 		$this->set("lastnameth",$dataProfile['lastnameth']);
 		$this->set("nickname",$dataProfile['nickname']);
+		
+// 		echo $dataProfile['generation'];
 		
 		$generation = is_numeric($dataProfile['generation'])? $dataProfile['generation']: '-';
 		$this->set("generation",$generation);

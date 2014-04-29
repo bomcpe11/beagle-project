@@ -29,7 +29,7 @@ if(isset($objuser) && !empty($objuser)){
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = __d('cake_dev', 'Jstp hub ');
+$cakeDescription = __d('cake_dev', 'My JSTP');
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,7 +37,7 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 		echo $this->Html->charset(); 
 	?>
 	<title>
-		<?php echo $cakeDescription ?>:
+		<?php echo $cakeDescription ?> :
 		<?php echo $title_for_layout; ?>
 	</title>
 	<?php
@@ -71,7 +71,7 @@ $cakeDescription = __d('cake_dev', 'Jstp hub ');
 				<table style="width: 100%;">
 					<tr>
 						<td style="width: 90%;">
-							<input style="width: 98%;" type="text" placeholder="Search Project">
+							<input class="txt-search" type="text" placeholder="Search...">
 						</td>
 						<td style="width: 10%;">
 							<input type="image" src="<?php echo $this->Html->url('/img/search-icon.png');?>" 

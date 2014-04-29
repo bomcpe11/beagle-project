@@ -119,6 +119,61 @@ class Profile extends AppModel {
    		
    		return $flag;
 	}// insert
+	
+	public function addnewmember($cardtype, $cardid, $name, $lastname, $birthdate, $email){
+		$flag = false;
+		$strSql = "INSERT INTO profiles(cardtype, cardid, nameth, lastnameth, birthday, email)";
+		$strSql .= "VALUES('".$cardtype."', '".$cardid."', '".$name."', '".$lastname."', '".$birthdate."', '".$email."')";
+		$strSql .= ";";
+		//$this->log("strSql => ".$strSql);
+		 
+		try {
+			$this->query($strSql);
+		
+			$flag = true;
+		} catch ( Exception $e ) {
+			$this->log("exception => ".$e->getMessage());
+		}// try catch
+		 
+		return $flag;
+	}//addnewmember
+	
+	public function checkforsignin($cardtype, $cardid, $name, $lastname, $birthdate, $email){
+		$result = null;
+		$strSql = "SELECT * FROM profiles WHERE (nameth='".$name."' AND lastnameth='".$lastname."') "
+				. "AND (cardid='".$cardid."' OR birthday='".$birthdate."' OR email='".$email."') "
+				. "AND NOT is_approve=1";
+		$this->log("strSql => ".$strSql);
+		
+		try {
+			$result = $this->query($strSql);
+		} catch ( Exception $e ) {
+			$this->log("exception => ".$e->getMessage());
+		}// try catch
+		
+		return $result;
+	}
+	
+	public function signinactivate($id, $cardtype, $cardid, $email, $username, $password){
+		$flag = false;
+		$sql = "UPDATE profiles
+				SET cardtype='".$cardtype."'
+				,cardid='".$cardid."'
+				,email='".$email."'
+				,login='".$username."'
+				,encrypt_password='".md5($password)."'
+				,is_approve='1'
+				WHERE id='$id'";
+		
+		try {
+			$this->query($sql);
+			$flag = true;
+		} catch (Exception $e) {
+			$this->log($e->getMessage());
+		}
+		
+		return $flag;
+	}
 	/* ------------------------------------------------------------------------------------------------------- */
 	public function updateProfile($profileId
 									,$titleTh

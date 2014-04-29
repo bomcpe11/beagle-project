@@ -6,7 +6,7 @@ class EmailsenderController extends AppController{
 	public $names = 'EmailsenderController';
 	public $uses = array('Profile','EmailHistory');
 	public $components = array('Email');
-	public $layout = 'default_new';
+// 	public $layout = 'default_new';
 	/* -------------------------------------------------------------------------------------------------- */
 	public function index(){
 		$this->log('---- EmailsenderController -> index ----');

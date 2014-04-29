@@ -114,7 +114,16 @@ function openPopupHtml(title, html, buttons, openFunc, closeFunc, isPutCloseBtn)
 //	var NewDialog = jQuery('<div style="width:800px;">\
 //            <p>This is your dialog content, which dfssssssss sssssssss sssssssssssss<br /><br /><br /><br /><br /><br /><br /><br /><br /> sssssssssssss sssssssss ssssss can be multiline and dynamic.</p>\
 //        </div>');
+	
 	var NewDialog = jQuery(html);
+	
+	//</?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)/?>
+//	var re = new RegExp("</?\w+((\s+\w+(\s*=\s*(?:\".*?\"|'.*?'|[^'\">\s]+))?)+\s*|\s*)/?>");
+//	if (html.match(re)) {
+//		
+//	}
+	
+	
 	if(buttons==undefined) buttons = [{text: "Close", click: function() {jQuery(this).dialog("close"); jQuery(this).remove();}}]
 	else if(isPutCloseBtn==undefined || isPutCloseBtn==true) buttons.push({text: "Close", click: function() {jQuery(this).dialog("close"); jQuery(this).remove();}});
 //		console.log(NewDialog.width());

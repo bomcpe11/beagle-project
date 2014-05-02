@@ -122,9 +122,13 @@
 						</tr>
 					<?php }?>
 				</table>
-				<input type="button" id="button_edit_profile" onclick="javascript:edit_profile();" value="แก้ไขข้อมูลส่วนตัว"/>
 			</div>
 		</div>
+		<table style="width:100%;"><tr>
+		<td align="center">
+			<input type="button" id="button_edit_profile" onclick="javascript:edit_profile();" value="แก้ไขข้อมูลส่วนตัว"/>
+		</td>
+		</tr></table>
 	</div>
 	<div class="container">
 		<h2>ประวัติครอบครัว</h2>

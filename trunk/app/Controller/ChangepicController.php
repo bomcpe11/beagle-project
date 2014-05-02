@@ -20,8 +20,8 @@ class ChangepicController extends AppController {
 		//// local variables ////
 		$result = null;
 		$objUser = $this->getObjUser();
-		$eduStep = $this->request->data["select_edustep"];
-		$imgDtm = $this->setFormatDate($this->request->data["text_imgdtm"]);
+		$eduStep = -1;
+		$imgDtm = $this->request->data["text_imgdtm"];
 		$imgDesc = $this->request->data["textarea_imgdesc"];
 		
 		//*** insert data
@@ -49,7 +49,14 @@ class ChangepicController extends AppController {
 					//*** update data(imgPath)
 					if ( $this->ProfilePic->updateImgPathById($directory."/".$fileName	// $imgPath
 									, $lastInsertId[0][0]["last_index_id"]) ) {	// $byId
-						$result = "บันทึกข้อมูล เรียบร้อย";
+						$objUser = $this->getObjUser();
+						if( $this->Profile->updateImg($objUser['id']
+									,$directory."/".$fileName
+									,$imgDesc) ){
+							$result = "บันทึกข้อมูล เรียบร้อย";
+						}else{
+							$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
+						}
 					} else {
 						$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
 					}// if else
@@ -66,6 +73,11 @@ class ChangepicController extends AppController {
 		// close transaction
 		if ( $result == "บันทึกข้อมูล เรียบร้อย" ) {
 			$dataSource->commit();
+			
+			//Update new session
+			$newObjUser = $this->Profile->getDataById($objUser['id']);
+			$this->Session->delete('objuser');
+			$this->Session->write('objuser',$newObjUser[0]["profiles"]);
 		} else {
 			$dataSource->rollback();
 		}// if else

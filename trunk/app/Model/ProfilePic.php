@@ -28,7 +28,7 @@ class ProfilePic extends AppModel {
   		$strSql .= " ,'".$imgpath."'"; // imgpath - IN varchar(255)
   		$strSql .= " ,'".$imgdesc."'"; // imgdesc - IN varchar(1000)
   		$strSql .= " ,".$edustep; // edustep - IN tinyint(4)
-  		$strSql .= " ,'".$imgdtm."'"; // imgdtm - IN datetime
+  		$strSql .= " ,'".$imgdtm."'"; // imgdtm - IN varchar(4)
   		$strSql .= " ,CURRENT_TIMESTAMP"; // uploaddtm - IN datetime
 		$strSql .= " )";
 		$strSql .= ";";

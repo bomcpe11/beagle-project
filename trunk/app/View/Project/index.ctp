@@ -1,4 +1,21 @@
 <?php 
+	function genUploadFileForm($action, $idUpload){
+		echo '<div class="frm-main">
+				<div class="frm frm1">
+					<input type="button" style="margin:0px;" value="อัพโหลดไฟล์เพิ่ม" class="frmbtn" frmid="frm2" />
+				</div>
+				<div class="frm frm2" style="display:none;">
+					<form action="'.$action.'" method="post" enctype="multipart/form-data">
+						<input type="file" name="upload" />
+						<input type="hidden" name="idUpload" value="'.$idUpload.'" /><br />
+						* จำกัด 5 ไฟล์ และขนาดไม่เกิน 25 MB
+						<input type="submit" style="margin:0px;display:inline;" value="Upload" /> 
+						<input type="button" style="margin:0px;display:inline;" value="Back" class="frmbtn" frmid="frm1" />
+					</form>
+				</div>
+			</div>';
+	}
+
 	echo $this->Html->css('personal_info.css');
 ?>
 <!-- ##################################################################################################### -->
@@ -13,6 +30,11 @@
 							<input type="hidden" name="research_id" value="<?php echo $listResearch[$i]['r']['id'];?>">
 							<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
 							<div class="data-item-wrapper">
+							
+							
+								<table><tr>
+								<td style="vertical-align:baseline;"><img src="" style="width:100px;height:100px;margin-top:2px;" /></td>
+								<td>
 								<table class="table-data-item">
 									<colgroup>
 										<col style="width:45%;"/>
@@ -57,7 +79,41 @@
 											<?php echo $listResearch[$i]['r']['detail']? $listResearch[$i]['r']['detail']: '-'; ?>
 										</td>
 									</tr>
+									<tr>
+										<td colspan="2">
+											<strong>ไฟล์ที่เกียวข้อง : </strong>
+											<div style="padding-left:20px;line-height:15px;">
+												<?php 
+												$path = "files/research/".$listResearch[$i]['r']['id'];
+												$countFiles = 0;
+												if($dir = @opendir($path)){
+													while (($file = readdir($dir)) !== false)
+													{ 
+														if(is_file($path."/".$file)){ 
+															?><a href="<?php echo $this->Html->url("/".$path."/".$file);?>" style="color:black;"><?php
+															echo $file; ?></a> 
+															<img src="<?php echo $this->Html->url('/img/icon_del.png');?>" style="cursor:pointer;" width="10" height="10" title="ลบไฟล์ <?php echo $file; ?> นี้"
+															onclick="deleteFile('<?php echo $path."/".$file ?>','<?php echo $listResearch[$i]['r']['id'] ?>');" />
+															<br /><?php
+															$countFiles++;
+														}
+													}
+												}
+												@closedir($dir);
+												?>
+												<?php 
+													if($objuser['id']==$_GET['id'] && $countFiles<5){
+														genUploadFileForm($this->Html->url('/Project/uploadFiles').'?uploadfor=research', $listResearch[$i]['r']['id']);
+													}
+												?>
+											</div>
+										</td>
+									</tr>
 								</table>
+								</td>
+								</tr></table>
+								
+								
 							</div>
 						</li>
 					<?php }?>
@@ -122,6 +178,36 @@
 											<?php echo $listOtherwork[$i]['o']['detail']? $listOtherwork[$i]['o']['detail']: '-'; ?>
 										</td>
 									</tr>
+									<tr>
+										<td colspan="2">
+											<strong>ไฟล์ที่เกียวข้อง : </strong>
+											<div style="padding-left:20px;line-height:15px;">
+												<?php 
+												$path = "files/otherwork/".$listOtherwork[$i]['o']['id'];
+												$countFiles = 0;
+												if($dir = @opendir($path)){
+													while (($file = readdir($dir)) !== false)
+													{ 
+														if(is_file($path."/".$file)){ 
+															?><a href="<?php echo $this->Html->url("/".$path."/".$file);?>" style="color:black;"><?php
+															echo $file; ?></a> 
+															<img src="<?php echo $this->Html->url('/img/icon_del.png');?>" style="cursor:pointer;" width="10" height="10" title="ลบไฟล์ <?php echo $file; ?> นี้"
+															onclick="deleteFile('<?php echo $path."/".$file ?>','<?php echo $listOtherwork[$i]['o']['id'] ?>');" />
+															<br /><?php
+															$countFiles++;
+														}
+													}
+												}
+												@closedir($dir);
+												?>
+												<?php 
+													if($objuser['id']==$_GET['id'] && $countFiles<5){
+														genUploadFileForm($this->Html->url('/Project/uploadFiles').'?uploadfor=otherwork', $listOtherwork[$i]['o']['id']);
+													}
+												?>
+											</div>
+										</td>
+									</tr>
 								</table>
 							</div>
 						</li>
@@ -142,6 +228,8 @@
 		<input type="button" id="button_add_otherwork" value="เพิ่มข้อมูล ผลงานอื่นๆ" onclick="openPopupOtherwork('','','','','','','')"/>
 	</div>
 </div>
+
+
 <!-- ##################################################################################################### -->
 <?php 
 	include 'popup_research.ctp';
@@ -165,6 +253,12 @@
 			jQuery('input[type="button"]').remove();
 			jQuery('.edit-delete').remove();
 		}
+
+		jQuery('input:button.frmbtn').click(function(){
+			var input_container = jQuery(this).closest("div.frm-main");
+			input_container.find('div.frm').hide();
+			input_container.find('div.'+jQuery(this).attr('frmid')).show();
+		});
 	});
 	/* -------------------------------------------------------------------------------------------------- */
 	function updateSortableSeq(sortable_id){
@@ -191,5 +285,32 @@
 							);
 				}
 				,'json');
+	}
+
+	function deleteFile(path,id){
+		jConfirm('ท่านต้องการลบไฟล์นี้?', 
+			function(){ //okFunc
+				loading();
+				jQuery.ajax({
+					type: "POST",
+					dataType: 'json',
+					url: '<?php echo $this->Html->url('/Project/deleteFile');?>',
+					data: {path:path},
+					success: function(data){
+						unloading();
+						if ( data.status ) {
+							jAlert(data.message, 
+								function(){
+									//window.location.replace("<?php echo $this->webroot;?>Project?id=" + id);
+									window.location.reload();
+								}
+							);
+						} else {
+							jAlert(data.message);
+						}
+					}
+				});
+			}
+		);
 	}
 </script>

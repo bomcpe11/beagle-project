@@ -9,7 +9,7 @@
 <div id="frm-menu" class="framecontainer" style="text-align:center;display:block;">
 	<?php if($isAdmin){ ?><a class="framebtn" frmid="frm-addnewmember">Add new member</a> <!-- Admin --><br /><?php } ?>
 	<a class="framebtn" frmid="frm-changepassword">Change password</a><br />
-	<a class="framebtn" frmid="">Change picture profile</a><br />
+	<a class="framebtn" urllink="<?php echo $this->Html->url('/Changepic'); ?>">Change picture profile</a><br />
 	<a class="framebtn" frmid="" onclick="window.location.replace('<?php echo $this->Html->url('/Mainmenu'); ?>');">Back to Main Menu</a><br />
 </div>
 
@@ -68,9 +68,17 @@ Change Password<br />
 <script type="text/javascript">
 	jQuery('a.framebtn[frmid!=""]').click(function(){
 		//alert('AAA');
-		jQuery('div.framecontainer').hide();
+// 		jQuery('div.framecontainer').hide();
 
-		jQuery('div#'+jQuery(this).attr('frmid')).show();
+// 		jQuery('div#'+jQuery(this).attr('frmid')).show();
+
+		var urllink = jQuery.trim(jQuery(this).attr('urllink'));
+
+		if(urllink!=''){
+			window.location.replace(urllink);
+		}else{
+			frame_display(jQuery(this).attr('frmid'));
+		}
 	});
 	jQuery('a.framebtn').button();
 
@@ -84,6 +92,20 @@ Change Password<br />
 		input_container.find('input:text').val('');
 	});
 
+	function frame_display(frmid){
+		var frm = jQuery('div#'+frmid);
+		if(frm.length>0){
+			jQuery('div.framecontainer').hide();
+			jQuery('div#'+frmid).show();
+		}
+	}
+
+	<?php 
+		if(!empty($_GET['frmid'])){
+			echo "frame_display('".$_GET['frmid']."')";
+		}
+	?>
+	
 	function submit_addnewmember(t){
 		
 		var input_container = jQuery(t).closest("div.input");

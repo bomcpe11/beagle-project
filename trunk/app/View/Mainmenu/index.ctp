@@ -4,7 +4,7 @@
 
 <ul class="main-menu">
 	<a href="<?php echo $this->Html->url('/PersonalInfo/index?id='.$objuser['id']);?>"><li id="menu-personal-info" class="active"><div class="caption">Personal Info</div></li></a>
-	<li id="menu-project" class="active"><div class="caption">Project/Research</div></li>
+	<a href="<?php echo $this->Html->url('/Project/index?id='.$objuser['id']);?>"><li id="menu-project" class="active"><div class="caption">Project/Research</div></li></a>
 	<li></li>
 	<li id="menu-resources" class="active"><div class="caption">Resources</div></li>
 	<li></li>
@@ -14,7 +14,7 @@
 	<li></li>
 	<li id="menu-export" class="active"><div class="caption">Export</div></li>
 	<li id="menu-mentor" class="active"><div class="caption">Mentor & Expert</div></li>
-	<li id="menu-otherjstp" class="active"><div class="caption">Other JSTP</div></li>
+	<a href="<?php echo $this->Html->url('/Otherjstp');?>"><li id="menu-otherjstp" class="active"><div class="caption">Other JSTP</div></li></a>
 	<li id="menu-achieve" class="active"><div class="caption">Achieve</div></li>
 </ul>
 

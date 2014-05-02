@@ -26,7 +26,7 @@
 	function validateData() {
 		var fileUpload = jQuery("#file_upload").val();
 		var extensionFile = fileUpload.split(".").pop();
-		var eduStep = jQuery("#select_edustep").val();
+// 		var eduStep = jQuery("#select_edustep").val();
 		var imgDtm = jQuery("#text_imgdtm").val();
 		var imgDesc = jQuery("#textarea_imgdesc").val();
 		
@@ -63,32 +63,32 @@
 		}// if
 		
 		// validate eduStep
-		if ( eduStep == -1 ) {
-			jAlert("กรุณาเลือก ระดับการศึกษา"
-					, function() {
-					}// okFnc
-					, function() {
-					}// openFnc
-					, function() {
-					}// closeFnc
-			);// jAlert
+// 		if ( eduStep == -1 ) {
+// 			jAlert("กรุณาเลือก ระดับการศึกษา"
+// 					, function() {
+// 					}// okFnc
+// 					, function() {
+// 					}// openFnc
+// 					, function() {
+// 					}// closeFnc
+// 			);// jAlert
 
-			return false;
-		}// if
+// 			return false;
+// 		}// if
 
 		// validate imgDtm
-		if ( !imgDtm ) {
-			jAlert("กรุณาเลือก วันที่ถ่ายรูปนี้"
-					, function() {
-					}// okFnc
-					, function() {
-					}// openFnc
-					, function() {
-					}// closeFnc
-			);// jAlert
+// 		if ( !imgDtm ) {
+// 			jAlert("กรุณาเลือก วันที่ถ่ายรูปนี้"
+// 					, function() {
+// 					}// okFnc
+// 					, function() {
+// 					}// openFnc
+// 					, function() {
+// 					}// closeFnc
+// 			);// jAlert
 
-			return false;
-		}// if
+// 			return false;
+// 		}// if
 
 		// validate imgDesc
 		if ( !imgDesc ) {
@@ -168,7 +168,7 @@
 					<input type="file" id="file_upload" name="file_upload">
 				</td>
 			</tr>
-			<tr>
+			<!--tr>
 				<td class="td_label">* ระดับการศึกษา</td>
 				<td class="td_data">
 					<select id="select_edustep" name="select_edustep">
@@ -178,11 +178,11 @@
 						<?php }?>
 					</select>
 				</td>
-			</tr>
+			</tr-->
 			<tr>
-				<td class="td_label">* วันที่ถ่ายรูปนี้</td>
+				<td class="td_label">ปีที่ถ่ายรูปนี้ (พ.ศ.)</td>
 				<td class="td_data">
-					<input type="text" id="text_imgdtm" name="text_imgdtm" class="datePicker" readonly size="18">
+					<input type="text" id="text_imgdtm" name="text_imgdtm" size="4">
 				</td>
 			</tr>
 			<tr>
@@ -198,7 +198,8 @@
 			<tr>
 				<td class="td_label"></td>
 				<td class="td_data">
-					<input type="submit" id="button_upload" value="อัพโหลด"/>
+					<input type="submit" id="button_upload" value="Upload"/>
+					<input type="button" value="Back" onclick="window.location.replace('<?php echo $this->Html->url('/Customize'); ?>');"/>
 				</td>
 			</tr>
 		</table>

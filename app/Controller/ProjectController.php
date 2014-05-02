@@ -164,6 +164,90 @@ class ProjectController extends AppController {
 		$this->set('message', json_encode($result));
 		$this->render('response');
 	}
+	
+	public function uploadFiles(){
+		$this->log('Start :: ProjectController :: uploadFiles');
+		$objUser = $this->getObjUser();
+		$id = $_POST["idUpload"];
+		$uploadfor = $_GET['uploadfor'];
+		
+		if($_FILES["upload"]["size"]>25000000){
+			$this->redirect(array("controller" => "Project", "action" => "?id=".$objUser['id']));
+			$this->log('Maximum file > 25 MB , not upload!!');
+			return;
+		}
+		
+		switch ($uploadfor){
+			case 'research': $uploadfor='research'; break;
+			case 'otherwork': $uploadfor='otherwork'; break;
+		}
+		$directory = "files/".$uploadfor."/".$id."/";
+		// 		$splitFileName = explode(".", $_FILES["upload"]["name"]);
+		// 		$extensionFile = ".".$splitFileName[count($splitFileName)-1];
+		// 		$fileName = '2-img-'.time().$extensionFile;
+		$fileName = $_FILES["upload"]["name"];
+		//echo $_FILES["upload"]["size"]; //24.7 MB = 24710068, limit 25000000
+		$this->log('directory = '.$directory.'  fileName = '.$fileName);
+		$result = '';
+	
+		if ( $this->checkDirectory($directory) ) {
+			$this->log('TEMP FILE = '.$_FILES["upload"]["tmp_name"]);
+			if ( move_uploaded_file($_FILES["upload"]["tmp_name"]	// temp_file
+					, $directory."/".$fileName) ) {	// path file
+			} else {
+				$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
+			}
+		} else {
+			$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
+		}
+		$this->redirect(array("controller" => "Project", "action" => "?id=".$objUser['id']));
+		$this->log('End :: ActivityController :: uploadFiles');
+	}
+	
+	public function deleteFile(){
+		$this->log('Start :: ProjectController :: deleteFile');
+		$path = $this->request->data['path'];
+		unlink($path);
+		$status = 1;
+		$message = 'สำเร็จ';
+		$this->log('message = '.$message);
+		$this->log('status = '.$status);
+		$this->layout='ajax';
+		$this->set('message', json_encode(array('status'=>$status,'message'=>$message)));
+		$this->render('response');
+		$this->log('End :: ProjectController :: deleteFile');
+	}
+	
+	private function checkDirectory($directory) {
+		$flag = false;
+	
+		// check directory existing
+		if ( is_dir($directory) ) {
+			$flag = true;
+		} else {
+			$this->log("not have directory");
+	
+			if ( mkdir($directory) ) {
+				$this->log("make directory complete");
+	
+				#Ref : http://php.net/manual/en/function.chmod.php
+				// Changes file mode
+				// Read and write for owner, read for everybody else
+				if ( chmod($directory, 0744) ) {
+				$this->log("set permission complete");
+							
+				$flag = true;
+				} else {
+				$this->log("set permission fail");
+				}// if else
+			} else {
+				$this->log("make directory fail");
+			}// if else
+				}// if else
+	
+				return $flag;
+	}// checkDirectory
+	
 	/* --------------------------------------------------------------------------------------------------- */
 	public function savedNewOtherwork(){
 		$this->log('---- ProjectController -> savedNewOtherwork ----');
@@ -187,11 +271,11 @@ class ProjectController extends AppController {
 										,$isnotfinish
 										,$detail) ){
 			$dataSource->commit();
-			$result['msg'] = 'การแก้ไขข้อมูลรางวัลอื่นๆเรียบร้อย';
+			$result['msg'] = 'การแก้ไขข้อมูลผลงานอื่นๆเรียบร้อย';
 			$result['flag'] = 1;
 		}else{
 			$dataSource->rollback();
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลรางวัลอื่นๆ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลผลงานอื่นๆ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 			$result['flag'] = -1;
 		}
 		
@@ -224,11 +308,11 @@ class ProjectController extends AppController {
 										,$isnotfinish
 										,$detail) ){
 			$dataSource->commit();
-			$result['msg'] = 'การแก้ไขข้อมูลรางวัลอื่นๆเรียบร้อย';
+			$result['msg'] = 'การแก้ไขข้อมูลผลงานอื่นๆเรียบร้อย';
 			$result['flag'] = 1;
 		}else{
 			$dataSource->rollback();
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลรางวัลอื่นๆ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลผลงานอื่นๆ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 			$result['flag'] = -1;
 		}
 		
@@ -247,11 +331,11 @@ class ProjectController extends AppController {
 		$dataSource = $this->Otherwork->getDataSource();
 		if( $this->Otherwork->deleteData($id) ){
 			$dataSource->commit();
-			$result['msg'] = 'การแก้ไขข้อมูลรางวัลอื่นๆเรียบร้อย';
+			$result['msg'] = 'การแก้ไขข้อมูลผลงานอื่นๆเรียบร้อย';
 			$result['flag'] = 1;
 		}else{
 			$dataSource->rollback();
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลรางวัลอื่นๆ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลผลงานอื่นๆ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 			$result['flag'] = -1;
 		}
 		

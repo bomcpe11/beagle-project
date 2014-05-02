@@ -1,6 +1,6 @@
 <?php
 // session_start();
-class PsearchController extends AppController {
+class OtherjstpController extends AppController {
 	/* ------------------------------------------------------------------------------------------------ */
 	public $uses = array('Profile');
 	/* ------------------------------------------------------------------------------------------------ */

@@ -70,10 +70,10 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 			<form>
 				<table style="width: 100%;">
 					<tr>
-						<td style="width: 28%;">
+						<td style="width: 30%;">
 							<button type="button" id="btn-logout">Log off</button>
 						</td>
-						<td style="width: 62%;">
+						<td style="width: 60%;">
 							<input class="txt-search" type="text" placeholder="Search...">
 						</td>
 						<td style="width: 10%;">

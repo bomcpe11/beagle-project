@@ -70,11 +70,11 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 			<form>
 				<table style="width: 100%;">
 					<tr>
-						<td style="width: 40%;">
+						<td style="width: 45%;">
 							<button type="button" id="btn-mainmenu">Main menu</button>
 							<button type="button" id="btn-logout">Log off</button>
 						</td>
-						<td style="width: 50%;">
+						<td style="width: 45%;">
 							<input class="txt-search" type="text" placeholder="Search...">
 						</td>
 						<td style="width: 10%;">
@@ -137,7 +137,7 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 						</a>
 					</div>
 					<div class="menu-item-wrapper">
-						<a href="#">
+						<a href="<?php echo $this->webroot; ?>Otherjstp">
 							<img src="<?php echo $this->Html->url('/img/icon-otherjstp-01.png');?>" class="tooltip"
 								alt="Other JSTP" title="Other JSTP"></img>
 						</a>

@@ -1,3 +1,41 @@
+<style type="text/css">
+/* 	table-data */
+table.table-data, table.table-data th, table.table-data td{
+border: 1px solid black;
+}
+table.table-data{
+border-collapse:collapse;
+}
+table.table-data, table.table-data th, table.table-data td{
+border: 1px solid black;
+}
+table.table-data {
+width:100%;
+}
+table.table-data th{
+height:30px;
+}
+table.table-data td{
+text-align:left;
+}
+table.table-data td{
+/* height:50px; */
+vertical-align:bottom;
+}
+table.table-data td{
+padding:5px;
+}
+table.table-data, table.table-data td, table.table-data th{
+border:1px solid green;
+}
+table.table-data th{
+background-color:green;
+color:white;
+}
+table.table-data tr{
+	cursor:pointer;
+}
+</style>
 <div>
 	<table class="section-layout" style="width:50%;">
 		<tr>
@@ -7,10 +45,10 @@
 		<tr>
 			<td class="form-label">ค้นหาด้วย :</td>
 			<td>
-				<input name="search_width" type="checkbox" value="nameth"/><lable>ชื่อ</lable>
-				<input name="search_width" type="checkbox" value="lastnameth"/><lable>นามสกุล</lable>
-				<input name="search_width" type="checkbox" value="nickname"/><lable>ชื่อเล่น</lable>
-				<input name="search_width" type="checkbox" value="login"/><lable>Username</lable><br/>
+				<input name="search_width" type="checkbox" checked="checked" value="nameth"/><lable>ชื่อ</lable>
+				<input name="search_width" type="checkbox" checked="checked" value="lastnameth"/><lable>นามสกุล</lable>
+				<input name="search_width" type="checkbox" checked="checked" value="nickname"/><lable>ชื่อเล่น</lable>
+				<input name="search_width" type="checkbox" checked="checked" value="login"/><lable>Username</lable><br/>
 				<input name="search_width" type="checkbox" value="age"/><lable>อายุ</lable>
 				<input name="search_width" type="checkbox" value="generation"/><lable>รุ่น</lable>
 				<input name="search_width" type="checkbox" value="activities"/><lable>ชื่อกิจกรรมที่เข้าร่วม</lable>
@@ -74,7 +112,7 @@
 		
 
 		loading();
-		jQuery.post('<?php echo $this->Html->url('/Psearch/searchData');?>'
+		jQuery.post('<?php echo $this->Html->url('/Otherjstp/searchData');?>'
 				,{'data':{'keyWord':keyWord
 							,'searchWidth':searchWidth
 							,'flagActivity':flagActivity}}
@@ -130,7 +168,7 @@
 	}
 	/*	------------------------------------------------------------------------------------------------ */
 	function goProfile(id){
-		window.location.assign('../Profile/index?id='+id);
+		window.location.assign('<?php echo $this->Html->url('/PersonalInfo/index?id='); ?>'+id);
 	}
 	/*	------------------------------------------------------------------------------------------------ */
 	function getAge(birthDay){

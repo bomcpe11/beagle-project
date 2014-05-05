@@ -327,7 +327,7 @@
 			</div>
 		</ul>
 	</div>
-	<div class="container">
+	<div class="container" id="containner_comment">
 		<h2>ความคิดเห็น</h2>
 		<div class="section-content">
 			<?php 
@@ -405,8 +405,9 @@
 ?>
 <script type="text/javascript">
 	jQuery(document).ready(function() {
-			<?php 
-				if( $isOwner || $objuser['role']==='1' ){
+			<?php
+				// visible sortable and buttons
+				if( $isOwner || $objuser['role']==='1' ){ // is Owner Profile or is Admin
 					echo "jQuery('#sortable_family"
 								.",#sortable_education"
 								.",#sortable_workplace').sortable({
@@ -425,6 +426,12 @@
 									.",#button_add_workplace').remove();";
 					
 					echo "jQuery('.edit-delete').remove();";
+					echo "jQuery('span.ui-icon.ui-icon-arrowthick-2-n-s').remove();";
+				}
+				
+				// visible comments
+				if( $objuser['role']==='10' || $objuser['role']==='30' ){ // นักเรียน,นักศึกษา หรือ วิทยากร
+					echo "jQuery('#containner_comment').remove();";
 				}
 			?>
 		}

@@ -16,7 +16,7 @@ class Gvar extends AppModel {
 		try {
 			$result = $this->query($strSql);
 		} catch ( Exception $e ) {
-			$this->log("Exception => ".$e.getMessage());
+			$this->log("Exception => ".$e->getMessage());
 		}// try catch
 		
 		return $result;
@@ -33,7 +33,7 @@ class Gvar extends AppModel {
 		try {
 			$result = $this->query($strSql);
 		} catch ( Exception $e ) {
-			$this->log("Exception => ".$e.getMessage());
+			$this->log("Exception => ".$e->getMessage());
 		}// try catch
 	
 		return $result;

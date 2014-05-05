@@ -66,8 +66,8 @@ class Comment extends AppModel {
 				FROM comments c,profiles p
 				WHERE c.commentable_id=p.id
 					AND c.profile_id='$profile_id'
-					AND c.commentable_id='$commentable_id'";
-		//$this->log($sql);
+					/*AND c.commentable_id='$commentable_id'*/";
+// 		$this->log($sql);
 		
 		try{
 			$result = $this->query($sql);

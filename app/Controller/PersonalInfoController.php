@@ -85,6 +85,7 @@ class PersonalInfoController extends AppController {
 			
 			/* comment */
 			$listComment = $this->Comment->getDataForProfile($objUser[0]['profiles']['id'],$sssnObjUser['id']);
+// 			$this->log($listComment);
 			$countListComment = count($listComment);
 			$splitCreatedAt = array();
 			$splitUpdatedAt = array();

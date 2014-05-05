@@ -8,12 +8,78 @@ class RegisterController extends AppController {
 	public $uses = array("Gvar"
 						, "Profile");
 	/* ------------------------------------------------------------------------------------------------------ */
-	function index() {
+	function index(){
+		$this->log("START :: RegisterController -> index()");
+// 		echo "<pre>"; print_r($this->request); echo "</pre>";
+
+		$id = @$this->request->query['id'];
+		$alterkey = @$this->request->query['key'];
+		
+		//TODO: check profileid & alterkey
+		$rs_chkalterkey = $this->Profile->checkAlterKey($id, $alterkey);
+// 		$this->log($rs_chkalterkey);
+		if(count($rs_chkalterkey)>0 && $rs_chkalterkey[0]['profiles']['id']==$id && $rs_chkalterkey[0]['profiles']['alterkey']==$alterkey){
+			
+		}else{
+			$this->redirect(array('controller' => 'Login'));
+		}
+		
+		$this->log("END :: RegisterController -> index()");
+	}
+	
+	function setUP(){
+		$this->log("START :: RegisterController -> setUP()");
+		
+		$result['status'] = false;
+		$result['message'] = '';
+		
+		$username 		= $this->request->data["username"];
+		$password 		= $this->request->data["password"];
+		$id 			= $this->request->data["profileid"];
+		$alterkey 		= $this->request->data["profilekey"];
+		
+		$cookieTimeOut = (3600 * 24) * 30;  // or '1 month'
+		
+		//TODO: check profileid & alterkey again
+		$rs_chkalterkey = $this->Profile->checkAlterKey($id, $alterkey);
+		if($rs_chkalterkey[0]['profiles']['id']==$id && $rs_chkalterkey[0]['profiles']['alterkey']==$alterkey){
+
+			//TODO: update DB
+			
+			if($this->Profile->setUPactivate($rs_chkalterkey[0]['profiles']['id'], $username, md5($password))){
+
+				// set cookie
+				$this->Cookie->time = $cookieTimeOut;
+				$this->Cookie->write("cookieUsername", $username);
+				$this->Cookie->write("cookieEncryptPassword", md5($password));
+				$this->log("### write cookie complete ###");
+				
+				
+				$result['status'] = true;
+				$result['message'] = 'ยินดีต้อนรับสู่ MyJSTP';
+				
+			}else{
+				$result['status'] = false;
+				$result['message'] = 'ไม่สามารถลงทะเบียนได้ กรุณาติดผู้ดูแลระบบ';
+			}
+					
+		}else{
+			$result['status'] = false;
+			$result['message'] = 'ตรวจสอบ Key ไม่ถูกต้อง กรุณาติดผู้ดูแลระบบ';
+		}
+		
+		$this->layout = "ajax_public";
+		$this->set("message", json_encode(array("result" => $result)));
+		$this->render("response");
+		
+		$this->log("END :: RegisterController -> setUP()");
+	}
+	
+	function index_bak20140502() {
 		$this->log("START :: RegisterController -> index()");
 	
 		//// local variables ////
-		$accountRole 	= $this->Gvar->getVarcodeVardesc1ByVarnameVardesc2("ACCOUNT_ROLE"
-																		, "Y");
+		$accountRole 	= $this->Gvar->getVarcodeVardesc1ByVarnameVardesc2("ACCOUNT_ROLE", "Y");
 		$personalIdType = $this->Gvar->getVarcodeVardesc1ByVarname("PERSONAL_ID_TYPE");
 		$namePrefixTh 	= $this->Gvar->getVarcodeVardesc1ByVarname("NAME_PREFIX_TH");
 		$namePrefixEn 	= $this->Gvar->getVarcodeVardesc1ByVarname("NAME_PREFIX_EN");
@@ -21,8 +87,6 @@ class RegisterController extends AppController {
 		// send data to view
 		$this->set(compact("accountRole", "personalIdType", "namePrefixTh", "namePrefixEn"));
 		
-		$this->render("register");
-	
 		$this->log("END :: RegisterController -> index()");
 	}// index
 	/* ------------------------------------------------------------------------------------------------------ */

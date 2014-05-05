@@ -1,7 +1,7 @@
 <?php 
 	//echo "<pre>"; print_r($objuser); echo "</pre>";
 	
-	$isAdmin = ($objuser['role_admin']==1?true:false);
+// 	$isAdmin = ($objuser['role_admin']==1?true:false);
 ?>
 
 <h2 style="padding:5px;">Customize</h2>

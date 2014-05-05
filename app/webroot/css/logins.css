@@ -1,8 +1,9 @@
 @CHARSET "UTF-8";
 .tableLayout {
-	border: 1px solid #666666;
+/* 	border: 1px solid #666666; */
 /* 	width: 50%; */
 	width: 700px;
+	margin: 100px auto 0 auto;
 	background-color: #FCFCFC;
 	border-radius:7px;
 	padding: 0 20px 0 20px;

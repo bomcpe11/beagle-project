@@ -36,12 +36,22 @@ class AppController extends Controller {
 	
 	private $is_AllowFooterTrace = true;
 	private $objuser = null;
+	protected $isLogin = false;
+	protected $isAdmin = false;
 	
 	
 	function beforeFilter(){
 		$this->objuser = $this->Session->read('objuser');
 		$this->set('objuser', $this->objuser);
 		//$this->log(print_r($this->objuser,true));
+		
+		$this->isLogin = !empty($this->objuser);
+		$this->set('isLogin', $this->isLogin);
+		
+// 		$this->log($this->objuser);
+		
+		$this->isAdmin = ($this->objuser['role_admin']==1?true:false);
+		$this->set('isAdmin', $this->isAdmin);
 		
 		$dataProfile =  $this->getObjUser();
 	

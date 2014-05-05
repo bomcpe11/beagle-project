@@ -177,18 +177,18 @@
 				<td>อีเมล์ : </td>
 				<td><input type="text" id="txt_email" /> *</td>
 			</tr>
-			<tr>
-				<td>Username : </td>
-				<td><input type="text" id="txt_username" /> *</td>
-			</tr>
-			<tr>
-				<td>Password : </td>
-				<td><input type="password" id="txt_password" /> *</td>
-			</tr>
-			<tr>
-				<td>Re-password : </td>
-				<td><input type="password" id="txt_repassword" /> *</td>
-			</tr>
+<!-- 			<tr> -->
+<!-- 				<td>Username : </td> -->
+<!-- 				<td><input type="text" id="txt_username" /> *</td> -->
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				<td>Password : </td> -->
+<!-- 				<td><input type="password" id="txt_password" /> *</td> -->
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				<td>Re-password : </td> -->
+<!-- 				<td><input type="password" id="txt_repassword" /> *</td> -->
+<!-- 			</tr> -->
 		</table>
 	</div>
 </div>
@@ -205,9 +205,9 @@
 		var txt_surname = jQuery.trim(input_container.find('#txt_surname').val());
 		var txt_birthdate = input_container.find('#txt_birthdate').val();
 		var txt_email = jQuery.trim(input_container.find('#txt_email').val());
-		var txt_username = jQuery.trim(input_container.find('#txt_username').val());
-		var txt_password = input_container.find('#txt_password').val();
-		var txt_repassword = input_container.find('#txt_repassword').val();
+// 		var txt_username = jQuery.trim(input_container.find('#txt_username').val());
+// 		var txt_password = input_container.find('#txt_password').val();
+// 		var txt_repassword = input_container.find('#txt_repassword').val();
 
 		// validate field *
 		if ( !select_cardtype
@@ -216,9 +216,9 @@
 			|| !txt_surname
 			|| !txt_birthdate
 			|| !txt_email
-			|| !txt_username
+			/*|| !txt_username
 			|| !txt_password
-			|| !txt_repassword ) {
+			|| !txt_repassword*/ ) {
 			jAlert("กรุณากรอกข้อมูลช่องที่ * ให้ครบ" 
 					, function(){ 
 					}//okFunc	
@@ -230,26 +230,13 @@
 			
 			return false;
 		}// if
-
-		if(txt_password!=txt_repassword){
-			jAlert("Re-password ไม่ถูกต้อง" 
-					, function(){ 
-					}//okFunc	
-					, function(){ 
-					}//openFunc
-					, function(){ 		
-					}//closeFunc
-			);// jAlert
-		}
 		
 		var data = {select_cardtype: select_cardtype,
 					txt_cardid: txt_cardid,
 					txt_name: txt_name,
 					txt_surname: txt_surname,
 					txt_birthdate: txt_birthdate,
-					txt_email: txt_email,
-					txt_username: txt_username,
-					txt_password: txt_password
+					txt_email: txt_email
 				};
 // 		console.log(data);
 		loading();

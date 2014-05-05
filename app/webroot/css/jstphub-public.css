@@ -1,0 +1,244 @@
+/* Screen Resolution Scope
+ *	min width 1024px (-15 of scroll bar)
+ *	max width 2048px (-15 of scroll bar)
+*/
+@CHARSET "UTF-8";
+
+/* HTML Element */
+html{
+	height: 100%;
+	width: 100%;
+	overflow-y: scroll;
+}
+body{
+	height: 100%;
+	width: 1009px;
+	width: 100%;
+	background-color: #E0E0D1;
+	font-family: verdana, sans-serif;
+	font-size: 0.8em;
+}
+h1{
+	color: #B8DB4D;
+}
+h2{
+	color: #526033;
+}
+h3{
+	color: #526033;
+}
+
+/* Layout */
+#header{
+	height: 80px;
+	width: 100%;
+	clear: both;
+	background-image: url('../img/background-header-01.png');
+/* 	border-bottom: 5px solid #A3C357; */
+}
+#header-bottom-border{
+	width: 100%;
+	clear: both;
+	height:5px;
+	background-image: url('../img/header-line.png');
+	background-size: 100%;
+}
+/* #header-bottom-border .line{ */
+/* 	width: 100%; */
+/* 	height: 5px; */
+/* } */
+	#header_logo_wrapper{
+		height: 55px;
+		width: 300px;
+		float: left;
+		margin-top: 20px;
+		margin-left: 30px;
+	}
+		#header_logo_wrapper img{
+			height: 100%;
+			width: 100%;
+		}
+	#header_search_wrapper{
+		height: 30px;
+		width: 500px;
+		float: right;
+		margin-top: 40px;
+		margin-right: 10px;
+	}
+		#header_search_wrapper form{
+			height: 100%;
+		}
+		
+#page{
+	height: auto;
+	width: 100%;
+	overflow: hidden;
+	margin: auto;
+	background-color: #181818;
+}
+#column_right{
+	float: right;
+	width: 260px;
+}
+	#menu{
+		height: 100%;
+		width: 100%;
+		overflow: hidden;
+		/*background-image: url('../img/background-right-side.png');*/
+	}
+		#menu_group_wrapper{
+			height: 100%;
+			width: 95%;
+			overflow: hidden;
+			margin: auto;
+		}
+		.menu-item-wrapper{
+			height: 80px;
+			width: 33.33%;
+			float: left;
+			position:relative;
+		}
+		.menu-item-wrapper:hover{
+			background-color: #3C3B3C;
+		}
+			.menu-item-wrapper a{
+				width: 100%;
+				height:100%;
+				display: block;
+				overflow: hidden;
+			}
+				.menu-item-wrapper a img{
+					height: 60%;
+					width: 60%;
+					position: absolute;
+				    top: 0;
+				    left: 0;
+				    right: 0;
+				    bottom: 0;
+				    margin: auto;
+				}
+#column_left{
+	margin-right: 260px;
+	background-color: #3C3B3C;
+}
+	#profile{
+		height: 450px;
+		width: 230px;
+		float: left;
+		margin-top: 80px;
+		background-color: #8AA44E;
+	}
+		#profile_picture{
+			height: 230px;
+			width: 100%;
+		}
+			#profile_picture img{
+				height: 100%;
+				width: 100%;
+			}
+		#profile_title{
+			height: 50px;
+			width: 100%;
+			background-color: #A3C357;
+		}
+			#profile_nickname{
+				height: 40px;
+				width: 161px;
+				float: left;
+				padding-top: 10px;
+				padding-left: 10px;
+				font-size: 2em;
+				font-weight: bold;
+				color: #526033;
+			}
+			#profile_title_generation{
+				height: 45px;
+				width: 59px;
+				float: left;
+				background-color: #B8DB4D;
+				padding-top: 5px;
+				text-align: center;
+			}
+				#profile_title_generation p{
+					font-weight: bold;
+					color: #526033;
+				}
+		#profile_detial{
+			height: 160px;
+			position:relative;
+			padding-top: 10px;
+			padding-right: 10px;
+			text-align: right;
+		}
+			#profile_detial p{
+				font-weight: bold;
+				color: #526033;
+			}
+	#content{
+		height: auto;
+		width: auto;
+/* 		margin: 0 auto; */
+		padding-top: 5px;
+		padding-bottom: 5px;
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+		#page_title{
+			height: 100%;
+			width: 100%;
+		}
+		#content_page{
+			min-height: 500px;
+			height: auto;
+			width: 100%;
+/* 			background-color: #f5f3e5; */
+/* 			border: 1px solid #dfd9c3; */
+		}
+#footer{
+	height: 60px;
+	width: 100%;
+	clear: both;
+	background-image: url('../img/background-footer-01.png');
+	border-top: 5px solid #A3C357;
+}
+	#footer_icon_wrapper{
+		height: 100%;
+		width: 600px;
+		
+		float: right;
+	}
+		#footer_icon_wrapper img{
+			height: 100%;
+			width: 19%;
+		}
+
+/* JQuery UI */
+.ui-datepicker-trigger{
+	vertical-align: middle;
+	cursor: pointer;
+}
+.ui-button-text-only .ui-button-text{
+	padding: .15em 1em;
+}
+.txt-search{
+	width: 88%;
+	border: 0px;
+	height: 30px;
+	font-size: 1.5em;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	padding: 0 15px 0 15px;
+}
+
+div.framecontainer{
+	display:none;
+}
+
+a.framebtn{
+	margin: 2px;
+}
+
+div.input fieldset{
+	margin: 5px 15px;
+}

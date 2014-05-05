@@ -2,11 +2,14 @@
 // session_start();
 class OtherjstpController extends AppController {
 	/* ------------------------------------------------------------------------------------------------ */
-	public $uses = array('Profile');
+	public $uses = array('Profile', 'Gvar');
 	/* ------------------------------------------------------------------------------------------------ */
 	public function index(){
 		$this->log('---- Psearch -> index ----');
 		
+		$accountRole 	= $this->Gvar->getVarcodeVardesc1ByVarnameVardesc2("ACCOUNT_ROLE", "Y");
+		
+		$this->set(compact("accountRole"));
 		$this->setTitle('ค้นหาบุคคล');
 	}
 	/* ------------------------------------------------------------------------------------------------ */
@@ -19,11 +22,71 @@ class OtherjstpController extends AppController {
 		$searchWidth = $this->request->data['searchWidth'];
 		$flagActivity = $this->request->data['flagActivity'];
 		
-		$result = $this->Profile->getDataForPsearch($keyWord,$searchWidth,$flagActivity);
-		//$this->log($result);
+		$keyWord = trim($keyWord);
+		if($keyWord=="*"){
+			//TODO: Search All, limit 0, 200
+			$result = $this->Profile->getProfilesLimit();
+		}else{
+			$result = $this->Profile->getDataForPsearch($keyWord,$searchWidth,$flagActivity);
+			//$this->log($result);
+		}
 		
 		$this->layout='ajax';
 		$this->set('message', json_encode($result));
 		$this->render('response');
+	}
+	
+	public function admin_updateCustomize(){
+		if(!$this->isAdmin){
+			return;
+		}
+		$this->log("START :: OtherjstpController -> admin_updateCustomize()");
+		
+		$result['status'] = false;
+		$result['message'] = '';
+
+		$profileid = $this->request->data["profileid"];
+		$profilerole = $this->request->data["profilerole"];
+		$profileroleadmin = $this->request->data["profileroleadmin"];
+		
+		//TODO: update DB.
+		if($this->Profile->updateRoleAndRoleAdmin($profileid, $profilerole, $profileroleadmin)){
+			$result['status'] = true;
+			$result['message'] = 'อัพเดทข้อมูลเรียบร้อย';
+		}else{
+			$result['message'] = 'เกิดข้อผิดพลาดในการอัพเดทข้อมูล กรุณาติดต่อผู้ดูแลระบบ';
+		}
+
+		$this->layout = "ajax_admin";
+		$this->set("message", json_encode(array("result" => $result)));
+		$this->render("response");
+		
+		$this->log("END :: OtherjstpController -> admin_updateCustomize()");
+	}
+	
+	public function admin_removeProfile(){
+		if(!$this->isAdmin){
+			return;
+		}
+		$this->log("START :: OtherjstpController -> admin_removeProfile()");
+		
+		$result['status'] = false;
+		$result['message'] = '';
+		
+		$profileid = $this->request->data["profileid"];
+		
+		//TODO: update DB.
+		if($this->Profile->removeProfile($profileid)){
+			$result['status'] = true;
+			$result['message'] = 'ลบสมาชิกเรียบร้อย';
+		}else{
+			$result['message'] = 'เกิดข้อผิดพลาดในการลบสมาชิก กรุณาติดต่อผู้ดูแลระบบ';
+		}
+		
+		$this->layout = "ajax_admin";
+		$this->set("message", json_encode(array("result" => $result)));
+		$this->render("response");
+		
+		$this->log("END :: OtherjstpController -> admin_removeProfile()");
 	}
 }

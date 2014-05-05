@@ -32,7 +32,7 @@ table.table-data th{
 background-color:green;
 color:white;
 }
-table.table-data tr{
+td.hover{
 	cursor:pointer;
 }
 </style>
@@ -63,11 +63,40 @@ table.table-data tr{
 		<h2>ผลการค้นหา</h2>
 		<div id="search_result"></div>
 	</div>
+<div style="display:none;">
+<?php if($isAdmin){ ?>
+<div id="user-custom">
+	<div class="lblmembername" style="padding:7px 0 7px 0;"></div>
+	<input type="hidden" class="params" value="" />
+	<table>
+	<tr>
+		<td>สิทธิ์ในการใช้งานเว็บ : </td>
+		<td><select name="role">
+			<?php for ( $i = 0; $i < count($accountRole); $i++ ) { ?>
+				<option value="<?php echo $accountRole[$i]['gvars']['varcode'];?>"><?php echo $accountRole[$i]['gvars']['vardesc1'];?></option>
+			<?php } ?>
+		</select></td>
+	</tr>
+	<tr>
+		<td>สิทธิ์ Admin : </td>
+		<td><select name="roleadmin"><option value="0">ไม่ใช่</option><option value="1">ใช่</option></select></td>
+	</tr>
+	<tr>
+		<td>ลบสมาชิก : </td>
+		<td><input type="button" class="btnremovemember" value="ลบ" /></td>
+	</tr>
+	</table>
+</div>
+<?php } ?>
+</div>
 </div>
 <!-- ############################################################################################### -->
 <script>
 	jQuery(document).ready(function(){
 		jQuery('input[type="button"]').button();
+
+		jQuery('#key_word').val('*');
+		searchData();
 	});
 	/*	------------------------------------------------------------------------------------------------ */
 	function searchData(){
@@ -123,9 +152,10 @@ table.table-data tr{
 					html+='<col style="width:15%">';
 					html+='<col style="width:15%">';
 					html+='<col style="width:10%">';
-					html+='<col style="width:20%">';
+					html+='<col>';
 					html+='<col style="width:10%">';
 					html+='<col style="width:30%">';
+					<?php if($isAdmin){ ?>html+='<col>';<?php } ?>
 					html+='</colgroup>';
 					
 					html+='<thead>';
@@ -136,19 +166,31 @@ table.table-data tr{
 					html+='<th>Username</th>';
 					html+='<th>อายุ(ปี)</th>';
 					html+='<th>email</th>';
+					<?php if($isAdmin){ ?>html+='<th>Admin</th>';<?php } ?>
 					html+='</tr>';
 					html+='</thead>';
 					
 					html+='<tbody>';
 					if( countData>0 ){
+						var params = {};
 						for( var i=0;i<countData;i++ ){
-							html+='<tr class="hover" onclick="goProfile(\''+data[i].p.id+'\')">';
-							html+='<td>'+data[i].p.nameth+'</td>';
-							html+='<td>'+data[i].p.lastnameth+'</td>';
-							html+='<td>'+data[i].p.nickname+'</td>';
-							html+='<td>'+data[i].p.login+'</td>';
-							html+='<td>'+getAge(data[i].p.birthday)+'</td>';
-							html+='<td>'+data[i].p.email+'</td>';
+							params = {
+									id: data[i].p.id
+									,name: data[i].p.nameth
+									,lastname: data[i].p.lastnameth
+									,role: data[i].p.role
+									<?php if($isAdmin){ ?>
+									,role_admin: data[i].p.role_admin
+									<?php } ?>
+										};
+							html+='<tr params="'+escape(JSON.stringify(params))+'">';
+							html+='<td class="hover openprofile">'+data[i].p.nameth+'</td>';
+							html+='<td class="hover openprofile">'+data[i].p.lastnameth+'</td>';
+							html+='<td class="hover openprofile">'+data[i].p.nickname+'</td>';
+							html+='<td class="hover openprofile">'+data[i].p.login+'</td>';
+							html+='<td class="hover openprofile">'+getAge(data[i].p.birthday)+'</td>';
+							html+='<td class="hover openprofile">'+data[i].p.email+'</td>';
+							<?php if($isAdmin){ ?>html+='<td style="text-align:center;"><img src="<?php echo $this->webroot; ?>img/custom.png" class="btncustom" style="cursor:pointer;" /></td>';<?php } ?>
 							html+='</tr>';
 						}
 					}else{
@@ -160,16 +202,27 @@ table.table-data tr{
 					html+='</table>';
 
 					jQuery('#search_result').html(html);
+
+					jQuery('.openprofile').unbind('click');
+					jQuery('.openprofile').click(function(){
+						gotoProfile(this);
+					});
+					<?php if($isAdmin){ ?>
+					jQuery('.btncustom').click(function(){
+						customize_openpopup(this);
+					});
+					jQuery('.btnremovemember').click(function(){
+						remove_member();
+					});
+					<?php } ?>
+					
 					jQuery('#section_search').show();
 
 					unloading();			
 				}
 				,'json');
 	}
-	/*	------------------------------------------------------------------------------------------------ */
-	function goProfile(id){
-		window.location.assign('<?php echo $this->Html->url('/PersonalInfo/index?id='); ?>'+id);
-	}
+
 	/*	------------------------------------------------------------------------------------------------ */
 	function getAge(birthDay){
 		// birth_dat => 2014-01-26
@@ -179,4 +232,143 @@ table.table-data tr{
 
 		return currentYear - splitBirthDay[0];
 	}
+	function gotoProfile(t){
+		var params = jQuery.parseJSON(unescape(jQuery(t).closest('tr').attr('params')));
+// 		console.log(params);
+        var win = window.open('<?php echo $this->Html->url('/PersonalInfo/index?id='); ?>'+params.id, '_blank');
+        win.focus();
+	}
+	<?php if($isAdmin){ ?>
+	function customize_openpopup(t){
+		var _params = jQuery(t).closest('tr').attr('params');
+		var params = jQuery.parseJSON(unescape(_params));
+		
+		var html = '#user-custom';
+		var buttons = [
+		   			{text: "Save", click: function(){
+			   				var container = jQuery('#user-custom');
+			   				var params = jQuery.parseJSON(unescape(container.find('input.params').val()));
+			   				var data = {profileid: params.id,
+					   				profilerole: container.find('select[name="role"]').val(),
+					   				profileroleadmin: container.find('select[name="roleadmin"]').val()};
+
+// 							console.log(params);
+// 							console.log(data);
+// 							return;
+			   				
+			   				loading();
+			   				jQuery.post("<?php echo $this->Html->url('/Otherjstp/admin_updateCustomize');?>", data,
+		   						function(data) {
+									if ( data.result.status ) {
+										searchData();
+										jAlert(data.result.message
+												, function(){ 
+													jQuery('#user-custom').dialog("close");
+												}//okFunc	
+												, function(){ 
+												}//openFunc
+												, function(){ 		
+												}//closeFunc
+										);// jAlert
+									}//if else
+									else{
+										jAlert(data.result.message
+												, function(){ 
+													
+												}//okFunc	
+												, function(){ 
+												}//openFunc
+												, function(){ 		
+												}//closeFunc
+										);// jAlert
+									}
+	
+									unloading();
+								}// function(data)
+								, "json").error(function() {
+								}// function()
+							);// jQuery.post
+			   				
+// 			   				console.log(data);
+			   			}}
+		];
+		jQuery(html).css('width', '400px').find('input.params').val(_params);
+		jQuery(html).find('.lblmembername').html('<h3>'+params.name+' '+params.lastname+'</h3>');
+		openPopupHtml('Member Customize', html, buttons, 
+				function(){ //openFunc
+					//TODO: set default role, role_admin
+					var container = jQuery('#user-custom');
+					var params = jQuery.parseJSON(unescape(container.find('input.params').val()));
+// 					alert(params.role);
+					//role, roleadmin
+					container.find('select[name="role"]').val(params.role);
+					//console.log(parseInt(params.role_admin, 10));
+					if(parseInt(params.role_admin, 10)==1){
+						container.find('select[name="roleadmin"]').val('1');
+					}else{
+						container.find('select[name="roleadmin"]').val('0');
+					}
+				}, 
+				function(){ //closeFunc
+// 					alert('closed');
+					var container = jQuery('#user-custom');
+					container.find('input.params').val('');
+					container.find('.lblmembername').html('');
+				}
+		);
+		// Example to close with script ==> closePopup('#jdialog1-container');
+	}
+	function remove_member(){
+
+		jConfirm('ต้องการลบสมาชิกคนนี้ ?', 
+				function(){ //okFunc
+				var container = jQuery('#user-custom');
+				var params = jQuery.parseJSON(unescape(container.find('input.params').val()));
+	
+				var data = {profileid: params.id};
+	
+				jQuery.post("<?php echo $this->Html->url('/Otherjstp/admin_removeProfile');?>", data,
+					function(data) {
+							if ( data.result.status ) {
+								searchData();
+								jAlert(data.result.message
+										, function(){ 
+											jQuery('#user-custom').dialog("close");
+										}//okFunc	
+										, function(){ 
+										}//openFunc
+										, function(){ 		
+										}//closeFunc
+								);// jAlert
+							}//if else
+							else{
+								jAlert(data.result.message
+										, function(){ 
+											
+										}//okFunc	
+										, function(){ 
+										}//openFunc
+										, function(){ 		
+										}//closeFunc
+								);// jAlert
+							}
+		
+							unloading();
+						}// function(data)
+						, "json").error(function() {
+						}// function()
+					);// jQuery.post
+				}, 
+				function(){ //cancelFunc
+				}, 
+				function(){ //openFunc
+				}, 
+				function(){ //closeFunc
+				}
+			);
+// 		});
+
+		
+	}
+	<?php } ?>
 </script>

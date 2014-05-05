@@ -13,7 +13,7 @@
 									<p>{$objUser[0]['profiles']['image_desc']}</p>";
 						}else{
 							echo "<img src=\"\"></img>
-									<p>ไม่พบขอ้มูล</p>";
+									<p>ไม่พบข้อมูล</p>";
 						}
 					?>
 					
@@ -327,20 +327,28 @@
 			</div>
 		</ul>
 	</div>
-	<div class="container" id="containner_comment">
+	
+	<?php //print_r($isAdmin); ?>
+	<?php if( $isAdmin || $objuser['role']=='20' || $objuser['role']=='40' ){ //นักเรียน,นักศึกษา,วิทยากร ?>
+	<div class="container">
 		<h2>ความคิดเห็น</h2>
 		<div class="section-content">
 			<?php 
 				$countListComment = count($listComment);
 				if( $countListComment>0 ){
 					for( $i=0;$i<$countListComment;$i++ ){
-						echo  "<table class=\"table-data-item\">
+// 						echo $listComment[$i]['c']['commentable_id'].'|'.$objuser['id'];
+						echo "<table class=\"table-data-item\">
 								<tr>
 									<td><strong>หัวข้อ : {$listComment[$i]['c']['title']}</strong></td>
-									<td class=\"edit-delete\">
-										<img src=\"{$this->Html->url('/img/icon_del.png')}\" width=\"16\" height=\"16\"
-											onclick=\"deleteComment('{$listComment[$i]['c']['id']}')\" />
-									</td>
+									<td class=\"edit-delete\">";
+						
+						if($isAdmin || $listComment[$i]['c']['commentable_id']==$objuser['id'] /* && commentatorid==session_profile_id*/){
+						echo "			<img src=\"{$this->Html->url('/img/icon_del.png')}\" width=\"16\" height=\"16\"
+											onclick=\"deleteComment('{$listComment[$i]['c']['id']}')\" />";
+						}
+						
+						echo "		</td>
 								</tr>
 								<tr>
 									<td colspan=\"2\" class=\"comment\">{$listComment[$i]['c']['comment']}</td>
@@ -360,7 +368,6 @@
 			?>
 		</div>
 		
-		<?php if( $objuser['role']!=='10' && $objuser['role']!=='30' ){ //นักเรียน,นักศึกษา,วิทยากร ?>
 			<div class="section-content">
 				<table class="table-data-item">
 					<colgroup>
@@ -389,8 +396,8 @@
 					</tr>
 				</table>
 			</div>
-		<?php }?>
 	</div>
+	<?php }?>
 	<!-- Popup -->
 	<div id="popup-profile">
 	</div>
@@ -405,9 +412,8 @@
 ?>
 <script type="text/javascript">
 	jQuery(document).ready(function() {
-			<?php
-				// visible sortable and buttons
-				if( $isOwner || $objuser['role']==='1' ){ // is Owner Profile or is Admin
+			<?php 
+				if( $isOwner || $objuser['role']==='1' ){
 					echo "jQuery('#sortable_family"
 								.",#sortable_education"
 								.",#sortable_workplace').sortable({
@@ -425,13 +431,7 @@
 									.",#button_add_education"
 									.",#button_add_workplace').remove();";
 					
-					echo "jQuery('.edit-delete').remove();";
-					echo "jQuery('span.ui-icon.ui-icon-arrowthick-2-n-s').remove();";
-				}
-				
-				// visible comments
-				if( $objuser['role']==='10' || $objuser['role']==='30' ){ // นักเรียน,นักศึกษา หรือ วิทยากร
-					echo "jQuery('#containner_comment').remove();";
+					//echo "jQuery('.edit-delete').remove();";
 				}
 			?>
 		}

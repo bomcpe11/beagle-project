@@ -17,69 +17,51 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = __d('cake_dev', 'My JSTP');
+$cakeDescription = __d('cake_dev', 'Jstp hub ');
 ?><!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<?php 
-		echo $this->Html->charset(); 
-	?>
+	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php echo $cakeDescription ?> :
+		<?php echo $cakeDescription ?>:
 		<?php echo $title_for_layout; ?>
 	</title>
 	<?php
-		/* CSS */
-		echo $this->Html->css('reset-stylesheet');
-		echo $this->Html->css('jstphub-public');
+		//echo $this->Html->meta('icon');
+
 		echo $this->Html->css('jquery/ui/south-street/jquery-ui-1.10.3.custom.min');
 		echo $this->Html->css('loading');
-	
-		/* JavaScript */
+		echo $this->Html->css('default');
+
 		echo $this->Html->script('jquery/core/jquery-1.10.2.min');
 		echo $this->Html->script('jquery/ui/jquery-ui-1.10.3.custom.min');
 		echo $this->Html->script('jquery/ui/jquery.ui.1.10.3.datepicker.th');
 		echo $this->Html->script('ckeditor/ckeditor');
 		echo $this->Html->script('loading');
 		echo $this->Html->script('jstphub-common');
-		
+
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
+<script type="text/javascript">
+	jQuery.noConflict();
+	G_WEB_ROOT = '<?php echo $this->webroot; ?>';
+</script>
 </head>
 <body>
-	<!-- Header -->
-	<div id="header">
-		<div id="header_logo_wrapper">
-			<img src="<?php echo $this->Html->url('/img/logo-jstp_v2.png');?>"></img>
+	<div id="layout-container">
+		<div id="layout-header">
+<!-- 			<h1>Header</h1> -->
 		</div>
-	</div>
-	<div id="header-bottom-border">
-		
-	</div>
-	<!-- Body -->
-	<div id="page">
-			<div id="content">
-				<div id="content_page">
-					<?php echo $this->fetch('content'); ?>
-				</div>
-			</div>
+		<div id="layout-content">
+
+			<?php //echo $this->Session->flash(); ?>
+
+			<?php echo $this->fetch('content'); ?>
 		</div>
-	</div>
-	<!-- Footer -->
-	<div id="footer">
-		<div id="footer_icon_wrapper">
-			<img src="<?php echo $this->Html->url('/img/logo-nstd-01.png');?>"
-				alt="Logo NSTD" title="Logo NSTD"></img>
-			<img src="<?php echo $this->Html->url('/img/logo-kmutt-01.png');?>" 
-				alt="Logo KMUTT" title="Logo KMUTT"></img>
-			<img src="<?php echo $this->Html->url('/img/logo-cheangmai-01.png');?>" 
-				alt="Logo CMU" title="Logo CMU"></img>
-			<img src="<?php echo $this->Html->url('/img/logo-kasetsart-01.png');?>" 
-				alt="Logo KU" title="Logo KU"></img>
-			<img src="<?php echo $this->Html->url('/img/logo_sut-01.png');?>" 
-				alt="Logo SUT" title="Logo SUT"></img>
+		<div id="layout-footer">
+			Footer...
 		</div>
 	</div>
 	<?php
@@ -90,7 +72,7 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 	<div id="block-page" class="loading-unblock"><div id="block-page_hdn"></div></div>
 	<div id="div_loading" class="loading-invisible">
 	    &nbsp;
-	    <table border="0" style="margin-left: auto;margin-right: auto;">
+	    <table border="0" align="center">
 	        <tr>
 	            <td align="center" valign="middle">
 	            		<?php echo $this->Html->image('loading.gif', array('style'=>'border: 0;')); ?>
@@ -104,27 +86,5 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 	    </table>
 	    &nbsp;
 	</div>
-	
-	<script type="text/javascript">
-		jQuery.noConflict();
-		G_WEB_ROOT = '<?php echo $this->webroot; ?>';
-	
-		jQuery(document).ready(function(){
-			jQuery('input:button, input:submit').button();
-			jQuery('.tooltip').tooltip();
-		});
-
-		jQuery('#btn-logout').button({
-		      icons: {
-		          primary: "ui-icon-locked"
-		        }
-		      }).click(function(){
-		    	  window.location.replace('<?php echo $this->Html->url('/Logout'); ?>');
-		      });
-
-		jQuery('#btn-mainmenu').button().click(function(){
-	    	  window.location.replace('<?php echo $this->Html->url('/Mainmenu'); ?>');
-			});
-	</script>
 </body>
 </html>

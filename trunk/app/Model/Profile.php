@@ -5,6 +5,29 @@ class Profile extends AppModel {
 		$result = $this->query('select * from profiles');
 		return $result;
 	}
+	
+	public function getProfilesLimit(){
+		$result = $this->query('select * from profiles p limit 0, 200');
+		return $result;
+	}
+	
+	public function removeProfile($id){
+		$flag = false;
+		$strSql = "DELETE FROM profiles ";
+		$strSql .= "WHERE id='".$id."'";
+		$strSql .= ";";
+		//$this->log("strSql => ".$strSql);
+			
+		try {
+			$this->query($strSql);
+		
+			$flag = true;
+		} catch ( Exception $e ) {
+			$this->log("exception => ".$e->getMessage());
+		}// try catch
+			
+		return $flag;
+	}
 	/* ------------------------------------------------------------------------------------------------------- */
 	public function insert($cardid
 				  		, $cardtype
@@ -154,17 +177,66 @@ class Profile extends AppModel {
 		return $result;
 	}
 	
-	public function signinactivate($id, $cardtype, $cardid, $email, $username, $password){
+	public function signinactivate($id, $cardtype, $cardid, $email, $alterkey){
 		$flag = false;
 		$sql = "UPDATE profiles
 				SET cardtype='".$cardtype."'
 				,cardid='".$cardid."'
 				,email='".$email."'
-				,login='".$username."'
-				,encrypt_password='".md5($password)."'
+				,alterkey='".$alterkey."'
+				,is_approve='0'
+				WHERE id='$id'";
+		
+		try {
+			$this->query($sql);
+			$flag = true;
+		} catch (Exception $e) {
+			$this->log($e->getMessage());
+		}
+		
+		return $flag;
+	}
+	
+	public function checkAlterKey($id, $alterkey){
+		$result = null;
+		$strSql = "SELECT * FROM profiles WHERE id='".$id."' AND alterkey='".$alterkey."'";
+		$this->log("strSql => ".$strSql);
+		
+		try {
+			$result = $this->query($strSql);
+		} catch ( Exception $e ) {
+			$this->log("exception => ".$e->getMessage());
+		}// try catch
+		
+		return $result;
+	}
+	
+	public function setUPactivate($id, $login, $password){
+		$flag = false;
+		$sql = "UPDATE profiles
+				SET login='".$login."'
+				,encrypt_password='".$password."'
+				,alterkey=''
 				,is_approve='1'
 				WHERE id='$id'";
 		
+		try {
+			$this->query($sql);
+			$flag = true;
+		} catch (Exception $e) {
+			$this->log($e->getMessage());
+		}
+		
+		return $flag;
+	}
+	
+	public function updateRoleAndRoleAdmin($id, $role, $roleadmin){
+		$flag = false;
+		$sql = "UPDATE profiles
+				SET role='".$role."'
+					,role_admin='".$roleadmin."'
+				WHERE id='$id'";
+		$this->log($sql);
 		try {
 			$this->query($sql);
 			$flag = true;

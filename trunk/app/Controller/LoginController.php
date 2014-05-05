@@ -1,4 +1,6 @@
 <?php
+App::uses('CakeEmail', 'Network/Email');
+
 class LoginController extends AppController {
 	/* ------------------------------------------------------------------------------------------------------ */
 	public $names = "LoginController";
@@ -129,18 +131,26 @@ class LoginController extends AppController {
 		$txt_surname = $this->request->data["txt_surname"];
 		$txt_birthdate = $this->request->data["txt_birthdate"];
 		$txt_email = $this->request->data["txt_email"];
-		$txt_username = $this->request->data["txt_username"];
-		$txt_password = $this->request->data["txt_password"];
+		$alterkey = md5('MyJSTP_'.$txt_name.'_'.$txt_surname.'_'.time());
+// 		$txt_username = $this->request->data["txt_username"];
+// 		$txt_password = $this->request->data["txt_password"];
 		
 		//TODO: check data
 		//TODO: check is_approve != 1 (Inactive)
 		$data = $this->Profile->checkforsignin($select_cardtype, $txt_cardid, $txt_name, $txt_surname, $this->changeFormatDate($txt_birthdate), $txt_email);
 // 		$this->log('checkforsignin : '.print_r($data, true));
 		if(count($data)==1){ //Found data.
-			$this->Profile->signinactivate($data[0]['profiles']['id'], $select_cardtype, $txt_cardid, $txt_email, $txt_username, $txt_password);
-			$this->loginFnc($txt_username, md5($txt_password), "false");
-			$result['status'] = true;
-			$result['message'] = "ลงทะเบียนเรียบร้อย";
+			$this->Profile->signinactivate($data[0]['profiles']['id'], $select_cardtype, $txt_cardid, $txt_email, $alterkey);
+// 			$this->loginFnc($txt_username, md5($txt_password), "false");
+			//TODO: Send Email
+			$rs_email = $this->sendEmail($txt_email, $data[0]['profiles']['id'], $alterkey);
+			$this->log($rs_email);
+			if($rs_email['status']){
+				$result['status'] = true;
+				$result['message'] = "ลงทะเบียนเรียบร้อย<br />กรุณาตรวจสอบอีเมล์เพื่อกำหนด Username, Passsword ในขั้นตอนต่อไป";
+			}else{
+				$result['message']='ไม่สามารถส่งออกอีเมล์ได้ กรุณาติดต่อผู้ดูแลเว็บไซต์';
+			}
 		}else if(count($data)>1){
 			$result['message']='พบข้อมูลซ้ำซ้อน กรุณาติดต่อผู้ดูแลเว็บไซต์';
 		}else{
@@ -148,31 +158,77 @@ class LoginController extends AppController {
 			$result['message']='ไม่พบข้อมูลนี้';
 		}
 		
-		
-		//TODO: Insert db
-		
-// 		if(!empty($txt_cardid)){ $checkCardId = $this->Profile->checkCardId($txt_cardid); }
-// 		if(!empty($txt_email)){ $checkEmail	= $this->Profile->checkEmail($txt_email); }
-// 		$checkNameTh = $this->Profile->checkNameTh($txt_name, $txt_surname);
-		
-// 		if ( !empty($txt_cardid) && count($checkCardId) == 1 ) {
-// 			$result['message'] = "เลขบัตรประจำตัว นี้มีข้อมูลแล้ว";
-// 		} else if ( count($checkNameTh) == 1 ) {
-// 			$result['message'] = "ชื่อ และ นามสกุล นี้มีข้อมูลแล้ว";
-// 		} else if ( !empty($txt_email) && count($checkEmail) == 1 ) {
-// 			$result['message'] = "อีเมล์ นี้มีข้อมูลแล้ว";
-// 		} else{
-// 			//TODO: Insert Data.
-// 			$this->Profile->addnewmember($select_cardtype, $txt_cardid, $txt_name, $txt_surname, $this->changeFormatDate($txt_birthdate), $txt_email);
-// 			$result['status'] = true;
-// 			$result['message'] = "ลงทะเบียนเรียบร้อย";
-// 		}
-		
 		$this->layout = "ajax_public";
 		$this->set("message", json_encode(array("result" => $result)));
 		$this->render("response");
 		
 		$this->log("END :: LoginController -> signinmember_submit()");
+	}
+	
+	private function sendEmail($recipient, $id, $alterkey){
+		$this->log('---- LoginController -> sendEmail ----');
+	
+		$result = array();
+		$result['status'] = false;
+// 		$objUser = $this->getObjUser();
+// 		//$this->log($objUser);
+// 		/* fullName */
+// 		if( $objUser['position'] ){
+// 			$fullNameTh = $objUser['position'].$objUser['nameth'].' '.$objUser['lastnameth'];
+// 		} else{
+// 			$fullNameTh = $objUser['titleth'].$objUser['nameth'].' '.$objUser['lastnameth'];
+// 		}
+
+// 		$reglink = 'http://www.myjstp.org/Register?id='.$id.'&key='.$alterkey.'';
+		$reglink = Router::url('/Register?id='.$id.'&key='.$alterkey, true);
+		
+// 		$recipient = $this->request['data']['email_send_to'];
+		$subject = 'MyJSTP : REGISTER';
+		//$content = substr(trim($this->request['data']['email_text']), 3, -4);	// delete whitespace and <p></p>
+		$content = '<b>MyJSTP Register, Please click this link</b><br />'
+				.'<a href="'.$reglink.'">'.$reglink.'</a>';
+	
+// 		$db = $this->EmailHistory->getDataSource();
+// 		$db->begin();
+// 		if( $this->EmailHistory->insert($objUser['id'],
+// 				$recipient,
+// 				$subject,
+// 				$content) ){
+			try{
+				$email = new CakeEmail('jstpEmail');
+				$email->template('jstphub_email', 'jstphub_email');
+				$email->emailFormat('html');
+				$email->from(array('admin-noreply@myjstp.org' => 'MyJSTP Administrator'));
+				$email->to($recipient);
+				$email->subject($subject);
+				$email->send($content);
+	
+// 				$result['flg'] = '1';
+				$result['status'] = true;
+				$result['msg'] = 'ดำเนินการส่ง Email เสร็จเรียบร้อย';
+			}catch(Exception $e){
+				$this->log($e->getMessage());
+	
+				$result['status'] = false;
+				$result['msg'] = 'เกิดข้อผิดพลาดในการส่ง Email กรุณาติดต่อผู้ดูแลระบบ';
+			}
+// 		}else{
+// 			$result['flg'] = '2';
+// 			$result['msg'] = 'เกิดข้อผิดพลาดในการส่ง Email กรุณาติดต่อผู้ดูแลระบบ';
+// 		}
+	
+// 		if( $result['flg']==='1' ){
+// 			$db->commit();
+// 		}else{
+// 			$db->rollback();
+// 		}
+	
+// 		$this->redirect(
+// 				array('controller' => 'emailsender',
+// 						'action' => 'index',
+// 						'?' => array('flg' => $result['flg']))
+// 		);
+		return $result;
 	}
 	
 	private function changeFormatDate($data) {

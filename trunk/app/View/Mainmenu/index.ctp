@@ -15,7 +15,7 @@
 	<li id="menu-export" class="active"><div class="caption">Export</div></li>
 	<li id="menu-mentor" class="active"><div class="caption">Mentor & Expert</div></li>
 	<a href="<?php echo $this->Html->url('/Otherjstp');?>"><li id="menu-otherjstp" class="active"><div class="caption">Other JSTP</div></li></a>
-	<li id="menu-achieve" class="active"><div class="caption">Achieve</div></li>
+	<a href="<?php echo $this->Html->url('/Achieve/index?id='.$objuser['id']);?>"><li id="menu-achieve" class="active"><div class="caption">Achieve</div></li></a>
 </ul>
 
 <script type="text/javascript">

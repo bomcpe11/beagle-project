@@ -31,7 +31,7 @@
 class CustomizeController extends AppController {
 
 	public $names = "CustomizeController";
-	public $uses = array("Gvar", "Profile");
+	public $uses = array("Gvar", "Profile", "Generation");
 
 	public function index(){
 		
@@ -43,6 +43,9 @@ class CustomizeController extends AppController {
 	}
 	
 	public function addnewmember_submit(){
+		if(!$this->isAdmin){
+			return;
+		}
 		$this->log("START :: CustomizeController -> addnewmember_submit()");
 		
 		$result['status'] = false;
@@ -77,6 +80,63 @@ class CustomizeController extends AppController {
 		$this->render("response");
 		
 		$this->log("END :: CustomizeController -> addnewmember_submit()");
+	}
+	
+	public function addgeneration_submit(){
+		if(!$this->isAdmin){
+			return;
+		}
+		$this->log("START :: CustomizeController -> addgeneration_submit()");
+		
+		$result['status'] = false;
+		$result['message'] = '';
+		
+		$txt_generation = $this->request->data["txt_generation"];
+		
+		//TODO: Insert Data.
+		if($this->Generation->insert($txt_generation)){
+			$result['status'] = true;
+			$result['message'] = "เพิ่ม รุ่นที่/ตำแหน่ง เรียบร้อย";
+		}
+		
+		$this->layout = "ajax_admin";
+		$this->set("message", json_encode(array("result" => $result)));
+		$this->render("response");
+		
+		$this->log("END :: CustomizeController -> addgeneration_submit()");
+	}
+	
+	public function remove_generation(){
+		if(!$this->isAdmin){
+			return;
+		}
+		$this->log("START :: CustomizeController -> remove_generation()");
+		
+		$result['status'] = false;
+		$result['message'] = '';
+		
+		$generationid = $this->request->data["generationid"];
+		
+		//TODO: Insert Data.
+		if($this->Generation->remove($generationid)){
+			$result['status'] = true;
+			$result['message'] = "ลบข้อมูล เรียบร้อย";
+		}
+		
+		$this->layout = "ajax_admin";
+		$this->set("message", json_encode(array("result" => $result)));
+		$this->render("response");
+		
+		$this->log("END :: CustomizeController -> remove_generation()");
+	}
+	
+	public function getGenerationList(){
+		
+		$result = $this->Generation->getAll();
+		
+		$this->layout = "ajax";
+		$this->set("message", json_encode(array("result" => $result)));
+		$this->render("response");
 	}
 	
 	private function changeFormatDate($data) {

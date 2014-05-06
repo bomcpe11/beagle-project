@@ -28,6 +28,8 @@
  * @package       app.Controller
  * @link http://book.cakephp.org/2.0/en/controllers/pages-controller.html
  */
+App::uses('CakeEmail', 'Network/Email');
+
 class CustomizeController extends AppController {
 
 	public $names = "CustomizeController";
@@ -139,6 +141,118 @@ class CustomizeController extends AppController {
 		$this->render("response");
 	}
 	
+	public function change_password_submit(){
+		$this->log("START :: CustomizeController -> change_password_submit()");
+		
+		$result['flg'] = '0';
+		$result['msg'] = 'เกิดข้อผิดพลาด กรุณาติดต่อผู้ดูแลระบบ';
+		//$this->log($this->request->data);
+		$card_type = $this->request->data['card_type'];
+		$card_id = $this->request->data['card_id'];
+		$name = $this->request->data['name'];
+		$surname = $this->request->data['surname'];
+		$birthdate = $this->changeFormatDate($this->request->data['birthdate']);
+		$email = $this->request->data['email'];
+		
+		$dataProfile = $this->Profile->checkForChangePassword($card_type, 
+																$card_id, 
+																$name, 
+																$surname, 
+																$birthdate, 
+																$email);
+		if( count($dataProfile)===1 ){
+			try{
+				$key = $this->genKey();
+				
+				$db = $this->Profile->getDataSource();
+				$db->begin();
+				if( $this->Profile->updateAlterKey($key, $dataProfile[0]['p']['id']) ){
+					$db->commit();
+					
+					$content = "<a href=\"127.0.0.1{$this->webroot}Customize/resetPassword?key=$key\" target=\"_blank\">"
+								."127.0.0.1{$this->webroot}Customize/resetPassword?key=$key</a>";
+					//$this->log($content);
+					
+					$cakeEmail = new CakeEmail('jstpEmail');
+					$cakeEmail->template('jstphub_email', 'jstphub_email');
+					$cakeEmail->emailFormat('html');
+					$cakeEmail->from(array('admin-noreply@myjstp.org' => 'MyJSTP Administrator'));
+					$cakeEmail->to($email);
+			        $cakeEmail->subject('ลิ้งค์สำหรับเปลี่ยนรหัสผ่าน');
+			        $cakeEmail->send($content);
+			        
+			        $result['flg'] = '1';
+					$result['msg'] = 'ระบบได้ส่ง ลิงค์เปลี่ยนรหัสผ่าน ไปยังอีเมล์ของคุณ เรียบร้อยแล้ว';	
+				}else{
+					$db->rollback();
+					
+					$result['flg'] = '0';
+		       	 	$result['msg'] = 'เกิดข้อผิดพลาด กรุณาติดต่อผู้ดูแลระบบ';
+				}
+			}catch(Exception $e){
+				$this->log($e->getMessage());
+				
+				$result['flg'] = '0';
+		        $result['msg'] = 'เกิดข้อผิดพลาด กรุณาติดต่อผู้ดูแลระบบ';
+			}
+												
+		}else{
+			$result['flg'] = '0';
+			$result['msg'] = 'ข้อมูลที่คุณกรอก ไม่ถูกต้อง';
+		}
+		
+		$this->layout = 'ajax';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	}
+	
+	public function resetPassword(){
+		$this->log("START :: CustomizeController -> resetPassword()");
+		
+		$key = $this->request->query['key'];
+		
+		$dataProfile = $this->Profile->checkAlterKeyForResetPassword($key);
+		if( count($dataProfile)===1 ){
+			
+			$this->set(compact('dataProfile'));
+			$this->layout='public';
+			$this->render('reset_password');
+		}else{
+			$this->redirect(array('controller' => 'Login',
+									'action' => 'index'));
+		}
+	}
+	
+	public function submitResetPassword(){
+		$this->log("START :: CustomizeController -> submitResetPassword()");
+		
+		$result['flg'] = '0';
+		$result['msg'] = 'เกิดข้อผิดผลาด กรุณาติดต่อผู้ดูแลระบบ';
+		//$this->log($this->request->data);
+		$username = $this->request->data['username'];
+		$password = $this->request->data['password'];
+		$rePassword = $this->request->data['rePassword'];
+		
+		$db = $this->Profile->getDataSource();
+		$db->begin();
+		if( $this->Profile->updatePassword(md5($password), $username) ){
+			$db->commit();
+			
+			$result['flg'] = '1';
+			$result['msg'] = 'แก้ไขรหัสผ่าน สำเร็จ';
+		}else{
+			$db->rollback();
+			
+			$result['flg'] = '0';
+			$result['msg'] = 'เกิดข้อผิดผลาด กรุณาติดต่อผู้ดูแลระบบ';
+		}
+		//$this->log($result);
+		
+		$this->layout="ajax_public";
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	}
+	
 	private function changeFormatDate($data) {
 		/*
 		 * index of $explodeDate
@@ -150,4 +264,19 @@ class CustomizeController extends AppController {
 	
 		return ($explodeDate[2] - 543)."/".$explodeDate[1]."/".$explodeDate[0];
 	}// changeFormatDate
+	
+	private function genKey(){
+		$reuslt = '';
+		$charecter = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		
+		try{
+			for( $i=0;$i<8;$i++ ){
+				$reuslt .= $charecter[mt_rand(0, strlen($charecter)-1)];
+			}
+		}catch(Exception $e){
+			throw new Exception($e);
+		}
+		
+		return $reuslt;
+	}
 }

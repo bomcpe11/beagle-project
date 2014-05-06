@@ -177,6 +177,37 @@ class Profile extends AppModel {
 		return $result;
 	}
 	
+	public function checkForChangePassword($cardtype, $cardid, $name, $lastname, $birthdate, $email){
+		$result = null;
+		$strSql = "SELECT p.* FROM profiles p WHERE nameth='".$name."' AND lastnameth='".$lastname."' "
+				. "AND cardid='".$cardid."' AND birthday='".$birthdate."' AND email='".$email."' ";
+		$this->log("strSql => ".$strSql);
+		
+		try {
+			$result = $this->query($strSql);
+		} catch ( Exception $e ) {
+			$this->log("exception => ".$e->getMessage());
+		}// try catch
+		
+		return $result;
+	}
+	
+	public function updateAlterKey($alterKey, $id){
+		$flg = false;
+		$sql = "UPDATE profiles
+				SET alterkey='".$alterKey."'
+				WHERE id='$id'";
+		
+		try {
+			$this->query($sql);
+			$flg = true;
+		} catch (Exception $e) {
+			$this->log($e->getMessage());
+		}
+		
+		return $flg;
+	}
+	
 	public function signinactivate($id, $cardtype, $cardid, $email, $alterkey){
 		$flag = false;
 		$sql = "UPDATE profiles
@@ -200,6 +231,20 @@ class Profile extends AppModel {
 	public function checkAlterKey($id, $alterkey){
 		$result = null;
 		$strSql = "SELECT * FROM profiles WHERE id='".$id."' AND alterkey='".$alterkey."'";
+		$this->log("strSql => ".$strSql);
+		
+		try {
+			$result = $this->query($strSql);
+		} catch ( Exception $e ) {
+			$this->log("exception => ".$e->getMessage());
+		}// try catch
+		
+		return $result;
+	}
+	
+	public function checkAlterKeyForResetPassword($alterkey){
+		$result = null;
+		$strSql = "SELECT p.* FROM profiles p WHERE alterkey='".$alterkey."'";
 		$this->log("strSql => ".$strSql);
 		
 		try {

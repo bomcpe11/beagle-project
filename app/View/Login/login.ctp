@@ -77,6 +77,26 @@
 			}
 		);
 	}// goRegister
+	/* ------------------------------------------------------------------------------------------------- */
+	function openPopupResetPassword() {
+		var buttons = [
+				{text: "ตกลง", 
+					click: function(){
+						go_reset_password();
+					}
+				}
+			];
+		
+		jQuery('#frm-reset-password').css('width', '500px');
+		openPopupHtml('Reset Password', '#frm-reset-password', buttons, 
+				function(){ //openFunc
+				}, 
+				function(){ //closeFunc
+					jQuery(this).find('input:text').val('');
+					jQuery(this).find('select').val('');
+				}
+		);
+	}
 </script>
 <!-- ###################################################################################################### -->
 <table align="center" class="tableLayout">
@@ -112,6 +132,7 @@
 					<td align="left">
 						<input type="submit" id="button_login" value="Login" onClick="JavaScript:loginFnc();"/>
 						<input type="button" id="button_register" value="Sign in" onClick="JavaScript:goRegister()"/>
+						<input type="button" id="button_reset_password" value="ลืมรหัสผ่าน" onClick="JavaScript:openPopupResetPassword()"/>
 					</td>
 				</tr>
 			</table>
@@ -192,7 +213,43 @@
 		</table>
 	</div>
 </div>
-
+<!-- ########################################## Popup Reset Password ##################################### -->
+<div style="display: none;">
+	<div id="frm-reset-password">
+		<table>
+			<tr>
+				<td>ประเภทของบัตร : </td>
+				<td>
+					<select name="select_cardtype">
+						<option value="">---- กรุณาเลือก ----</option>
+					<?php for ( $i = 0; $i < count($personalIdType); $i++ ) { ?>
+						<option <?php //if($i==0) echo 'selected="selected"'; ?> value="<?php echo $personalIdType[$i]['gvars']['varcode'];?>"><?php echo $personalIdType[$i]['gvars']['vardesc1'];?></option>
+					<?php } ?>
+					</select> *</td>
+			</tr>
+			<tr>
+				<td>เลขบัตรประจำตัว : </td>
+				<td><input type="text" name="txt_cardid" /> *</td>
+			</tr>
+			<tr>
+				<td>ชื่อ (ภาษาไทย) : </td>
+				<td><input type="text" name="txt_name" /> *</td>
+			</tr>
+			<tr>
+				<td>นามสกุล (ภาษาไทย) : </td>
+				<td><input type="text" name="txt_surname" /> *</td>
+			</tr>
+			<tr>
+				<td>วันเดือนปี เกิด : </td>
+				<td><input type="text" name="txt_birthdate" class="birthDatePicker" /> *</td>
+			</tr>
+			<tr>
+				<td>อีเมล์ : </td>
+				<td><input type="text" name="txt_email" /> *</td>
+			</tr>
+		</table>
+	</div>
+</div>
 <script type="text/javascript">
 	setBirthDatePicker(".birthDatePicker");
 
@@ -271,5 +328,58 @@
 					unloading();
 				}// function()
 		);// jQuery.post
+	}
+
+	
+	function go_reset_password(){
+		var card_type = jQuery('#frm-reset-password').find('select[name="select_cardtype"]').val();
+		var card_id = jQuery('#frm-reset-password').find('input[name="txt_cardid"]').val();
+		var name = jQuery('#frm-reset-password').find('input[name="txt_name"]').val();
+		var surname = jQuery('#frm-reset-password').find('input[name="txt_surname"]').val();
+		var birthdate = jQuery('#frm-reset-password').find('input[name="txt_birthdate"]').val();
+		var email = jQuery('#frm-reset-password').find('input[name="txt_email"]').val();
+
+
+		// validate field *
+		if ( !card_type
+			|| !card_id
+			|| !name 
+			|| !surname
+			|| !birthdate
+			|| !email  ) {
+			jAlert("กรุณากรอกข้อมูลช่องที่ * ให้ครบ" 
+					, function(){ 
+					}//okFunc	
+					, function(){ 
+					}//openFunc
+					, function(){ 		
+					}//closeFunc
+			);// jAlert
+			
+			return false;
+		}// if
+
+		var data = {'card_type':card_type,
+					'card_id':card_id,
+					'name':name,
+					'surname':surname,
+					'birthdate':birthdate,
+					'email':email}
+		loading();
+		jQuery.post('<?php echo $this->Html->url('/Login/go_reset_password');?>',
+					data,
+					function(data){
+						unloading();
+
+						jAlert(data.msg
+								, function(){ 
+								}//okFunc	
+								, function(){ 
+								}//openFunc
+								, function(){ 		
+								}//closeFunc
+						);// jAlert
+					},
+					'json');
 	}
 </script>

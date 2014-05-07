@@ -8,14 +8,20 @@
 	<li></li>
 	<li id="menu-resources" class="active"><div class="caption">Resources</div></li>
 	<li></li>
+	<li id="menu-utility" class="active"></li> <!-- Utilitiy -->
+	<li></li>
 	<li></li>
 	<li></li>
 	<a href="<?php echo $this->Html->url('/Customize');?>"><li id="menu-customize" class="active"><div class="caption">Customize</div></li></a>
 	<li></li>
 	<li id="menu-export" class="active"><div class="caption">Export</div></li>
+	<li></li>
+	<li></li>
 	<li id="menu-mentor" class="active"><div class="caption">Mentor & Expert</div></li>
 	<a href="<?php echo $this->Html->url('/Otherjstp');?>"><li id="menu-otherjstp" class="active"><div class="caption">Other JSTP</div></li></a>
 	<a href="<?php echo $this->Html->url('/Achieve/index?id='.$objuser['id']);?>"><li id="menu-achieve" class="active"><div class="caption">Achieve</div></li></a>
+	<li></li>
+	<li id="menu-activity" class="active"></li> <!-- Activity -->
 </ul>
 
 <script type="text/javascript">

@@ -62,7 +62,13 @@
 								</p>\
 								<p><strong>* รุ่นที่/ตำแหน่ง :</strong></p>\
 								<p>\
-									<input id="text-generation" type="text" value=<?php echo $objUser[0]['profiles']["generation"];?>>\
+									<select id="text-generation"><?php 
+										echo '<option value="">---- กรุณาเลือก ----</option>';
+										for($i=0; $i<count($generationList); $i++){
+											$selected = ($objUser[0]['profiles']["generation"]==$generationList[$i]['generations']['name']?' selected="selected" ':'');
+											echo '<option value="'.$generationList[$i]['generations']['name'].'" '.$selected.'>'.$generationList[$i]['generations']['name'].'</option>';
+										}
+									?></select>\
 								</p>\
 							</li>\
 							<li class="single">\

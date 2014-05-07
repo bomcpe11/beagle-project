@@ -141,7 +141,7 @@ class CustomizeController extends AppController {
 		$this->render("response");
 	}
 	
-	public function change_password_submit(){
+	/*public function change_password_submit(){
 		$this->log("START :: CustomizeController -> change_password_submit()");
 		
 		$result['flg'] = '0';
@@ -204,9 +204,9 @@ class CustomizeController extends AppController {
 		$this->layout = 'ajax';
 		$this->set('message', json_encode($result));
 		$this->render('response');
-	}
+	}*/
 	
-	public function resetPassword(){
+	/*public function resetPassword(){
 		$this->log("START :: CustomizeController -> resetPassword()");
 		
 		$key = $this->request->query['key'];
@@ -221,9 +221,9 @@ class CustomizeController extends AppController {
 			$this->redirect(array('controller' => 'Login',
 									'action' => 'index'));
 		}
-	}
+	}*/
 	
-	public function submitResetPassword(){
+	/*public function submitResetPassword(){
 		$this->log("START :: CustomizeController -> submitResetPassword()");
 		
 		$result['flg'] = '0';
@@ -251,7 +251,7 @@ class CustomizeController extends AppController {
 		$this->layout="ajax_public";
 		$this->set('message', json_encode($result));
 		$this->render('response');
-	}
+	}*/
 	
 	private function changeFormatDate($data) {
 		/*
@@ -265,7 +265,7 @@ class CustomizeController extends AppController {
 		return ($explodeDate[2] - 543)."/".$explodeDate[1]."/".$explodeDate[0];
 	}// changeFormatDate
 	
-	private function genKey(){
+	/*private function genKey(){
 		$reuslt = '';
 		$charecter = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		
@@ -278,5 +278,5 @@ class CustomizeController extends AppController {
 		}
 		
 		return $reuslt;
-	}
+	}*/
 }

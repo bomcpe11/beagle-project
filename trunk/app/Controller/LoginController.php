@@ -165,6 +165,119 @@ class LoginController extends AppController {
 		$this->log("END :: LoginController -> signinmember_submit()");
 	}
 	
+	public function go_reset_password(){
+		$this->log("START :: LoginController -> go_reset_password()");
+		
+		$result['flg'] = '0';
+		$result['msg'] = 'เกิดข้อผิดพลาด กรุณาติดต่อผู้ดูแลระบบ';
+		//$this->log($this->request->data);
+		$card_type = $this->request->data['card_type'];
+		$card_id = $this->request->data['card_id'];
+		$name = $this->request->data['name'];
+		$surname = $this->request->data['surname'];
+		$birthdate = $this->changeFormatDate($this->request->data['birthdate']);
+		$email = $this->request->data['email'];
+		
+		$dataProfile = $this->Profile->checkForChangePassword($card_type, 
+																$card_id, 
+																$name, 
+																$surname, 
+																$birthdate, 
+																$email);
+		if( count($dataProfile)===1 ){
+			try{
+				$key = $this->genKey();
+				
+				$db = $this->Profile->getDataSource();
+				$db->begin();
+				if( $this->Profile->updateAlterKey($key, $dataProfile[0]['p']['id']) ){
+					$db->commit();
+					
+					// $reglink = 'http://www.myjstp.org/Register?id='.$id.'&key='.$alterkey.'';
+					$link = Router::url('/Login/resetPassword?key='.$key, true);
+					$content = "<a href=\"$link\" target=\"_blank\">$link</a>";
+					//$this->log($content);
+					
+					$cakeEmail = new CakeEmail('jstpEmail');
+					$cakeEmail->template('jstphub_email', 'jstphub_email');
+					$cakeEmail->emailFormat('html');
+					$cakeEmail->from(array('admin-noreply@myjstp.org' => 'MyJSTP Administrator'));
+					$cakeEmail->to($email);
+			        $cakeEmail->subject('ลิ้งค์สำหรับเปลี่ยนรหัสผ่าน');
+			        $cakeEmail->send($content);
+			        
+			        $result['flg'] = '1';
+					$result['msg'] = 'ระบบได้ส่งลิงค์สำหรับเปลี่ยนรหัสผ่าน ไปยังอีเมล์ของคุณ เรียบร้อยแล้ว';	
+				}else{
+					$db->rollback();
+					
+					$result['flg'] = '0';
+		       	 	$result['msg'] = 'ไม่สามารถส่งออกอีเมล์ได้ กรุณาติดต่อผู้ดูแลเว็บไซต์';
+				}
+			}catch(Exception $e){
+				$this->log($e->getMessage());
+				
+				$result['flg'] = '0';
+		        $result['msg'] = 'เกิดข้อผิดพลาด กรุณาติดต่อผู้ดูแลระบบ';
+			}
+												
+		}else{
+			$result['flg'] = '0';
+			$result['msg'] = 'ข้อมูลที่คุณกรอก ไม่ถูกต้อง';
+		}
+		//$this->log($result);
+		
+		$this->layout = 'ajax_public';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	}
+	
+	public function resetPassword(){
+		$this->log("START :: LoginController -> resetPassword()");
+		
+		$key = $this->request->query['key'];
+		
+		$dataProfile = $this->Profile->checkAlterKeyForResetPassword($key);
+		if( count($dataProfile)===1 ){
+			$this->set(compact('dataProfile'));
+			$this->render('reset_password');
+		}else{
+			$this->redirect(array('controller' => 'Login',
+									'action' => 'index'));
+		}
+	}
+	
+	public function submitResetPassword(){
+		$this->log("START :: LoginController -> submitResetPassword()");
+		
+		$result['flg'] = '0';
+		$result['msg'] = 'เกิดข้อผิดผลาด กรุณาติดต่อผู้ดูแลระบบ';
+		//$this->log($this->request->data);
+		$id = $this->request->data['id'];
+		$username = $this->request->data['username'];
+		$password = $this->request->data['password'];
+		$rePassword = $this->request->data['rePassword'];
+		
+		$db = $this->Profile->getDataSource();
+		$db->begin();
+		if( $this->Profile->resetPassword(md5($password), $id) ){
+			$db->commit();
+			
+			$result['flg'] = '1';
+			$result['msg'] = 'แก้ไขรหัสผ่าน สำเร็จ';
+		}else{
+			$db->rollback();
+			
+			$result['flg'] = '0';
+			$result['msg'] = 'เกิดข้อผิดผลาด กรุณาติดต่อผู้ดูแลระบบ';
+		}
+		//$this->log($result);
+		
+		$this->layout = 'ajax_public';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	}
+	
 	private function sendEmail($recipient, $id, $alterkey){
 		$this->log('---- LoginController -> sendEmail ----');
 	
@@ -229,6 +342,21 @@ class LoginController extends AppController {
 // 						'?' => array('flg' => $result['flg']))
 // 		);
 		return $result;
+	}
+	
+	private function genKey(){
+		$reuslt = '';
+		$charecter = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		
+		try{
+			for( $i=0;$i<8;$i++ ){
+				$reuslt .= $charecter[mt_rand(0, strlen($charecter)-1)];
+			}
+		}catch(Exception $e){
+			throw new Exception($e);
+		}
+		
+		return $reuslt;
 	}
 	
 	private function changeFormatDate($data) {

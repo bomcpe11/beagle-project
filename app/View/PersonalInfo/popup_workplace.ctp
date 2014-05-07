@@ -14,20 +14,20 @@
 				<tr>\
 					<td style="text-align: right;">* ชื่อที่ทำงาน :</td>\
 					<td>\
-						<input id="workplace-id" type="hidden" value=' + id +'>\
-						<input id="workplace-name" type="text" value=' + name +'>\
+						<input id="workplace-id" type="hidden" value="' + id +'">\
+						<input id="workplace-name" type="text" value="' + name +'">\
 					</td>\
 				</tr>\
 				<tr>\
 					<td style="text-align: right;">* ตำแหน่ง :</td>\
 					<td>\
-						<input id="workplace-position" type="text" value=' + position +'>\
+						<input id="workplace-position" type="text" value="' + position +'">\
 					</td>\
 				</tr>\
 				<tr>\
 					<td style="text-align: right;">* โทรศัพท์ :</td>\
 					<td>\
-						<input id="workplace-telephone" type="text" maxlength="10" value=' + telephone +'>\
+						<input id="workplace-telephone" type="text" maxlength="10" value="' + telephone +'">\
 					</td>\
 				</tr>\
 				<tr>\

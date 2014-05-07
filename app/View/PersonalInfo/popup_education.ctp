@@ -13,31 +13,31 @@
 							<tr>\
 								<td style="width:30%; text-align:right;">* ระดับ :</td>\
 								<td style="width:70%;">\
-									<input id="education-id" type="hidden" value=' + id +'>\
-									<input id="education-edutype" type="text" value=' + edutype +'>\
+									<input id="education-id" type="hidden" value="' + id +'">\
+									<input id="education-edutype" type="text" value="' + edutype +'">\
 								</td>\
 							</tr>\
 							<tr>\
 								<td style="text-align:right;">* ชื่อสถาบัน :</td>\
-								<td><input id="education-name" style="width:300px" type="text" value=' + name +'></td>\
+								<td><input id="education-name" style="width:300px" type="text" value="' + name +'"></td>\
 							</tr>\
 							<tr>\
 								<td style="text-align:right;">* คณะ :</td>\
-								<td><input id="education-faculty" type="text" value=' + faculty +'></td>\
+								<td><input id="education-faculty" type="text" value="' + faculty +'"></td>\
 							</tr>\
 							<tr>\
 								<td style="text-align:right;">สาขาวิชา :</td>\
 								<td>\
-									<input id="education-major" type="text" value=' + major +'>\
+									<input id="education-major" type="text" value="' + major +'">\
 									<br/>\
 									<input id="education-is-graduate" type="checkbox" '+( (isGraduate==='1')?'checked value="1"':'value="0"' )+'><label>สำเร็จการศึกษาแล้ว</label>\
 								</td>\
 							</tr>\
 							<tr>\
 								<td style="text-align:right;">ปีการศึกษา :</td>\
-								<td><input id="education-startyear" style="width:40px" type="text"  maxlength="4" value=' + startyear +'>\
+								<td><input id="education-startyear" style="width:40px" type="text"  maxlength="4" value="' + startyear +'">\
 									ถึง\
-									<input id="education-endyear" style="width:40px" type="text"  maxlength="4" value=' + endyear +'>\
+									<input id="education-endyear" style="width:40px" type="text"  maxlength="4" value="' + endyear +'">\
 									<br/>\
 									กรุณากรอกเป็นปี พ.ศ.\
 								</td>\

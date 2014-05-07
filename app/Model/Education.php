@@ -26,6 +26,9 @@ class Education extends AppModel {
 					, $edutype
 					, $profile_id
 					, $isGraduate){
+		
+// 		$name = mysql_escape_string($name);
+		
 		$flag = false;
 		$sql = "INSERT INTO educations 
 					(seq
@@ -74,6 +77,9 @@ class Education extends AppModel {
 					, $edutype
 					, $profile_id
 					, $isGraduate){
+		
+// 		$name = mysql_escape_string($name);
+		
 		$flag = false;
 		$sql = "UPDATE educations 
 					SET name = '$name'

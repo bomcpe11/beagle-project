@@ -233,7 +233,7 @@ h3{
 }
 ul.main-menu{
 	margin-top: 75px;
-	width: 800px;
+	width: 1050px;
 }
 ul.main-menu li{
 	display:block;
@@ -287,6 +287,31 @@ ul.main-menu li#menu-otherjstp{
 ul.main-menu li#menu-achieve{
 	background: #FF9ABC url("../img/menu_achieve.png") no-repeat center 18px;
 }ul.main-menu li#menu-achieve.hover{background-color: #CCC;}
+
+ul.main-menu li#menu-utility{
+	background: #CCC;
+}
+ul.main-menu li#menu-activity{
+	background: #555;
+	width: 450px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

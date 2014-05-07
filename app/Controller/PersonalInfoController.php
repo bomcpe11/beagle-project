@@ -8,7 +8,8 @@ class PersonalInfoController extends AppController {
 						,'Family'
 						,'Education'
 						,'Workplace'
-						,'Comment');
+						,'Comment'
+						,'Generation');
 // 	public $layout = "default_new";
 	/* ------------------------------------------------------------------------------------------------ */
 	public function index(){
@@ -71,13 +72,16 @@ class PersonalInfoController extends AppController {
 			$namePrefixTh 	= $this->Gvar->getVarcodeVardesc1ByVarname('NAME_PREFIX_TH');
 			$namePrefixEn 	= $this->Gvar->getVarcodeVardesc1ByVarname('NAME_PREFIX_EN');
 			
+			/* Generation List */
+			$generationList = $this->Generation->getAll();
+			
 			/* families */
 			$listFamily = $this->Family->getFamiliesByProfileId($objUser[0]['profiles']['id']);
 			//$this->log(print_r($listFamily, true));
 			
 			/* education */
 			$listEducation = $this->Education->getEducationByProfileId($objUser[0]['profiles']['id']);
-			//$this->log(print_r($listEducation, true));
+// 			$this->log(print_r($listEducation, true));
 			
 			/* work place */
 			$listWorkplace = $this->Workplace->getDataByProfileId($objUser[0]['profiles']['id']);
@@ -102,7 +106,7 @@ class PersonalInfoController extends AppController {
 		
 		/* set data to view */
 		$this->set(compact('isOwner', 'objUser', 'fullNameTh', 'birthday' ,'age', 'namePrefixTh'
-							,'namePrefixEn', 'listFamily','listEducation', 'listWorkplace','listComment'));
+							,'namePrefixEn', 'listFamily','listEducation', 'listWorkplace','listComment', 'generationList'));
 	}
 	/* ------------------------------------------------------------------------------------------------ */
 	public function updateProfileAjax() {
@@ -181,12 +185,12 @@ class PersonalInfoController extends AppController {
 			$dataSource->commit();
 			
 			$result['flg'] = 1;
-			$result['msg'] = 'การแก้ไขข้อมูลประวัติครอบครัวเสร็จเรียบร้อย';
+			$result['msg'] = 'เพิ่มข้อมูลประวัติครอบครัวเสร็จเรียบร้อย';
 		}else{
 			$dataSource->rollback();
 			
 			$result['flg'] = -1;
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติครอบครัว กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การเพิ่มข้อมูลประวัติครอบครัว กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 		}
 		
 		$this->layout='ajax';
@@ -240,13 +244,13 @@ class PersonalInfoController extends AppController {
 			$dataSource->commit();
 			
 			$result['flg'] = 1;
-			$result['msg'] = 'การแก้ไขข้อมูลประวัติครอบครัวเสร็จเรียบร้อย';
+			$result['msg'] = 'ลบข้อมูลประวัติครอบครัวเสร็จเรียบร้อย';
 		}else{
 			
 			$dataSource->rollback();
 			
 			$result['flg'] = -1;
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติครอบครัว กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การลบข้อมูลประวัติครอบครัว กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 		}
 		
 		$this->layout='ajax';
@@ -280,10 +284,10 @@ class PersonalInfoController extends AppController {
 								, $objUser['id']
 								, $isGraduate) ){
 			$dataSource->commit();
-			$message = 'การแก้ไขข้อมูลประวัติการศึกษาเสร็จเรียบร้อย';
+			$message = 'เพิ่มประวัติการศึกษาเสร็จเรียบร้อย';
 		}else{
 			$dataSource->rollback();
-			$message = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			$message = 'เกิดข้อผิดพลาดใน การเพิ่มข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 		}
 		
 		$this->layout='ajax';
@@ -343,12 +347,12 @@ class PersonalInfoController extends AppController {
 			$dataSource->commit();
 			
 			$result['flg'] = 1;
-			$result['msg'] = 'การแก้ไขประวัติการศึกษาเสร็จเรียบร้อย';
+			$result['msg'] = 'การลบประวัติการศึกษาเสร็จเรียบร้อย';
 		}else{
 			$dataSource->rollback();
 			
 			$result['flg'] = -1;
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การลบประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 		}
 		
 		$this->layout='ajax';
@@ -376,11 +380,11 @@ class PersonalInfoController extends AppController {
 								,$position
 								,$objUser['id']) ){
 			$dataSource->commit();
-			$result['msg'] = 'การแก้ไขข้อมูลประวัติการทำงานเสร็จเรียบร้อย';
+			$result['msg'] = 'เพิ่มข้อมูลประวัติการทำงานเสร็จเรียบร้อย';
 			$result['flag'] = 1;
 		}else{
 			$dataSource->rollback();
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการทำงาน กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การเพิ่มข้อมูลประวัติการทำงาน กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 			$result['flag'] = -1;
 		}
 		
@@ -433,11 +437,11 @@ class PersonalInfoController extends AppController {
 		$dataSource = $this->Workplace->getDataSource();
 		if( $this->Workplace->deleteData($id) ){
 			$dataSource->commit();
-			$result['msg'] = 'การแก้ไขข้อมูลประวัติการทำงานเสร็จเรียบร้อย';
+			$result['msg'] = 'ลบข้อมูลประวัติการทำงานเสร็จเรียบร้อย';
 			$result['flag'] = 1;
 		}else{
 			$dataSource->rollback();
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการทำงาน กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การลบข้อมูลประวัติการทำงาน กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 			$result['flag'] = -1;
 		}
 		
@@ -487,11 +491,11 @@ class PersonalInfoController extends AppController {
 		if( $this->Comment->deleteData($id) ){
 			$dataSource->commit();
 			$result['flg'] = 1;
-			$result['msg'] = 'การแก้ไข ความคิดเห็นเสร็จเรียบร้อย';
+			$result['msg'] = 'ลบความคิดเห็นเสร็จเรียบร้อย';
 		}else{
 			$dataSource->rollback();
 			$result['flg'] = -1;
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขกิจกรรมที่เข้าร่วมเ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การลบความคิดเห็น กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 		}
 		
 		$this->layout='ajax';
@@ -526,7 +530,7 @@ class PersonalInfoController extends AppController {
 			}else{
 				$dataSource->rollback();
 				$result['flg'] = -1;
-				$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขกิจกรรมที่เข้าร่วมเ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+				$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขลำดับ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 			}
 		}else if( $id==='education' ){
 			$dataSource = $this->Education->getDataSource();
@@ -545,7 +549,7 @@ class PersonalInfoController extends AppController {
 			}else{
 				$dataSource->rollback();
 				$result['flg'] = -1;
-				$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขกิจกรรมที่เข้าร่วมเ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+				$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขลำดับ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 			}
 		}else if( $id==='workplace' ){
 			$dataSource = $this->Workplace->getDataSource();
@@ -564,7 +568,7 @@ class PersonalInfoController extends AppController {
 			}else{
 				$dataSource->rollback();
 				$result['flg'] = -1;
-				$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขกิจกรรมที่เข้าร่วมเ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+				$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขลำดับ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 			}
 		}else{
 			$result['flag'] = -1;

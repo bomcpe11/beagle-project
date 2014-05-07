@@ -11,33 +11,33 @@
 							<tr>\
 								<td style="width:30%; text-align:right;">* ความเกี่ยวข้อง :</td>\
 								<td style="width:70%;">\
-									<input id="family-id" type="hidden" value=' + id +'>\
-									<input id="family-relation" type="text" value=' + relation +'>\
+									<input id="family-id" type="hidden" value="' + id +'">\
+									<input id="family-relation" type="text" value="' + relation +'">\
 								</td>\
 							</tr>\
 							<tr>\
 								<td style="text-align:right;">* ชื่อ :</td>\
-								<td><input id="family-name" type="text" value=' + name +'></td>\
+								<td><input id="family-name" type="text" value="' + name +'"></td>\
 							</tr>\
 							<tr>\
 								<td style="text-align:right;">* นามสกุล :</td>\
-								<td><input id="family-lastname" type="text" value=' + lastname +'></td>\
+								<td><input id="family-lastname" type="text" value="' + lastname +'"></td>\
 							</tr>\
 							<tr>\
 								<td style="text-align:right;">วุฒิการศึกษา :</td>\
-								<td><input id="family-education" type="text" value=' + education +'></td>\
+								<td><input id="family-education" type="text" value="' + education +'"></td>\
 							</tr>\
 							<tr>\
 								<td style="text-align:right;">*อาชีพ :</td>\
-								<td><input id="family-occupation" type="text" value=' + occupation +'></td>\
+								<td><input id="family-occupation" type="text" value="' + occupation +'"></td>\
 							</tr>\
 							<tr>\
 								<td style="text-align:right;">ตำแหนง :</td>\
-								<td><input id="family-position" type="text" value=' + position +'></td>\
+								<td><input id="family-position" type="text" value="' + position +'"></td>\
 							</tr>\
 							<tr>\
 								<td style="text-align:right;">สถานะ :</td>\
-								<td><input  type="checkbox" value=></td>\
+								<td><input  type="checkbox" value=""></td>\
 							</tr>\
 						</table>\
 					</div>';

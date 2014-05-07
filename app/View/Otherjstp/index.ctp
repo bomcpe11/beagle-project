@@ -1,36 +1,21 @@
 <style type="text/css">
-/* 	table-data */
 table.table-data, table.table-data th, table.table-data td{
 border: 1px solid black;
+/* border:1px solid green; */
 }
 table.table-data{
 border-collapse:collapse;
-}
-table.table-data, table.table-data th, table.table-data td{
-border: 1px solid black;
-}
-table.table-data {
 width:100%;
 }
 table.table-data th{
 height:30px;
+background-color:green;
+color:white;
 }
 table.table-data td{
 text-align:left;
-}
-table.table-data td{
-/* height:50px; */
 vertical-align:bottom;
-}
-table.table-data td{
 padding:5px;
-}
-table.table-data, table.table-data td, table.table-data th{
-border:1px solid green;
-}
-table.table-data th{
-background-color:green;
-color:white;
 }
 td.hover{
 	cursor:pointer;

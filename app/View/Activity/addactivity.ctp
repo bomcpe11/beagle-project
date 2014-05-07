@@ -54,6 +54,8 @@
 		
 	
 </script>
+<div style="padding:20px;">
+<h2>เพิ่มกิจกรรม</h2>
 <table class="tableLayout" width="100%">
 	<tr align="left">
 		<th align="right" width="20%">ชื่อกิจกรรม : </th>
@@ -77,7 +79,7 @@
 		<textarea id="shortdesc" style="width: 700px;" rows="5" ></textarea>
 		</td>
 	</tr>
-	<tr align="left">
+	<tr align="left" style="display:none;">
 		<th align="right" width="20%">ชื่อรุ่น : </th>
 		<td align="left"><input type="text" id="genname" /></td>
 	</tr>
@@ -88,7 +90,8 @@
 		<td colspan="2"><textarea id="longdesc" rows="10" cols="80"></textarea></td>
 	</tr>
 	<tr align="left">
-		<td align="right" width="20%"><input type="button" id="save" value="บันทึก" onclick="saveClick();" /></td>
-		<td align="left"><input type="button" id="cancel" value="ยกเลิก" onclick="cancelClick();" /></td>
+		<td  colspan="2" style="text-align: center;" width="20%"><input type="button" id="save" value="บันทึก" onclick="saveClick();" /> 
+		<input type="button" id="cancel" value="ยกเลิก" onclick="cancelClick();" /></td>
 	</tr>
 </table>
+</div>

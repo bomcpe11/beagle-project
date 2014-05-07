@@ -305,102 +305,11 @@ function remove_generation(id, name){
 	<div class="input">
 		<fieldset>
 		<legend>Change Password</legend>
-		<table>
-			<tr>
-				<td>ประเภทของบัตร : </td>
-				<td>
-					<select name="select_cardtype">
-						<option value="">---- กรุณาเลือก ----</option>
-					<?php for ( $i = 0; $i < count($personalIdType); $i++ ) { ?>
-						<option <?php //if($i==0) echo 'selected="selected"'; ?> value="<?php echo $personalIdType[$i]['gvars']['varcode'];?>"><?php echo $personalIdType[$i]['gvars']['vardesc1'];?></option>
-					<?php } ?>
-					</select> *</td>
-			</tr>
-			<tr>
-				<td>เลขบัตรประจำตัว : </td>
-				<td><input type="text" name="txt_cardid" /> *</td>
-			</tr>
-			<tr>
-				<td>ชื่อ (ภาษาไทย) : </td>
-				<td><input type="text" name="txt_name" /> *</td>
-			</tr>
-			<tr>
-				<td>นามสกุล (ภาษาไทย) : </td>
-				<td><input type="text" name="txt_surname" /> *</td>
-			</tr>
-			<tr>
-				<td>วันเดือนปี เกิด : </td>
-				<td><input type="text" name="txt_birthdate" class="birthDatePicker" /> *</td>
-			</tr>
-			<tr>
-				<td>อีเมล์ : </td>
-				<td><input type="text" name="txt_email" /> *</td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center">
-					<input type="button" value="ตกลง" onclick="submit_change_password();" />
-					<input type="button" class="btn-reset" value="ล้าง Input" />
-				</td>
-			</tr>
-		</table>
 <!-- 		<input type="text" name="id" /> -->
 		</fieldset>
 	</div>
 	<a class="framebtn" frmid="frm-menu">Back</a>
 </div>
-<script type="text/javascript">
-	function submit_change_password(){
-		var card_type = jQuery('#frm-changepassword').find('select[name="select_cardtype"]').val();
-		var card_id = jQuery('#frm-changepassword').find('input[name="txt_cardid"]').val();
-		var name = jQuery('#frm-changepassword').find('input[name="txt_name"]').val();
-		var surname = jQuery('#frm-changepassword').find('input[name="txt_surname"]').val();
-		var birthdate = jQuery('#frm-changepassword').find('input[name="txt_birthdate"]').val();
-		var email = jQuery('#frm-changepassword').find('input[name="txt_email"]').val();
-
-
-		// validate field *
-		if ( !card_type
-			|| !card_id
-			|| !name 
-			|| !surname
-			|| !birthdate
-			|| !email  ) {
-			jAlert("กรุณากรอกข้อมูลช่องที่ * ให้ครบ" 
-					, function(){ 
-					}//okFunc	
-					, function(){ 
-					}//openFunc
-					, function(){ 		
-					}//closeFunc
-			);// jAlert
-			
-			return false;
-		}// if
-
-		var data = {'card_type':card_type,
-					'card_id':card_id,
-					'name':name,
-					'surname':surname,
-					'birthdate':birthdate,
-					'email':email}
-		loading();
-		jQuery.post('<?php echo $this->Html->url('/Customize/change_password_submit');?>',
-					data,
-					function(data){
-						unloading();
-
-						jAlert(data.msg
-								, function(){ 
-								}//okFunc	
-								, function(){ 
-								}//openFunc
-								, function(){ 		
-								}//closeFunc
-						);// jAlert
-					},
-					'json');
-	}
-</script>
 <!-- #################################################################################################### -->
 <script type="text/javascript">
 	jQuery('a.framebtn[frmid!=""]').click(function(){

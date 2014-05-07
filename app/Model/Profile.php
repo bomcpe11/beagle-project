@@ -256,6 +256,25 @@ class Profile extends AppModel {
 		return $result;
 	}
 	
+	public function resetPassword($newPassword, $id) {
+		$flg = false;
+		$sql = "UPDATE profiles
+					 	SET encrypt_password = '$newPassword',
+					 	alterkey='',
+					 	updated_at=now()
+					 WHERE id = '$id'";
+		$this->log($sql);
+		
+		try {
+			$this->query($sql);
+			$flg = true;
+		}catch( Exception $e ){
+			$this->log("exception => ".$e->getMessage());
+		}
+		
+		return $flg;
+	}
+	
 	public function setUPactivate($id, $login, $password){
 		$flag = false;
 		$sql = "UPDATE profiles

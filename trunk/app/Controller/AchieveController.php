@@ -16,9 +16,8 @@ class AchieveController extends AppController{
 		 * 	1 	= is owner profile
 		 */
 		$isOwner = '-1';
-		$fullNameTh = null;
-		$listAward = null;
-		
+		$fullNameTh = '';
+		$listAward = '';
 		
 		if( !empty($objUser) ){
 			/* owner profile */

@@ -242,20 +242,6 @@ class Profile extends AppModel {
 		return $result;
 	}
 	
-	public function checkAlterKeyForResetPassword($alterkey){
-		$result = null;
-		$strSql = "SELECT p.* FROM profiles p WHERE alterkey='".$alterkey."'";
-		$this->log("strSql => ".$strSql);
-		
-		try {
-			$result = $this->query($strSql);
-		} catch ( Exception $e ) {
-			$this->log("exception => ".$e->getMessage());
-		}// try catch
-		
-		return $result;
-	}
-	
 	public function resetPassword($newPassword, $id) {
 		$flg = false;
 		$sql = "UPDATE profiles

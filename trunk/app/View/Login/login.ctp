@@ -78,7 +78,7 @@
 		);
 	}// goRegister
 	/* ------------------------------------------------------------------------------------------------- */
-	function openPopupResetPassword() {
+	function openPopupForgotPassword() {
 		var buttons = [
 				{text: "ตกลง", 
 					click: function(){
@@ -87,8 +87,8 @@
 				}
 			];
 		
-		jQuery('#frm-reset-password').css('width', '500px');
-		openPopupHtml('Reset Password', '#frm-reset-password', buttons, 
+		jQuery('#frm-forgot-password').css('width', '500px');
+		openPopupHtml('ลืมรหัสผ่าน', '#frm-forgot-password', buttons, 
 				function(){ //openFunc
 				}, 
 				function(){ //closeFunc
@@ -132,7 +132,7 @@
 					<td align="left">
 						<input type="submit" id="button_login" value="Login" onClick="JavaScript:loginFnc();"/>
 						<input type="button" id="button_register" value="Sign in" onClick="JavaScript:goRegister()"/>
-						<input type="button" id="button_reset_password" value="ลืมรหัสผ่าน" onClick="JavaScript:openPopupResetPassword()"/>
+						<input type="button" id="button_reset_password" value="ลืมรหัสผ่าน" onClick="JavaScript:openPopupForgotPassword()"/>
 					</td>
 				</tr>
 			</table>
@@ -213,9 +213,9 @@
 		</table>
 	</div>
 </div>
-<!-- ########################################## Popup Reset Password ##################################### -->
+<!-- ########################################## Popup Forgot Password ##################################### -->
 <div style="display: none;">
-	<div id="frm-reset-password">
+	<div id="frm-forgot-password">
 		<table>
 			<tr>
 				<td>ประเภทของบัตร : </td>
@@ -332,12 +332,12 @@
 
 	
 	function go_reset_password(){
-		var card_type = jQuery('#frm-reset-password').find('select[name="select_cardtype"]').val();
-		var card_id = jQuery('#frm-reset-password').find('input[name="txt_cardid"]').val();
-		var name = jQuery('#frm-reset-password').find('input[name="txt_name"]').val();
-		var surname = jQuery('#frm-reset-password').find('input[name="txt_surname"]').val();
-		var birthdate = jQuery('#frm-reset-password').find('input[name="txt_birthdate"]').val();
-		var email = jQuery('#frm-reset-password').find('input[name="txt_email"]').val();
+		var card_type = jQuery('#frm-forgot-password').find('select[name="select_cardtype"]').val();
+		var card_id = jQuery('#frm-forgot-password').find('input[name="txt_cardid"]').val();
+		var name = jQuery('#frm-forgot-password').find('input[name="txt_name"]').val();
+		var surname = jQuery('#frm-forgot-password').find('input[name="txt_surname"]').val();
+		var birthdate = jQuery('#frm-forgot-password').find('input[name="txt_birthdate"]').val();
+		var email = jQuery('#frm-forgot-password').find('input[name="txt_email"]').val();
 
 
 		// validate field *
@@ -366,7 +366,7 @@
 					'birthdate':birthdate,
 					'email':email}
 		loading();
-		jQuery.post('<?php echo $this->Html->url('/Login/go_reset_password');?>',
+		jQuery.post('<?php echo $this->Html->url('/Login/forgotPassword');?>',
 					data,
 					function(data){
 						unloading();

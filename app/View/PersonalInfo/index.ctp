@@ -430,8 +430,7 @@
 									.",#button_add_family"
 									.",#button_add_education"
 									.",#button_add_workplace').remove();";
-					
-					//echo "jQuery('.edit-delete').remove();";
+					echo "jQuery('.edit-delete').remove();";
 				}
 			?>
 		}

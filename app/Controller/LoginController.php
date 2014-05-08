@@ -165,8 +165,8 @@ class LoginController extends AppController {
 		$this->log("END :: LoginController -> signinmember_submit()");
 	}
 	
-	public function go_reset_password(){
-		$this->log("START :: LoginController -> go_reset_password()");
+	public function forgotPassword(){
+		$this->log("START :: LoginController -> forgotPassword()");
 		
 		$result['flg'] = '0';
 		$result['msg'] = 'เกิดข้อผิดพลาด กรุณาติดต่อผู้ดูแลระบบ';

@@ -5,8 +5,8 @@
 		<tr>
 			<td align="right" class="tdLabel">Username :</td>
 			<td align="left">
-				<input type="hidden" id="id" value="<?php echo $dataProfile[0]['p']['id']; ?>"/>
-				<input type="text" id="txt_username" value="<?php echo $dataProfile[0]['p']['login']; ?>" readonly/>
+				<input type="hidden" id="id" value="<?php echo $dataProfile[0]['profiles']['id']; ?>"/>
+				<input type="text" id="txt_username" value="<?php echo $dataProfile[0]['profiles']['login']; ?>" readonly/>
 			</td>
 		</tr>
 		<tr>

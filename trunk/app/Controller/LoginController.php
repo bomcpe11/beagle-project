@@ -186,16 +186,18 @@ class LoginController extends AppController {
 																$email);
 		if( count($dataProfile)===1 ){
 			try{
-				$key = $this->genKey();
+				$alterkey = md5('MyJSTP_'.$name.'_'.$surname.'_'.time());
 				
 				$db = $this->Profile->getDataSource();
 				$db->begin();
-				if( $this->Profile->updateAlterKey($key, $dataProfile[0]['p']['id']) ){
+				if( $this->Profile->updateAlterKey($alterkey, $dataProfile[0]['p']['id']) ){
 					$db->commit();
 					
 					// $reglink = 'http://www.myjstp.org/Register?id='.$id.'&key='.$alterkey.'';
-					$link = Router::url('/Login/resetPassword?key='.$key, true);
-					$content = "<a href=\"$link\" target=\"_blank\">$link</a>";
+					$link = Router::url('/Login/resetPassword?id='.$dataProfile[0]['p']['id']
+											.'&key='.$alterkey, true);
+					$content = "<b>MyJSTP Register, Please click this link</b><br/>"
+								."<a href=\"$link\" target=\"_blank\">$link</a>";
 					//$this->log($content);
 					
 					$cakeEmail = new CakeEmail('jstpEmail');
@@ -203,7 +205,7 @@ class LoginController extends AppController {
 					$cakeEmail->emailFormat('html');
 					$cakeEmail->from(array('admin-noreply@myjstp.org' => 'MyJSTP Administrator'));
 					$cakeEmail->to($email);
-			        $cakeEmail->subject('ลิ้งค์สำหรับเปลี่ยนรหัสผ่าน');
+			        $cakeEmail->subject('MyJSTP : Reset Password');
 			        $cakeEmail->send($content);
 			        
 			        $result['flg'] = '1';
@@ -235,9 +237,10 @@ class LoginController extends AppController {
 	public function resetPassword(){
 		$this->log("START :: LoginController -> resetPassword()");
 		
+		$id = $this->request->query['id'];
 		$key = $this->request->query['key'];
 		
-		$dataProfile = $this->Profile->checkAlterKeyForResetPassword($key);
+		$dataProfile = $this->Profile->checkAlterKey($id, $key);
 		if( count($dataProfile)===1 ){
 			$this->set(compact('dataProfile'));
 			$this->render('reset_password');
@@ -344,7 +347,7 @@ class LoginController extends AppController {
 		return $result;
 	}
 	
-	private function genKey(){
+	/*private function genKey(){
 		$reuslt = '';
 		$charecter = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		
@@ -357,7 +360,7 @@ class LoginController extends AppController {
 		}
 		
 		return $reuslt;
-	}
+	}*/
 	
 	private function changeFormatDate($data) {
 		/*

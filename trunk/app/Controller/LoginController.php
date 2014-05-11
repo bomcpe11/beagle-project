@@ -196,7 +196,7 @@ class LoginController extends AppController {
 					// $reglink = 'http://www.myjstp.org/Register?id='.$id.'&key='.$alterkey.'';
 					$link = Router::url('/Login/resetPassword?id='.$dataProfile[0]['p']['id']
 											.'&key='.$alterkey, true);
-					$content = "<b>MyJSTP Register, Please click this link</b><br/>"
+					$content = "<b>MyJSTP Reset Password, Please click this link</b><br/>"
 								."<a href=\"$link\" target=\"_blank\">$link</a>";
 					//$this->log($content);
 					

@@ -80,57 +80,57 @@
 							<li>\
 								<p><strong>สัญชาติ :</strong></p>\
 								<p>\
-									<input id="text-nationality" type="text" value=<?php echo $objUser[0]['profiles']["nationality"];?>>\
+									<input id="text-nationality" type="text" value=<?php echo $objUser[0]['profiles']['nationality'];?>>\
 								</p>\
 								<p><strong>ศาสนา :</strong></p>\
 								<p>\
-									<input id="text-religious" type="text" value=<?php echo $objUser[0]['profiles']["religious"];?>>\
+									<input id="text-religious" type="text" value=<?php echo $objUser[0]['profiles']['religious'];?>>\
 								</p>\
 							</li>\
 							<li>\
 								<p><strong>สถานภาพ :</strong></p>\
 								<p>\
-									<input id="text-social-status" type="text" value=<?php echo $objUser[0]['profiles']["socialstatus"];?>>\
+									<input id="text-social-status" type="text" value=<?php echo $objUser[0]['profiles']['socialstatus'];?>>\
 								</p>\
 								<p><strong>สถานภาพทางการศึกษา :</strong></p>\
 								<p>\
-									<input id="text-study-status" type="text" value=<?php echo $objUser[0]['profiles']["studystatus"];?>>\
+									<input id="text-study-status" type="text" value=<?php echo $objUser[0]['profiles']['studystatus'];?>>\
 								</p>\
 							</li>\
 							<li class="single">\
 								<p><strong>ที่อยู่ :</strong></p>\
 								<p>\
-									<textarea id="textarea-address" rows="3"><?php echo trim($objUser[0]['profiles']["address"]);?></textarea>\
+									<textarea id="textarea-address" rows="3"><?php echo trim($objUser[0]['profiles']['address']);?></textarea>\
 								</p>\
 							</li>\
 							<li>\
 								<p><strong>โทรศัพท์ :</strong></p>\
 								<p>\
-									<input id="text-tel-phone" type="text" value=<?php echo $objUser[0]['profiles']["telphone"];?>>\
+									<input id="text-tel-phone" type="text" value=<?php echo $objUser[0]['profiles']['telphone'];?>>\
 								</p>\
 								<p><strong>โทรศัพท์มือถือ :</strong></p>\
 								<p>\
-									<input id="text-cel-phone" type="text" value=<?php echo $objUser[0]['profiles']["celphone"];?>>\
+									<input id="text-cel-phone" type="text" value=<?php echo $objUser[0]['profiles']['celphone'];?>>\
 								</p>\
 							</li>\
 							<li>\
 								<p><strong>* อีเมล์ :</strong></p>\
 								<p>\
-									<input id="text-email" type="text" value=<?php echo $objUser[0]['profiles']["email"];?>>\
+									<input id="text-email" type="text" value=<?php echo $objUser[0]['profiles']['email'];?>>\
 								</p>\
 								<p><strong>ตำแหน่งทางวิชาการ(ถ้ามี) :</strong></p>\
 								<p>\
-									<input id="text-position" type="text" value=<?php echo $objUser[0]['profiles']["position"];?>>\
+									<input id="text-position" type="text" value=<?php echo $objUser[0]['profiles']['position'];?>>\
 								</p>\
 							</li>\
 							<li>\
 								<p><strong>Sosial Network :</strong></p>\
 								<p>\
-									<input id="text-blog-address" type="text" value=<?php echo $objUser[0]['profiles']["blogaddress"];?>>\
+									<input id="text-blog-address" type="text" value=<?php echo $objUser[0]['profiles']['blogaddress'];?>>\
 								</p>\
-								<p><strong>สถานะ :</strong></p>\
+								<p><strong>ถึงแก่กรรม :</strong></p>\
 								<p>\
-									<input id="text-position" type="checkbox" value=>\
+									<input id="checkbox-status" type="checkbox" <?php echo ( $objUser[0]['profiles']['status']==='0' )? 'checked': ''; ?>>\
 								</p>\
 							</li>\
 						</ul>\
@@ -174,6 +174,7 @@
 		var position		= jQuery("#text-position").val();
 		var blogAddress 	= jQuery("#text-blog-address").val();
 		var profileId 		= jQuery("#hidden-profile-id").val();
+		var status			= jQuery("#checkbox-status").prop('checked');
 	
 		if ( !titleTh
 			|| !nameTh
@@ -231,7 +232,8 @@
 					,"email":email
 					,"position":position
 					,"blogAddress":blogAddress
-					,"profileId":profileId}
+					,"profileId":profileId
+					,"status":status}
 				, function(data) {
 					unloading();
 					

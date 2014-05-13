@@ -111,7 +111,7 @@
 									<span><?php echo $objUser[0]['profiles']['blogaddress'];?></span>
 								</td>
 								<td>
-									<span>สถานะ</span>
+									<span><?php echo ( $objUser[0]['profiles']['status']==='0' )?'*** ถึงแก่กรรม': ''; ?></span>
 								</td>
 							</tr>
 					<?php }else{?>
@@ -138,6 +138,11 @@
 					$countListFamily = empty($listFamily)?0:count($listFamily);
 					if( $countListFamily>0 ){
 						for($i=0; $i<$countListFamily; $i++){
+							$status = '';
+							if( $listFamily[$i]['families']['status']==='0' ){
+								$status = '(ถึงแก่กรรม)';
+							}
+							
 							echo "<li class=\"ui-state-default block\">
 									<input type=\"hidden\" name=\"family_id\" value=\"{$listFamily[$i]['families']['id']}\">
 									<span class=\"ui-icon ui-icon-arrowthick-2-n-s\"></span>
@@ -154,7 +159,7 @@
 												</td>
 												<td>
 													<strong>ชื่อ-นามสกุล : </strong>
-													{$listFamily[$i]['families']['name']} {$listFamily[$i]['families']['lastname']}
+													{$listFamily[$i]['families']['name']} {$listFamily[$i]['families']['lastname']} $status
 												</td>
 												<td class='edit-delete'>
 													<img src=\"{$this->Html->url('/img/icon_edit.png')}\"
@@ -164,7 +169,8 @@
 																			,'{$listFamily[$i]['families']['lastname']}'
 																			,'{$listFamily[$i]['families']['education']}'
 																			,'{$listFamily[$i]['families']['occupation']}'
-																			,'{$listFamily[$i]['families']['position']}')\"/>
+																			,'{$listFamily[$i]['families']['position']}'
+																			,'{$listFamily[$i]['families']['status']}')\"/>
 													<img src=\"{$this->Html->url('/img/icon_del.png')}\"
 														onclick=\"deleteFamily('{$listFamily[$i]['families']['id']}')\"/>
 												</td>
@@ -333,39 +339,50 @@
 	<div class="container">
 		<h2>ความคิดเห็น</h2>
 		<div class="section-content">
-			<?php 
-				$countListComment = count($listComment);
-				if( $countListComment>0 ){
-					for( $i=0;$i<$countListComment;$i++ ){
-// 						echo $listComment[$i]['c']['commentable_id'].'|'.$objuser['id'];
-						echo "<table class=\"table-data-item\">
-								<tr>
-									<td><strong>หัวข้อ : {$listComment[$i]['c']['title']}</strong></td>
-									<td class=\"edit-delete\">";
-						
-						if($isAdmin || $listComment[$i]['c']['commentable_id']==$objuser['id'] /* && commentatorid==session_profile_id*/){
-						echo "			<img src=\"{$this->Html->url('/img/icon_del.png')}\" width=\"16\" height=\"16\"
-											onclick=\"deleteComment('{$listComment[$i]['c']['id']}')\" />";
+			<ul id="sortable_comment">
+				<?php 
+					$countListComment = count($listComment);
+					if( $countListComment>0 ){
+						for( $i=0;$i<$countListComment;$i++ ){
+	 						//echo $listComment[$i]['c']['commentable_id'].'|'.$objuser['id'];
+							echo "<li class=\"ui-state-default block\">
+									<input type=\"hidden\" name=\"comment_id\" value=\"{$listComment[$i]['c']['id']}\">
+									<span class=\"ui-icon ui-icon-arrowthick-2-n-s\"></span>
+									<div class=\"data-item-wrapper\">
+										<table class=\"table-data-item\">
+											<tr>
+												<td><strong>หัวข้อ : {$listComment[$i]['c']['title']}</strong></td>
+												<td class=\"edit-delete\">";
+							
+							if($isAdmin || $listComment[$i]['c']['commentable_id']==$objuser['id'] /* && commentatorid==session_profile_id*/){
+								echo "				<img src=\"{$this->Html->url('/img/icon_del.png')}\" width=\"16\" height=\"16\"
+														onclick=\"deleteComment('{$listComment[$i]['c']['id']}')\" />";
+							}
+							echo "				</td>
+											</tr>
+											<tr>
+												<td colspan=\"2\" class=\"comment\">{$listComment[$i]['c']['comment']}</td>
+											</tr>
+											<tr>
+												<td colspan=\"2\">โดย {$listComment[$i][0]['commentator']} เมื่อวันที่ {$listComment[$i]['c']['created_at']}</td>
+											</tr>
+										</table>
+									</div>
+								</il>";
 						}
-						
-						echo "		</td>
-								</tr>
-								<tr>
-									<td colspan=\"2\" class=\"comment\">{$listComment[$i]['c']['comment']}</td>
-								</tr>
-								<tr>
-									<td colspan=\"2\">โดย {$listComment[$i][0]['commentator']} เมื่อวันที่ {$listComment[$i]['c']['created_at']}</td>
-								</tr>
-							</table>";
+					}else{
+						echo "<il class=\"ui-state-default block\">
+								<div class=\"data-item-wrapper\">
+									<table class=\"table-data-item\">
+										<tr class=\"no-found-data\">
+											<td>ไม่พบข้อมูล</td>
+										</tr>
+									</table>
+								</div>
+							</li>";
 					}
-				}else{
-					echo "<table class=\"table-data-item\">
-								<tr class=\"no-found-data\">
-									<td>ไม่พบข้อมูล</td>
-								</tr>
-							</table>";
-				}
-			?>
+				?>
+			</ul>
 		</div>
 		
 			<div class="section-content">
@@ -416,7 +433,8 @@
 				if( $isOwner || $objuser['role']==='1' ){
 					echo "jQuery('#sortable_family"
 								.",#sortable_education"
-								.",#sortable_workplace').sortable({
+								.",#sortable_workplace"
+								.",#sortable_comment').sortable({
 								update: function(event, ui) {
 									// format => sortable_xxxx
 									var sortable_id = ui.item.parent('ul').prop('id').replace(/sortable_/gi,'');

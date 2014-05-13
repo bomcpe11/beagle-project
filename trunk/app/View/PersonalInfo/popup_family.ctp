@@ -5,7 +5,8 @@
 							,lastname
 							,education
 							,occupation
-							,position){
+							,position
+							,status){
 		var html = '<div id="popup-family-container" style="width:400px;">\
 						<table style="width:100%;">\
 							<tr>\
@@ -36,8 +37,10 @@
 								<td><input id="family-position" type="text" value="' + position +'"></td>\
 							</tr>\
 							<tr>\
-								<td style="text-align:right;">สถานะ :</td>\
-								<td><input  type="checkbox" value=""></td>\
+								<td style="text-align:right;">ถึงแก่กรรม :</td>\
+								<td>\
+									<input id="family-status" type="checkbox">\
+								</td>\
 							</tr>\
 						</table>\
 					</div>';
@@ -53,6 +56,9 @@
 						}];
 		openPopupHtml('[เพิ่ม][แก้ไข]ข้อมูลส่วนตัว', html, buttons, 
 				function(){ //openFunc
+					if( status==='0' ){
+						jQuery('#family-status').prop('checked', true);
+					}
 				}, 
 				function(){ //closeFunc
 				}
@@ -69,6 +75,7 @@
 								,'education':jQuery('#family-education').val()
 								,'occupation':jQuery('#family-occupation').val()
 								,'position':jQuery('#family-position').val()
+								,'status':jQuery('#family-status').prop('checked')
 							}}
 					,function(data){
 						unloading();
@@ -100,6 +107,7 @@
 								,'education':jQuery('#family-education').val()
 								,'occupation':jQuery('#family-occupation').val()
 								,'position':jQuery('#family-position').val()
+								,'status':jQuery('#family-status').prop('checked')
 							}}
 					,function(data){
 						unloading();

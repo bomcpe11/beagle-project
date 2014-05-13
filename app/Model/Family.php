@@ -22,7 +22,14 @@ class Family extends AppModel {
 		return $result;
 	}
 	/* ------------------------------------------------------------------------------------------------- */
-	public function insertFamily($profile_id, $relation, $name, $lastname, $education, $occupation, $position){
+	public function insertFamily($profile_id
+									,$relation
+									,$name
+									,$lastname
+									,$education
+									,$occupation
+									,$position
+									,$status){
 		$flag = false;
 		$sql = "INSERT INTO families 
 				(seq
@@ -32,6 +39,7 @@ class Family extends AppModel {
 				,education
 				,occupation
 				,position
+				,status
 				,created_at
 				,updated_at) 
 				VALUES
@@ -45,6 +53,7 @@ class Family extends AppModel {
 				,'$education'
 				,'$occupation'
 				,'$position'
+				,'$status'
 				,sysdate()
 				,sysdate())";
 		//$this->log($sql);
@@ -59,20 +68,26 @@ class Family extends AppModel {
 		return $flag;
 	}
 	/* ------------------------------------------------------------------------------------------------- */
-	public function updateFamily($profile_id, $relation
-								, $name, $lastname
-								, $education, $occupation
-								, $position, $family_id){
+	public function updateFamily($profile_id
+									,$relation
+									,$name
+									,$lastname
+									,$education
+									,$occupation
+									,$position
+									,$family_id
+									,$status){
 		$flag = false;
 		$sql = "UPDATE families 
 				SET profile_id='$profile_id'
-				, relation='$relation'
-				, name='$name'
-				, lastname='$lastname'
-				, education='$education'
-				, occupation='$occupation'
-				, position='$position'
-				, updated_at=sysdate()
+				,relation='$relation'
+				,name='$name'
+				,lastname='$lastname'
+				,education='$education'
+				,occupation='$occupation'
+				,position='$position'
+				,status='$status'
+				,updated_at=sysdate()
 				WHERE id='$family_id'";
 		
 		try{

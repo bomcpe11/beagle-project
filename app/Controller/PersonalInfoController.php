@@ -112,6 +112,7 @@ class PersonalInfoController extends AppController {
 	public function updateProfileAjax() {
 		$this->log('---- PersonalInfoController -> updateProfileAjax ----');
 		
+		//$this->log($this->request->data);
 		$result 		= array();
 		$titleTh 		= $this->request->data["titleTh"];
 		$nameTh 		= $this->request->data["nameTh"];
@@ -133,6 +134,8 @@ class PersonalInfoController extends AppController {
 		$position		= $this->request->data["position"];
 		$blogAddress 	= $this->request->data["blogAddress"];
 		$profileId 		= $this->request->data["profileId"];
+		$status			= ( $this->request->data["status"]==='true' )? '0': '1';
+		//$this->log($status);
 		
 		if ( $this->Profile->updateProfile($profileId
 												,$titleTh
@@ -153,7 +156,8 @@ class PersonalInfoController extends AppController {
 												,$celPhone 
 												,$email
 												,$position
-												,$blogAddress) ) {
+												,$blogAddress
+												,$status) ) {
 			$result['flg'] = 1;
 			$result['msg'] = "การแก้ไขข้อมูลส่วนตัวเสร็จเรียบร้อย";								
 		} else {
@@ -178,14 +182,21 @@ class PersonalInfoController extends AppController {
 		$education = $this->request->data['education'];
 		$occupation = $this->request->data['occupation'];
 		$position = $this->request->data['position'];
+		$status	= ( $this->request->data["status"]==='true' )? '0': '1';
 		
 		$dataSource = $this->Family->getDataSource();
-		if( $this->Family->insertFamily($objUser['id'], $relation, $name
-										, $lastname, $education, $occupation, $position) ){
+		if( $this->Family->insertFamily($objUser['id']
+										,$relation
+										,$name
+										,$lastname
+										,$education
+										,$occupation
+										,$position
+										,$status) ){
 			$dataSource->commit();
 			
 			$result['flg'] = 1;
-			$result['msg'] = 'เพิ่มข้อมูลประวัติครอบครัวเสร็จเรียบร้อย';
+			$result['msg'] = 'เพิ่มข้อมูลประวัติครอบครัว เสร็จเรียบร้อย';
 		}else{
 			$dataSource->rollback();
 			
@@ -211,16 +222,22 @@ class PersonalInfoController extends AppController {
 		$education = $this->request->data['education'];
 		$occupation = $this->request->data['occupation'];
 		$position = $this->request->data['position'];
+		$status	= ( $this->request->data["status"]==='true' )? '0': '1';
 		
 		$dataSource = $this->Family->getDataSource();
-		if( $this->Family->updateFamily($objUser['id'], $relation
-										, $name, $lastname
-										, $education, $occupation
-										, $position, $family_id) ){
+		if( $this->Family->updateFamily($objUser['id']
+										,$relation
+										,$name
+										,$lastname
+										,$education
+										,$occupation
+										,$position
+										,$family_id
+										,$status) ){
 			$dataSource->commit();
 			
 			$result['flg'] = 1;
-			$result['msg'] = 'การแก้ไขข้อมูลประวัติครอบครัวเสร็จเรียบร้อย';
+			$result['msg'] = 'การแก้ไขข้อมูลประวัติครอบครัว เสร็จเรียบร้อย';
 		}else{
 			$dataSource->rollback();
 			
@@ -526,11 +543,11 @@ class PersonalInfoController extends AppController {
 			if( $flagUpdateData ){
 				$dataSource->commit();
 				$result['flg'] = 1;
-				$result['msg'] = 'การแก้ไขลำดับ ข้อมูลประวัติครอบครัวเสร็จเรียบร้อย';
+				$result['msg'] = 'การแก้ไขลำดับข้อมูลประวัติครอบครัว เสร็จเรียบร้อย';
 			}else{
 				$dataSource->rollback();
 				$result['flg'] = -1;
-				$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขลำดับ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+				$result['msg'] = 'เกิดข้อผิดพลาดในการแก้ไขลำดับ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 			}
 		}else if( $id==='education' ){
 			$dataSource = $this->Education->getDataSource();
@@ -545,11 +562,11 @@ class PersonalInfoController extends AppController {
 			if( $flagUpdateData ){
 				$dataSource->commit();
 				$result['flg'] = 1;
-				$result['msg'] = 'การแก้ไขลำดับ ข้อมูลประวัติการศึกษาเสร็จเรียบร้อย';
+				$result['msg'] = 'การแก้ไขลำดับข้อมูลประวัติการศึกษา เสร็จเรียบร้อย';
 			}else{
 				$dataSource->rollback();
 				$result['flg'] = -1;
-				$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขลำดับ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+				$result['msg'] = 'เกิดข้อผิดพลาดในการแก้ไขลำดับ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 			}
 		}else if( $id==='workplace' ){
 			$dataSource = $this->Workplace->getDataSource();
@@ -564,15 +581,34 @@ class PersonalInfoController extends AppController {
 			if( $flagUpdateData ){
 				$dataSource->commit();
 				$result['flg'] = 1;	
-				$result['msg'] = 'การแก้ไขลำดับ ข้อมูลประวัติการทำงานเสร็จเรียบร้อย';
+				$result['msg'] = 'การแก้ไขลำดับข้อมูลประวัติการทำงาน เสร็จเรียบร้อย';
 			}else{
 				$dataSource->rollback();
 				$result['flg'] = -1;
-				$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขลำดับ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+				$result['msg'] = 'เกิดข้อผิดพลาดในการแก้ไขลำดับ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			}
+		}else if( $id==='comment' ){
+			$dataSource = $this->Comment->getDataSource();
+			$dataSource->begin();
+			for( $i=0;$i<$countData;$i++ ){
+				$flagUpdateData = $this->Comment->updateSeq($data[$i]['id']
+																,$data[$i]['seq']);
+				if( !$flagUpdateData ){
+					break;
+				}
+			}
+			if( $flagUpdateData ){
+				$dataSource->commit();
+				$result['flg'] = 1;	
+				$result['msg'] = 'การแก้ไขลำดับความคิดเห็น เสร็จเรียบร้อย';
+			}else{
+				$dataSource->rollback();
+				$result['flg'] = -1;
+				$result['msg'] = 'เกิดข้อผิดพลาดในการแก้ไขลำดับ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 			}
 		}else{
 			$result['flag'] = -1;
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขกิจกรรมที่เข้าร่วมเ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			$result['msg'] = 'เกิดข้อผิดพลาดในการแก้ไขลำดับ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 		}
 		
 		$this->layout='ajax';

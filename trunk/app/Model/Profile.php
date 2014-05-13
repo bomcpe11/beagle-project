@@ -97,37 +97,37 @@ class Profile extends AppModel {
 		$strSql .= " )";
 		$strSql .= " VALUES";
 		$strSql .= " (";
-  		$strSql .= " ".$cardid; // cardid - IN varchar(20)
- 		$strSql .= " ,".$cardtype; // cardtype - IN tinyint(4)
- 		$strSql .= " ,'".$nameth."'"; // nameth - IN varchar(255)
-  		$strSql .= " ,'".$lastnameth."'"; // lastnameth - IN varchar(255)
-  		$strSql .= " ,'".$nameeng."'"; // nameeng - IN varchar(255)
-  		$strSql .= " ,'".$nickname."'"; // nickname - IN varchar(255)
-  		$strSql .= " ,'".$generation."'"; // generation - IN varchar(255)
-  		$strSql .= " ,'".$birthday."'"; // birthday - IN date
-  		$strSql .= " ,'".$nationality."'"; // nationality - IN varchar(255)
-  		$strSql .= " ,'".$religious."'"; // religious - IN varchar(255)
-  		$strSql .= " ,'".$socialstatus."'"; // socialstatus - IN varchar(255)
-  		$strSql .= " ,'".$studystatus."'"; // studystatus - IN varchar(255)
-  		$strSql .= " ,'".$address."'"; // address - IN varchar(1000)
-  		$strSql .= " ,'".$telphone."'"; // telphone - IN varchar(255)
-  		$strSql .= " ,'".$celphone."'"; // celphone - IN varchar(255)
-  		$strSql .= " ,'".$email."'"; // email - IN varchar(255)
-  		$strSql .= " ,'".$blogaddress."'"; // blogaddress - IN varchar(255)
-  		$strSql .= " ,'".$image_file."'"; // image_file - IN varchar(255)
-  		$strSql .= " ,'".$image_desc."'"; // image_desc - IN varchar(500)
-  		$strSql .= " ,sysdate()"; // created_at - IN datetime
-  		$strSql .= " ,sysdate()"; // updated_at - IN datetime
-  		$strSql .= " ,'".$lastnameeng."'"; // lastnameeng - IN varchar(255)
-  		$strSql .= " ,'".$titleth."'"; // titleth - IN varchar(255)
-  		$strSql .= " ,'".$titleen."'"; // titleen - IN varchar(255)
-  		$strSql .= " ,'".$position."'"; // position - IN varchar(255)
-  		$strSql .= " ,'".$login."'"; // login - IN varchar(255)
-  		$strSql .= " ,'".$encrypt_password."'"; // encrypt_password - IN varchar(40)
-  		$strSql .= " ,'".$role."'"; // role - IN varchar(10)
-  		$strSql .= " ,'".$login_count."'"; // login_count - IN int(11)
-  		$strSql .= " ,'".$failed_login_count."'"; // failed_login_count - IN int(11)
-  		$strSql .= " ,'".$last_login_at."'"; // last_login_at - IN datetime
+  		$strSql .= " ".$cardid;
+ 		$strSql .= " ,".$cardtype;
+ 		$strSql .= " ,'".$nameth."'";
+  		$strSql .= " ,'".$lastnameth."'";
+  		$strSql .= " ,'".$nameeng."'";
+  		$strSql .= " ,'".$nickname."'";
+  		$strSql .= " ,'".$generation."'";
+  		$strSql .= " ,'".$birthday."'";
+  		$strSql .= " ,'".$nationality."'";
+  		$strSql .= " ,'".$religious."'";
+  		$strSql .= " ,'".$socialstatus."'";
+  		$strSql .= " ,'".$studystatus."'";
+  		$strSql .= " ,'".$address."'";
+  		$strSql .= " ,'".$telphone."'";
+  		$strSql .= " ,'".$celphone."'";
+  		$strSql .= " ,'".$email."'";
+  		$strSql .= " ,'".$blogaddress."'";
+  		$strSql .= " ,'".$image_file."'";
+  		$strSql .= " ,'".$image_desc."'";
+  		$strSql .= " ,sysdate()";
+  		$strSql .= " ,sysdate()";
+  		$strSql .= " ,'".$lastnameeng."'";
+  		$strSql .= " ,'".$titleth."'";
+  		$strSql .= " ,'".$titleen."'";
+  		$strSql .= " ,'".$position."'";
+  		$strSql .= " ,'".$login."'";
+  		$strSql .= " ,'".$encrypt_password."'";
+  		$strSql .= " ,'".$role."'";
+  		$strSql .= " ,'".$login_count."'";
+  		$strSql .= " ,'".$failed_login_count."'";
+  		$strSql .= " ,'".$last_login_at."'";
 		$strSql .= " )";
    		$strSql .= ";";
    		//$this->log("strSql => ".$strSql);
@@ -316,29 +316,31 @@ class Profile extends AppModel {
 									,$celPhone 
 									,$email
 									,$position
-									,$blogAddress) {
+									,$blogAddress
+									,$status) {
 		$flag = false;
 		$strSql = "UPDATE profiles";
-		$strSql .= " SET titleth = '".$titleTh."'";	// VARCHAR(255)
-		$strSql .= " ,nameth = '".$nameTh."'";	// VARCHAR(255)
-		$strSql .= " ,lastnameth = '".$lastnameTh."'";	// VARCHAR(255)
-		$strSql .= " ,titleen = '".$titleEng."'";	// VARCHAR(255)
-		$strSql .= " ,nameeng = '".$nameEng."'";	// VARCHAR(255)
-		$strSql .= " ,lastnameeng = '".$lastnameEng."'";	// VARCHAR(255)
-		$strSql .= " ,nickname = '".$nickname."'";	// VARCHAR(255)
-		$strSql .= " ,generation = '".$generation."'";	// VARCHAR(255)
-		$strSql .= " ,birthday = '".$birthday."'";	// DATE
-		$strSql .= " ,nationality = '".$nationality."'";	// VARCHAR(255)
-		$strSql .= " ,religious = '".$religious."'";	// VARCHAR(255)
-		$strSql .= " ,socialstatus = '".$socialStatus."'";	// VARCHAR(255)
-		$strSql .= " ,studystatus = '".$studyStatus."'";	// VARCHAR(255)
-		$strSql .= " ,address = '".$address."'";	// VARCHAR(1000)
-		$strSql .= " ,telphone = '".$telPhone."'";	// VARCHAR(255)
-		$strSql .= " ,celphone = '".$celPhone."'";	// VARCHAR(255)
-		$strSql .= " ,email = '".$email."'";	// VARCHAR(255)
-		$strSql .= " ,position = '".$position."'";	// VARCHAR(255)
-		$strSql .= " ,blogaddress = '".$blogAddress."'";	// VARCHAR(255)
-		$strSql .= " ,updated_at = now()";	// DATETIME
+		$strSql .= " SET titleth = '".$titleTh."'";
+		$strSql .= " ,nameth = '".$nameTh."'";
+		$strSql .= " ,lastnameth = '".$lastnameTh."'";
+		$strSql .= " ,titleen = '".$titleEng."'";
+		$strSql .= " ,nameeng = '".$nameEng."'";
+		$strSql .= " ,lastnameeng = '".$lastnameEng."'";
+		$strSql .= " ,nickname = '".$nickname."'";
+		$strSql .= " ,generation = '".$generation."'";
+		$strSql .= " ,birthday = '".$birthday."'";
+		$strSql .= " ,nationality = '".$nationality."'";
+		$strSql .= " ,religious = '".$religious."'";
+		$strSql .= " ,socialstatus = '".$socialStatus."'";
+		$strSql .= " ,studystatus = '".$studyStatus."'";
+		$strSql .= " ,address = '".$address."'";
+		$strSql .= " ,telphone = '".$telPhone."'";
+		$strSql .= " ,celphone = '".$celPhone."'";
+		$strSql .= " ,email = '".$email."'";
+		$strSql .= " ,position = '".$position."'";
+		$strSql .= " ,blogaddress = '".$blogAddress."'";
+		$strSql .= " ,status = '".$status."'";
+		$strSql .= " ,updated_at = now()";
 		$strSql .= " WHERE id = ".$profileId;
 		$strSql .= ";";
 		//$this->log("strSql => ".$strSql);

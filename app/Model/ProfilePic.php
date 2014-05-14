@@ -64,6 +64,22 @@ class ProfilePic extends AppModel {
 		return $flag;
 	}// updateImgPathById
 	/* ---------------------------------------------------------------------------------- */
+	public function deleteById($id){
+		$flg = false;
+		$sql = "DELETE FROM profile_pics WHERE id='$id'";
+		$this->log($sql);
+		
+		try{
+			$this->query($sql);
+			
+			$flg = true;
+		}catch( Exception $e ){
+			$this->log("Exception => ".$e.getMessage());
+		}
+		
+		return $flg;
+	}
+	/* ---------------------------------------------------------------------------------- */
 	public function getLastInsert() {
 		$result = null;
 		$strSql = "SELECT LAST_INSERT_ID() AS last_index_id;";
@@ -91,4 +107,18 @@ class ProfilePic extends AppModel {
 	
 		return $result;
 	}// getStarByProfileId
+	/* ---------------------------------------------------------------------------------- */
+	public function getDataById($id){
+		$result = null;
+		$strSql = "SELECT * FROM profile_pics pp WHERE id = '$id';";
+		$this->log("strSql => ".$strSql);
+	
+		try {
+			$result = $this->query($strSql);
+		} catch ( Exception $e ) {
+			$this->log("Exception => ".$e.getMessage());
+		}
+	
+		return $result;
+	}
 }// ProfilePic

@@ -18,28 +18,34 @@
 /* Picture */
 .div_form_picture {
 	padding: 0px 25px 25px 25px;
-	height: 205px;
-	overflow-y: scroll;
+	height: 225px;
+	overflow-y: auto;
 }
-.div-item-picture {
-	float: left;
-	margin: 10px 6px 10px 6px;
-	border: 1px solid #666666;
-	height: 200px;
-	width: 200px;
-}
-.div-item-picture:hover {
-	background-color: #B8E62E;
-}
-.img-picture {
-	display: block;
-	margin: 15px auto 0px auto;
-    height: 150px;
-	width: 150px;
-	cursor: pointer;
-}
-.span-picture-desc {
-	display: block;
-	margin: 10px 10px 0px 10px;
-	text-align: center;
-}
+	.div-item-picture {
+		float: left;
+		margin: 10px 6px 10px 6px;
+		border: 1px solid #666666;
+		height: 200px;
+		width: 200px;
+		position: relative;
+	}
+	.div-item-picture:hover {
+		background-color: #459e00;
+	}
+		.icon-delete{
+			position: absolute;
+			top: 5px;
+			right: 5px;
+		}
+		.img-picture {
+			display: block;
+			margin: 15px auto 0px auto;
+		    height: 150px;
+			width: 150px;
+			cursor: pointer;
+		}
+		.span-picture-desc {
+			display: block;
+			margin: 10px 10px 0px 10px;
+			text-align: center;
+		}

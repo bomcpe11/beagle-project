@@ -305,11 +305,94 @@ function remove_generation(id, name){
 	<div class="input">
 		<fieldset>
 		<legend>Change Password</legend>
-<!-- 		<input type="text" name="id" /> -->
+		<table>
+			<tr>
+				<td class="td_label">รหัสผ่านเดิม : </td>
+				<td class="td_data">
+					<input type="password" id="old_password" size="24"/> *</td>
+			</tr>
+			<tr>
+				<td class="td_label">รหัสผ่านใหม่ : </td>
+				<td class="td_data">
+					<input type="password" id="new_password" size="24"/> *</td>
+			</tr>
+			<tr>
+				<td class="td_label">ยืนยันรหัสผ่านใหม่ : </td>
+				<td class="td_data">
+					<input type="password" id="confirm_new_password" size="24"/> *</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td style="text-aling: center;">
+					<input type="button" id="button_submit" value="ยืนยันการแก้ไขรหัสผ่าน" onclick="updatePassword()"/>
+				</td>
+			</tr>
+		</table>
 		</fieldset>
 	</div>
 	<a class="framebtn" frmid="frm-menu">Back</a>
 </div>
+<script type="text/javascript">
+	function updatePassword() {
+		var oldPassword = jQuery('#frm-changepassword').find("#old_password").val();
+		var newPassword = jQuery('#frm-changepassword').find("#new_password").val();
+		var confirmNewPassword = jQuery('#frm-changepassword').find("#confirm_new_password").val();
+
+		// validate data
+		if ( !oldPassword || !newPassword || !confirmNewPassword ) {
+			jAlert('กรุณากรอกข้อมูลช่องที่ * ให้ครบ'
+					, function(){ 
+					}//okFunc	
+					, function(){ 
+					}//openFunc
+					, function(){ 		
+					}//closeFunc
+			);
+	
+			return false;
+		}
+
+		loading();
+		jQuery.post('<?php echo $this->Html->url('/Customize/updatePassword');?>',
+				{'data':{'oldPassword':oldPassword,
+						'newPassword':newPassword,
+						'confirmNewPassword':confirmNewPassword}},
+				function(data){
+						jAlert(data.msg
+								,function(){
+									if( data.flg==='1' ){
+										// logout
+										jQuery.post('<?php echo $this->Html->url('/logout/logoutAjax');?>',
+												{},
+												function(data){
+													if( data.status ){	// logout success
+														// redirect
+														window.location.assign('<?php echo $this->Html->url('Login/index'); ?>');
+													}else{
+														jAlert('ระบบขัดข้อง กรุณาติดต่อผู้ดูแลระบบ'
+																, function(){ 
+																}//okFunc	
+																, function(){ 
+																	unloading();
+																}//openFunc
+																, function(){ 		
+																}//closeFunc
+														);
+													}
+												},'json').error(function() {}
+										);
+									}
+								}//okFunc	
+								,function(){ 
+									unloading();
+								}//openFunc
+								, function(){ 		
+								}//closeFunc
+						);
+				},'json').error(function(){}
+		);
+	}
+</script>
 <!-- #################################################################################################### -->
 <script type="text/javascript">
 	jQuery('a.framebtn[frmid!=""]').click(function(){

@@ -4,12 +4,11 @@
 	/* ------------------------------------------------------------------------------------------------- */
 	var flagUploadFile = "<?php echo $flagUploadFile;?>";
 	/* ------------------------------------------------------------------------------------------------- */
-	jQuery(document).ready(function() {
-			// set datepicker
+	jQuery(document).ready(function(){
 			setDatePicker(".datePicker");
 			jQuery('input[type="submit"]').button();
 			
-			if ( flagUploadFile ) {
+			if( flagUploadFile ) {
 				jAlert(flagUploadFile
 						, function() {
 							window.location.replace('<?php echo $this->Html->url('/Changepic/index');?>');
@@ -18,10 +17,10 @@
 						}// openFnc
 						, function() {
 						}// closeFnc
-				);// jAlert
-			}// if
-		}// callback
-	);// jQuery.ready
+				);
+			}
+		}
+	);
 	/* ------------------------------------------------------------------------------------------------- */
 	function validateData() {
 		var fileUpload = jQuery("#file_upload").val();
@@ -137,27 +136,51 @@
 				function(){ //closeFunc
 				});
 	}
+	function deletePic(linkDeletePic){
+		jConfirm('กรุณายืนยันเพื่อ ลบรูปโปรไฟล์', 
+				function(){ //okFunc
+					window.location.replace(linkDeletePic);
+				}, 
+				function(){ //cancelFunc
+				}, 
+				function(){ //openFunc
+				}, 
+				function(){ //closeFunc
+				});
+	}
 </script>
 <!-- #################################################################################################### -->
 <!-- Picture -->
-<div>	
+<div style="margin: 20px 0 0 10px;">	
 	<span class="header1">รูปภาพที่มีอยู่</span>
 	<div class="div_form_picture">
 		<?php 
+			$linkDeletePic = '';
 			$countPathImage = count($pathImage);
-			for ( $i=0;$i<$countPathImage;$i++ ) {
-				echo "<div class=\"div-item-picture\" title=\"ใช้รูปนี้เป็นรูป โปรไฟล์\">
-						<img class=\"img-picture\" src=\"$this->webroot{$pathImage[$i]['profile_pics']['imgpath']}\"
+			for( $i=0;$i<$countPathImage;$i++ ){
+				$linkDeletePic = $this->Html->url(array('controller' => 'Changepic',
+												    	'action' => 'deletePic',
+												    	'?' => array('id' => $pathImage[$i]['profile_pics']['id'])
+														));
+					
+				echo "<div class=\"div-item-picture\">
+						<a class=\"icon-delete\" title=\"ลบ รูปโปรไฟล์\"
+							href=\"#\" onclick=\"deletePic('$linkDeletePic')\">
+							<img src=\"{$this->Html->url('/img/icon_del.png')}\" />
+						</a>
+						<img class=\"img-picture\" title=\"ใช้รูปนี้เป็นรูป โปรไฟล์\"
+							src=\"$this->webroot{$pathImage[$i]['profile_pics']['imgpath']}\"
 							onclick=\"updateImgProfile('{$pathImage[$i]['profile_pics']['imgpath']}'
 														,'{$pathImage[$i]['profile_pics']['imgdesc']}')\"/>
 						<span class=\"span-picture-desc\">{$pathImage[$i]['profile_pics']['imgdesc']}</span>
+						
 					</div>";
 			}
 		?>
 	</div>
 </div>
 <!-- Data -->
-<div class="section-layout" style="width:97% ;margin-top:20px">
+<div class="section-layout" style="width:97% ;margin: 20px 0 0 10px;">
 	<span class="header1">อัพโหลดรูปภาพเพิ่ม</span>
 	<form id="form_data" name="form_data" method="post" action="<?php echo $this->webroot;?>changepic/submitDataFnc" 
 		enctype="multipart/form-data" onSubmit="return validateData();">

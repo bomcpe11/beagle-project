@@ -141,6 +141,41 @@ class CustomizeController extends AppController {
 		$this->render("response");
 	}
 	
+	public function updatePassword() {
+		$this->log('---- CustomizeController->updatePassword ----');
+		
+		$result = array();
+		$objUser = $this->getObjUser();
+		//$this->log($objUser);
+		//$this->log($this->request->data);
+		$oldPassword = $this->request->data['oldPassword'];
+		$newPassword = $this->request->data['newPassword'];
+		$confirmNewPassword = $this->request->data['confirmNewPassword'];
+		
+		if( md5($oldPassword)!==$objUser['encrypt_password'] ){
+			$result['flg'] = '0';
+			$result['msg'] = 'รหัสผ่านเดิม ไม่ถูกต้อง';
+		}else{
+			if( $newPassword!==$confirmNewPassword ){
+				$result['flg'] = '0';
+				$result['msg'] = 'รหัสผ่านใหม่ ไม่ตรงกัน';
+			}else{
+				if( $this->Profile->updatePassword(md5($newPassword)
+													, $objUser["login"]) ){
+					$result['flg'] = '1';								
+					$result['msg'] = 'แก้ไขรหัสผ่านเสร็จเรียบร้อย กรุณาเข้าสู่ระบบอีกครั้ง';
+				}else{
+					$result['flg'] = '0';
+					$result['msg'] = 'เกิดข้อผิดพลาดในการแก้ไขรหัสผ่าน กรุณาติดต่อผู้ดูแลระบบ';
+				}
+			}
+		}
+	
+		$this->layout = 'ajax_admin';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	}
+	
 	/*public function change_password_submit(){
 		$this->log("START :: CustomizeController -> change_password_submit()");
 		

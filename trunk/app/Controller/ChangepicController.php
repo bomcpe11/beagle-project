@@ -88,6 +88,45 @@ class ChangepicController extends AppController {
 		$this->log("END :: ChangepicController -> submitDataFnc()");
 	}// submitDataFnc
 	/* ------------------------------------------------------------------------------------------------- */
+	public function deletePic(){
+		$this->log('START :: ChangepicController -> deletePic()');
+		
+		$result = array();
+		$objUser = $this->getObjUser();
+		//$this->log($this->request->query);
+		$id = $this->request->query['id'];
+		$dataProfilePic = $this->ProfilePic->getDataById($id);
+		
+		$dataSource = $this->ProfilePic->getdatasource();
+		$dataSource->begin();
+		if( $this->ProfilePic->deleteById($id) ){
+			if( unlink($dataProfilePic[0]['pp']['imgpath']) ){
+				$dataSource->commit();
+				
+				$result['flg'] = '1';
+				$result['msg'] = 'ลบรูปโปรไฟล์ เสร็จเรียบร้อย';
+				
+				//reset session
+				$newObjUser = $this->Profile->getDataById($objUser['id']);
+				$this->Session->delete('objuser');
+				$this->Session->write('objuser',$newObjUser[0]["profiles"]);
+			}else{
+				$result['flg'] = '0';
+				$result['msg'] = 'เกิดข้อผิดพลาด กรุณาติดต่อผู้ดูแลระบบ';
+			}
+		}else{
+			$dataSource->rollback();
+			
+			$result['flg'] = '0';
+			$result['msg'] = 'เกิดข้อผิดพลาด กรุณาติดต่อผู้ดูแลระบบ';
+		}
+		
+		$this->log('END :: ChangepicController -> deletePic()');
+		
+		$this->prepareDataFnc($result['msg']);
+		$this->render("index");
+	}
+	/* ------------------------------------------------------------------------------------------------- */
 	private function prepareDataFnc($flagUploadFile) {
 		$objUser = $this->getObjUser();
 		

@@ -430,7 +430,7 @@
 <script type="text/javascript">
 	jQuery(document).ready(function() {
 			<?php 
-				if( $isOwner || $objuser['role']==='1' ){
+				if( $isOwner || $isAdmin ){
 					echo "jQuery('#sortable_family"
 								.",#sortable_education"
 								.",#sortable_workplace"

@@ -67,7 +67,7 @@
 	jQuery(document).ready(function() {
 		var isOwner = '<?php echo $isOwner; ?>';
 
-		if( isOwner==='1' || '<?php echo $objuser['role']; ?>'==='1' ){
+		if( isOwner==='1' || '<?php echo $isAdmin; ?>' ){
 			jQuery('#sortable_award').sortable({
 				update: function(event, ui){
 					// format => sortable_xxxx

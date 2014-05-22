@@ -42,6 +42,8 @@
 
 			return false;
 		}// if
+
+		extensionFile = extensionFile.toLowerCase();
 		
 		// validate extenstion file
 		if ( extensionFile != "jpg"

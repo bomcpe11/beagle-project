@@ -1,4 +1,7 @@
-<?php include 'popup_join_activity.ctp'; ?>
+<?php //include 'popup_join_activity.ctp'; ?>
+<?php 
+	$isAllowUploadFile = $isAdmin;
+?>
 <script type="text/javascript">
     function addFile(){
 		jQuery('#uploadFile').css("display","block");
@@ -14,6 +17,8 @@
 	function activityEdit(id){
 		window.location.replace("<?php echo $this->webroot;?>Activity/editactivity?id="+id);
 	}
+
+	<?php if($isAdmin){ ?>
 	function deleteData(id){
 		jConfirm('ท่านต้องการลบข้อมูลกิจกรรมนี้ใช่หรือไม่?', 
 			function(){ //okFunc
@@ -38,8 +43,27 @@
 				});
 			}
 		);
-	}	
-	
+	}
+	function activityChangeToCurrent(id){
+		loading();
+		jQuery.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: '<?php echo $this->Html->url('/Activity/updateToCurrentActivity');?>',
+			data: {activity_id:id},
+			success: function(data){
+				unloading();
+				if ( data.status ) {
+					window.location.reload();
+				} else {
+					jAlert(data.msg);
+				}
+			}
+		});
+	}
+	<?php } ?>
+
+	<?php if($isAllowUploadFile){ ?>
 	function deleteFile(path,id){
 		jConfirm('ท่านต้องการลบไฟล์นี้?', 
 			function(){ //okFunc
@@ -65,6 +89,7 @@
 			}
 		);
 	}
+	<?php } ?>
 </script>
 <style type="text/css">
 #activity-longdesc, #activity-longdesc p, #activity-longdesc td, #activity-longdesc th, #activity-longdesc span, #activity-longdesc div{
@@ -106,10 +131,13 @@
 		$enddtm = "";
 	}
 ?>
-<form id="form_data" name="form_data" method="post" action="<?php echo $this->webroot;?>Activity/uploadFiles" 
-		enctype="multipart/form-data">
+<div style="padding:20px;">
+<h2 style="margin: 0 0 10px 0;"><?php echo $result[0]["activities"]["name"] ?></h2>
+<?php if($isAllowUploadFile){ ?>
+<form id="form_data" name="form_data" method="post" action="<?php echo $this->webroot;?>Activity/uploadFiles" enctype="multipart/form-data">
+<?php } ?>
 <input type="hidden" name="idUpload" value="<?php echo $result[0]["activities"]["id"] ?>" />
-<table class="tableLayout" width="100%" border="0">
+<table class="tableLayout" width="100%" border="0" style="border-spacing: 10px;border-collapse: separate;">
 	<tr>
 		<th align="right" width="170">ชื่อกิจกรรม : 
 		<input type="hidden" id="AcId" value="<?php echo $result[0]["activities"]["id"] ?>"/>
@@ -129,10 +157,6 @@
 		<td><?php echo $result[0]["activities"]["location"] ?></td>
 	</tr>
 	<tr>
-		<th align="right">ชื่อรุ่น : </th>
-		<td><?php echo $result[0]["activities"]["genname"] ?></td>
-	</tr>
-	<tr>
 		<th align="right">รายละเอียดกิจกรรมอย่างย่อ : </th><td></td>
 	</tr>
 	<tr>
@@ -146,9 +170,7 @@
 	</tr>
 	<tr>
 		<td colspan="2" align="right">
-		<?php if( $objuser['role'] != '1' ){ ?>
-			<input type="button" id="Edit" onclick="activityEdit('<?php echo $result[0]["activities"]["id"] ?>');" value="แก้ไขรายละเอียดของกิจกรรมนี้"/>
-		<?php } ?>
+			<!--input type="button" id="Edit" onclick="activityEdit('<?php echo $result[0]["activities"]["id"] ?>');" value="แก้ไขรายละเอียดของกิจกรรมนี้"/-->
 		</td>
 	</tr>
 </table>
@@ -159,31 +181,40 @@
 	</tr>
 	<tr>
 		<th align="left" width="40%">ชื่อไฟล์</th>
-		<th align="right" width="40%">ลบไฟล์</th>
+		<?php if($isAllowUploadFile){ ?><th align="right" width="40%">ลบไฟล์</th><?php } ?>
 	</tr>
 	<?php
-			$dir = opendir("files/activities/".$result[0]["activities"]["id"]);
-			while (($file = readdir($dir)) !== false)
-			{ 
+			$path = "files/activities/".$result[0]["activities"]["id"];
+			if($dir = @opendir($path)){
+				$dir = opendir("files/activities/".$result[0]["activities"]["id"]);
+				while (($file = readdir($dir)) !== false)
+				{ 
 	?>
-	<tr>
-		<td align="left">
-			<?php if(is_file("files/activities/".$result[0]["activities"]["id"]."/"."$file")){ echo "$file"; ?>
-		</td>
-		<td align="right">
-		<img style="cursor: pointer; cursor: hand;" 
-		onclick="deleteFile('<?php echo  "files/activities/".$result[0]["activities"]["id"]."/"."$file" ?>','<?php echo $result[0]["activities"]["id"] ?>');"
-		src="<?php echo $this->Html->url('/img/icon_del.png'); ?>" width="16" height="16" />
-		</td>
-		<?php } ?>
-	</tr>
-	<?php   }
-			closedir($dir);
+				<?php if(is_file("files/activities/".$result[0]["activities"]["id"]."/"."$file")){ ?>
+				<tr>
+					<td align="left">
+						<a href="<?php echo $this->Html->url("/".$path."/".$file);?>" style="color:black;"><?php echo $file; ?></a> 
+					</td>
+						<?php if($isAllowUploadFile){ ?>
+						<td align="right">
+						<img style="cursor: pointer; cursor: hand;" 
+						onclick="deleteFile('<?php echo  "files/activities/".$result[0]["activities"]["id"]."/"."$file" ?>','<?php echo $result[0]["activities"]["id"] ?>');"
+						src="<?php echo $this->Html->url('/img/icon_del.png'); ?>" width="16" height="16" />
+						</td>
+						<?php }?>
+				</tr>
+				<?php } ?>
+		<?php   }
+			}
+			@closedir($dir);
 			?> 
+	<?php if($isAllowUploadFile){ ?>
 	<tr align="left" >
 		<th colspan="4"><input type="button" id="AddFile" onclick="addFile();" value="อัพโหลดไฟล์เพิ่ม"/></th>
 	</tr>
+	<?php } ?>
 </table>
+<?php if($isAllowUploadFile){ ?>
 <table class="tableLayout" id="uploadFile" width="100%" style="display:none;">
 	<tr>
 		<td class="td_label">ไฟล์แนบ : </td>
@@ -194,18 +225,18 @@
 		<td><input value="Cancel" type="button" onclick="cancel();"></td>
 	</tr>
 </table>
+<?php } ?>
 <table class="tableLayout" width="100%">
 	<tr style="text-align:center">
 		<td>
-		<?php if( $objuser['role']==='1' ){ ?>
+		<?php if( $isAdmin ){ ?>
 			<input type="button" id="Edit" onclick="activityEdit('<?php echo $result[0]["activities"]["id"] ?>');" value="แก้ไขกิจกรรมนี้"/>
-		<?php } ?>
-			<input type="button" id="JoinActivity" onclick="openPopupActivity('<?php echo $result[0]["activities"]["id"] ?>');" 
-					value="เข้าร่วมกิจกรรมนี้" <?php echo ($flagJoinActivity===1)?'disabled':''; ?>/>
-		<?php if( $objuser['role']==='1' ){ ?>
+			<input type="button" <?php echo ($result[0]["activities"]["currentflg"]?'disabled="disabled"':''); ?> id="ChangeCurrent" onclick="activityChangeToCurrent('<?php echo $result[0]["activities"]["id"] ?>');" value="ตั้งค่าให้แสดงในกิจกรรมล่าสุด"/>
 			<input type="button" id="Delete" onclick="deleteData('<?php echo $result[0]["activities"]["id"] ?>');" value="ลบกิจกรรมนี้"/>
 		<?php } ?>
+		<input type="button" onclick="history.back();" value="กลับ"/>
 		</td>
 	</tr>
 </table>
-</form>
+<?php if($isAllowUploadFile){ ?></form><?php } ?>
+</div>

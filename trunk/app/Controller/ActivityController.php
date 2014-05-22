@@ -26,12 +26,16 @@ class ActivityController extends AppController {
 	}
 	
 	public function addactivity(){
+		if(!$this->getIsAdmin()){$this->redirect(array('controller' => 'Mainmenu'));}
 		$this->setTitle('เพิ่มกิจกรรม');
 		$this->log('Start :: ActivityController :: addactivity');
 		$this->log('END :: ActivityController :: addactivity');
 	}
 	
 	public function insertActivity(){
+		if(!$this->getIsAdmin()){
+			return;
+		}
 		$this->log('Start :: ActivityController :: insertActivity');
 		$activityName = $this->request->data['activityName'];
 		$startDate = $this->request->data['startDate'];
@@ -78,6 +82,7 @@ class ActivityController extends AppController {
 	}
 	
 	public function editactivity(){
+		if(!$this->getIsAdmin()){$this->redirect(array('controller' => 'Mainmenu'));}
 		$this->setTitle('แก้ไขกิจกรรม');
 		$this->log('Start :: ActivityController :: editactivity');
 		$id = $_GET["id"];
@@ -90,6 +95,9 @@ class ActivityController extends AppController {
 	}
 	
 	public function updateActivity(){
+		if(!$this->getIsAdmin()){
+			return;
+		}
 		$this->log('Start :: ActivityController :: editActivity');
 		$id = $this->request->data['id'];
 		$activityName = $this->request->data['activityName'];
@@ -97,7 +105,6 @@ class ActivityController extends AppController {
 		$endDate = $this->request->data['endDate'];
 		$location = $this->request->data['location'];
 		$shortdesc = $this->request->data['shortdesc'];
-		$genname = $this->request->data['genname'];
 		$longdesc = $this->request->data['longdesc'];
 	
 		$this->log('id => '.$id);
@@ -118,7 +125,6 @@ class ActivityController extends AppController {
 											$startDate,
 											$endDate,
 											$location,
-											$genname,
 											$shortdesc,
 											$longdesc) ){
 			$status = 1;
@@ -161,6 +167,9 @@ class ActivityController extends AppController {
 	}
 	
 	public function deleteFile(){
+		if(!$this->getIsAdmin()){
+			return;
+		}
 		$this->log('Start :: ActivityController :: deleteFile');
 		$path = $this->request->data['path'];
 		unlink($path);
@@ -233,6 +242,28 @@ class ActivityController extends AppController {
 		}
 		
 		//$this->log(print_r($result,true));
+		
+		$this->layout='ajax';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	}
+	
+	public function updateToCurrentActivity(){
+		if(!$this->getIsAdmin()){
+			return;
+		}
+		
+		$result['status'] = 0;
+		$result['msg'] = '';
+		
+		$activity_id = $this->request->data['activity_id'];
+		
+		if($this->Activity->setCurrentActivity($activity_id)){
+			$result['status'] = 1;
+			$result['msg'] = 'ตั้งค่าแสดงเป็นกิจกรรมล่าสุดเรียบร้อย';
+		}else{
+			$result['status'] = 'เกิดข้อผิดพลาดในการตั้งค่า กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+		}
 		
 		$this->layout='ajax';
 		$this->set('message', json_encode($result));

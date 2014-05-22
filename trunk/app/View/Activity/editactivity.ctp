@@ -84,7 +84,7 @@
 					jQuery.ajax({
 						type: "POST",
 						dataType: 'json',
-						url: '<?php echo $this->Html->url('/Activity/admin_updateActivity');?>',
+						url: '<?php echo $this->Html->url('/Activity/updateActivity');?>',
 						data: {id:id,
 							   activityName:activityName,
 						       startDate:startDate,
@@ -184,9 +184,9 @@
 			</textarea>
 		</td>
 	</tr>
-	<tr align="left">
-		<td align="right" width="20%"><input type="button" id="save" value="บันทึก" onclick="saveClick();" /></td>
-		<td align="left"><input type="button" id="cancel" value="ยกเลิก" onclick="cancelClick('<?php echo $result[0]["activities"]["id"] ?>');" /></td>
+	<tr>
+		<td colspan="2" style="text-align:center;"><input type="button" id="save" value="บันทึก" onclick="admin_saveClick();" /> 
+		<input type="button" id="cancel" value="ยกเลิก" onclick="cancelClick('<?php echo $result[0]["activities"]["id"] ?>');" /></td>
 	</tr>
 </table>
 </div>

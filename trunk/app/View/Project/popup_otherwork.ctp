@@ -11,29 +11,29 @@
 							<tr>\
 								<td style="width:30%; text-align:right;">* ชื่อเรื่อง :</td>\
 								<td style="width:60%;">\
-									<input id="otherwork_id" type="hidden" value=' + id +'>\
-									<input id="otherwork_name" type="text" value=' + name +'>\
+									<input id="otherwork_id" type="hidden" value="'+ id +'">\
+									<input id="otherwork_name" type="text" value="'+ name +'">\
 								</td>\
 							</tr>\
 							<tr>\
-								<td style="text-align:right;">หน่วยงาน :</td>\
+								<td style="text-align: right;vertical-align: top;padding-top: 3px;">หน่วยงาน :</td>\
 								<td>\
-									<input id="otherwork_organization" type="text" value=' + organization +'>\
+									<input id="otherwork_organization" type="text" value="'+ organization +'">\
 									<br/>\
 									<input id="otherwork_isnotfinish" type="checkbox" '+( (isnotfinish==='1')?'checked value="1"':'value="0"' )+'><label>ยังไม่สำเร็จ</label>\
 								</td>\
 							</tr>\
 							<tr>\
-								<td style="text-align:right;">ปีที่เริ่ม :</td>\
+								<td style="text-align: right;vertical-align: top;padding-top: 3px;">ปีที่เริ่ม :</td>\
 								<td>\
-								<input id="otherwork_yearstart" style="width:40px" type="text" maxlength="4" value="'+yearstart+'" '+( (id)?'disabled':'' )+'>\
+								<input id="otherwork_yearstart" style="width:40px" type="text" maxlength="4" value="'+yearstart+'">\
 									<span style="margin: 0 3px;">ปีที่เสร็จ</span>\
-									<input id="otherwork_yearfinish" style="width:40px" type="text" maxlength="4" value="'+yearfinish+'" '+( (id)?'disabled':'' )+'>\
+									<input id="otherwork_yearfinish" style="width:40px" type="text" maxlength="4" value="'+yearfinish+'">\
 									<br>กรุณากรอกเป็นปี พ.ศ.\
 								</td>\
 							</tr>\
 							<tr>\
-								<td style="text-align: right;vertical-align: top;">รายละเอียด :</td>\
+								<td style="text-align: right;vertical-align: top;padding-top: 3px;">รายละเอียด :</td>\
 								<td>\
 									<textarea id="otherwork_detail" class="popup-textarea">'+detail+'</textarea>\
 								</td>\
@@ -64,12 +64,13 @@
 		if( validateOtherwork() ){
 			loading();
 			jQuery.post('<?php echo $this->Html->url('/Project/savedNewOtherwork');?>'
-				,{'data':{'name':jQuery('#otherwork_name').val()
-						,'organization':jQuery('#otherwork_organization').val()
-						,'yearstart':jQuery('#otherwork_yearstart').val()
-						,'yearfinish':jQuery('#otherwork_yearfinish').val()
-						,'isnotfinish':jQuery('#otherwork_isnotfinish').prop('checked')
-						,'detail':jQuery('#otherwork_detail').val()}}
+				,{'data':{'profile_id':'<?php echo $this->request->query['id']; ?>'
+							,'name':jQuery('#otherwork_name').val()
+							,'organization':jQuery('#otherwork_organization').val()
+							,'yearstart':jQuery('#otherwork_yearstart').val()
+							,'yearfinish':jQuery('#otherwork_yearfinish').val()
+							,'isnotfinish':jQuery('#otherwork_isnotfinish').prop('checked')
+							,'detail':jQuery('#otherwork_detail').val()}}
 				,function(data){
 					unloading();
 					
@@ -94,7 +95,8 @@
 		if( validateOtherwork() ){
 			loading();
 			jQuery.post('<?php echo $this->Html->url('/Project/editOtherwork');?>'
-					,{'data':{'id':jQuery('#otherwork_id').val()
+					,{'data':{'profile_id':'<?php echo $this->request->query['id']; ?>'
+							,'id':jQuery('#otherwork_id').val()
 							,'name':jQuery('#otherwork_name').val()
 							,'organization':jQuery('#otherwork_organization').val()
 							,'yearstart':jQuery('#otherwork_yearstart').val()

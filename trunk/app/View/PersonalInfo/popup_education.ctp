@@ -13,30 +13,30 @@
 							<tr>\
 								<td style="width:30%; text-align:right;">* ระดับ :</td>\
 								<td style="width:70%;">\
-									<input id="education-id" type="hidden" value="' + id +'">\
-									<input id="education-edutype" type="text" value="' + edutype +'">\
+									<input id="education-id" type="hidden" value="'+ id +'">\
+									<input id="education-edutype" type="text" value="'+ edutype +'">\
 								</td>\
 							</tr>\
 							<tr>\
 								<td style="text-align:right;">* ชื่อสถาบัน :</td>\
-								<td><input id="education-name" style="width:300px" type="text" value="' + name +'"></td>\
+								<td><input id="education-name" style="width:300px" type="text" value="'+ name +'"></td>\
 							</tr>\
 							<tr>\
 								<td style="text-align:right;">* คณะ :</td>\
-								<td><input id="education-faculty" type="text" value="' + faculty +'"></td>\
+								<td><input id="education-faculty" type="text" value="'+ faculty +'"></td>\
 							</tr>\
 							<tr>\
-								<td style="text-align:right;">สาขาวิชา :</td>\
+								<td style="text-align: right;vertical-align: top;padding-top: 3px;">สาขาวิชา :</td>\
 								<td>\
-									<input id="education-major" type="text" value="' + major +'">\
+									<input id="education-major" type="text" value="'+ major +'">\
 									<br/>\
 									<input id="education-is-graduate" type="checkbox" '+( (isGraduate==='1')?'checked value="1"':'value="0"' )+'><label>สำเร็จการศึกษาแล้ว</label>\
 								</td>\
 							</tr>\
 							<tr>\
-								<td style="text-align:right;">ปีการศึกษา :</td>\
+								<td style="text-align: right;vertical-align: top;padding-top: 3px;">ปีการศึกษา :</td>\
 								<td><input id="education-startyear" style="width:40px" type="text"  maxlength="4" value="' + startyear +'">\
-									ถึง\
+									<span>ถึง</span>\
 									<input id="education-endyear" style="width:40px" type="text"  maxlength="4" value="' + endyear +'">\
 									<br/>\
 									กรุณากรอกเป็นปี พ.ศ.\
@@ -44,7 +44,7 @@
 							</tr>\
 							<tr>\
 								<td style="text-align:right;">เกรดเฉลี่ย :</td>\
-								<td><input id="education-gpa" type="text" value=' + gpa +'></td>\
+								<td><input id="education-gpa" type="text" value="'+ gpa +'"></td>\
 							</tr>\
 						</table>\
 					</div>';
@@ -58,7 +58,7 @@
 									}
 								}
 						}];
-			openPopupHtml('[เพิ่ม][แก้ไข]ข้อมูลส่วนตัว', html, buttons, 
+			openPopupHtml('[เพิ่ม][แก้ไข] ประวัติการศึกษา', html, buttons, 
 				function(){ //openFunc
 				}, 
 				function(){ //closeFunc
@@ -70,7 +70,8 @@
 		if( validateEducation() ){
 			loading();
 			jQuery.post('<?php echo $this->Html->url('/PersonalInfo/saveNewEducation');?>'
-					,{'data':{'edutype':jQuery('#education-edutype').val()
+					,{'data':{'profile_id':'<?php echo $this->request->query['id']; ?>'
+								,'edutype':jQuery('#education-edutype').val()
 								,'name':jQuery('#education-name').val()
 								,'faculty':jQuery('#education-faculty').val()
 								,'major':jQuery('#education-major').val()
@@ -81,9 +82,9 @@
 					,function(data){
 						unloading();
 
-						jAlert(data.message
+						jAlert(data.msg
 								, function(){ 
-									if( data.message === 'การแก้ไขข้อมูลประวัติการศึกษาเสร็จเรียบร้อย' ){
+									if( data.flg==='1' ){
 										closePopup('#popup-education-container');
 										window.location.reload();
 									}
@@ -102,7 +103,8 @@
 		if( validateEducation() ){
 			loading();
 			jQuery.post('<?php echo $this->Html->url('/PersonalInfo/editEducation');?>'
-					,{'data':{'id':jQuery('#education-id').val()
+					,{'data':{'profile_id':'<?php echo $this->request->query['id']; ?>'
+								,'id':jQuery('#education-id').val()
 								,'edutype':jQuery('#education-edutype').val()
 								,'name':jQuery('#education-name').val()
 								,'faculty':jQuery('#education-faculty').val()
@@ -114,9 +116,9 @@
 					,function(data){
 						unloading();
 
-						jAlert(data.message
+						jAlert(data.msg
 								, function(){ 
-									if( data.message === 'การแก้ไขข้อมูลประวัติการศึกษาเสร็จเรียบร้อย' ){
+									if( data.flg==='1' ){
 										closePopup('#popup-education-container');
 										window.location.reload();
 									}

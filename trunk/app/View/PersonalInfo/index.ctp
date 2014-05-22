@@ -207,7 +207,18 @@
 				<?php 
 					$countListEducation = empty($listEducation)?0:count($listEducation);
 					if( $countListEducation>0 ){
-						for($i=0; $i<$countListEducation; $i++){?>
+						for($i=0; $i<$countListEducation; $i++){
+							$startYear = '';
+							$endYear = '';
+							if( !empty($listEducation[$i]['educations']['startyear'])&&!empty($listEducation[$i]['educations']['endyear']) ){
+								if($listEducation[$i]['educations']['isGraduate'] == 1){
+									$startYear = ( intval($listEducation[$i]['educations']['startyear']) + 543 );
+									$endYear = ( intval($listEducation[$i]['educations']['endyear']) + 543 );
+								}else{
+									$startYear = ( intval($listEducation[$i]['educations']['startyear']) + 543 );
+									$endYear = ( intval(date('Y')) + 543 );
+								}
+							}else{}?>
 							<li class="ui-state-default block">
 								<input type="hidden" name="education_id" value="<?php echo $listEducation[$i]['educations']['id'];?>">
 								<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
@@ -224,8 +235,8 @@
 																				,'<?php echo $listEducation[$i]['educations']['faculty'];?>'
 																				,'<?php echo $listEducation[$i]['educations']['major'];?>'
 																				,'<?php echo $listEducation[$i]['educations']['isGraduate'];?>'
-																				,'<?php echo ( (empty($listEducation[$i]['educations']['startyear']))?'':intval($listEducation[$i]['educations']['startyear']) + 543 );?>'
-																				,'<?php echo ( (empty($listEducation[$i]['educations']['endyear']))?'':intval($listEducation[$i]['educations']['endyear']) + 543 );?>'
+																				,'<?php echo $startYear;?>'
+																				,'<?php echo $endYear;?>'
 																				,'<?php echo $listEducation[$i]['educations']['gpa'];?>')"/>
 												<img src="<?php echo $this->Html->url('/img/icon_del.png');?>"
 													onclick="deleteEducation('<?php echo $listEducation[$i]['educations']['id'];?>')"/>
@@ -236,17 +247,7 @@
 											<td colspan="2"><strong>สาขาวิชา : </strong><?php echo ( empty($listEducation[$i]['educations']['major'])?'-':$listEducation[$i]['educations']['major'] );?></td>
 										</tr>
 										<tr>
-											<td><strong>ปีการศึกษา : </strong><?php 
-															if( !empty($listEducation[$i]['educations']['startyear'])&&!empty($listEducation[$i]['educations']['endyear']) ){
-																if($listEducation[$i]['educations']['isGraduate'] == 1){
-																	echo ( intval($listEducation[$i]['educations']['startyear']) + 543 ).' - '.( intval($listEducation[$i]['educations']['endyear']) + 543 );
-																}else{
-																	echo ( intval($listEducation[$i]['educations']['startyear']) + 543 ).' - '.( intval(date('Y')) + 543 );
-																}
-															}else{
-																echo "-";
-															}
-															?></td>
+											<td><strong>ปีการศึกษา : </strong><?php echo $startYear.' - '.$endYear; ?></td>
 											<td colspan="2"><strong>เกรดเฉลี่ย : </strong><?php echo ( empty($listEducation[$i]['educations']['gpa'])?'-':$listEducation[$i]['educations']['gpa'] );?></td>
 										</tr>
 									</table>

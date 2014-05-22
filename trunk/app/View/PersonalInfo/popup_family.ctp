@@ -12,29 +12,29 @@
 							<tr>\
 								<td style="width:30%; text-align:right;">* ความเกี่ยวข้อง :</td>\
 								<td style="width:70%;">\
-									<input id="family-id" type="hidden" value="' + id +'">\
-									<input id="family-relation" type="text" value="' + relation +'">\
+									<input id="family-id" type="hidden" value="'+ id +'">\
+									<input id="family-relation" type="text" value="'+ relation +'">\
 								</td>\
 							</tr>\
 							<tr>\
 								<td style="text-align:right;">* ชื่อ :</td>\
-								<td><input id="family-name" type="text" value="' + name +'"></td>\
+								<td><input id="family-name" type="text" value="'+ name +'"></td>\
 							</tr>\
 							<tr>\
 								<td style="text-align:right;">* นามสกุล :</td>\
-								<td><input id="family-lastname" type="text" value="' + lastname +'"></td>\
+								<td><input id="family-lastname" type="text" value="'+ lastname +'"></td>\
 							</tr>\
 							<tr>\
 								<td style="text-align:right;">วุฒิการศึกษา :</td>\
-								<td><input id="family-education" type="text" value="' + education +'"></td>\
+								<td><input id="family-education" type="text" value="'+ education +'"></td>\
 							</tr>\
 							<tr>\
 								<td style="text-align:right;">*อาชีพ :</td>\
-								<td><input id="family-occupation" type="text" value="' + occupation +'"></td>\
+								<td><input id="family-occupation" type="text" value="'+ occupation +'"></td>\
 							</tr>\
 							<tr>\
 								<td style="text-align:right;">ตำแหนง :</td>\
-								<td><input id="family-position" type="text" value="' + position +'"></td>\
+								<td><input id="family-position" type="text" value="'+ position +'"></td>\
 							</tr>\
 							<tr>\
 								<td style="text-align:right;">ถึงแก่กรรม :</td>\
@@ -69,7 +69,8 @@
 		if( validateFamily() ){
 			loading();
 			jQuery.post('<?php echo $this->Html->url('/PersonalInfo/saveNewFamily');?>'
-					,{'data':{'relation':jQuery('#family-relation').val()
+					,{'data':{'profile_id':'<?php echo $this->request->query['id']; ?>'
+								,'relation':jQuery('#family-relation').val()
 								,'name':jQuery('#family-name').val()
 								,'lastname':jQuery('#family-lastname').val()
 								,'education':jQuery('#family-education').val()
@@ -100,7 +101,8 @@
 		if( validateFamily() ){
 			loading();
 			jQuery.post('<?php echo $this->Html->url('/PersonalInfo/editFamily');?>'
-					,{'data':{'id':jQuery('#family-id').val()
+					,{'data':{'profile_id':'<?php echo $this->request->query['id']; ?>'
+								,'id':jQuery('#family-id').val()
 								,'relation':jQuery('#family-relation').val()
 								,'name':jQuery('#family-name').val()
 								,'lastname':jQuery('#family-lastname').val()

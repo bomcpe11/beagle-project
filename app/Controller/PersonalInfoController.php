@@ -176,6 +176,7 @@ class PersonalInfoController extends AppController {
 		$result = array();
 		$objUser = $this->getObjUser();
 		//$this->log($this->request->data);
+		$profile_id = $this->request->data['profile_id'];
 		$relation = $this->request->data['relation'];
 		$name = $this->request->data['name'];
 		$lastname = $this->request->data['lastname'];
@@ -185,7 +186,7 @@ class PersonalInfoController extends AppController {
 		$status	= ( $this->request->data["status"]==='true' )? '0': '1';
 		
 		$dataSource = $this->Family->getDataSource();
-		if( $this->Family->insertFamily($objUser['id']
+		if( $this->Family->insertFamily($profile_id
 										,$relation
 										,$name
 										,$lastname
@@ -215,6 +216,7 @@ class PersonalInfoController extends AppController {
 		$result = array();
 		$objUser = $this->getObjUser();
 		//$this->log($this->request->data);
+		$profile_id = $this->request->data['profile_id'];
 		$family_id = $this->request->data['id'];
 		$relation = $this->request->data['relation'];
 		$name = $this->request->data['name'];
@@ -225,7 +227,7 @@ class PersonalInfoController extends AppController {
 		$status	= ( $this->request->data["status"]==='true' )? '0': '1';
 		
 		$dataSource = $this->Family->getDataSource();
-		if( $this->Family->updateFamily($objUser['id']
+		if( $this->Family->updateFamily($profile_id
 										,$relation
 										,$name
 										,$lastname
@@ -278,9 +280,10 @@ class PersonalInfoController extends AppController {
 	public function saveNewEducation(){
 		$this->log('---- PersonalInfoController -> saveNewEducation ----');
 		
-		$message = '';
+		$result = array();
 		$objUser = $this->getObjUser();
 		//$this->log($this->request->data);
+		$profile_id = $this->request->data['profile_id'];
 		$edutype = $this->request->data['edutype'];
 		$name = $this->request->data['name'];
 		$faculty = $this->request->data['faculty'];
@@ -292,32 +295,37 @@ class PersonalInfoController extends AppController {
 		
 		$dataSource = $this->Education->getDataSource();
 		if( $this->Education->insertEducation($name
-								, $faculty
-								, $major
-								, $gpa
-								, '00,00,'.$startyear
-								, '00,00,'.$endyear
-								, $edutype
-								, $objUser['id']
-								, $isGraduate) ){
+												,$faculty
+												,$major
+												,$gpa
+												,'00,00,'.$startyear
+												,'00,00,'.$endyear
+												,$edutype
+												,$profile_id
+												,$isGraduate) ){
 			$dataSource->commit();
-			$message = 'เพิ่มประวัติการศึกษาเสร็จเรียบร้อย';
+			
+			$result['msg']='เพิ่มประวัติการศึกษาเสร็จเรียบร้อย';
+			$result['flg']='1';
 		}else{
 			$dataSource->rollback();
-			$message = 'เกิดข้อผิดพลาดใน การเพิ่มข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			
+			$result['msg']='เกิดข้อผิดพลาดใน การเพิ่มข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			$result['flg']='0';
 		}
 		
 		$this->layout='ajax';
-		$this->set('message', json_encode(array('message'=>$message)));
+		$this->set('message', json_encode($result));
 		$this->render('response');
 	}
 	/* ------------------------------------------------------------------------------------------------ */
 	public function editEducation(){
 		$this->log('---- PersonalInfoController -> editEducation ----');
 		
-		$message = '';
+		$result = array();
 		$objUser = $this->getObjUser();
-		$this->log($this->request->data);
+		//$this->log($this->request->data);
+		$profile_id = $this->request->data['profile_id'];
 		$id = $this->request->data['id'];
 		$edutype = $this->request->data['edutype'];
 		$name = $this->request->data['name'];
@@ -330,24 +338,28 @@ class PersonalInfoController extends AppController {
 		
 		$dataSource = $this->Education->getDataSource();
 		if( $this->Education->updateEducation($id
-												, $name
-												, $faculty
-												, $major
-												, $gpa
-												, '00,00,'.$startyear
-												, '00,00,'.$endyear
-												, $edutype
-												, $objUser['id']
-												, $isGraduate) ){
+												,$name
+												,$faculty
+												,$major
+												,$gpa
+												,'00,00,'.$startyear
+												,'00,00,'.$endyear
+												,$edutype
+												,$profile_id
+												,$isGraduate) ){
 			$dataSource->commit();
-			$message = 'การแก้ไขข้อมูลประวัติการศึกษาเสร็จเรียบร้อย';
+			
+			$result['msg']='การแก้ไขข้อมูลประวัติการศึกษาเสร็จเรียบร้อย';
+			$result['flg']='1';
 		}else{
 			$dataSource->rollback();
-			$message = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			
+			$result['msg']='เกิดข้อผิดพลาดใน การแก้ไขข้อมูลประวัติการศึกษา กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			$result['flg']='0';
 		}
 		
 		$this->layout='ajax';
-		$this->set('message', json_encode(array('message'=>$message)));
+		$this->set('message', json_encode($result));
 		$this->render('response');
 		
 		$this->log('END :: ProfileController -> editEducation');
@@ -383,6 +395,7 @@ class PersonalInfoController extends AppController {
 		$result = array();
 		$objUser = $this->getObjUser();
 		//$this->log($this->request->data);
+		$profile_id = $this->request->data['profile_id'];
 		$name = $this->request->data['name'];
 		$telephone = $this->request->data['telephone'];
 		$startyear = $this->request->data['startyear'];
@@ -391,11 +404,11 @@ class PersonalInfoController extends AppController {
 	
 		$dataSource = $this->Workplace->getDataSource();
 		if( $this->Workplace->insertData($name
-								,$telephone
-								,$startyear
-								,$endyear
-								,$position
-								,$objUser['id']) ){
+										,$telephone
+										,$startyear
+										,$endyear
+										,$position
+										,$profile_id) ){
 			$dataSource->commit();
 			$result['msg'] = 'เพิ่มข้อมูลประวัติการทำงานเสร็จเรียบร้อย';
 			$result['flag'] = 1;
@@ -416,6 +429,7 @@ class PersonalInfoController extends AppController {
 		$result = array();
 		$objUser = $this->getObjUser();
 		//$this->log($this->request->data);
+		$profile_id = $this->request->data['profile_id'];
 		$id = $this->request->data['id'];
 		$name = $this->request->data['name'];
 		$telephone = $this->request->data['telephone'];

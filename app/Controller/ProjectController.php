@@ -64,6 +64,7 @@ class ProjectController extends AppController {
 		$result = array();
 		$objUser = $this->getObjUser();
 		//$this->log($this->request->data);
+		$profile_id = $this->request->data['profile_id'];
 		$name = $this->request->data['name'];
 		$researchtype = $this->request->data['researchtype'];
 		$advisor = $this->request->data['advisor'];
@@ -79,7 +80,7 @@ class ProjectController extends AppController {
 										,$researchtype
 										,$advisor
 										,$organization
-										,$objUser['id']
+										,$profile_id
 										,$isnotfinish
 										,$yearstart
 										,$yearfinish
@@ -105,6 +106,7 @@ class ProjectController extends AppController {
 		$result = array();
 		$objUser = $this->getObjUser();
 		//$this->log($this->request->data);
+		$profile_id = $this->request->data['profile_id'];
 		$id = $this->request->data['id'];
 		$name = $this->request->data['name'];
 		$researchtype = $this->request->data['researchtype'];
@@ -122,7 +124,7 @@ class ProjectController extends AppController {
 										,$researchtype
 										,$advisor
 										,$organization
-										,$objUser['id']
+										,$profile_id
 										,$isnotfinish
 										,$yearstart
 										,$yearfinish
@@ -255,6 +257,7 @@ class ProjectController extends AppController {
 		$result = array();
 		$objUser = $this->getObjUser();
 		//$this->log($this->request->data);
+		$profile_id = $this->request->data['profile_id'];
 		$name = $this->request->data['name'];
 		$organization = $this->request->data['organization'];
 		$yearstart = empty($this->request->data['yearstart'])? 'null': intval($this->request->data['yearstart'])-543;
@@ -265,7 +268,7 @@ class ProjectController extends AppController {
 		$dataSource = $this->Otherwork->getDataSource();
 		if( $this->Otherwork->insertData($name
 										,$organization
-										,$objUser['id']
+										,$profile_id 
 										,$yearstart
 										,$yearfinish
 										,$isnotfinish
@@ -290,6 +293,7 @@ class ProjectController extends AppController {
 		$result = array();
 		$objUser = $this->getObjUser();
 		//$this->log($this->request->data);
+		$profile_id = $this->request->data['profile_id'];
 		$id = $this->request->data['id'];
 		$name = $this->request->data['name'];
 		$organization = $this->request->data['organization'];
@@ -302,7 +306,7 @@ class ProjectController extends AppController {
 		if( $this->Otherwork->updateData($id
 										,$name
 										,$organization
-										,$objUser['id']
+										,$profile_id
 										,$yearstart
 										,$yearfinish
 										,$isnotfinish

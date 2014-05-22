@@ -1,4 +1,4 @@
-<script>
+<script type="text/javascript">
 	function openPopupAward(id
 							,name
 							,awardname
@@ -9,19 +9,19 @@
 							<tr>\
 								<td style="width:30%; text-align:right;">* ชื่อผลงาน :</td>\
 								<td style="width:60%;">\
-									<input id="award_id" type="hidden" value=' + id +'>\
-									<input id="award_name" type="text" value=' + name +'>\
+									<input id="award_id" type="hidden" value="'+ id +'">\
+									<input id="award_name" type="text" value="'+ name +'">\
 								</td>\
 							</tr>\
 							<tr>\
 								<td style="text-align:right;">* ชื่อรางวัล :</td>\
 								<td>\
-									<input id="award_awardname" type="text" value=' + awardname +'>\
+									<input id="award_awardname" type="text" value="'+ awardname +'">\
 								</td>\
 							</tr>\
 							<tr>\
 								<td style="text-align:right;">* หน่วยงาน :</td>\
-								<td><input id="award_organization" type="text" value=' + organization +'></td>\
+								<td><input id="award_organization" type="text" value="'+ organization +'"></td>\
 							</tr>\
 							<tr>\
 								<td style="text-align: right;vertical-align: top;">รายละเอียด :</td>\
@@ -41,7 +41,6 @@
 						}];
 		openPopupHtml('[เพิ่ม][แก้ไข] รางวัลที่ได้รับ', html, buttons, 
 				function(){ //openFunc
-					
 				}, 
 				function(){ //closeFunc
 				}
@@ -52,7 +51,8 @@
 		if( validateAward() ){
 			loading();
 			jQuery.post('<?php echo $this->Html->url('/Achieve/savedNewAward');?>'
-						,{'data':{'name':jQuery('#award_name').val()
+						,{'data':{'profile_id':'<?php echo $this->request->query['id']; ?>'
+									,'name':jQuery('#award_name').val()
 									,'awardname':jQuery('#award_awardname').val()
 									,'organization':jQuery('#award_organization').val()
 									,'detail':jQuery('#award_detail').val()}}
@@ -80,7 +80,8 @@
 		if( validateAward() ){
 			loading();
 			jQuery.post('<?php echo $this->Html->url('/Achieve/editAward');?>'
-						,{'data':{'id':jQuery('#award_id').val()
+						,{'data':{'profile_id':'<?php echo $this->request->query['id']; ?>'
+									,'id':jQuery('#award_id').val()
 									,'name':jQuery('#award_name').val()
 									,'awardname':jQuery('#award_awardname').val()
 									,'organization':jQuery('#award_organization').val()

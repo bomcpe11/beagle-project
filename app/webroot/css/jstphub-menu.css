@@ -205,12 +205,14 @@ h3{
 	#footer_icon_wrapper{
 		height: 100%;
 		width: 600px;
-		
 		float: right;
+/* 		padding: 3px 0; */
+		text-align: right;
 	}
 		#footer_icon_wrapper img{
-			height: 100%;
-			width: 19%;
+/* 			height: 100%; */
+/* 			width: 19%; */
+			margin: 3px 10px;
 		}
 
 /* JQuery UI */
@@ -295,6 +297,33 @@ ul.main-menu li#menu-activity{
 	background: #555;
 	width: 450px;
 }
+
+ul.main-menu li#menu-activity div.current-activity{
+	clear: both;
+	float: left;
+	/* border: 1px solid black; */
+	overflow: hidden;
+	width: 355px;
+	height: 120px;
+	cursor: default;
+	padding: 15px 0 15px 15px;
+	color: white;
+	line-height: 1.3em;
+	font-size: 1.1em;
+}
+
+ul.main-menu li#menu-activity div.current-activity h2{
+	color: #FFFFB0;
+	margin: 0 0 10px 0;
+}
+
+ul.main-menu li#menu-activity div.showall-activity{
+	width: 80px;
+	height: 150px;
+	float: right;
+	text-align: center;
+}
+
 
 
 

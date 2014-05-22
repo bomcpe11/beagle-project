@@ -188,7 +188,7 @@ h3{
 			width: 100%;
 		}
 		#content_page{
-			min-height: 500px;
+/* 			min-height: 500px; */
 			height: auto;
 			width: 100%;
 /* 			background-color: #f5f3e5; */
@@ -200,16 +200,21 @@ h3{
 	clear: both;
 	background-image: url('../img/background-footer-01.png');
 	border-top: 5px solid #A3C357;
+	/* position: absolute;
+	bottom: 0px;
+	left: 0px; */
 }
 	#footer_icon_wrapper{
 		height: 100%;
-		width: 600px;
-		
+		width: 700px;
 		float: right;
+/* 		padding: 3px 0; */
+		text-align: right;
 	}
 		#footer_icon_wrapper img{
-			height: 100%;
-			width: 19%;
+/* 			height: 100%; */
+/* 			width: 19%; */
+			margin: 3px 10px;
 		}
 
 /* JQuery UI */

@@ -87,6 +87,10 @@ class AppController extends Controller {
 		return $this->objuser;
 	}
 	
+	protected function getIsAdmin(){
+		return $this->isAdmin;
+	}
+	
 	function DateThai($strDate)
 	{
 		$strYear = date("Y",strtotime($strDate))+543;

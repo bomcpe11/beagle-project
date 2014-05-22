@@ -7,8 +7,11 @@
 <h2 style="padding:5px;">Customize</h2>
 
 <div id="frm-menu" class="framecontainer" style="text-align:center;display:block;">
-	<?php if($isAdmin){ ?><a class="framebtn" frmid="frm-addnewmember">Add new member</a> <!-- Admin --><br /><?php } ?>
-	<a class="framebtn" frmid="frm-generationmanager" onclick="display_generationlist();">Generation Manager</a><br />
+	<?php if($isAdmin){ ?>
+		<a class="framebtn" frmid="frm-addnewmember">Add new member</a> <!-- Admin --><br />
+		<a class="framebtn" urllink="<?php echo $this->Html->url('/Activitylist'); ?>">Activity Manager</a><br />
+		<a class="framebtn" frmid="frm-generationmanager" onclick="display_generationlist();">Generation Manager</a><br />
+	<?php } ?>
 	<a class="framebtn" frmid="frm-changepassword">Change password</a><br />
 	<a class="framebtn" urllink="<?php echo $this->Html->url('/Changepic'); ?>">Change picture profile</a><br />
 	<a class="framebtn" frmid="" onclick="window.location.replace('<?php echo $this->Html->url('/Mainmenu'); ?>');">Back to Main Menu</a><br />

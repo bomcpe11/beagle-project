@@ -70,16 +70,18 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 	<!-- Footer -->
 	<div id="footer">
 		<div id="footer_icon_wrapper">
-			<img src="<?php echo $this->Html->url('/img/logo-nstd-01.png');?>"
-				alt="Logo NSTD" title="Logo NSTD"></img>
-			<img src="<?php echo $this->Html->url('/img/logo-kmutt-01.png');?>" 
-				alt="Logo KMUTT" title="Logo KMUTT"></img>
-			<img src="<?php echo $this->Html->url('/img/logo-cheangmai-01.png');?>" 
-				alt="Logo CMU" title="Logo CMU"></img>
-			<img src="<?php echo $this->Html->url('/img/logo-kasetsart-01.png');?>" 
-				alt="Logo KU" title="Logo KU"></img>
-			<img src="<?php echo $this->Html->url('/img/logo_sut-01.png');?>" 
-				alt="Logo SUT" title="Logo SUT"></img>
+			<a href="http://www.nstda.or.th/"><img src="<?php echo $this->Html->url('/img/logo-nstd-01.png');?>"
+				alt="สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ" title="สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ"></img></a>
+			<a href="http://www2.kmutt.ac.th/"><img src="<?php echo $this->Html->url('/img/logo-kmutt-01.png');?>" 
+				alt="มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี" title="มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี"></img></a>
+			<a href="http://www.cmu.ac.th/"><img src="<?php echo $this->Html->url('/img/logo-cheangmai-01.png');?>" 
+				alt="มหาวิทยาลัยเชียงใหม่" title="มหาวิทยาลัยเชียงใหม่"></img></a>
+			<a href="http://www.ku.ac.th/"><img src="<?php echo $this->Html->url('/img/logo-kasetsart-01.png');?>" 
+				alt="มหาวิทยาลัยเกษตรศาสตร์" title="มหาวิทยาลัยเกษตรศาสตร์"></img></a>
+			<a href="http://www.sut.ac.th/"><img src="<?php echo $this->Html->url('/img/logo_sut-01.png');?>" 
+				alt="มหาวิทยาลัยเทคโนโลยีสุรนารี" title="มหาวิทยาลัยเทคโนโลยีสุรนารี"></img></a>
+			<a href="http://www.wu.ac.th/"><img src="<?php echo $this->Html->url('/img/logo-wu-01.png');?>" 
+				alt="มหาวิทยาลัยวลัยลักษณ์" title="มหาวิทยาลัยวลัยลักษณ์"></img></a>
 		</div>
 	</div>
 	<?php

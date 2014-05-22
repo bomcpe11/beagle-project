@@ -1,5 +1,5 @@
 <?php
-// session_start();
+App::import('Vendor', 'php_image_magician');
 class ChangepicController extends AppController {
 	/* ------------------------------------------------------------------------------------------------- */
 	public $names = "ChangepicController";
@@ -44,25 +44,49 @@ class ChangepicController extends AppController {
 			
 			//*** upload file
 			if ( $this->checkDirectory($directory) ) {
+
+				$tmp1_fileName = $directory."/"."tmp1_".$fileName;
+// 				$tmp2_fileName = $directory."/"."tmp2_".$fileName;
+
 				if ( move_uploaded_file($_FILES["file_upload"]["tmp_name"]	// temp_file
-						, $directory."/".$fileName) ) {	// path file
+						, $tmp1_fileName) ) {	// path file
 					//*** update data(imgPath)
-					if ( $this->ProfilePic->updateImgPathById($directory."/".$fileName	// $imgPath
-									, $lastInsertId[0][0]["last_index_id"]) ) {	// $byId
-						$objUser = $this->getObjUser();
-						if( $this->Profile->updateImg($objUser['id']
-									,$directory."/".$fileName
-									,$imgDesc) ){
-							$result = "บันทึกข้อมูล เรียบร้อย";
-						}else{
-							$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
-						}
-					} else {
-						$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
-					}// if else
+					
+
+					$this->log('###After Resize....');
+
+					$magicianObj = new imageLib($tmp1_fileName);
+					$magicianObj->resizeImage(700, 700, 'portrait');
+					$magicianObj->saveImage($tmp2_fileName, 100);
+					
+// 					unlink($tmp1_fileName);
+
+					$this->log('###Before Resize....');
+					
+					
+					$result = "บันทึกข้อมูล เรียบร้อย";
+					
+// 					if ( $this->ProfilePic->updateImgPathById($directory."/".$fileName	// $imgPath
+// 									, $lastInsertId[0][0]["last_index_id"]) ) {	// $byId
+// 						$objUser = $this->getObjUser();
+// 						if( $this->Profile->updateImg($objUser['id']
+// 									,$directory."/".$fileName
+// 									,$imgDesc) ){
+// 							$result = "บันทึกข้อมูล เรียบร้อย";
+// 						}else{
+// 							$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
+// 						}
+// 					} else {
+// 						$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
+// 					}// if else
+	
+					
 				} else {
 					$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
 				}// if else
+					
+				
+				
 			} else {
 				$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
 			}// if
@@ -72,12 +96,16 @@ class ChangepicController extends AppController {
 			
 		// close transaction
 		if ( $result == "บันทึกข้อมูล เรียบร้อย" ) {
-			$dataSource->commit();
+// 			$dataSource->commit();
+			
+			$this->redirect(array("controller" => "Changepic",
+					"action" => "crop",
+					"imgPath" => base64_encode($tmp1_fileName)));
 			
 			//Update new session
-			$newObjUser = $this->Profile->getDataById($objUser['id']);
-			$this->Session->delete('objuser');
-			$this->Session->write('objuser',$newObjUser[0]["profiles"]);
+// 			$newObjUser = $this->Profile->getDataById($objUser['id']);
+// 			$this->Session->delete('objuser');
+// 			$this->Session->write('objuser',$newObjUser[0]["profiles"]);
 		} else {
 			$dataSource->rollback();
 		}// if else
@@ -87,6 +115,42 @@ class ChangepicController extends AppController {
 		
 		$this->log("END :: ChangepicController -> submitDataFnc()");
 	}// submitDataFnc
+	
+	public function crop(){
+		
+		
+// 		$imgPath = '/img/profiles/17/20.jpg';
+
+// 		$this->log($this->params);
+		
+		$raw_imgPath = $this->params['named']['imgPath'];
+		$imgPath = '';
+		if(!empty($raw_imgPath)){
+			$imgPath = base64_decode($raw_imgPath);
+			
+			$this->log($imgPath);
+// 			$imgPath = 'img/profiles/17/tmp1_35.jpg';
+// // 			$imgPath = '/Applications/MAMP/htdocs/jstphub/app/webroot/img/profiles/17/tmp1_35.jpg';
+			
+// 			$this->log('###After Resize....');
+
+// 			$magicianObj = new imageLib($imgPath);
+// // 			$magicianObj->resizeImage(700, 700, 'portrait');
+// // 			$magicianObj->saveImage($imgPath, 100);
+	
+// // 			unlink($tmp1_fileName);
+
+// 			$this->log('###Before Resize....');
+			
+		}else{
+			$this->redirect(array("controller" => "Changepic", "action" => "index"));
+		}
+
+		$this->layout='public';
+		$this->set(compact('imgPath'));
+		
+	}
+	
 	/* ------------------------------------------------------------------------------------------------- */
 	public function deletePic(){
 		$this->log('START :: ChangepicController -> deletePic()');

@@ -1,4 +1,7 @@
 @CHARSET "UTF-8";
+html, body{
+	overflow:hidden;
+}
 .tableLayout {
 /* 	border: 1px solid #666666; */
 /* 	width: 50%; */
@@ -16,4 +19,68 @@
 .upperBar {
     border-bottom: 1px solid #666666;
     padding-bottom: 20px;
+}
+
+#login-network{
+	background: url('../img/login-network.png') -13px -63px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 800px;
+	height: 462px;
+}
+
+#login-human2{
+	background: url('../img/login-human2.png') 0px -23px;
+	position: absolute;
+	bottom: -36px;
+	left: 220px;
+	width: 370px;
+	height: 310px;
+}
+
+#login-human1{
+	background: url('../img/login-human1.png') 0px -48px;
+	position: fixed;
+	bottom: 46px;
+	left: 455px;
+	width: 302px;
+	height: 376px;
+	z-index: 1;
+}
+
+#page{
+	background: #5B5B5C;
+}
+
+#content{
+	padding: 0px;
+}
+
+#right-side{
+	background: url('../img/login-background1.png');
+}
+
+.login-input{
+	width: 200px;
+	border: 0px;
+	height: 40px;
+	font-size: 1.7em;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	padding: 0 15px 0 15px;	
+	margin: 10px 0;
+}
+.login-button{
+	border: 0px;
+	height: 26px;
+	font-size: 1.1em;
+	-webkit-border-radius: 13px;
+	-moz-border-radius: 13px;
+	border-radius: 13px;
+	padding: 2px 11px 2px 11px;
+	margin: 10px 3px;
+	font-weight: bold;
+	cursor: pointer;
 }

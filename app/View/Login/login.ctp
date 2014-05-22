@@ -18,9 +18,41 @@
 	/* ------------------------------------------------------------------------------------------------- */
 	jQuery(document).ready(function() {
 		jQuery('#button_login, #button_register').button();
-		}// function()
-	);// jQuery.ready
+
+		setFooterToBottom();
+
+		jQuery('body').prepend('<div id="login-human1"></div>');
+		
+	});// jQuery.ready
 	/* ------------------------------------------------------------------------------------------------- */
+	
+	function setFooterToBottom(){
+
+		var body = document.body,
+	    html = document.documentElement;
+		var documentHeight = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
+		var jHeader = jQuery('#header');
+		var jBottomHeader = jQuery('#header-bottom-border');
+		var jContent = jQuery('#content');
+		var jLeftSide = jQuery('#left-side');
+		var jRightSide = jQuery('#right-side');
+		var jFooter = jQuery('#footer');
+		var contentpadding = 5;
+
+		var contentHeightSetting = documentHeight - jHeader.height() - jBottomHeader.height() - jFooter.height() - contentpadding;
+
+		//Solution : content.height = documentHeight - headerHeight - headerbottomborderHeight - footerHeight;
+// 		console.log(documentHeight);
+// 		console.log(jContent.height());
+// 		console.log(contentHeightSetting);
+		if(jContent.height() < contentHeightSetting){
+			jContent.css('height', contentHeightSetting + 'px');
+			jLeftSide.css('height', contentHeightSetting + 'px');
+			jRightSide.css('height', contentHeightSetting + 'px');
+		}
+		
+	}
+	
 	function loginFnc() {
 		var username = jQuery("#text_username").val();
 		var password = jQuery("#text_password").val();
@@ -99,7 +131,60 @@
 	}
 </script>
 <!-- ###################################################################################################### -->
-<table align="center" class="tableLayout">
+
+<div id="left-side" style="clear:both;float:left;position:relative;width:auto;">
+	<div id="login-human2"></div>
+	<div id="login-network"></div>
+</div>
+<div id="right-side" style="float:right;width:500px;">
+	<div style="text-align: center;padding: 30px 0;"><img src="<?php echo $this->webroot;?>img/login-logo.png" style="margin: 0 auto;" /></div>
+	<table style="margin: 0 auto;">
+		<tr>
+			<td style="color:white;font-size: 1.7em;padding-right:15px;">Username</td>
+			<td><input class="login-input" id="text_username" type="text" value="" maxlength="100" /></td>
+		</tr>
+		<tr>
+			<td style="color:white;font-size: 1.7em;padding-right:15px;">Password</td>
+			<td><input class="login-input" id="text_password" type="password" value="" maxlength="100" /></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td style="text-align: center;">
+				<div style="text-align:left;padding-top:15px;color:white;font-size:1.2em;"><input type="checkbox" id="checkbox_remem" style="cursor:pointer;" value="remem"/> <label style="cursor:pointer;" for="checkbox_remem">Remember me</label></div>
+				<button class="login-button" type="button" style="background-color: #EACE2E;" onClick="JavaScript:loginFnc();">Login</button>
+				<button class="login-button" type="button" style="background-color: #E6A340;" onClick="JavaScript:openPopupForgotPassword()">Forgot</button>
+				<button class="login-button" type="button" style="background-color: #A5E541;" onClick="JavaScript:goRegister()">Sign in</button>
+				<div style="color:red;height:25px;"><span id="span_error"></span></div>
+			</td>
+		</tr>
+		
+	</table>
+	<div style="color:white;padding:0 40px;margin-top: 10px;">
+		<p style="text-indent: 25px;word-wrap: break-word;line-height: 1.5em;font-size: 1.1em;">
+						ระบบจัดการข้อมูลผ่านทางเว็บไซด์เป็นส่วนหนึ่งของโครงการพัฒนาอัจฉริยภาพทางวิทยาศาสตร์และเทคโนโลยีสำหรับเด็กและ
+						เยาวชน ( JSTP) ซึ่งจะรวบรวมและจัดเก็บข้อมูลส่วนบุคคลของนักเรียนที่สมัครเข้าร่วมโครงการ อาทิเช่น ประวัติส่วนบุคคล
+						ประสบการณ์การทำงานวิจัย ตลอดจนผลงานที่ได้รับรางวัล เป็นต้นโดยมีวัตถุประสงค์เพื่อพัฒนาการจัดเก็บข้อมูลอย่างเป็นระบบ
+						สะดวกในการสืบค้นข้อมูล รวมทั้งยังสามารถติดตามความก้าวหน้าของนักเรียนที่ได้รับการคัดเลือกเข้าร่วมโครงการ เพื่อเป็น
+						ประโยชน์ในการพัฒนาโครงการต่อไป
+						</p>
+	</div>
+</div>
+
+<!--table style="width:100%;border-spacing: 0px">
+	<td>
+		<div style="position:relative;color:white;">
+			DFSD
+			
+		</div>
+	</td>
+	<td style="width:500px;">
+		<div>
+			DSDLJDSLFKJFD
+		</div>
+	</td>
+</table-->
+
+<!--table align="center" class="tableLayout">
 	<tr>
 		<td class="upperBar">
 			<table class="tableForm">
@@ -158,7 +243,7 @@
 			</table>
 		</td>
 	</tr>
-</table>
+</table-->
 <div style="display:none;">
 	<div id="frm-newmember">
 		<table>

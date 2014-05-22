@@ -110,7 +110,6 @@ class Activity extends AppModel {
 									, $startdtm
 									, $enddtm
 									, $location
-									, $genname
 									, $shortdesc
 									, $longdesc) {
 		$flag = false;
@@ -119,13 +118,27 @@ class Activity extends AppModel {
 		$strSql .= " ,startdtm = '".$startdtm."'";	
 		$strSql .= " ,enddtm = '".$enddtm."'";
 		$strSql .= " ,location = '".$location."'";	
-		$strSql .= " ,genname = '".$genname."'";
 		$strSql .= " ,shortdesc = '".$shortdesc."'";
 		$strSql .= " ,longdesc = '".$longdesc."'";
 		$strSql .= " ,updated_at = sysdate()";		
 		$strSql .= " WHERE id = ".$id;
 		$strSql .= ";";
 		$this->log("strSql => ".$strSql);
+	
+		try {
+			$this->query($strSql);
+			$flag = true;
+		} catch ( Exception $e ) {
+			$this->log("Exception => ".$e->getMessage());
+		}
+	
+		return $flag;
+	}
+	
+	public function setCurrentActivity ($id) {
+		$flag = false;
+		$strSql = "UPDATE activities SET currentflg=0 WHERE currentflg=1; UPDATE activities SET currentflg=1 WHERE id = ".$id.";";
+		//$this->log("strSql => ".$strSql);
 	
 		try {
 			$this->query($strSql);

@@ -38,7 +38,7 @@ td.hover{
 		</tr>
 		<?php for($i=0; $i<count($result); $i++){ ?>
 		<tr align="center">
-			<td><a style="cursor: pointer; cursor: hand;" href="<?php echo $this->Html->url('/Activity?id='.$result[$i]["activities"]["id"]);?>" ><?php echo $result[$i]["activities"]["name"] ?></a></td>
+			<td><a style="cursor: pointer;" href="<?php echo $this->Html->url('/Activity?id='.$result[$i]["activities"]["id"]);?>" ><?php echo $result[$i]["activities"]["name"] ?></a></td>
 			<td>
 			<?php 
 			if($result[$i]["activities"]["startdtm"] != "" and  $result[$i]["activities"]["enddtm"] != ""){

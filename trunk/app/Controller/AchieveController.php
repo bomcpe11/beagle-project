@@ -55,6 +55,7 @@ class AchieveController extends AppController{
 		$result = array();
 		$objUser = $this->getObjUser();
 		//$this->log($this->request->data);
+		$profile_id = $this->request->data['profile_id'];
 		$name = $this->request->data['name'];
 		$awardname = $this->request->data['awardname'];
 		$organization = $this->request->data['organization'];
@@ -62,11 +63,11 @@ class AchieveController extends AppController{
 	
 		$dataSource = $this->Award->getDataSource();
 		if( $this->Award->insertData($name
-								,$awardname
-								,$organization
-								,$objUser['id']
-								,''
-								,$detail) ){
+									,$awardname
+									,$organization
+									,$profile_id
+									,''
+									,$detail) ){
 			$dataSource->commit();
 			$result['msg'] = 'การแก้ไขข้อมูลรางวัลที่ได้รับเสร็จเรียบร้อย';
 			$result['flag'] = 1;
@@ -87,6 +88,7 @@ class AchieveController extends AppController{
 		$result = array();
 		$objUser = $this->getObjUser();
 		//$this->log($this->request->data);
+		$profile_id = $this->request->data['profile_id'];
 		$id = $this->request->data['id'];
 		$name = $this->request->data['name'];
 		$awardname = $this->request->data['awardname'];

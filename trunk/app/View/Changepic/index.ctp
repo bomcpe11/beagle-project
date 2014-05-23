@@ -92,18 +92,18 @@
 // 		}// if
 
 		// validate imgDesc
-		if ( !imgDesc ) {
-			jAlert("กรุณากรอก คำอธิบายใต้ภาพ"
-					, function() {
-					}// okFnc
-					, function() {
-					}// openFnc
-					, function() {
-					}// closeFnc
-			);// jAlert
+// 		if ( !imgDesc ) {
+// 			jAlert("กรุณากรอก คำอธิบายใต้ภาพ"
+// 					, function() {
+// 					}// okFnc
+// 					, function() {
+// 					}// openFnc
+// 					, function() {
+// 					}// closeFnc
+// 			);// jAlert
 
-			return false;
-		}// if
+// 			return false;
+// 		}// if
 
 		return true;
 	}// validateData
@@ -193,17 +193,7 @@
 					<input type="file" id="file_upload" name="file_upload">
 				</td>
 			</tr>
-			<!--tr>
-				<td class="td_label">* ระดับการศึกษา</td>
-				<td class="td_data">
-					<select id="select_edustep" name="select_edustep">
-						<option value="-1">---- กรุณาเลือก ----</option>
-						<?php for ( $i = 0; $i < count($eduStep); $i++ ) { ?>
-							<option value="<?php echo $eduStep[$i]['gvars']['varcode'];?>"><?php echo$eduStep[$i]['gvars']['vardesc1'];?></option>
-						<?php }?>
-					</select>
-				</td>
-			</tr-->
+			<!-- 
 			<tr>
 				<td class="td_label">ปีที่ถ่ายรูปนี้ (พ.ศ.)</td>
 				<td class="td_data">
@@ -216,10 +206,7 @@
 					<textarea rows="3" cols="24" id="textarea_imgdesc" name="textarea_imgdesc"></textarea>
 				</td>
 			</tr>
-			<tr>
-				<td class="td_label"></td>
-				<td class="td_data"></td>
-			</tr>
+			-->
 			<tr>
 				<td class="td_label"></td>
 				<td class="td_data">

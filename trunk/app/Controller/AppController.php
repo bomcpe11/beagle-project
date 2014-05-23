@@ -87,6 +87,10 @@ class AppController extends Controller {
 		return $this->objuser;
 	}
 	
+	protected function getIsLogin(){
+		return $this->isLogin;
+	}
+	
 	protected function getIsAdmin(){
 		return $this->isAdmin;
 	}

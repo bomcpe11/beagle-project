@@ -1,4 +1,5 @@
 <?php
+App::import('Vendor', 'php_image_magician');
 class AchieveController extends AppController{
 	public $names = 'AchieveController';
 	public $uses = array('Profile','Award');
@@ -69,11 +70,11 @@ class AchieveController extends AppController{
 									,''
 									,$detail) ){
 			$dataSource->commit();
-			$result['msg'] = 'การแก้ไขข้อมูลรางวัลที่ได้รับเสร็จเรียบร้อย';
+			$result['msg'] = 'การเพิ่มข้อมูลรางวัลที่ได้รับเสร็จเรียบร้อย';
 			$result['flag'] = 1;
 		}else{
 			$dataSource->rollback();
-			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขข้อมูลรางวัลที่ได้รับ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การเพิ่มข้อมูลรางวัลที่ได้รับ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 			$result['flag'] = -1;
 		}
 		
@@ -138,6 +139,228 @@ class AchieveController extends AppController{
 		$this->set('message', json_encode($result));
 		$this->render('response');
 	}
+	/* --------------------------------------------------------------------------------------------------- */
+	public function uploadFiles(){
+		$this->log('Start :: AchieveController :: uploadFiles');
+		$objUser = $this->getObjUser();
+		$id = $_POST["idUpload"];
+		$uploadfor = $_GET['uploadfor'];
+	
+		if($_FILES["upload"]["size"]>25000000){
+			$this->redirect(array("controller" => "Achieve", "action" => "?id=".$objUser['id']));
+			$this->log('Maximum file > 25 MB , not upload!!');
+			return;
+		}
+	
+		switch ($uploadfor){
+			case 'award': $uploadfor='award'; break;
+		}
+		$directory = "files/".$uploadfor."/".$id."/";
+		// 		$splitFileName = explode(".", $_FILES["upload"]["name"]);
+		// 		$extensionFile = ".".$splitFileName[count($splitFileName)-1];
+		// 		$fileName = '2-img-'.time().$extensionFile;
+		$fileName = $_FILES["upload"]["name"];
+		//echo $_FILES["upload"]["size"]; //24.7 MB = 24710068, limit 25000000
+		$this->log('directory = '.$directory.'  fileName = '.$fileName);
+		$result = '';
+	
+		if ( $this->checkDirectory($directory) ) {
+			$this->log('TEMP FILE = '.$_FILES["upload"]["tmp_name"]);
+			if ( move_uploaded_file($_FILES["upload"]["tmp_name"]	// temp_file
+					, $directory."/".$fileName) ) {	// path file
+			} else {
+				$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
+			}
+		} else {
+			$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
+		}
+		$this->redirect(array("controller" => "Achieve", "action" => "?id=".$objUser['id']));
+		$this->log('End :: AchieveController :: uploadFiles');
+	}
+	/* --------------------------------------------------------------------------------------------------- */
+	public function crop(){
+	
+		$this->log('START :: AchieveController -> crop()');
+	
+// 		$this->log($this->request->data);
+		
+		$objUser = $this->getObjUser();
+		
+		$dataname = $this->request->data["dataname"];
+		$dataid = $this->request->data["dataid"];
+		
+		$imgPath = '';
+		$raw_imgPath = '';
+			
+		$directory = "";
+		switch($dataname){
+			case "award" :
+				$directory = "img/award";
+				break;
+			default : 
+		}
+			
+		if(!empty($dataname) && !empty($dataid) && !empty($directory)){
+			
+			$this->log($_FILES["file_upload"]["name"]);
+			
+			$splitFileName = explode(".", $_FILES["file_upload"]["name"]);
+			$extensionFile = ".".$splitFileName[count($splitFileName)-1];
+			$fileName = $dataid.$extensionFile;
+			
+			if ( $this->checkDirectory($directory) ) {
+			
+				$tmp1_fileName = $directory."/"."tmp1_".$fileName;
+				$tmp2_fileName = $directory."/"."tmp2_".$fileName;
+					
+				if ( move_uploaded_file($_FILES["file_upload"]["tmp_name"]	// temp_file
+						, $tmp1_fileName) ) {
+			
+					$magicianObj = new imageLib($tmp1_fileName);
+					$magicianObj->resizeImage(500, 1, 'landscape');
+					$magicianObj->saveImage($tmp2_fileName, 100);
+						
+					unlink($tmp1_fileName);
+			
+					$imgPath = $tmp2_fileName;
+					$raw_imgPath = base64_encode($imgPath);
+			
+				}
+					
+			}				
+		}else{
+			$this->redirect(array("controller" => "Achieve", "action" => "index?id=".$objUser['id']));
+		}
+	
+		$this->layout='public';
+		$this->set(compact('imgPath', 'raw_imgPath', 'dataname', 'dataid'));
+	
+		$this->log('END :: AchieveController -> crop()');
+	
+	}
+	
+	public function ajax_crop(){
+		$this->log('START :: AchieveController -> ajax_crop()');
+	
+		$result = array();
+	
+		$raw_imgPath = $this->request->data['imgpath'];
+		$cropInfo = $this->request->data['cropInfo'];
+		$dataname = $this->request->data['dataname'];
+		$dataid = $this->request->data['dataid'];
+		
+		$objUser = $this->getObjUser();
+	
+		$directory = "";
+		$model = "";
+		switch($dataname){
+			case "award" :
+				$directory = "img/award";
+				$model = $this->Award;
+				break;
+			default :
+		}
+		
+		$imgPath = '';
+		if(!empty($dataname) && !empty($dataid) && !empty($raw_imgPath)){
+			$imgPath = base64_decode($raw_imgPath);
+				
+			$splitFileName = explode(".", $imgPath);
+			$extensionFile = ".".$splitFileName[count($splitFileName)-1];
+			$fileName = $dataid.$extensionFile;
+				
+			if ( $this->checkDirectory($directory) ) {
+					
+				$tmp3_fileName = $directory."/"."tmp3_".$fileName;
+	
+				$cropposX = $cropInfo['x1'];
+				$cropposY = $cropInfo['y1'];
+				$cropWidth = $cropInfo['width'];
+				$cropHeight = $cropInfo['height'];
+	
+				$magicianObj = new imageLib($imgPath);
+				$this->log('Crop->'.$cropposX.'x'.$cropposY);
+				$this->log('Crop->Width:'.$cropWidth);
+				$this->log('Crop->Height:'.$cropHeight);
+				$magicianObj->cropImage($cropWidth, $cropHeight, $cropposX.'x'.$cropposY);
+				$magicianObj->saveImage($tmp3_fileName, 100);
+				//TODO: -> SAVE
+				$magicianObj = new imageLib($tmp3_fileName);
+				$magicianObj->resizeImage(100, 1, 'landscape');
+				$magicianObj->saveImage($directory."/".$fileName, 100);
+	
+				unlink($imgPath);
+				unlink($tmp3_fileName);
+	
+				if( $model->updateThumbPath($dataid, $directory."/".$fileName)
+					/*TODO: update data to data table, as research, otherwork, award, etc.*/){
+
+					$result['status'] = true;
+					$result['message'] = 'อัพโหลดรูปภาพ เรียบร้อย';
+				}else{
+					$result['status'] = false;
+					$result['message'] = 'บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ';
+				}
+	
+			}else{
+				$result['status'] = false;
+				$result['message'] = 'บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ';
+			}
+		}else{
+			$result['status'] = false;
+			$result['message'] = 'บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ';
+		}
+	
+		$this->layout='ajax';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	
+		$this->log('END :: AchieveController -> ajax_crop()');
+	}
+	/* --------------------------------------------------------------------------------------------------- */
+	public function deleteFile(){
+		$this->log('Start :: AchieveController :: deleteFile');
+		$path = $this->request->data['path'];
+		unlink($path);
+		$status = 1;
+		$message = 'สำเร็จ';
+		$this->log('message = '.$message);
+		$this->log('status = '.$status);
+		$this->layout='ajax';
+		$this->set('message', json_encode(array('status'=>$status,'message'=>$message)));
+		$this->render('response');
+		$this->log('End :: AchieveController :: deleteFile');
+	}
+	/* --------------------------------------------------------------------------------------------------- */
+	private function checkDirectory($directory) {
+		$flag = false;
+	
+		// check directory existing
+		if ( is_dir($directory) ) {
+			$flag = true;
+		} else {
+			$this->log("not have directory");
+	
+			if ( mkdir($directory) ) {
+				$this->log("make directory complete");
+	
+				#Ref : http://php.net/manual/en/function.chmod.php
+				// Changes file mode
+				// Read and write for owner, read for everybody else
+				if ( chmod($directory, 0744) ) {
+				$this->log("set permission complete");
+							
+				$flag = true;
+				} else {
+				$this->log("set permission fail");
+				}// if else
+			} else {
+			$this->log("make directory fail");
+			}// if else
+		}// if else
+	
+			return $flag;
+	}// checkDirectory
 	/* --------------------------------------------------------------------------------------------------- */
 	public function updateSortableSeq(){
 		$this->log('---- AchieveController -> updateSortableSeq ----');

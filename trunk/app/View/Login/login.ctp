@@ -137,7 +137,7 @@
 	<div id="login-network"></div>
 </div>
 <div id="right-side" style="float:right;width:500px;">
-	<div style="text-align: center;padding: 30px 0;"><img src="<?php echo $this->webroot;?>img/login-logo.png" style="margin: 0 auto;" /></div>
+	<div style="text-align: center;padding: 20px 0 10px 0;"><img src="<?php echo $this->webroot;?>img/login-logo.png" style="margin: 0 auto;" /></div>
 	<table style="margin: 0 auto;">
 		<tr>
 			<td style="color:white;font-size: 1.7em;padding-right:15px;">Username</td>
@@ -159,7 +159,7 @@
 		</tr>
 		
 	</table>
-	<div style="color:white;padding:0 40px;margin-top: 10px;">
+	<div style="color:white;padding:0 40px;margin-top: 0px;">
 		<p style="text-indent: 25px;word-wrap: break-word;line-height: 1.5em;font-size: 1.1em;">
 						ระบบจัดการข้อมูลผ่านทางเว็บไซด์เป็นส่วนหนึ่งของโครงการพัฒนาอัจฉริยภาพทางวิทยาศาสตร์และเทคโนโลยีสำหรับเด็กและ
 						เยาวชน ( JSTP) ซึ่งจะรวบรวมและจัดเก็บข้อมูลส่วนบุคคลของนักเรียนที่สมัครเข้าร่วมโครงการ อาทิเช่น ประวัติส่วนบุคคล

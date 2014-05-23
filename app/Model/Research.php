@@ -113,6 +113,21 @@ class Research extends AppModel {
 		return $flag;
 	}
 	/* --------------------------------------------------------------------------------------------------- */
+	public function updateThumbPath($id, $imgPath){
+		$flag=false;
+		$sql="UPDATE researches
+				SET thumbpath='$imgPath'
+				WHERE id=$id";
+		try{
+			$this->query($sql);
+			$flag = true;
+		}catch(Exception $e){
+			$this->log($e->getMessage());
+		}
+		
+		return $flag;
+	}
+	/* --------------------------------------------------------------------------------------------------- */
 	public function updateSeq($id,$seq){
 		$flag = false;
 		$sql = "UPDATE researches 

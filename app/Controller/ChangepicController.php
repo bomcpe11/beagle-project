@@ -3,7 +3,7 @@ App::import('Vendor', 'php_image_magician');
 class ChangepicController extends AppController {
 	/* ------------------------------------------------------------------------------------------------- */
 	public $names = "ChangepicController";
-	public $uses = array('Gvar','ProfilePic','Profile');
+	public $uses = array('Gvar','ProfilePic','Profile','Sequence');
 	var $components = array('Session');
 	/* ------------------------------------------------------------------------------------------------- */
 	public function index(){
@@ -21,50 +21,51 @@ class ChangepicController extends AppController {
 		$result = null;
 		$objUser = $this->getObjUser();
 		$eduStep = -1;
-		$imgDtm = $this->request->data["text_imgdtm"];
-		$imgDesc = $this->request->data["textarea_imgdesc"];
+// 		$imgDtm = $this->request->data["text_imgdtm"];
+// 		$imgDesc = $this->request->data["textarea_imgdesc"];
 		
 		//*** insert data
-		$dataSource = $this->ProfilePic->getdatasource();
-		$dataSource->begin();
-		if ( $this->ProfilePic->insertAll($objUser["id"]
-				, ""
-				, $imgDesc
-				, $eduStep
-				, $imgDtm
-				, "") ) {
+// 		$dataSource = $this->ProfilePic->getdatasource();
+// 		$dataSource->begin();
+// 		if ( $this->ProfilePic->insertAll($objUser["id"]
+// 				, ""
+// 				, $imgDesc
+// 				, $eduStep
+// 				, $imgDtm
+// 				, "") ) {
 			// gen directory
 			$directory = "img/profiles/".$objUser["id"];
 			// gen fileName
-			$lastInsertId = $this->ProfilePic->getLastInsert();
+			$pictureId = $this->Sequence->next_val('PROFILEPICTURE');
+// 			$lastInsertId = 
 			// Format => Untitled.png
 			$splitFileName = explode(".", $_FILES["file_upload"]["name"]);
 			$extensionFile = ".".$splitFileName[count($splitFileName)-1];
-			$fileName = $lastInsertId[0][0]["last_index_id"].$extensionFile;
+			$fileName = $pictureId.$extensionFile;
 			
 			//*** upload file
 			if ( $this->checkDirectory($directory) ) {
 
 				$tmp1_fileName = $directory."/"."tmp1_".$fileName;
-// 				$tmp2_fileName = $directory."/"."tmp2_".$fileName;
+				$tmp2_fileName = $directory."/"."tmp2_".$fileName;
 
 				if ( move_uploaded_file($_FILES["file_upload"]["tmp_name"]	// temp_file
 						, $tmp1_fileName) ) {	// path file
 					//*** update data(imgPath)
 					
 
-					$this->log('###After Resize....');
+// 					$this->log('###After Resize....');
 
 					$magicianObj = new imageLib($tmp1_fileName);
-					$magicianObj->resizeImage(700, 700, 'portrait');
+					$magicianObj->resizeImage(1100, 1, 'landscape');
 					$magicianObj->saveImage($tmp2_fileName, 100);
 					
-// 					unlink($tmp1_fileName);
+					unlink($tmp1_fileName);
 
-					$this->log('###Before Resize....');
+// 					$this->log('###Before Resize....');
 					
 					
-					$result = "บันทึกข้อมูล เรียบร้อย";
+					$result = true;
 					
 // 					if ( $this->ProfilePic->updateImgPathById($directory."/".$fileName	// $imgPath
 // 									, $lastInsertId[0][0]["last_index_id"]) ) {	// $byId
@@ -82,32 +83,34 @@ class ChangepicController extends AppController {
 	
 					
 				} else {
-					$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
+					$result = false;
 				}// if else
 					
 				
 				
 			} else {
-				$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
+				$result = false;
 			}// if
-		} else {
-			$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
-		}// if else
+// 		} else {
+// 			$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
+// 		}// if else
 			
 		// close transaction
-		if ( $result == "บันทึกข้อมูล เรียบร้อย" ) {
+		if ( $result ) {
 // 			$dataSource->commit();
 			
 			$this->redirect(array("controller" => "Changepic",
 					"action" => "crop",
-					"imgPath" => base64_encode($tmp1_fileName)));
+					"imgPath" => base64_encode($tmp2_fileName),
+					"pictureId" => $pictureId
+					));
 			
 			//Update new session
 // 			$newObjUser = $this->Profile->getDataById($objUser['id']);
 // 			$this->Session->delete('objuser');
 // 			$this->Session->write('objuser',$newObjUser[0]["profiles"]);
 		} else {
-			$dataSource->rollback();
+// 			$dataSource->rollback();
 		}// if else
 		
 		$this->prepareDataFnc($result);
@@ -118,37 +121,133 @@ class ChangepicController extends AppController {
 	
 	public function crop(){
 		
+		$this->log('START :: ChangepicController -> crop()');
 		
 // 		$imgPath = '/img/profiles/17/20.jpg';
 
 // 		$this->log($this->params);
 		
 		$raw_imgPath = $this->params['named']['imgPath'];
+		$pictureId = $this->params['named']['pictureId'];
 		$imgPath = '';
-		if(!empty($raw_imgPath)){
+		if(!empty($raw_imgPath) && !empty($pictureId)){
 			$imgPath = base64_decode($raw_imgPath);
-			
-			$this->log($imgPath);
-// 			$imgPath = 'img/profiles/17/tmp1_35.jpg';
-// // 			$imgPath = '/Applications/MAMP/htdocs/jstphub/app/webroot/img/profiles/17/tmp1_35.jpg';
-			
-// 			$this->log('###After Resize....');
-
-// 			$magicianObj = new imageLib($imgPath);
-// // 			$magicianObj->resizeImage(700, 700, 'portrait');
-// // 			$magicianObj->saveImage($imgPath, 100);
-	
-// // 			unlink($tmp1_fileName);
-
-// 			$this->log('###Before Resize....');
 			
 		}else{
 			$this->redirect(array("controller" => "Changepic", "action" => "index"));
 		}
 
 		$this->layout='public';
-		$this->set(compact('imgPath'));
+		$this->set(compact('imgPath', 'raw_imgPath', 'pictureId'));
 		
+		$this->log('END :: ChangepicController -> crop()');
+		
+	}
+	
+	public function ajax_crop(){
+		$this->log('START :: ChangepicController -> ajax_crop()');
+		
+		$result = array();
+
+		$raw_imgPath = $this->request->data['imgpath'];
+		$imgDtm = $this->request->data['imgdtm'];
+		$imgDesc = $this->request->data['imgdesc'];
+		$pictureId = $this->request->data['pictureId'];
+		$cropInfo = $this->request->data['cropInfo'];
+		
+		$objUser = $this->getObjUser();
+
+		/* Insert Database */
+		$dataSource = $this->ProfilePic->getdatasource();
+		$dataSource->begin();
+		
+		$imgPath = '';
+		if(!empty($raw_imgPath) && !empty($pictureId)){
+			$imgPath = base64_decode($raw_imgPath);
+			
+			
+			$directory = "img/profiles/".$objUser["id"];
+			$splitFileName = explode(".", $imgPath);
+			$extensionFile = ".".$splitFileName[count($splitFileName)-1];
+			$fileName = $pictureId.$extensionFile;
+			
+			if ( $this->checkDirectory($directory) ) {
+			
+				$tmp3_fileName = $directory."/"."tmp3_".$fileName;
+				
+				$cropposX = $cropInfo['x1']; 
+				$cropposY = $cropInfo['y1']; 
+				$cropWidth = $cropInfo['width']; 
+				$cropHeight = $cropInfo['height']; 
+				
+				$magicianObj = new imageLib($imgPath);
+				$this->log('Crop->'.$cropposX.'x'.$cropposY);
+				$this->log('Crop->Width:'.$cropWidth);
+				$this->log('Crop->Height:'.$cropHeight);
+				$magicianObj->cropImage($cropWidth, $cropHeight, $cropposX.'x'.$cropposY);
+				$magicianObj->saveImage($tmp3_fileName, 100);
+				//TODO: -> SAVE
+				$magicianObj = new imageLib($tmp3_fileName);
+				$magicianObj->resizeImage(230, 1, 'landscape');
+				$magicianObj->saveImage($directory."/".$fileName, 100);
+				
+				unlink($imgPath);
+				unlink($tmp3_fileName);
+
+				
+				/* Insert Database */
+				if ( $this->ProfilePic->insertAll($pictureId,
+						$objUser["id"]
+						, $directory."/".$fileName
+						, $imgDesc
+						, 0
+						, $imgDtm
+						, "") ) {
+
+					if( $this->Profile->updateImg($objUser['id']
+								,$directory."/".$fileName
+								,$imgDesc) ){
+
+
+						$result['status'] = true;
+						$result['message'] = 'เพิ่มรูปภาพส่วนตัว เรียบร้อย';
+						
+						
+					}else{
+						$result['status'] = false;
+						$result['message'] = 'บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ';
+					}
+					
+				}else{
+					$result['status'] = false;
+					$result['message'] = 'บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ';
+				}
+				
+			}else{
+				$result['status'] = false;
+				$result['message'] = 'บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ';
+			}
+		}else{
+			$result['status'] = false;
+			$result['message'] = 'บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ';
+		}
+		
+		if($result['status']){
+			$dataSource->commit();
+			
+			//Update new session
+			$newObjUser = $this->Profile->getDataById($objUser['id']);
+			$this->Session->delete('objuser');
+			$this->Session->write('objuser',$newObjUser[0]["profiles"]);
+		}else{
+			$dataSource->rollback();
+		}
+		
+		$this->layout='ajax';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+		
+		$this->log('END :: ChangepicController -> ajax_crop()');
 	}
 	
 	/* ------------------------------------------------------------------------------------------------- */
@@ -202,8 +301,8 @@ class ChangepicController extends AppController {
 		$this->set("pathImage", $pathImage);
 		
 		// eduStep
-		$eduStep = $this->Gvar->getVarcodeVardesc1ByVarname("EDUCATION_STEP");	// $byVarName
-		$this->set("eduStep", $eduStep);
+// 		$eduStep = $this->Gvar->getVarcodeVardesc1ByVarname("EDUCATION_STEP");	// $byVarName
+// 		$this->set("eduStep", $eduStep);
 		
 		$this->set("flagUploadFile", $flagUploadFile);
 	}// prepareDataFnc

@@ -1,7 +1,7 @@
 <style type="text/css">
 .tableLayout {
 	width: 400px;
-	margin: 100px auto 0 auto;
+	margin: 100px auto 200px auto;
 	background-color: #FCFCFC;
 	border-radius:7px;
 	padding: 0 20px 0 20px;

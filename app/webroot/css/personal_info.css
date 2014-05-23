@@ -176,3 +176,62 @@
 .ui-icon{
 	float: left;
 }
+
+div.thumb1{
+	width:100px;
+	height:100px;
+	margin-top:2px;
+	border: 1px solid black;
+	position: relative;
+}
+div.thumb1 img.thumb{
+	width:100%;
+	height:100%;
+}
+div.thumb1 .overlay{
+	display:none;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 4;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	background-color:rgba(0, 0, 0, 0.6);
+	background: black\9;
+	cursor: pointer;
+}
+/* div.thumb1 .overlay p{ */
+/* 	padding: 40px 0 0 0; */
+/* } */
+/* div.thumb1 .overlay:hover{ */
+/* 	color: yellow; */
+/* } */
+div.thumb1 .label{
+/* 	display:block; */
+/* 	padding: 41px 0 0 0; */
+/* 	display:none; */
+/* 	position: absolute; */
+/* 	width: 100%; */
+/* 	top: 41px; */
+/* 	left: 0px; */
+/* 	text-align: center; */
+/* 	z-index: 4; */
+/* 	cursor: pointer; */
+}
+div.thumb1 .overlay:hover{
+/* 	color: yellow; */
+}
+div.blank{
+	text-align: center;
+	margin: 10px 0 0 0;
+}
+div.thumb1 .link{
+	cursor: pointer;
+}
+div.thumb1 .link:hover{
+	color: yellow;
+}
+div.thumb1 .input-container{
+	display:none;
+}

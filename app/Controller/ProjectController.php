@@ -1,4 +1,5 @@
 <?php
+App::import('Vendor', 'php_image_magician');
 class ProjectController extends AppController {
 	public $names = 'ProjectController';
 	public $uses = array('Profile','Research','Otherwork','Gvar');
@@ -204,6 +205,159 @@ class ProjectController extends AppController {
 		}
 		$this->redirect(array("controller" => "Project", "action" => "?id=".$objUser['id']));
 		$this->log('End :: ActivityController :: uploadFiles');
+	}
+	
+	public function crop(){
+	
+		$this->log('START :: ProjectController -> crop()');
+	
+		$this->log($this->request->data);
+		
+		$objUser = $this->getObjUser();
+		
+		$dataname = $this->request->data["dataname"];
+		$dataid = $this->request->data["dataid"];
+		
+		$imgPath = '';
+		$raw_imgPath = '';
+			
+		$directory = "";
+		switch($dataname){
+			case "research" :
+				$directory = "img/research";
+				break;
+			case "otherwork" :
+				$directory = "img/otherwork";
+				break;
+			default : 
+		}
+			
+		if(!empty($dataname) && !empty($dataid) && !empty($directory)){
+			
+			$this->log($_FILES["file_upload"]["name"]);
+			
+			$splitFileName = explode(".", $_FILES["file_upload"]["name"]);
+			$extensionFile = ".".$splitFileName[count($splitFileName)-1];
+			$fileName = $dataid.$extensionFile;
+			
+			if ( $this->checkDirectory($directory) ) {
+			
+				$this->log($directory);
+				
+				$tmp1_fileName = $directory."/"."tmp1_".$fileName;
+				$tmp2_fileName = $directory."/"."tmp2_".$fileName;
+					
+				if ( move_uploaded_file($_FILES["file_upload"]["tmp_name"]	// temp_file
+						, $tmp1_fileName) ) {
+			
+					$magicianObj = new imageLib($tmp1_fileName);
+					$magicianObj->resizeImage(500, 1, 'landscape');
+					$magicianObj->saveImage($tmp2_fileName, 100);
+						
+					unlink($tmp1_fileName);
+			
+					$imgPath = $tmp2_fileName;
+					$raw_imgPath = base64_encode($imgPath);
+			
+				}else{
+					$this->log('Can not save file.');
+				}
+					
+			}
+		}else{
+			$this->redirect(array("controller" => "Project", "action" => "index?id=".$objUser['id']));
+		}
+	
+		$this->layout='public';
+		$this->set(compact('imgPath', 'raw_imgPath', 'dataname', 'dataid'));
+	
+		$this->log('END :: ProjectController -> crop()');
+	
+	}
+	
+	public function ajax_crop(){
+		$this->log('START :: ProjectController -> ajax_crop()');
+	
+		$result = array();
+	
+		$raw_imgPath = $this->request->data['imgpath'];
+		$cropInfo = $this->request->data['cropInfo'];
+		$dataname = $this->request->data['dataname'];
+		$dataid = $this->request->data['dataid'];
+		
+		$objUser = $this->getObjUser();
+	
+		$directory = "";
+		$model = "";
+		switch($dataname){
+			case "research" :
+				$directory = "img/research";
+				$model = $this->Research;
+				break;
+			case "otherwork" :
+				$directory = "img/otherwork";
+				$model = $this->Otherwork;
+				break;
+			default :
+		}
+		
+		$imgPath = '';
+		if(!empty($dataname) && !empty($dataid) && !empty($raw_imgPath)){
+			$imgPath = base64_decode($raw_imgPath);
+				
+			$splitFileName = explode(".", $imgPath);
+			$extensionFile = ".".$splitFileName[count($splitFileName)-1];
+			$fileName = $dataid.$extensionFile;
+				
+			if ( $this->checkDirectory($directory) ) {
+					
+				$tmp3_fileName = $directory."/"."tmp3_".$fileName;
+	
+				$cropposX = $cropInfo['x1'];
+				$cropposY = $cropInfo['y1'];
+				$cropWidth = $cropInfo['width'];
+				$cropHeight = $cropInfo['height'];
+	
+				$magicianObj = new imageLib($imgPath);
+				$this->log('Crop->'.$cropposX.'x'.$cropposY);
+				$this->log('Crop->Width:'.$cropWidth);
+				$this->log('Crop->Height:'.$cropHeight);
+				$magicianObj->cropImage($cropWidth, $cropHeight, $cropposX.'x'.$cropposY);
+				$magicianObj->saveImage($tmp3_fileName, 100);
+				//TODO: -> SAVE
+				$magicianObj = new imageLib($tmp3_fileName);
+				$magicianObj->resizeImage(100, 1, 'landscape');
+				$magicianObj->saveImage($directory."/".$fileName, 100);
+	
+				unlink($imgPath);
+				unlink($tmp3_fileName);
+	
+	
+	
+				if( $model->updateThumbPath($dataid, $directory."/".$fileName)
+					/*TODO: update data to data table, as research, otherwork, award, etc.*/){
+
+					$result['status'] = true;
+					$result['message'] = 'อัพโหลดรูปภาพ เรียบร้อย';
+				}else{
+					$result['status'] = false;
+					$result['message'] = 'บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ';
+				}
+	
+			}else{
+				$result['status'] = false;
+				$result['message'] = 'บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ';
+			}
+		}else{
+			$result['status'] = false;
+			$result['message'] = 'บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ';
+		}
+	
+		$this->layout='ajax';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	
+		$this->log('END :: ProjectController -> ajax_crop()');
 	}
 	
 	public function deleteFile(){

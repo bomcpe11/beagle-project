@@ -17,6 +17,7 @@
 	}
 
 	echo $this->Html->css('personal_info.css');
+// 	echo $isOwner;
 ?>
 <!-- ##################################################################################################### -->
 <div class="container">
@@ -31,9 +32,24 @@
 							<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
 							<div class="data-item-wrapper">
 							
-							
 								<table><tr>
-								<td style="vertical-align:baseline;"><img src="" style="width:100px;height:100px;margin-top:2px;" /></td>
+								<td style="vertical-align:baseline;">
+									<div class="thumb1">
+										<div class="input-container">
+											<input type="hidden" name="dataname" value="research" />
+											<input type="hidden" name="dataid" value="<?php echo $listResearch[$i]['r']['id']; ?>" />
+										</div>
+										<div class="overlay"><br /><br /><br />แก้ไข</div>
+										
+										<?php 
+											if(is_file($listResearch[$i]['r']['thumbpath'])){
+										?>
+											<img class="thumb" src="<?php echo $this->Html->url("/".$listResearch[$i]['r']['thumbpath']); ?>" />
+										<?php }else{ ?>
+											<div class="blank">ไม่มีภาพ<?php if($isOwner=="1"){ ?><br /><a class="link"><img class="thumbchoosefile" alt="อัพโหลดภาพ" title="อัพโหลดภาพ" style="margin: 10px 0 0 0;" src="<?php echo $this->Html->url("/img/plus.png");?>" /></a><?php } ?></div>
+										<?php } ?>
+									</div>
+								</td>
 								<td>
 								<table class="table-data-item">
 									<colgroup>
@@ -92,8 +108,10 @@
 														if(is_file($path."/".$file)){ 
 															?><a href="<?php echo $this->Html->url("/".$path."/".$file);?>" style="color:black;"><?php
 															echo $file; ?></a> 
-															<img src="<?php echo $this->Html->url('/img/icon_del.png');?>" style="cursor:pointer;" width="10" height="10" title="ลบไฟล์ <?php echo $file; ?> นี้"
-															onclick="deleteFile('<?php echo $path."/".$file ?>','<?php echo $listResearch[$i]['r']['id'] ?>');" />
+															<?php if($isAdmin || $isOwner=="1"){ ?>
+																<img src="<?php echo $this->Html->url('/img/icon_del.png');?>" style="cursor:pointer;" width="10" height="10" title="ลบไฟล์ <?php echo $file; ?> นี้"
+																onclick="deleteFile('<?php echo $path."/".$file ?>','<?php echo $listResearch[$i]['r']['id'] ?>');" />
+															<?php } ?>
 															<br /><?php
 															$countFiles++;
 														}
@@ -145,6 +163,26 @@
 							<input type="hidden" name="otherwork_id" value="<?php echo $listOtherwork[$i]['o']['id'];?>">
 							<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
 							<div class="data-item-wrapper">
+							
+								<table><tr>
+								<td style="vertical-align:baseline;">
+									<div class="thumb1">
+										<div class="input-container">
+											<input type="hidden" name="dataname" value="otherwork" />
+											<input type="hidden" name="dataid" value="<?php echo $listOtherwork[$i]['o']['id']; ?>" />
+										</div>
+										<div class="overlay"><br /><br /><br />แก้ไข</div>
+										
+										<?php 
+											if(is_file($listOtherwork[$i]['o']['thumbpath'])){
+										?>
+											<img class="thumb" src="<?php echo $this->Html->url("/".$listOtherwork[$i]['o']['thumbpath']); ?>" />
+										<?php }else{ ?>
+											<div class="blank">ไม่มีภาพ<?php if($isOwner=="1"){ ?><br /><a class="link"><img class="thumbchoosefile" alt="อัพโหลดภาพ" title="อัพโหลดภาพ" style="margin: 10px 0 0 0;" src="<?php echo $this->Html->url("/img/plus.png");?>" /></a><?php } ?></div>
+										<?php } ?>
+									</div>
+								</td>
+								<td>
 								<table class="table-data-item">
 									<colgroup>
 										<col style="width:45%">
@@ -166,7 +204,7 @@
 										</td>
 									</tr>
 									<tr>
-										<td><strong>หนว่ยงาน : </strong><?php echo empty($listOtherwork[$i]['o']['organization'])?'-':$listOtherwork[$i]['o']['organization']; ?></td>
+										<td><strong>หน่วยงาน : </strong><?php echo empty($listOtherwork[$i]['o']['organization'])?'-':$listOtherwork[$i]['o']['organization']; ?></td>
 										<td>
 											<strong>ปีที่เริ่ม - ปีที่เสร็จ : </strong>
 											<?php echo $listOtherwork[$i]['o']['yearstart']? intval($listOtherwork[$i]['o']['yearstart']) + 543: '-'; ?>
@@ -191,8 +229,10 @@
 														if(is_file($path."/".$file)){ 
 															?><a href="<?php echo $this->Html->url("/".$path."/".$file);?>" style="color:black;"><?php
 															echo $file; ?></a> 
-															<img src="<?php echo $this->Html->url('/img/icon_del.png');?>" style="cursor:pointer;" width="10" height="10" title="ลบไฟล์ <?php echo $file; ?> นี้"
-															onclick="deleteFile('<?php echo $path."/".$file ?>','<?php echo $listOtherwork[$i]['o']['id'] ?>');" />
+															<?php if($isAdmin || $isOwner=="1"){ ?>
+																<img src="<?php echo $this->Html->url('/img/icon_del.png');?>" style="cursor:pointer;" width="10" height="10" title="ลบไฟล์ <?php echo $file; ?> นี้"
+																onclick="deleteFile('<?php echo $path."/".$file ?>','<?php echo $listOtherwork[$i]['o']['id'] ?>');" />
+															<?php } ?>
 															<br /><?php
 															$countFiles++;
 														}
@@ -209,6 +249,10 @@
 										</td>
 									</tr>
 								</table>
+								</td>
+								</tr></table>
+
+								
 							</div>
 						</li>
 					<?php }?>
@@ -227,6 +271,27 @@
 		
 		<input type="button" id="button_add_otherwork" value="เพิ่มข้อมูล ผลงานอื่นๆ" onclick="openPopupOtherwork('','','','','','','')"/>
 	</div>
+</div>
+<div style="display:none;">
+	
+	<div id="frmthumbuploader">
+		<form action="<?php echo $this->Html->url('/Project/crop'); ?>" method="post" enctype="multipart/form-data">
+			<fieldset style="width: 300px;margin: 5px auto;">
+			<legend>อัพโหลดภาพ</legend>
+				<table>
+					<tr>
+						<td>
+							<input type="file" name="file_upload" />
+							<input type="hidden" name="dataname" />
+							<input type="hidden" name="dataid" />
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</form>
+		
+	</div>
+
 </div>
 
 
@@ -259,7 +324,75 @@
 			input_container.find('div.frm').hide();
 			input_container.find('div.'+jQuery(this).attr('frmid')).show();
 		});
+
+		<?php if($isOwner=="1"){ ?>
+		jQuery('div.thumb1 .thumb').mouseover(function(){
+			var thumb_container = jQuery(this).closest("div.thumb1");
+			thumb_container.find('.overlay').show();
+		});
+		jQuery('div.thumb1 .overlay').mouseout(function(){
+// 			alert('AA');
+			var thumb_container = jQuery(this).closest("div.thumb1");
+			thumb_container.find('.overlay').hide();
+		});
+		jQuery('.thumbchoosefile, div.overlay').click(function() {
+			//openPopupHtml('#frmthumbuploader');
+			
+			//TODO: Set all parameter value.
+			var input_container = jQuery(this).closest("div.thumb1").find('.input-container');
+// 			console.log(input_container);
+			var dataname = input_container.find('input[name="dataname"]').val();
+			var dataid = input_container.find('input[name="dataid"]').val();
+			
+			var frmContainer = jQuery('#frmthumbuploader');
+			frmContainer.find('input[name="dataname"]').val(dataname);
+			frmContainer.find('input[name="dataid"]').val(dataid);
+			
+			frmContainer.css('width', '500px');
+			var buttons = [
+	   			{text: "Upload", click: function(){
+	   				jQuery('#frmthumbuploader').find('form')[0].submit();
+		   		}}
+			];
+			openPopupHtml('Upload Thumbnail', '#frmthumbuploader', buttons, 
+					function(){ //openFunc
+					}, 
+					function(){ //closeFunc
+						jQuery('#frmthumbuploader').find('form')[0].reset();
+					}
+			);
+		});
+		<?php } ?>
 	});
+	/* -------------------------------------------------------------------------------------------------- */
+	<?php if($isAdmin || $isOwner=="1"){ ?>
+		function deleteFile(path,id){
+			jConfirm('ท่านต้องการลบไฟล์นี้?', 
+				function(){ //okFunc
+					loading();
+					jQuery.ajax({
+						type: "POST",
+						dataType: 'json',
+						url: '<?php echo $this->Html->url('/Project/deleteFile');?>',
+						data: {path:path},
+						success: function(data){
+							unloading();
+							if ( data.status ) {
+								jAlert(data.message, 
+									function(){
+										//window.location.replace("<?php echo $this->webroot;?>Project?id=" + id);
+										window.location.reload();
+									}
+								);
+							} else {
+								jAlert(data.message);
+							}
+						}
+					});
+				}
+			);
+		}
+	<?php } ?>
 	/* -------------------------------------------------------------------------------------------------- */
 	function updateSortableSeq(sortable_id){
 		var data = new Array();
@@ -285,32 +418,5 @@
 							);
 				}
 				,'json');
-	}
-
-	function deleteFile(path,id){
-		jConfirm('ท่านต้องการลบไฟล์นี้?', 
-			function(){ //okFunc
-				loading();
-				jQuery.ajax({
-					type: "POST",
-					dataType: 'json',
-					url: '<?php echo $this->Html->url('/Project/deleteFile');?>',
-					data: {path:path},
-					success: function(data){
-						unloading();
-						if ( data.status ) {
-							jAlert(data.message, 
-								function(){
-									//window.location.replace("<?php echo $this->webroot;?>Project?id=" + id);
-									window.location.reload();
-								}
-							);
-						} else {
-							jAlert(data.message);
-						}
-					}
-				});
-			}
-		);
 	}
 </script>

@@ -6,7 +6,8 @@ class ProfilePic extends AppModel {
 		return $result;
 	}
 	/* ---------------------------------------------------------------------------------- */
-	public function insertAll($proflieid
+	public function insertAll($pictureid
+								, $proflieid
 								, $imgpath
 								, $imgdesc
 								, $edustep
@@ -15,7 +16,8 @@ class ProfilePic extends AppModel {
 		$flag = false;
 		$strSql = "INSERT INTO profile_pics";
 		$strSql .= " (";
-  		$strSql .= " proflieid";
+  		$strSql .= " id";
+  		$strSql .= " ,proflieid";
   		$strSql .= " ,imgpath";
   		$strSql .= " ,imgdesc";
   		$strSql .= " ,edustep";
@@ -24,7 +26,8 @@ class ProfilePic extends AppModel {
 		$strSql .= " )";
 		$strSql .= " VALUES";
 		$strSql .= " (";
-  		$strSql .= " ".$proflieid; // proflieid - IN int(11)
+  		$strSql .= " ".$pictureid; // id - IN bigint
+  		$strSql .= " ,".$proflieid; // proflieid - IN int(11)
   		$strSql .= " ,'".$imgpath."'"; // imgpath - IN varchar(255)
   		$strSql .= " ,'".$imgdesc."'"; // imgdesc - IN varchar(1000)
   		$strSql .= " ,".$edustep; // edustep - IN tinyint(4)

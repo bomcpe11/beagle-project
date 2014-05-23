@@ -39,10 +39,11 @@ class MainmenuController extends AppController {
 		$this->setTitle('Main Menu');
 		
 		$currentActivity = $this->Activity->getDataByStmtSql('currentflg=1');
-		$currentActivity[0]['activities']['startdtm'] = $this->DateThai($currentActivity[0]['activities']['startdtm']);
-		$currentActivity[0]['activities']['enddtm'] = $this->DateThai($currentActivity[0]['activities']['enddtm']);
-// 		$this->log($currentActivity);
-		
+		if(count($currentActivity)>0){
+			$currentActivity[0]['activities']['startdtm'] = $this->DateThai($currentActivity[0]['activities']['startdtm']);
+			$currentActivity[0]['activities']['enddtm'] = $this->DateThai($currentActivity[0]['activities']['enddtm']);
+// 			$this->log($currentActivity);
+		}
 		$this->set(compact('currentActivity'));
 		
 		return;

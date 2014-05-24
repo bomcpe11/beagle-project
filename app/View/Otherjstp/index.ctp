@@ -44,10 +44,15 @@ td.hover{
 			<td><input type="button" value="ค้นหา" onclick="searchData()"/></td>
 		</tr>
 	</table>
-	<div id="section_search" style="display:none">
+	<div id="section_search">
 		<h2>ผลการค้นหา</h2>
 		<div id="search_result"></div>
+		
+		<div id="pagination_contianner" style="text-align: right;overflow: hidden;">  
+			<div id="pagination"></div>                 
+        </div>
 	</div>
+                
 <div style="display:none;">
 <?php if($isAdmin){ ?>
 <div id="user-custom">
@@ -76,7 +81,8 @@ td.hover{
 </div>
 </div>
 <!-- ############################################################################################### -->
-<script>
+
+<script type="text/javascript">
 	jQuery(document).ready(function(){
 		jQuery('input[type="button"]').button();
 
@@ -136,7 +142,8 @@ td.hover{
 					html+='<colgroup>';
 					html+='<col style="width:15%">';
 					html+='<col style="width:15%">';
-					html+='<col style="width:10%">';
+					html+='<col style="width:5%">';
+					html+='<col style="width:5%">';
 					html+='<col>';
 					html+='<col style="width:10%">';
 					html+='<col style="width:30%">';
@@ -148,6 +155,7 @@ td.hover{
 					html+='<th>ชื่อ</th>';
 					html+='<th>นามสกุล</th>';
 					html+='<th>ชื่อเล่น</th>';
+					html+='<th>รุ่นที่</th>';
 					html+='<th>Username</th>';
 					html+='<th>อายุ(ปี)</th>';
 					html+='<th>email</th>';
@@ -172,7 +180,8 @@ td.hover{
 							html+='<td class="hover openprofile">'+data[i].p.nameth+'</td>';
 							html+='<td class="hover openprofile">'+data[i].p.lastnameth+'</td>';
 							html+='<td class="hover openprofile">'+data[i].p.nickname+'</td>';
-							html+='<td class="hover openprofile">'+data[i].p.login+'</td>';
+							html+='<td class="hover openprofile">'+( (data[i].p.generation)? data[i].p.generation: '' )+'</td>';
+							html+='<td class="hover openprofile">'+( (data[i].p.login)? data[i].p.login: '' )+'</td>';
 							html+='<td class="hover openprofile">'+getAge(data[i].p.birthday)+'</td>';
 							html+='<td class="hover openprofile">'+data[i].p.email+'</td>';
 							<?php if($isAdmin){ ?>html+='<td style="text-align:center;"><img src="<?php echo $this->webroot; ?>img/custom.png" class="btncustom" style="cursor:pointer;" /></td>';<?php } ?>

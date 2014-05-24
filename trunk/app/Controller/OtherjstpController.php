@@ -28,8 +28,8 @@ class OtherjstpController extends AppController {
 			$result = $this->Profile->getProfilesLimit();
 		}else{
 			$result = $this->Profile->getDataForPsearch($keyWord,$searchWidth,$flagActivity);
-			//$this->log($result);
 		}
+		$this->log($result);
 		
 		$this->layout='ajax';
 		$this->set('message', json_encode($result));

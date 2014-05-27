@@ -18,6 +18,7 @@
 			var endDate = jQuery('#endDate').val();
 			var location = jQuery('#location').val();
 			var shortdesc = jQuery('#shortdesc').val();
+			var summary = jQuery('#summary').val();
 			var genname = jQuery('#genname').val();
 			var longdesc = CKEDITOR.instances.longdesc.getData();
 			
@@ -33,6 +34,7 @@
 						       endDate:endDate,
 						       location:location,
 						       shortdesc:shortdesc,
+						       summary:summary,
 						       genname:genname,
 						       longdesc:longdesc},
 						success: function(data){
@@ -79,6 +81,14 @@
 		<textarea id="shortdesc" style="width: 700px;" rows="5" ></textarea>
 		</td>
 	</tr>
+	<?php if( $isAdmin ){ ?>
+	<tr align="left">
+		<th align="right" width="20%">สรุปกิจกรรม : </th>
+		<td align="left">
+			<textarea id="summary" style="width: 700px;" rows="5"></textarea>
+		</td>
+	</tr>
+	<?php } ?>
 	<tr align="left" style="display:none;">
 		<th align="right" width="20%">ชื่อรุ่น : </th>
 		<td align="left"><input type="text" id="genname" /></td>

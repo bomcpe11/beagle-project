@@ -77,6 +77,7 @@
 			var endDate = jQuery('#endDate').val();
 			var location = jQuery('#location').val();
 			var shortdesc = jQuery('#shortdesc').val();
+			var summary = jQuery('#summary').val();
 			var longdesc = CKEDITOR.instances.editCK.getData();
 			jConfirm('ท่านต้องการบันทึกข้อมูลกิจกรรมนี้ใช่หรือไม่?', 
 				function(){ //okFunc
@@ -91,8 +92,10 @@
 						       endDate:endDate,
 						       location:location,
 						       shortdesc:shortdesc,
+						       summary:summary,
 						       longdesc:longdesc},
 						success: function(data){
+							console.log('data');
 							unloading();
 							
 							if ( data.status == 1 ) {
@@ -174,6 +177,14 @@
 		} ?>
 		</td>
 	</tr>
+	<?php if( $isAdmin ){ ?>
+	<tr align="left">
+		<th align="right" width="20%">สรุปกิจกรรม : </th>
+		<td align="left">
+			<textarea id="summary" style="width: 700px;" rows="5"><?php echo $result[0]["activities"]["summary"] ?></textarea>
+		</td>
+	</tr>
+	<?php } ?>
 	<tr align="left">
 		<th align="right" width="20%">รายละเอียดกิจกรรม : </th>
 	</tr>

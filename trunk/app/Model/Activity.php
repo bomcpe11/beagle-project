@@ -57,13 +57,14 @@ class Activity extends AppModel {
 		return $result;
 	}
 	/* ------------------------------------------------------------------------------------------------ */
-	public function insertActivities(     $name
-										, $startdtm
-										, $enddtm
-										, $location
-										, $shortdesc
-										, $genname
-										, $longdesc) {
+	public function insertActivities($name
+										,$startdtm
+										,$enddtm
+										,$location
+										,$shortdesc
+										,$summary
+										,$genname
+										,$longdesc) {
 		$this->log("START MODEL  insertActivities ");
 		$flag = false;
 		$strSql = "INSERT INTO activities";
@@ -74,6 +75,7 @@ class Activity extends AppModel {
 		$strSql .= " ,location";
 		$strSql .= " ,genname";
 		$strSql .= " ,shortdesc";
+		$strSql .= " ,summary";
 		$strSql .= " ,longdesc";
 		$strSql .= " ,created_at";
 		$strSql .= " ,updated_at";
@@ -86,6 +88,7 @@ class Activity extends AppModel {
 		$strSql .= " ,'".$location."'"; 
 		$strSql .= " ,'".$genname."'"; 
 		$strSql .= " ,'".$shortdesc."'";
+		$strSql .= " ,'".$summary."'";
 		$strSql .= " ,'".$longdesc."'";
 		$strSql .= " ,sysdate()"; 
 		$strSql .= " ,sysdate()"; 
@@ -105,13 +108,14 @@ class Activity extends AppModel {
 		$this->log("END MODEL  insertActivities ");
 	}
 	/* ------------------------------------------------------------------------------------------------ */
-	public function updateActivity (  $id
-									, $name
-									, $startdtm
-									, $enddtm
-									, $location
-									, $shortdesc
-									, $longdesc) {
+	public function updateActivity($id
+									,$name
+									,$startdtm
+									,$enddtm
+									,$location
+									,$shortdesc
+									,$summary
+									,$longdesc) {
 		$flag = false;
 		$strSql = "UPDATE activities";
 		$strSql .= " SET name = '".$name."'";	
@@ -119,6 +123,7 @@ class Activity extends AppModel {
 		$strSql .= " ,enddtm = '".$enddtm."'";
 		$strSql .= " ,location = '".$location."'";	
 		$strSql .= " ,shortdesc = '".$shortdesc."'";
+		$strSql .= " ,summary = '".$summary."'";
 		$strSql .= " ,longdesc = '".$longdesc."'";
 		$strSql .= " ,updated_at = sysdate()";		
 		$strSql .= " WHERE id = ".$id;

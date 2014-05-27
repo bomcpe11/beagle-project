@@ -42,6 +42,7 @@ class ActivityController extends AppController {
 		$endDate = $this->request->data['endDate'];
 		$location = $this->request->data['location'];
 		$shortdesc = $this->request->data['shortdesc'];
+		$summary = $this->request->data['summary'];
 		$genname = $this->request->data['genname']; 
 		$longdesc = $this->request->data['longdesc'];
 		
@@ -63,6 +64,7 @@ class ActivityController extends AppController {
 						                              $endDate,
 													  $location,
 													  $shortdesc,
+													  $summary,
 													  $genname,
 													  $longdesc) ){
 			$dataSource->commit();
@@ -105,6 +107,7 @@ class ActivityController extends AppController {
 		$endDate = $this->request->data['endDate'];
 		$location = $this->request->data['location'];
 		$shortdesc = $this->request->data['shortdesc'];
+		$summary = $this->request->data['summary'];
 		$longdesc = $this->request->data['longdesc'];
 	
 		$this->log('id => '.$id);
@@ -117,7 +120,7 @@ class ActivityController extends AppController {
 		$this->log('endDate => '.$endDate);
 		$this->log('location => '.$location);
 		$this->log('shortdesc => '.$shortdesc);
-		$this->log('genname => '.$genname);
+		//$this->log('genname => '.$genname);
 		$this->log('longdesc => '.$longdesc);
 	
 		if( $this->Activity->updateActivity($id,
@@ -126,6 +129,7 @@ class ActivityController extends AppController {
 											$endDate,
 											$location,
 											$shortdesc,
+											$summary,
 											$longdesc) ){
 			$status = 1;
 			$message = 'บันทึกข้อมูล สำเร็จ';

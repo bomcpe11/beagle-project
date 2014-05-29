@@ -6,5 +6,4 @@ class CalendarController extends AppController{
 	public function index(){
 		$this->log('---- CalendarController->index ----');
 	}
-	
 }

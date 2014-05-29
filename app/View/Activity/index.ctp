@@ -162,12 +162,14 @@
 	<tr>
 		<td colspan="2"><div style="padding-left:50px;"><?php echo $result[0]["activities"]["shortdesc"] ?></div></td>
 	</tr>
-	<tr>
-		<th align="right">สรุปกิจกกรม : </th>
-	</tr>
-	<tr>
-		<td colspan="2"><div style="padding-left:50px;"><?php echo $result[0]["activities"]["summary"]; ?></div></td>
-	</tr>
+	<?php if( $isAdmin ){ ?>
+		<tr>
+			<th align="right">สรุปกิจกกรม : </th>
+		</tr>
+		<tr>
+			<td colspan="2"><div style="padding-left:50px;"><?php echo $result[0]["activities"]["summary"]; ?></div></td>
+		</tr>
+	<?php } ?>
 	<tr>
 		<th align="right">รายละเอียดกิจกรรม : </th><td></td>
 	</tr>

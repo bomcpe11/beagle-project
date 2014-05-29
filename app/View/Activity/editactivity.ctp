@@ -177,7 +177,7 @@
 		} ?>
 		</td>
 	</tr>
-	<?php if( $isAdmin && $objuser['role']==='1' ){ ?>
+	<?php if( $isAdmin ){ ?>
 	<tr align="left">
 		<th align="right" width="20%">สรุปกิจกรรม : </th>
 		<td align="left">

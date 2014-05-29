@@ -8,7 +8,14 @@
 	<li></li>
 	<li id="menu-resources" class="active"><div class="caption">Resources</div></li>
 	<li></li>
-	<li id="menu-utility" class="active"></li> <!-- Utilitiy -->
+	<li id="menu-utility" class="active">
+		<ul class="util-menu">
+			<li id="util-menu-email" class="active"></li>
+			<li id="util-menu-calendar" class="active"></li>
+			<li id="util-menu-webboard" class="active"></li>
+			<li id="util-menu-faq" class="active"></li>
+		</ul>
+	</li> <!-- Utilitiy -->
 	<li></li>
 	<li></li>
 	<li></li>
@@ -51,5 +58,5 @@
 // 	});
 
 
-	jQuery('ul.main-menu li.active').hover(function(){jQuery(this).addClass('hover');}, function(){jQuery(this).removeClass('hover');});
+	jQuery('ul.main-menu li.active, ul.util-menu li.active').hover(function(){jQuery(this).addClass('hover');}, function(){jQuery(this).removeClass('hover');});
 </script>

@@ -18,7 +18,7 @@
 			var endDate = jQuery('#endDate').val();
 			var location = jQuery('#location').val();
 			var shortdesc = jQuery('#shortdesc').val();
-			var summary = jQuery('#summary').val();
+			var summary = jQuery('#summary').val()? jQuery('#summary').val(): '';
 			var genname = jQuery('#genname').val();
 			var longdesc = CKEDITOR.instances.longdesc.getData();
 			
@@ -81,7 +81,7 @@
 		<textarea id="shortdesc" style="width: 700px;" rows="5" ></textarea>
 		</td>
 	</tr>
-	<?php if( $isAdmin ){ ?>
+	<?php if( $isAdmin && $objuser['role']==='1' ){ ?>
 	<tr align="left">
 		<th align="right" width="20%">สรุปกิจกรรม : </th>
 		<td align="left">

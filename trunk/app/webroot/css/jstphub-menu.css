@@ -325,6 +325,34 @@ ul.main-menu li#menu-activity div.showall-activity{
 }
 
 
+ul.util-menu{
+	margin: 0px;
+	width: 150px;
+}
+ul.util-menu li{
+	display:block;
+	list-style-type: none;
+	float:left;
+	width: 75px;
+	height: 75px;
+}
+ul.util-menu li#util-menu-email{
+	background: #797B7E url("../img/menu-email.png") no-repeat center 21px;
+}ul.util-menu li#util-menu-email.hover{background-color: #CCC;}
+
+ul.util-menu li#util-menu-calendar{
+	background: #5C5E60 url("../img/menu-calendar.png") no-repeat center 12px;
+}ul.util-menu li#util-menu-calendar.hover{background-color: #CCC;}
+
+ul.util-menu li#util-menu-webboard{
+	background: #5C5E60 url("../img/menu-webboard.png") no-repeat center 15px;
+}ul.util-menu li#util-menu-webboard.hover{background-color: #CCC;}
+
+ul.util-menu li#util-menu-faq{
+	background: #797B7E url("../img/menu-faq.png") no-repeat center 11px;
+}ul.util-menu li#util-menu-faq.hover{background-color: #CCC;}
+
+
 
 
 

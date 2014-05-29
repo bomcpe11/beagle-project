@@ -67,23 +67,23 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 			<img src="<?php echo $this->Html->url('/img/logo-jstp_v2.png');?>"></img>
 		</div>
 		<div id="header_search_wrapper">
-			<form>
-				<table style="width: 100%;">
-					<tr>
-						<td style="width: 45%;">
-							<button type="button" id="btn-mainmenu">Main menu</button>
-							<button type="button" id="btn-logout">Log off</button>
-						</td>
-						<td style="width: 45%;">
-							<input class="txt-search" type="text" placeholder="Search...">
-						</td>
-						<td style="width: 10%;">
-							<input type="image" src="<?php echo $this->Html->url('/img/search-icon.png');?>" 
-								style="width: 20px;height: 20px;margin-left: 5px;" title="Search Project">
-						</td>
-					</tr>
-				</table>
-			</form>
+			<table style="width: 100%;">
+				<tr>
+					<td style="width: 45%;">
+						<button type="button" id="btn-mainmenu">Main menu</button>
+						<button type="button" id="btn-logout">Log off</button>
+					</td>
+					<td style="width: 45%;">
+						<form action="<?php echo $this->Html->url('/Searchresult');?>" method="post">
+							<input class="txt-search" type="text" name="keyword" value="<?php echo (empty($keyword)?'':$keyword); ?>" placeholder="Search...">
+						</form>
+					</td>
+					<td style="width: 10%;">
+						<input type="image" src="<?php echo $this->Html->url('/img/search-icon.png');?>" 
+							style="width: 20px;height: 20px;margin-left: 5px;" title="Search Project">
+					</td>
+				</tr>
+			</table>
 		</div>
 	</div>
 	<div id="header-bottom-border">

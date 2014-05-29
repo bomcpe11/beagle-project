@@ -216,6 +216,7 @@ class Profile extends AppModel {
 				,email='".$email."'
 				,alterkey='".$alterkey."'
 				,is_approve='0'
+				,updforsearchflg='1'
 				WHERE id='$id'";
 		
 		try {
@@ -341,6 +342,7 @@ class Profile extends AppModel {
 		$strSql .= " ,blogaddress = '".$blogAddress."'";
 		$strSql .= " ,status = '".$status."'";
 		$strSql .= " ,updated_at = now()";
+		$strSql .= " ,updforsearchflg = '1'";
 		$strSql .= " WHERE id = ".$profileId;
 		$strSql .= ";";
 		//$this->log("strSql => ".$strSql);
@@ -363,6 +365,7 @@ class Profile extends AppModel {
 		$sql = "UPDATE profiles
 					 SET image_file='$image_file'
 					 	,image_desc='$image_desc'
+					 	,updforsearchflg='1'
 					 WHERE id='$id'";
 		
 		try {

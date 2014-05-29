@@ -119,21 +119,16 @@ function openPopupHtml(title, html, buttons, openFunc, closeFunc, isPutCloseBtn)
 	
 	//</?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)/?>
 	var isHTML = false;
-	var re = new RegExp("</?\w+((\s+\w+(\s*=\s*(?:\".*?\"|'.*?'|[^'\">\s]+))?)+\s*|\s*)/?>");
+//	var re = new RegExp("</?\w+((\s+\w+(\s*=\s*(?:\".*?\"|'.*?'|[^'\">\s]+))?)+\s*|\s*)/?>");
+	var re = new RegExp("</?\\w+((\\s+\\w+(\\s*=\\s*(?:\".*?\"|'.*?'|[^'\">\\s]+))?)+\\s*|\\s*)/?>");
 	if (html.match(re)) {
 		isHTML = true;
 	}
 	
-	
 	if(buttons==undefined) buttons = [{text: "Close", click: function() {jQuery(this).dialog("close"); jQuery(this).remove();}}]
 	else if(isPutCloseBtn==undefined || isPutCloseBtn==true){
-		if(isHTML){
-			buttons.push({text: "Close", click: function() {jQuery(this).dialog("close"); jQuery(this).remove();}});
-		}else{
 			buttons.push({text: "Close", click: function() {jQuery(this).dialog("close");}});
-		}
 	}
-//		console.log(NewDialog.width());
         NewDialog.dialog({
             modal: true,
             title: title,
@@ -142,7 +137,12 @@ function openPopupHtml(title, html, buttons, openFunc, closeFunc, isPutCloseBtn)
             width: NewDialog.width(),
             buttons: buttons,
             open: openFunc,
-            close: closeFunc
+            close: function(){
+	            	if(closeFunc!=undefined) closeFunc();
+	            	if(isHTML){
+	            		jQuery(this).closest('div.ui-dialog').remove();
+	        		}
+	            }
         });
 }
 

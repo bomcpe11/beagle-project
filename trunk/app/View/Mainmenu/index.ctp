@@ -6,14 +6,14 @@
 	<a href="<?php echo $this->Html->url('/PersonalInfo/index?id='.$objuser['id']);?>"><li id="menu-personal-info" class="active"><div class="caption">Personal Info</div></li></a>
 	<a href="<?php echo $this->Html->url('/Project/index?id='.$objuser['id']);?>"><li id="menu-project" class="active"><div class="caption">Project/Research</div></li></a>
 	<li></li>
-	<li id="menu-resources" class="active"><div class="caption">Resources</div></li>
+	<a href="<?php echo $this->Html->url('/Resources');?>"><li id="menu-resources" class="active"><div class="caption">Resources</div></li></a>
 	<li></li>
 	<li id="menu-utility" class="active">
 		<ul class="util-menu">
-			<li id="util-menu-email" class="active"></li>
-			<li id="util-menu-calendar" class="active"></li>
-			<li id="util-menu-webboard" class="active"></li>
-			<li id="util-menu-faq" class="active"></li>
+			<a href="<?php echo $this->Html->url('/Emailsender');?>"><li id="util-menu-email" class="active tooltip" title="Email"></li></a>
+			<li id="util-menu-calendar" class="active tooltip" title="Calendar"></li>
+			<a href="<?php echo $this->Html->url('/Webboard');?>"><li id="util-menu-webboard" class="active tooltip" title="Webboard"></li></a>
+			<li id="util-menu-faq" class="active tooltip" title="FAQ"></li>
 		</ul>
 	</li> <!-- Utilitiy -->
 	<li></li>

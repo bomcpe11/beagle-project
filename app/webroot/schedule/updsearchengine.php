@@ -3,8 +3,27 @@ header('Content-Type: text/html; charset=utf-8');
 
 include "../../Config/database.php";
 
+//*** Start Transaction ***//
+// mysql_query("BEGIN");
+
+//*** Commit Transaction ***//
+// mysql_query("COMMIT")
+
+//*** RollBack Tranasction ***//
+// mysql_query("ROLLBACK")
 
 function retriveProfiles($objConnect){
+	
+	//Select profile where updforsearchflg=1
+	
+	$strSQL = "";
+	mysql_query("BEGIN");
+	
+	
+	
+	
+	
+	
 	$strSQL = "insert into searchkeywords (typeid, dataid, keyword) 
 select 1, t.id, 
 			concat(ifnull(t.nameth,'')

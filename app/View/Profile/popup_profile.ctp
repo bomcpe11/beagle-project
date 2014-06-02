@@ -115,7 +115,7 @@
 								</p>\
 							</li>\
 							<li class="single">\
-								<p><strong>Sosial Media :</strong></p>\
+								<p><strong>Social Media :</strong></p>\
 								<p>\
 									<input id="text-blog-address" type="text" value=<?php echo $objUser[0]['profiles']["blogaddress"];?>>\
 									<input id="hidden-profile-id" type="hidden" value=<?php echo $objUser[0]['profiles']["id"];?>>\

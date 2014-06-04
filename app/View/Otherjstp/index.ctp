@@ -4,18 +4,19 @@ border: 1px solid black;
 /* border:1px solid green; */
 }
 table.table-data{
-border-collapse:collapse;
-width:100%;
+	border-collapse:collapse;
+	width:100%;
 }
 table.table-data th{
-height:30px;
-background-color:green;
-color:white;
+	height:30px;
+	background-color:green;
+	color:white;
+	cursor: pointer;
 }
 table.table-data td{
-text-align:left;
-vertical-align:bottom;
-padding:5px;
+	text-align:left;
+	vertical-align:bottom;
+	padding:5px;
 }
 td.hover{
 	cursor:pointer;
@@ -41,15 +42,14 @@ td.hover{
 		</tr>
 		<tr>
 			<td></td>
-			<td><input type="button" value="ค้นหา" onclick="searchData()"/></td>
+			<td><input type="button" value="ค้นหา" onclick="searchData('1','id')"/></td>
 		</tr>
 	</table>
 	<div id="section_search">
 		<h2>ผลการค้นหา</h2>
 		<div id="search_result"></div>
 		
-		<div id="pagination_contianner" style="text-align: right;overflow: hidden;">  
-			<div id="pagination"></div>                 
+		<div id="pagination" style="margin: auto;">
         </div>
 	</div>
                 
@@ -87,10 +87,10 @@ td.hover{
 		jQuery('input[type="button"]').button();
 
 		jQuery('#key_word').val('*');
-		searchData();
+		searchData('1','id');
 	});
 	/*	------------------------------------------------------------------------------------------------ */
-	function searchData(){
+	function searchData(currentPage, orderBy){
 		var keyWord = jQuery('#key_word').val();
 		var searchWidth = new Array();
 		var flagActivity = -1;	// -1 not have activity, 1 have activity
@@ -135,55 +135,58 @@ td.hover{
 		jQuery.post('<?php echo $this->Html->url('/Otherjstp/searchData');?>'
 				,{'data':{'keyWord':keyWord
 							,'searchWidth':searchWidth
-							,'flagActivity':flagActivity}}
-				,function(data){
-					var countData = data?data.length:0;
+							,'flagActivity':flagActivity
+							,'currentPage':currentPage
+							,'orderBy':orderBy}}
+				,function(response){
+					/* var countData = data?data.length:0; */
+					var countData = response.data.length;
 					var html='<table class="table-data">';
 					html+='<colgroup>';
-					html+='<col style="width:15%">';
-					html+='<col style="width:15%">';
-					html+='<col style="width:5%">';
-					html+='<col style="width:5%">';
+					html+='<col style="width: 15%;">';
+					html+='<col style="width: 15%;">';
+					html+='<col style="width: 5%;">';
+					html+='<col style="width: 5%;">';
 					html+='<col>';
-					html+='<col style="width:10%">';
-					html+='<col style="width:30%">';
+					html+='<col style="width: 10%;">';
+					html+='<col style="width: 30%;">';
 					<?php if($isAdmin){ ?>html+='<col>';<?php } ?>
 					html+='</colgroup>';
 					
 					html+='<thead>';
 					html+='<tr>';
-					html+='<th>ชื่อ</th>';
-					html+='<th>นามสกุล</th>';
-					html+='<th>ชื่อเล่น</th>';
-					html+='<th>รุ่นที่</th>';
-					html+='<th>Username</th>';
-					html+='<th>อายุ(ปี)</th>';
-					html+='<th>email</th>';
+					html+='<th onclick="searchData(\'1\', \'nameth\')">ชื่อ</th>';
+					html+='<th onclick="searchData(\'1\', \'lastnameth\')">นามสกุล</th>';
+					html+='<th onclick="searchData(\'1\', \'nickname\')">ชื่อเล่น</th>';
+					html+='<th onclick="searchData(\'1\', \'generation\')">รุ่นที่</th>';
+					html+='<th onclick="searchData(\'1\', \'login\')">Username</th>';
+					html+='<th onclick="searchData(\'1\', \'birthday\')">อายุ(ปี)</th>';
+					html+='<th onclick="searchData(\'1\', \'email\')">email</th>';
 					<?php if($isAdmin){ ?>html+='<th>Admin</th>';<?php } ?>
 					html+='</tr>';
 					html+='</thead>';
 					
 					html+='<tbody>';
-					if( countData>0 ){
+					if( response.total_data>0 ){
 						var params = {};
 						for( var i=0;i<countData;i++ ){
 							params = {
-									id: data[i].p.id
-									,name: data[i].p.nameth
-									,lastname: data[i].p.lastnameth
-									,role: data[i].p.role
+									id: response.data[i].p.id
+									,name: response.data[i].p.nameth
+									,lastname: response.data[i].p.lastnameth
+									,role: response.data[i].p.role
 									<?php if($isAdmin){ ?>
-									,role_admin: data[i].p.role_admin
+									,role_admin: response.data[i].p.role_admin
 									<?php } ?>
 										};
 							html+='<tr params="'+escape(JSON.stringify(params))+'">';
-							html+='<td class="hover openprofile">'+data[i].p.nameth+'</td>';
-							html+='<td class="hover openprofile">'+data[i].p.lastnameth+'</td>';
-							html+='<td class="hover openprofile">'+data[i].p.nickname+'</td>';
-							html+='<td class="hover openprofile">'+( (data[i].p.generation)? data[i].p.generation: '' )+'</td>';
-							html+='<td class="hover openprofile">'+( (data[i].p.login)? data[i].p.login: '' )+'</td>';
-							html+='<td class="hover openprofile">'+getAge(data[i].p.birthday)+'</td>';
-							html+='<td class="hover openprofile">'+data[i].p.email+'</td>';
+							html+='<td class="hover openprofile">'+response.data[i].p.nameth+'</td>';
+							html+='<td class="hover openprofile">'+response.data[i].p.lastnameth+'</td>';
+							html+='<td class="hover openprofile">'+response.data[i].p.nickname+'</td>';
+							html+='<td class="hover openprofile">'+( (response.data[i].p.generation)? response.data[i].p.generation: '' )+'</td>';
+							html+='<td class="hover openprofile">'+( (response.data[i].p.login)? response.data[i].p.login: '' )+'</td>';
+							html+='<td class="hover openprofile">'+getAge(response.data[i].p.birthday)+'</td>';
+							html+='<td class="hover openprofile">'+response.data[i].p.email+'</td>';
 							<?php if($isAdmin){ ?>html+='<td style="text-align:center;"><img src="<?php echo $this->webroot; ?>img/custom.png" class="btncustom" style="cursor:pointer;" /></td>';<?php } ?>
 							html+='</tr>';
 						}
@@ -209,6 +212,22 @@ td.hover{
 						remove_member();
 					});
 					<?php } ?>
+
+					/* pagination */
+					jQuery('#pagination').smartpaginator({totalrecords: response.total_data, 
+															recordsperpage: response.record_per_page, 
+															datacontainer: 'divs', 
+															dataelement: 'div', 
+															initval: currentPage, 
+															next: 'Next', 
+															prev: 'Prev', 
+															first: 'First', 
+															last: 'Last', 
+															theme: 'black',
+															onchange: function(newPageValue){
+																searchData(newPageValue, orderBy);
+															} 
+														});
 					
 					jQuery('#section_search').show();
 

@@ -11,6 +11,30 @@ class Profile extends AppModel {
 		return $result;
 	}
 	
+	public function getProfilesByLimit($start,$end,$orderBy){
+		$result = array();
+		$sql = 'select * from profiles p';
+		if( $orderBy==='birthday' ){
+			$order = " order by p.{$orderBy} desc";
+		}else{
+			$order = " order by p.{$orderBy} asc";
+		}
+		$limit = " limit $start, $end";
+		$this->log($sql.$order.$limit);
+		
+		try{
+			$resultAll = $this->query($sql.$order);
+			$resultLimit = $this->query($sql.$order.$limit);
+			$result = array('total_data' => count($resultAll),
+								'data' => $resultLimit);
+			//$this->log($resultAll);
+		}catch( Exception $e ){
+			$this->log("exception => ".$e->getMessage());
+		}
+		
+		return $result;
+	}
+	
 	public function removeProfile($id){
 		$flag = false;
 		$strSql = "DELETE FROM profiles ";
@@ -489,8 +513,15 @@ class Profile extends AppModel {
 		return $result;
 	}// checkNameEng
 	/* ------------------------------------------------------------------------------------------------------- */
-	public function getDataForPsearch($keyWord,$searchWidth,$flagActivity){
-		$result = null;
+	public function getDataForPsearch($keyWord,
+										$searchWidth,
+										$flagActivity,
+										$start,
+										$end,
+										$orderBy){
+		$result = array();
+		$resultAll = array();
+		$resultLimit = array();
 		$nowYear = date('Y');
 		if( $flagActivity==='1' ){
 			$sql = "SELECT DISTINCT p.* 
@@ -530,10 +561,20 @@ class Profile extends AppModel {
 			}
 		}
 		$sql = "$sql ( $sqlCondition )";
-		$this->log($sql);
+		if( $orderBy==='birthday' ){
+			$order = " order by p.{$orderBy} desc";
+		}else{
+			$order = " order by p.{$orderBy} asc";
+		}
+		$limit = " limit $start, $end";
+		$this->log($sql.$order.$limit);
 	
 		try {
-   			$result = $this->query($sql);
+   			$resultAll = $this->query($sql.$order);
+   			$resultLimit = $this->query($sql.$order.$limit);
+			
+			$result = array('total_data' => count($resultAll),
+							'data' => $resultLimit);
    		} catch ( Exception $e ) {
    			$this->log("exception => ".$e->getMessage());
    		}

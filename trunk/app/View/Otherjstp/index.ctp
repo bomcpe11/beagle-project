@@ -1,7 +1,7 @@
 <style type="text/css">
 table.table-data, table.table-data th, table.table-data td{
-border: 1px solid black;
-/* border:1px solid green; */
+	border: 1px solid black;
+	/* border:1px solid green; */
 }
 table.table-data{
 	border-collapse:collapse;
@@ -190,10 +190,30 @@ td.hover{
 							<?php if($isAdmin){ ?>html+='<td style="text-align:center;"><img src="<?php echo $this->webroot; ?>img/custom.png" class="btncustom" style="cursor:pointer;" /></td>';<?php } ?>
 							html+='</tr>';
 						}
+
+						/* pagination */
+						jQuery('#pagination').show();
+						jQuery('#pagination').smartpaginator({totalrecords: response.total_data, 
+																recordsperpage: response.record_per_page, 
+																datacontainer: 'divs', 
+																dataelement: 'div', 
+																initval: currentPage, 
+																next: 'Next', 
+																prev: 'Prev', 
+																first: 'First', 
+																last: 'Last', 
+																theme: 'black',
+																onchange: function(newPageValue){
+																	searchData(newPageValue, orderBy);
+																} 
+															});
 					}else{
 						html+='<tr>';
-						html+='<td colspan="6" style="text-align:center">ไม่พบข้อมูล</td>';
+						html+='<td colspan="7" style="text-align:center">ไม่พบข้อมูล</td>';
 						html+='</tr>';
+
+						/* pagination */
+						jQuery('#pagination').hide();
 					}
 					html+='</tbody>';
 					html+='</table>';
@@ -212,23 +232,7 @@ td.hover{
 						remove_member();
 					});
 					<?php } ?>
-
-					/* pagination */
-					jQuery('#pagination').smartpaginator({totalrecords: response.total_data, 
-															recordsperpage: response.record_per_page, 
-															datacontainer: 'divs', 
-															dataelement: 'div', 
-															initval: currentPage, 
-															next: 'Next', 
-															prev: 'Prev', 
-															first: 'First', 
-															last: 'Last', 
-															theme: 'black',
-															onchange: function(newPageValue){
-																searchData(newPageValue, orderBy);
-															} 
-														});
-					
+			
 					jQuery('#section_search').show();
 
 					unloading();			

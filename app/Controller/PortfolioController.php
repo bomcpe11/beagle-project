@@ -67,7 +67,7 @@ class PortfolioController extends AppController {
 				$htmlResearchTable .= '<table class="table-data">
 										<tr>
 											<td style="width: 40%;">
-												<img style="width: 300px; height: 250px;" src="'.$dataResearch[$i]['r']['thumbpath'].'" alt="thumbpath"></img>
+												<img style="width: 250px; height: 250px;" src="'.$dataResearch[$i]['r']['thumbpath'].'" alt="thumbpath"></img>
 											</td>
 											<td style="width: 60%;">
 												Project: '.$dataResearch[$i]['r']['name'].'<br/>
@@ -86,7 +86,7 @@ class PortfolioController extends AppController {
 				$htmlResearchTable .= '<table class="table-data" style="margin-top: 60px;">
 										<tr>
 											<td style="width: 40%;">
-												<img style="width: 300px; height: 250px;" src="'.$dataResearch[$i]['r']['thumbpath'].'" alt="thumbpath"></img>
+												<img style="width: 250px; height: 250px;" src="'.$dataResearch[$i]['r']['thumbpath'].'" alt="thumbpath"></img>
 											</td>
 											<td style="width: 60%;">
 												Project: '.$dataResearch[$i]['r']['name'].'<br/>
@@ -118,7 +118,7 @@ class PortfolioController extends AppController {
 				$htmlAwardTable .= '<table class="table-data">
 										<tr>
 											<td style="width: 40%;">
-												<img style="width: 300px; height: 250px;" src="'.$dataAward[$i]['d']['thumbpath'].'" alt="thumbpath"></img>
+												<img style="width: 250px; height: 250px;" src="'.$dataAward[$i]['d']['thumbpath'].'" alt="thumbpath"></img>
 											</td>
 											<td style="width: 60%;">
 												Name: '.$dataAward[$i]['a']['name'].'<br/>
@@ -135,7 +135,7 @@ class PortfolioController extends AppController {
 				$htmlAwardTable .= '<table class="table-data" style="margin-top: 60px;">
 										<tr>
 											<td style="width: 40%;">
-												<img style="width: 300px; height: 250px;" src="'.$dataAward[$i]['d']['thumbpath'].'" alt="thumbpath"></img>
+												<img style="width: 250px; height: 250px;" src="'.$dataAward[$i]['d']['thumbpath'].'" alt="thumbpath"></img>
 											</td>
 											<td style="width: 60%;">
 												Name: '.$dataAward[$i]['a']['name'].'<br/>
@@ -151,9 +151,11 @@ class PortfolioController extends AppController {
 			}
 		}
 		
-		$html = '
+		/* Page 1 */
+		$page1 = '
 				<style>
 					body{
+						background-image: url('.$this->webroot.'/img/pdf-profile-bg1-01.png'.');
 						font-size: 14px;
 					}
 					h1,h2,h3,h4,h5,h6,hr,table{
@@ -182,6 +184,10 @@ class PortfolioController extends AppController {
 						text-indent: 10px;
 					}
 					img{
+					}
+					.page{	
+						width: 21cm;
+						height: 29.7cm;		
 					}
 					.table-data{
 						width: 100%;
@@ -219,8 +225,75 @@ class PortfolioController extends AppController {
 							<h4 style="margin: 300px 0 0 0; text-align: center;">'.$dataProfile[0]['profiles']['nameth'].' '.$dataProfile[0]['profiles']['lastnameth'].'</h4>
 						</div>
 					</div>
-					<pagebreak />
-				
+				</body>';
+		$mpdf=new mPDF('UTF-8');
+		$mpdf->SetAutoFont();
+		$mpdf->WriteHTML($page1);
+		$mpdf->AddPage('P');
+		
+		/* Page 2 */
+		$page2 = '
+				<style>
+					body{
+						background-image: url('.$this->webroot.'/img/pdf-profile-bg2-01.png'.');
+						font-size: 14px;
+					}
+					h1,h2,h3,h4,h5,h6,hr,table{
+						margin: 0;
+						padding: 0;
+					}
+					h1{
+						font-size: 44px;
+					}
+					h2{
+						font-size: 40px;
+					}
+					h3{
+						font-size: 36px;
+					}
+					h4{
+						font-size: 32px;
+					}
+					h5{
+						font-size: 28px;
+					}
+					h6{
+						font-size: 24px;
+					}
+					p{
+						text-indent: 10px;
+					}
+					img{
+					}
+					.page{	
+						width: 21cm;
+						height: 29.7cm;		
+					}
+					.table-data{
+						width: 100%;
+						color: #3D991F;
+						table-layout: fixed;
+					}
+					.table-data-border{
+						width: 100%;
+						border-collapse: collapse;
+					}
+					.table-data-border tr:nth-child(even){
+						background-color: #E5EFC6;
+					}
+					.table-data-border th{
+						background-color: #A7C942;
+					}
+					.table-data-border th, .table-data-border td{
+						border: 1px solid #98bf21;
+					}
+					.underline{
+						height: 5px;
+						margin-bottom: 10px;
+						color: #3D991F;
+					}
+				</style>
+				<body>
 					<div name="page2" class="page">
 						<table class="table-data">
 							<tr>
@@ -251,7 +324,7 @@ class PortfolioController extends AppController {
 									<table class="table-data">
 										<tr>
 											<td>
-												<img style="width: 250px; height: 300px;" src="'.$dataProfile[0]['profiles']['image_file'].'" alt="img profile"></img>
+												<img style="width: 250px; height: 250px;" src="'.$dataProfile[0]['profiles']['image_file'].'" alt="img profile"></img>
 											</td>
 										</tr>
 									</table>
@@ -267,8 +340,73 @@ class PortfolioController extends AppController {
 							</tr>
 						</table>
 					</div>
-					<pagebreak />
-				
+				</body>';
+		$mpdf->WriteHTML($page2);
+		$mpdf->AddPage('P');
+		
+		/* Page 3 */
+		$page3 = '
+				<style>
+					body{
+						background-image: url('.$this->webroot.'/img/pdf-profile-bg3-01.png'.');
+						font-size: 14px;
+					}
+					h1,h2,h3,h4,h5,h6,hr,table{
+						margin: 0;
+						padding: 0;
+					}
+					h1{
+						font-size: 44px;
+					}
+					h2{
+						font-size: 40px;
+					}
+					h3{
+						font-size: 36px;
+					}
+					h4{
+						font-size: 32px;
+					}
+					h5{
+						font-size: 28px;
+					}
+					h6{
+						font-size: 24px;
+					}
+					p{
+						text-indent: 10px;
+					}
+					img{
+					}
+					.page{	
+						width: 21cm;
+						height: 29.7cm;		
+					}
+					.table-data{
+						width: 100%;
+						color: #3D991F;
+						table-layout: fixed;
+					}
+					.table-data-border{
+						width: 100%;
+						border-collapse: collapse;
+					}
+					.table-data-border tr:nth-child(even){
+						background-color: #E5EFC6;
+					}
+					.table-data-border th{
+						background-color: #A7C942;
+					}
+					.table-data-border th, .table-data-border td{
+						border: 1px solid #98bf21;
+					}
+					.underline{
+						height: 5px;
+						margin-bottom: 10px;
+						color: #3D991F;
+					}
+				</style>
+				<body>
 					<div name="page3" class="page">
 						<table style="width: 100%;">
 							<tr>
@@ -280,8 +418,73 @@ class PortfolioController extends AppController {
 						<hr class="underline">
 						'.$htmlResearchTable.'
 					</div>
-					<pagebreak />
-				
+				</body>';
+		$mpdf->WriteHTML($page3);
+		$mpdf->AddPage('P');
+		
+		/* Page 4 */
+		$page4 = '
+				<style>
+					body{
+						background-image: url('.$this->webroot.'/img/pdf-profile-bg5-01.png'.');
+						font-size: 14px;
+					}
+					h1,h2,h3,h4,h5,h6,hr,table{
+						margin: 0;
+						padding: 0;
+					}
+					h1{
+						font-size: 44px;
+					}
+					h2{
+						font-size: 40px;
+					}
+					h3{
+						font-size: 36px;
+					}
+					h4{
+						font-size: 32px;
+					}
+					h5{
+						font-size: 28px;
+					}
+					h6{
+						font-size: 24px;
+					}
+					p{
+						text-indent: 10px;
+					}
+					img{
+					}
+					.page{	
+						width: 21cm;
+						height: 29.7cm;		
+					}
+					.table-data{
+						width: 100%;
+						color: #3D991F;
+						table-layout: fixed;
+					}
+					.table-data-border{
+						width: 100%;
+						border-collapse: collapse;
+					}
+					.table-data-border tr:nth-child(even){
+						background-color: #E5EFC6;
+					}
+					.table-data-border th{
+						background-color: #A7C942;
+					}
+					.table-data-border th, .table-data-border td{
+						border: 1px solid #98bf21;
+					}
+					.underline{
+						height: 5px;
+						margin-bottom: 10px;
+						color: #3D991F;
+					}
+				</style>
+				<body>
 					<div name="page4" class="page">
 						<table style="width: 100%;">
 							<tr>
@@ -293,11 +496,74 @@ class PortfolioController extends AppController {
 						<hr class="underline">
 						'.$htmlAwardTable.'
 					</div>
-					<pagebreak />
-					
-					
-					<div name="page5" class="page">
-						<table style="width: 100%;">
+				</body>';
+		$mpdf->WriteHTML($page4);
+		$mpdf->AddPage('P');
+		
+		/* Page 5 */
+		$page5 = '
+				<style>
+					body{
+						background-image: url('.$this->webroot.'/img/pdf-profile-bg7-01.png'.');
+						font-size: 14px;
+					}
+					h1,h2,h3,h4,h5,h6,hr,table{
+						margin: 0;
+						padding: 0;
+					}
+					h1{
+						font-size: 44px;
+					}
+					h2{
+						font-size: 40px;
+					}
+					h3{
+						font-size: 36px;
+					}
+					h4{
+						font-size: 32px;
+					}
+					h5{
+						font-size: 28px;
+					}
+					h6{
+						font-size: 24px;
+					}
+					p{
+						text-indent: 10px;
+					}
+					img{
+					}
+					.page{	
+						width: 21cm;
+						height: 29.7cm;		
+					}
+					.table-data{
+						width: 100%;
+						color: #3D991F;
+						table-layout: fixed;
+					}
+					.table-data-border{
+						width: 100%;
+						border-collapse: collapse;
+					}
+					.table-data-border tr:nth-child(even){
+						background-color: #E5EFC6;
+					}
+					.table-data-border th{
+						background-color: #A7C942;
+					}
+					.table-data-border th, .table-data-border td{
+						border: 1px solid #98bf21;
+					}
+					.underline{
+						height: 5px;
+						margin-bottom: 10px;
+						color: #3D991F;
+					}
+				</style>
+				<body>
+					<table style="width: 100%;">
 							<tr>
 								<td>
 									<h5 style="color: #333333;">Eduction<h5>
@@ -306,13 +572,8 @@ class PortfolioController extends AppController {
 						</table>
 						<hr class="underline">
 						'.$htmlEducationTable.'
-					</div>
-				</body>
-				';
-		
-		$mpdf=new mPDF('UTF-8');
-		$mpdf->SetAutoFont();
-		$mpdf->WriteHTML($html);
+				</body>';
+		$mpdf->WriteHTML($page5);
 		$mpdf->Output();
 		
 		$this->set('message', '');

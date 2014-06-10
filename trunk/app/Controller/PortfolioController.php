@@ -30,6 +30,9 @@ class PortfolioController extends AppController {
 			$htmlEducationTable .= '<tr><td colspan="4" style="text-align: center;">ไม่พบข้อมูล</td></tr>';
 		}
 		for( $i=0;$i<$countEducation && $i<4;$i++ ){
+			$splitEndYear = array();
+			$splitEndYear = explode('-', $dataEducation[$i]['educations']['endyear']);	// yyyy-mm-dd
+			
 			if( $i==0 ){
 				$htmlEducation = '';
 			}
@@ -38,7 +41,7 @@ class PortfolioController extends AppController {
 			
 			$htmlEducationTable .= '<tr>
 										<td>'.$dataEducation[$i]['educations']['edutype'].'</td>
-										<td>'.$dataEducation[$i]['educations']['endyear'].'</td>
+										<td>'.$splitEndYear[0].'</td>
 										<td>'.$dataEducation[$i]['educations']['gpa'].'</td>
 										<td>'.$dataEducation[$i]['educations']['name'].'</td>
 									</tr>';

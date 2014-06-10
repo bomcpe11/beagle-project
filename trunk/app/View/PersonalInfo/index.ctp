@@ -122,13 +122,17 @@
 						</tr>
 					<?php }?>
 				</table>
+				
+				<table style="width:100%;"><tr>
+					<td align="center">
+						<input type="button" style="display: inline-block; margin: 0;"
+								id="button_edit_profile" onclick="javascript:edit_profile();" value="แก้ไขข้อมูลส่วนตัว"/>
+						<input type="button" style="display: inline-block; margin: 0;"
+								onclick="export_profile('<?php echo $objUser[0]['profiles']['id']; ?>')" value="Export Profile"/>
+					</td>
+					</tr></table>
 			</div>
 		</div>
-		<table style="width:100%;"><tr>
-		<td align="center">
-			<input type="button" id="button_edit_profile" onclick="javascript:edit_profile();" value="แก้ไขข้อมูลส่วนตัว"/>
-		</td>
-		</tr></table>
 	</div>
 	<div class="container">
 		<h2>ประวัติครอบครัว</h2>
@@ -535,5 +539,8 @@
 		}
 		
 		return result;
+	}
+	function export_profile(profile_id){
+		window.open('<?php echo $this->Html->url('/Portfolio/'); ?>?id='+profile_id);
 	}
 </script>

@@ -256,6 +256,8 @@ ul.main-menu li.active{
 ul.main-menu li.active div.caption{
 	text-align: center;
 	padding-top: 125px;
+	font-size: 1.2em;
+	font-weight: bold;
 }
 
 ul.main-menu li#menu-personal-info{

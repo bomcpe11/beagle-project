@@ -21,6 +21,15 @@ class ChangepicController extends AppController {
 		$result = null;
 		$objUser = $this->getObjUser();
 		$eduStep = -1;
+
+		$profileId = '';
+		if(empty($this->request->query['id'])){
+			$profileId = $objUser["id"];
+		}else{
+			$profileId = $this->request->query['id'];
+		}
+		$this->log("id=".$profileId);
+		
 // 		$imgDtm = $this->request->data["text_imgdtm"];
 // 		$imgDesc = $this->request->data["textarea_imgdesc"];
 		
@@ -34,7 +43,7 @@ class ChangepicController extends AppController {
 // 				, $imgDtm
 // 				, "") ) {
 			// gen directory
-			$directory = "img/profiles/".$objUser["id"];
+			$directory = "img/profiles/".$profileId;
 			// gen fileName
 			$pictureId = $this->Sequence->next_val('PROFILEPICTURE');
 // 			$lastInsertId = 
@@ -102,7 +111,8 @@ class ChangepicController extends AppController {
 			$this->redirect(array("controller" => "Changepic",
 					"action" => "crop",
 					"imgPath" => base64_encode($tmp2_fileName),
-					"pictureId" => $pictureId
+					"pictureId" => $pictureId,
+					"profileId" => $profileId
 					));
 			
 			//Update new session
@@ -129,8 +139,9 @@ class ChangepicController extends AppController {
 		
 		$raw_imgPath = $this->params['named']['imgPath'];
 		$pictureId = $this->params['named']['pictureId'];
+		$profileId = $this->params['named']['profileId'];
 		$imgPath = '';
-		if(!empty($raw_imgPath) && !empty($pictureId)){
+		if(!empty($raw_imgPath) && !empty($pictureId) && !empty($profileId)){
 			$imgPath = base64_decode($raw_imgPath);
 			
 		}else{
@@ -138,7 +149,7 @@ class ChangepicController extends AppController {
 		}
 
 		$this->layout='public';
-		$this->set(compact('imgPath', 'raw_imgPath', 'pictureId'));
+		$this->set(compact('imgPath', 'raw_imgPath', 'pictureId', 'profileId'));
 		
 		$this->log('END :: ChangepicController -> crop()');
 		
@@ -153,6 +164,7 @@ class ChangepicController extends AppController {
 		$imgDtm = $this->request->data['imgdtm'];
 		$imgDesc = $this->request->data['imgdesc'];
 		$pictureId = $this->request->data['pictureId'];
+		$profileId = $this->request->data['profileId'];
 		$cropInfo = $this->request->data['cropInfo'];
 		
 		$objUser = $this->getObjUser();
@@ -162,11 +174,11 @@ class ChangepicController extends AppController {
 		$dataSource->begin();
 		
 		$imgPath = '';
-		if(!empty($raw_imgPath) && !empty($pictureId)){
+		if(!empty($raw_imgPath) && !empty($pictureId) && !empty($profileId)){
 			$imgPath = base64_decode($raw_imgPath);
 			
 			
-			$directory = "img/profiles/".$objUser["id"];
+			$directory = "img/profiles/".$profileId;
 			$splitFileName = explode(".", $imgPath);
 			$extensionFile = ".".$splitFileName[count($splitFileName)-1];
 			$fileName = $pictureId.$extensionFile;
@@ -197,14 +209,14 @@ class ChangepicController extends AppController {
 				
 				/* Insert Database */
 				if ( $this->ProfilePic->insertAll($pictureId,
-						$objUser["id"]
+						$profileId
 						, $directory."/".$fileName
 						, $imgDesc
 						, 0
 						, $imgDtm
 						, "") ) {
 
-					if( $this->Profile->updateImg($objUser['id']
+					if( $this->Profile->updateImg($profileId
 								,$directory."/".$fileName
 								,$imgDesc) ){
 
@@ -257,6 +269,7 @@ class ChangepicController extends AppController {
 		$result = array();
 		$objUser = $this->getObjUser();
 		//$this->log($this->request->query);
+		$profileId = $this->request->query['profileId'];
 		$id = $this->request->query['id'];
 		$dataProfilePic = $this->ProfilePic->getDataById($id);
 		
@@ -287,17 +300,26 @@ class ChangepicController extends AppController {
 		$this->log('END :: ChangepicController -> deletePic()');
 		
 		$this->prepareDataFnc($result['msg']);
+		$redirectparam = (empty($profileId)?'':'?id='.$profileId);
 		$this->render("index");
 	}
 	/* ------------------------------------------------------------------------------------------------- */
 	private function prepareDataFnc($flagUploadFile) {
 		$objUser = $this->getObjUser();
 		
+		$profileId = '';
+		if(empty($this->request->query['id'])){
+			$profileId = $objUser["id"];
+		}else{
+			$profileId = $this->request->query['id'];
+		}
+		$this->log("id=".$profileId);
+		
 		// page title
 		$this->setTitle('เปลี่ยนรูปประจำตัว');
 		
 		// image
-		$pathImage = $this->ProfilePic->getStarByProfileId($objUser["id"]);	// $byProfileId
+		$pathImage = $this->ProfilePic->getStarByProfileId($profileId);	// $byProfileId
 		$this->set("pathImage", $pathImage);
 		
 		// eduStep

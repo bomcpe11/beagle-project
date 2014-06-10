@@ -13,10 +13,33 @@ include "../../Config/database.php";
 // mysql_query("ROLLBACK")
 
 function retriveProfiles($objConnect){
-	$strSQL = "select * from profiles where updforsearchflg=1";
-	$result = mysql_query($strSQL);
-	return $result;
 	
+	//Select profile where updforsearchflg=1
+	
+	$strSQL = "";
+	mysql_query("BEGIN");
+	
+	
+	
+	
+	
+	
+	$strSQL = "insert into searchkeywords (typeid, dataid, keyword) 
+select 1, t.id, 
+			concat(ifnull(t.nameth,'')
+				,'|',ifnull(t.lastnameth,'')
+				,'|',ifnull(t.nameeng,'')
+				,'|',ifnull(t.lastnameeng,'')
+			) as keyword from profiles t 
+		where updforsearchflg=1
+on duplicate key update keyword=values(keyword)";
+
+	$result = mysql_query($strSQL);
+	if($result){
+		
+		$strSQL = "update profiles set updforsearchflg=0, searchupddtm=now() where updforsearchflg=1";
+		$result = mysql_query($strSQL);
+	}
 }
 
 
@@ -34,26 +57,13 @@ mysql_query("set names 'utf8'",$objConnect);
 
 // $objQuery = mysql_query($strSQL) or die ("Error Query : ".mysql_error()."<br />".$strSQL);
 
-$result = retriveProfiles($objConnect);
-
-
-$prepareData = array();
-$keyword = "";
-
-//TODO: Prepare Data.
-while($objResult = mysql_fetch_assoc($result)){
-	//echo "<p><pre>"; print_r($objResult); echo "</pre></p>";
-	$keyword = $objResult['nameth']
-				.'|'.$objResult['lastnameth']
-				.'|'.$objResult['nameeng']
-				.'|'.$objResult['lastnameeng'];
-	array_push($prepareData, array("isExist"=>true, "typeid"=>"1", "dataid"=>$objResult['id'], "keyword"=>$keyword, "objdata"=>json_encode($objResult)));
-}
-
-echo "<p><pre>"; print_r($prepareData); echo "</pre></p>";
-
-//TODO: Update & Insert.
-
+retriveProfiles($objConnect);
 
 echo "----END-----";
+
+// while($objResult = mysql_fetch_assoc($objQuery)){
+// 	echo "<p><pre>"; print_r($objResult); echo "</pre></p>";
+// }
+
+
 ?>

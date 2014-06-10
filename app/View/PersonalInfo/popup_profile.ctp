@@ -124,7 +124,7 @@
 								</p>\
 							</li>\
 							<li>\
-								<p><strong>Sosial Network :</strong></p>\
+								<p><strong>Social Network :</strong></p>\
 								<p>\
 									<input id="text-blog-address" type="text" value=<?php echo $objUser[0]['profiles']['blogaddress'];?>>\
 								</p>\

@@ -54,6 +54,7 @@ class AppController extends Controller {
 		$this->set('isAdmin', $this->isAdmin);
 		
 		$dataProfile =  $this->getObjUser();
+// 		$this->log($dataProfile);
 	
 		$this->set("image_file",$dataProfile['image_file']);
 		$this->set("position",$dataProfile['position']);

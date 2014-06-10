@@ -162,7 +162,7 @@
 			for( $i=0;$i<$countPathImage;$i++ ){
 				$linkDeletePic = $this->Html->url(array('controller' => 'Changepic',
 												    	'action' => 'deletePic',
-												    	'?' => array('id' => $pathImage[$i]['profile_pics']['id'])
+												    	'?' => array('id' => $pathImage[$i]['profile_pics']['id'], 'profileId'=>( empty($_GET['id'])?'':$_GET['id'] ))
 														));
 					
 				echo "<div class=\"div-item-picture\">
@@ -184,7 +184,7 @@
 <!-- Data -->
 <div class="section-layout" style="width:97% ;margin: 20px 0 0 10px;">
 	<span class="header1">อัพโหลดรูปภาพเพิ่ม</span>
-	<form id="form_data" name="form_data" method="post" action="<?php echo $this->webroot;?>changepic/submitDataFnc" 
+	<form id="form_data" name="form_data" method="post" action="<?php echo $this->webroot;?>changepic/submitDataFnc<?php if(!empty($_GET['id'])) echo '?id='.$_GET['id']; ?>" 
 		enctype="multipart/form-data" onSubmit="return validateData();">
 		<table class="table_form_data">
 			<tr>

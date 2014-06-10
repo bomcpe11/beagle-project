@@ -26,6 +26,7 @@
 	function submit_crop(){
 		var raw_imgPath = '<?php echo $raw_imgPath; ?>';
 		var pictureId = '<?php echo $pictureId; ?>';
+		var profileId = '<?php echo $profileId; ?>';
 		var cropInfo = g_imgCropper.getSelection();
 		var imgDtm = jQuery("#text_imgdtm").val();
 		var imgDesc = jQuery("#textarea_imgdesc").val();
@@ -51,6 +52,7 @@
 					,imgdesc: imgDesc
 					,cropInfo: cropInfo
 					,pictureId: pictureId
+					,profileId: profileId
 				}
 			,function(data){
 // 				console.log(data);
@@ -58,7 +60,11 @@
 				jAlert(data.message
 						, function(){ 
 							if( data.status ){
-								window.location.replace('<?php echo $this->Html->url('/Changepic');?>');
+								if('<?php echo $objuser['id']; ?>'==profileId){
+									window.location.replace('<?php echo $this->Html->url('/Changepic/index');?>?id='+profileId);
+								}else{
+									window.location.replace('<?php echo $this->Html->url('/PersonalInfo/index');?>?id='+profileId);
+								}
 							}
 						}//okFunc	
 						, function(){ 

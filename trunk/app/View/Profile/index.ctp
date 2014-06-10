@@ -109,7 +109,6 @@
 										<p>ไม่พบขอ้มูล</p>";
 							}
 						?>
-						
 					</div>
 				</div>
 				<div class="section_content">

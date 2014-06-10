@@ -11,7 +11,7 @@
 	<li id="menu-utility" class="active">
 		<ul class="util-menu">
 			<a href="<?php echo $this->Html->url('/Emailsender');?>"><li id="util-menu-email" class="active tooltip" title="Email"></li></a>
-			<li id="util-menu-calendar" class="active tooltip" title="Calendar"></li>
+			<a href="<?php echo $this->Html->url('/Calendar');?>"><li id="util-menu-calendar" class="active tooltip" title="Calendar"></li></a>
 			<a href="<?php echo $this->Html->url('/Webboard');?>"><li id="util-menu-webboard" class="active tooltip" title="Webboard"></li></a>
 			<li id="util-menu-faq" class="active tooltip" title="FAQ"></li>
 		</ul>

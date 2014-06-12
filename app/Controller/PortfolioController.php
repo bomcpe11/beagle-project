@@ -158,7 +158,7 @@ class PortfolioController extends AppController {
 		$page1 = '
 				<style>
 					body{
-						background-image: url('.$this->webroot.'/img/pdf-profile-bg1-01.png'.');
+						background-image: url("'.Router::fullbaseUrl().$this->webroot.'img/pdf-profile-bg1-01.png");
 						font-size: 14px;
 					}
 					h1,h2,h3,h4,h5,h6,hr,table{
@@ -238,7 +238,7 @@ class PortfolioController extends AppController {
 		$page2 = '
 				<style>
 					body{
-						background-image: url('.$this->webroot.'/img/pdf-profile-bg2-01.png'.');
+						background-image: url("'.Router::fullbaseUrl().$this->webroot.'img/pdf-profile-bg2-01.png");
 						font-size: 14px;
 					}
 					h1,h2,h3,h4,h5,h6,hr,table{
@@ -351,7 +351,7 @@ class PortfolioController extends AppController {
 		$page3 = '
 				<style>
 					body{
-						background-image: url('.$this->webroot.'/img/pdf-profile-bg3-01.png'.');
+						background-image: url("'.Router::fullbaseUrl().$this->webroot.'img/pdf-profile-bg3-01.png");
 						font-size: 14px;
 					}
 					h1,h2,h3,h4,h5,h6,hr,table{
@@ -429,7 +429,7 @@ class PortfolioController extends AppController {
 		$page4 = '
 				<style>
 					body{
-						background-image: url('.$this->webroot.'/img/pdf-profile-bg5-01.png'.');
+						background-image: url("'.Router::fullbaseUrl().$this->webroot.'img/pdf-profile-bg5-01.png");
 						font-size: 14px;
 					}
 					h1,h2,h3,h4,h5,h6,hr,table{
@@ -507,7 +507,7 @@ class PortfolioController extends AppController {
 		$page5 = '
 				<style>
 					body{
-						background-image: url('.$this->webroot.'/img/pdf-profile-bg7-01.png'.');
+						background-image: url("'.Router::fullbaseUrl().$this->webroot.'img/pdf-profile-bg7-01.png");
 						font-size: 14px;
 					}
 					h1,h2,h3,h4,h5,h6,hr,table{

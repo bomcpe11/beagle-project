@@ -22,7 +22,7 @@
 								<td><input id="education-name" style="width:300px" type="text" value="'+ name +'"></td>\
 							</tr>\
 							<tr>\
-								<td style="text-align:right;">* คณะ :</td>\
+								<td style="text-align:right;">คณะ :</td>\
 								<td><input id="education-faculty" type="text" value="'+ faculty +'"></td>\
 							</tr>\
 							<tr>\
@@ -135,8 +135,7 @@
 	/* -------------------------------------------------------------------------------------------------- */
 	function validateEducation(){
 		if( jQuery('#education-edutype').val()
-				&& jQuery('#education-name').val()
-				&& jQuery('#education-faculty').val() ){
+				&& jQuery('#education-name').val() ){
 			return true;
 		}else{
 			jAlert('คุณกรอกข้อมูล ไม่ครบ', 

@@ -46,14 +46,14 @@ function validateReply(form){
 	}
 }
 </script>
-
+<div style="padding:20px; 5px; 0 5px;">
 <?php 
 if(count($webboard)>0){
 ?>
 
 <table width="98%" border="1" cellpadding="1" cellspacing="1" bordercolor="#eeeeee">
   <tr>
-    <td colspan="2"><center><h1><?=$webboard[0]["webboards"]["Question"];?></h1></center></td>
+    <td colspan="2"><center><h2><?=$webboard[0]["webboards"]["Question"];?></h2></center><hr /></td>
   </tr>
   <tr>
     <td height="53" colspan="2"><?=nl2br($webboard[0]["webboards"]["Details"]);?></td>
@@ -63,11 +63,10 @@ if(count($webboard)>0){
     <td width="253">View : <?=$webboard[0]["webboards"]["View"];?> Reply : <?=$webboard[0]["webboards"]["Reply"];?></td>
   </tr>
 </table>
-<br>
-<br>
+<hr />
 <?
 for($i=0; $i<count($replies); $i++){
-?> No : <?=$i;?>
+?> No : <?=($i+1);?>
 <table width="98%" border="1" cellpadding="1" cellspacing="1" bordercolor="#eeeeee">
   <tr>
     <td height="" colspan="2"><?=nl2br($replies[$i]["webboard_replies"]["Details"]);?></td>
@@ -78,13 +77,10 @@ for($i=0; $i<count($replies); $i++){
     <td width="">Create Date :
     <?=$replies[$i]["webboard_replies"]["CreateDate"];?></td>
   </tr>
-</table><br>
+</table><hr />
 <?
 }
 ?>
-<br>
-<a href="<?=$this->Html->url('/Webboard/index')?>">Back to Webboard</a> <br>
-<br>
 <form action="" method="post" name="frmMain" id="frmMain">
   <input type="hidden" name="hidQuestionID" value="<?=$webboard[0]["webboards"]["QuestionID"]?>" />
   <table width="738" border="1" cellpadding="1" cellspacing="1" bordercolor="#eeeeee">
@@ -99,6 +95,7 @@ for($i=0; $i<count($replies); $i++){
   </table>
   
   <input name="btnSave" type="button" id="btnSave" value="Submit" onclick="submitReply(this.form);" />
+  <input type="button" value="Back" onclick="window.location.replace('<?=$this->Html->url('/Webboard/index')?>');" />
 </form>
 <?php 
 }else{ echo "Error can't find QuestionID"; }

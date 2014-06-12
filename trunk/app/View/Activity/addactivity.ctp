@@ -9,6 +9,7 @@
 		jQuery(document).ready(function(){
 			setDatePicker('.datePicker');
 			setBirthDatePicker('.birthDatePicker');
+			CKEDITOR.replace( 'summary', {filebrowserImageUploadUrl : getURL('/activity/uploadImages')});
 			CKEDITOR.replace( 'longdesc', {filebrowserImageUploadUrl : getURL('/activity/uploadImages')});
 		});
 		
@@ -18,7 +19,7 @@
 			var endDate = jQuery('#endDate').val();
 			var location = jQuery('#location').val();
 			var shortdesc = jQuery('#shortdesc').val();
-			var summary = jQuery('#summary').val()? jQuery('#summary').val(): '';
+			var summary = CKEDITOR.instances.summary.getData();//jQuery('#summary').val()? jQuery('#summary').val(): '';
 			var genname = jQuery('#genname').val();
 			var longdesc = CKEDITOR.instances.longdesc.getData();
 			
@@ -84,8 +85,10 @@
 	<?php if( $isAdmin ){ ?>
 	<tr align="left">
 		<th align="right" width="20%">สรุปกิจกรรม : </th>
-		<td align="left">
-			<textarea id="summary" style="width: 700px;" rows="5"></textarea>
+	</tr>
+	<tr align="left">
+		<td colspan="2">
+			<textarea id="summary" rows="10" cols="80"></textarea>
 		</td>
 	</tr>
 	<?php } ?>

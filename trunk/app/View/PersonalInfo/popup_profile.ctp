@@ -25,7 +25,7 @@
 								<p>\
 									<input id="text-name-th" type="text" value=<?php echo $objUser[0]['profiles']["nameth"];?>>\
 								</p>\
-								<p><strong>* นามสกุล(ภาษาอังกฤษ) :</strong></p>\
+								<p><strong>* นามสกุล(ภาษาไทย) :</strong></p>\
 								<p>\
 									<input id="text-lastname-th" type="text" value=<?php echo $objUser[0]['profiles']["lastnameth"];?>>\
 								</p>\

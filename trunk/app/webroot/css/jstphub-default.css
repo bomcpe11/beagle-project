@@ -127,7 +127,7 @@ h3{
 		width: 230px;
 		float: left;
 		margin-top: 80px;
-		background-color: #8AA44E;
+		background-color: #C4D0C9;
 	}
 		#profile_picture{
 			height: 230px;
@@ -140,7 +140,7 @@ h3{
 		#profile_title{
 			height: 50px;
 			width: 100%;
-			background-color: #A3C357;
+			background-color: #B6C2BA;
 		}
 			#profile_nickname{
 				height: 40px;
@@ -150,13 +150,13 @@ h3{
 				padding-left: 10px;
 				font-size: 2em;
 				font-weight: bold;
-				color: #526033;
+/* 				color: #526033; */
 			}
 			#profile_title_generation{
 				height: 45px;
 				width: 59px;
 				float: left;
-				background-color: #B8DB4D;
+				background-color: #A3ADA7;
 				padding-top: 5px;
 				text-align: center;
 			}

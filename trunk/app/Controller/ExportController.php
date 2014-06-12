@@ -1,83 +1,61 @@
 <?php
+/**
+ * Static content controller.
+ *
+ * This file will render views from views/pages/
+ *
+ * PHP 5
+ *
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
+ * @package       app.Controller
+ * @since         CakePHP(tm) v 0.2.9
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ */
+
+/**
+ * Static content controller
+ *
+ * Override this controller by placing a copy in controllers directory of an application
+ *
+ * @package       app.Controller
+ * @link http://book.cakephp.org/2.0/en/controllers/pages-controller.html
+ */
+
 class ExportController extends AppController {
 
 	public $names = "ExportController";
-	public $uses = array("Gvar","Queryexport");
+	public $uses = array("Queryexport");
 
-//-----------------------------------------------------------------------------------------------------
 	public function index(){
-		$this->log("START :: ExportController -> index()");
 		
-		$this->set("page_title","Export");
+		$this->setTitle('Export');
 		
-		//--Drop Down ExportTypeList
-		$exportTypeList     = $this->Gvar->getVarcodeVardesc1ByVarname("EXPORT_FILE_TYPE");
-        $this->set("exportTypeList", $exportTypeList);
-        
-        //--Drop Down SelectDataNameList
-        $selectDataNameList = $this->Queryexport->getSelectDataName();
-        $this->set("selectDataNameList", $selectDataNameList);
-		
-		$this->log("END :: ExportController -> index()");
 	}
-//-----------------------------------------------------------------------------------------------------
-	function isSQLInjection($sql){
-		if (strpos($sql, '--') !== FALSE)
-			return true;
-		else
-			return false;
-	}
-//-----------------------------------------------------------------------------------------------------
-	function export(){
-		$this->log("START :: ExportController -> export()");
+	
+	public function allPersonalInfoes(){
+		$this->log("START :: ExportController -> allPersonalInfoes()");
 		
-// 		$this->log($this->request->data);
-		
-		$datas      = $this->request->data["datas"];
-// 		$mode            = $this->request->data["mode"];
-// 		$stmt            = $this->request->data["stmt"];
-// 		$selectDataName  = $this->request->data["selectDataName"];
-// 		$selectDataNameId = $this->request->data["selectDataNameId"];
-		
-// 		if($mode == 1){
-// 			$rs = $this->Queryexport->updateSelectData($selectDataNameId);
-// 		}else{
-// 			$id = $this->Queryexport->getMaxId();
-// 			$rs = $this->Queryexport->insertSelectData($id[0][0]['id'],$selectDataName,$stmt);
-// 		}
-
 		header('Content-type: application/csv charset=utf-8');
-		header('Content-Disposition: attachment; filename="data.csv"');
+		header('Content-Disposition: attachment; filename="personal-info-data.csv"');
 		header("Content-Encoding: utf-8");
 		
+// 		$stmt = "select * from profiles p
+// left join awards a on (a.profile_id=p.id)
+// left join educations e on (e.profile_id=p.id)
+// left join families f on (f.profile_id=p.id)";
 		
-// 			echo $key.'<br>';
-// 		}
-		
-		
-		if(count($datas)==1){
-			$stmt = "select ";
-			foreach ($datas as $key => $value){
-// 				$key = key($datas);
-				if($this->isSQLInjection($key)) break;
-				for($i=0; $i<count($value); $i++){
-					if($this->isSQLInjection($value[$i])) break;
-					$stmt .= ($i==0?'':',').$value[$i];
-				}
-				$stmt .= " from ".$key;
-// 				next($datas);
-				break;
-			}
-			
-		}else{
-			$stmt = "select * from profiles";
-		}
-		
-// 		$this->log("stmt=".$stmt);
+		$stmt = "select * from profiles";
 		
 		$result = $this->Queryexport->query($stmt);
-// 		$status['id'] = $rs;
-
+		
 		// The column headings of your .csv file
 		$header_row = array();
 		$data_row = array();
@@ -85,43 +63,123 @@ class ExportController extends AppController {
 		// Print the column names as the headers of a table
 		for($i = 0; $i < mysql_num_fields($result); $i++) {
 			$field_info = mysql_fetch_field($result, $i);
-// 			$header_row[] = $field_info->name;
 			echo ($i==0?'':',').$field_info->name;
 		}
 		
 		echo "\n";
 		
-// 		fputcsv($csv_file,$header_row,',','"');
+		// Print the data
+		while($row = mysql_fetch_row($result)) {
+			$i=0;
+			foreach($row as $_column) {
+				echo ($i==0?'':',').$_column;
+				$i++;
+			}
+			echo "\n";
+		}
+		
+		// send data to view
+		$this->layout = "ajax";
+		$this->render("exportfile");
+			
+		$this->log("END :: ExportController -> allPersonalInfoes()");
+	}
+	
+	public function allActivities(){
+		$this->log("START :: ExportController -> allActivities()");
+		
+		header('Content-type: application/csv charset=utf-8');
+		header('Content-Disposition: attachment; filename="activities-data.csv"');
+		header("Content-Encoding: utf-8");
+		
+		// 		$stmt = "select * from profiles p
+		// left join awards a on (a.profile_id=p.id)
+		// left join educations e on (e.profile_id=p.id)
+		// left join families f on (f.profile_id=p.id)";
+		
+		$stmt = "select * from activities";
+		
+		$result = $this->Queryexport->query($stmt);
+		
+		// The column headings of your .csv file
+		$header_row = array();
+		$data_row = array();
+		
+		// Print the column names as the headers of a table
+		for($i = 0; $i < mysql_num_fields($result); $i++) {
+			$field_info = mysql_fetch_field($result, $i);
+			echo ($i==0?'':',').$field_info->name;
+		}
+		
+		echo "\n";
 		
 		// Print the data
 		while($row = mysql_fetch_row($result)) {
 			$i=0;
 			foreach($row as $_column) {
-// 				$data_row[] = $_column;
 				echo ($i==0?'':',').$_column;
 				$i++;
 			}
-// 			fputcsv($csv_file,$data_row,',','"');
-// 			$data_row = array();
 			echo "\n";
 		}
-		//fputcsv($csv_file,$data_row,',','"');
-// 		if(mysql_query($sql)){
-// 			$rs = 1;
-// 		}else{
-// 			$rs = 0;
-// 		}
 		
-// 		mysql_close($dbLink);
-		
-	    // send data to view
-	    $this->layout = "ajax";
-// 	    $this->set('message', json_encode(array("status"=>$status)));
-	    $this->render("exportfile");
-	    
-	    $this->log("END :: ExportController -> export()");
-		
+		// send data to view
+		$this->layout = "ajax";
+		$this->render("exportfile");
+			
+		$this->log("END :: ExportController -> allActivities()");
 	}
-//-----------------------------------------------------------------------------------------------------	
-
+	
+	private function ExampleExport(){
+		$this->log("START :: ExportController -> ExampleExport()");
+	
+		header('Content-type: application/csv charset=utf-8');
+		header('Content-Disposition: attachment; filename="data.csv"');
+		header("Content-Encoding: utf-8");
+	
+		$stmt = "select * from profiles";
+	
+		$result = $this->Queryexport->query($stmt);
+	
+		// The column headings of your .csv file
+		$header_row = array();
+		$data_row = array();
+	
+		// Print the column names as the headers of a table
+		for($i = 0; $i < mysql_num_fields($result); $i++) {
+			$field_info = mysql_fetch_field($result, $i);
+			echo ($i==0?'':',').$field_info->name;
+		}
+	
+		echo "\n";
+	
+		// Print the data
+		while($row = mysql_fetch_row($result)) {
+			$i=0;
+			foreach($row as $_column) {
+				echo ($i==0?'':',').$_column;
+				$i++;
+			}
+			echo "\n";
+		}
+	
+		// send data to view
+		$this->layout = "ajax";
+		$this->render("exportfile");
+		 
+		$this->log("END :: ExportController -> ExampleExport()");
+	
+	}
+	
+	private function changeFormatDate($data) {
+		/*
+		 * index of $explodeDate
+		* [0] = day
+		* [1] = month
+		* [2] = year(2013)
+		*/
+		$explodeDate = explode("/", $data);
+	
+		return ($explodeDate[2] - 543)."/".$explodeDate[1]."/".$explodeDate[0];
+	}// changeFormatDate
 }

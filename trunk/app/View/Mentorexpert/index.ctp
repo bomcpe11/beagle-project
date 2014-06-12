@@ -23,7 +23,7 @@ td.hover{
 }
 </style>
 <div>
-	<table class="section-layout" style="width:50%;">
+	<table class="section-layout" style="width:50%;display:none;">
 		<tr>
 			<td class="form-label">Key Word :</td>
 			<td><input id="key_word" type="text" style="width:95%"/></td>
@@ -46,7 +46,7 @@ td.hover{
 		</tr>
 	</table>
 	<div id="section_search">
-		<h2>ผลการค้นหา</h2>
+		<h2>Mentor & Expert</h2>
 		<div id="search_result"></div>
 		
 		<div id="pagination" style="margin: auto;">
@@ -132,7 +132,7 @@ td.hover{
 		
 
 		loading();
-		jQuery.post('<?php echo $this->Html->url('/Otherjstp/searchData');?>'
+		jQuery.post('<?php echo $this->Html->url('/Mentorexpert/searchData');?>'
 				,{'data':{'keyWord':keyWord
 							,'searchWidth':searchWidth
 							,'flagActivity':flagActivity
@@ -150,7 +150,6 @@ td.hover{
 					html+='<col>';
 					html+='<col style="width: 10%;">';
 					html+='<col style="width: 30%;">';
-					<?php if($isAdmin){ ?>html+='<col>';<?php } ?>
 					html+='</colgroup>';
 					
 					html+='<thead>';
@@ -162,7 +161,6 @@ td.hover{
 					html+='<th onclick="searchData(\'1\', \'login\')">Username</th>';
 					html+='<th onclick="searchData(\'1\', \'birthday\')">อายุ(ปี)</th>';
 					html+='<th onclick="searchData(\'1\', \'email\')">email</th>';
-					<?php if($isAdmin){ ?>html+='<th>Admin</th>';<?php } ?>
 					html+='</tr>';
 					html+='</thead>';
 					
@@ -187,7 +185,6 @@ td.hover{
 							html+='<td class="hover openprofile">'+( (response.data[i].p.login)? response.data[i].p.login: '' )+'</td>';
 							html+='<td class="hover openprofile">'+getAge(response.data[i].p.birthday)+'</td>';
 							html+='<td class="hover openprofile">'+response.data[i].p.email+'</td>';
-							<?php if($isAdmin){ ?>html+='<td style="text-align:center;"><img src="<?php echo $this->webroot; ?>img/custom.png" class="btncustom" style="cursor:pointer;" /></td>';<?php } ?>
 							html+='</tr>';
 						}
 
@@ -255,137 +252,4 @@ td.hover{
         var win = window.open('<?php echo $this->Html->url('/PersonalInfo/index?id='); ?>'+params.id, '_blank');
         win.focus();
 	}
-	<?php if($isAdmin){ ?>
-	function customize_openpopup(t){
-		var _params = jQuery(t).closest('tr').attr('params');
-		var params = jQuery.parseJSON(unescape(_params));
-		
-		var html = '#user-custom';
-		var buttons = [
-		   			{text: "Save", click: function(){
-			   				var container = jQuery('#user-custom');
-			   				var params = jQuery.parseJSON(unescape(container.find('input.params').val()));
-			   				var data = {profileid: params.id,
-					   				profilerole: container.find('select[name="role"]').val(),
-					   				profileroleadmin: container.find('select[name="roleadmin"]').val()};
-
-// 							console.log(params);
-// 							console.log(data);
-// 							return;
-			   				
-			   				loading();
-			   				jQuery.post("<?php echo $this->Html->url('/Otherjstp/admin_updateCustomize');?>", data,
-		   						function(data) {
-									if ( data.result.status ) {
-										searchData();
-										jAlert(data.result.message
-												, function(){ 
-													jQuery('#user-custom').dialog("close");
-												}//okFunc	
-												, function(){ 
-												}//openFunc
-												, function(){ 		
-												}//closeFunc
-										);// jAlert
-									}//if else
-									else{
-										jAlert(data.result.message
-												, function(){ 
-													
-												}//okFunc	
-												, function(){ 
-												}//openFunc
-												, function(){ 		
-												}//closeFunc
-										);// jAlert
-									}
-	
-									unloading();
-								}// function(data)
-								, "json").error(function() {
-								}// function()
-							);// jQuery.post
-			   				
-// 			   				console.log(data);
-			   			}}
-		];
-		jQuery(html).css('width', '400px').find('input.params').val(_params);
-		jQuery(html).find('.lblmembername').html('<h3>'+params.name+' '+params.lastname+'</h3>');
-		openPopupHtml('Member Customize', html, buttons, 
-				function(){ //openFunc
-					//TODO: set default role, role_admin
-					var container = jQuery('#user-custom');
-					var params = jQuery.parseJSON(unescape(container.find('input.params').val()));
-// 					alert(params.role);
-					//role, roleadmin
-					container.find('select[name="role"]').val(params.role);
-					//console.log(parseInt(params.role_admin, 10));
-					if(parseInt(params.role_admin, 10)==1){
-						container.find('select[name="roleadmin"]').val('1');
-					}else{
-						container.find('select[name="roleadmin"]').val('0');
-					}
-				}, 
-				function(){ //closeFunc
-// 					alert('closed');
-					var container = jQuery('#user-custom');
-					container.find('input.params').val('');
-					container.find('.lblmembername').html('');
-				}
-		);
-		// Example to close with script ==> closePopup('#jdialog1-container');
-	}
-	function remove_member(){
-
-		jConfirm('ต้องการลบสมาชิกคนนี้ ?', 
-				function(){ //okFunc
-				var container = jQuery('#user-custom');
-				var params = jQuery.parseJSON(unescape(container.find('input.params').val()));
-	
-				var data = {profileid: params.id};
-	
-				jQuery.post("<?php echo $this->Html->url('/Otherjstp/admin_removeProfile');?>", data,
-					function(data) {
-							if ( data.result.status ) {
-								searchData();
-								jAlert(data.result.message
-										, function(){ 
-											jQuery('#user-custom').dialog("close");
-										}//okFunc	
-										, function(){ 
-										}//openFunc
-										, function(){ 		
-										}//closeFunc
-								);// jAlert
-							}//if else
-							else{
-								jAlert(data.result.message
-										, function(){ 
-											
-										}//okFunc	
-										, function(){ 
-										}//openFunc
-										, function(){ 		
-										}//closeFunc
-								);// jAlert
-							}
-		
-							unloading();
-						}// function(data)
-						, "json").error(function() {
-						}// function()
-					);// jQuery.post
-				}, 
-				function(){ //cancelFunc
-				}, 
-				function(){ //openFunc
-				}, 
-				function(){ //closeFunc
-				}
-			);
-// 		});
-
-		
-	}
-	<?php } ?>
 </script>

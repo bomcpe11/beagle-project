@@ -35,6 +35,30 @@ class Profile extends AppModel {
 		return $result;
 	}
 	
+	public function getProfilesMentorExpertByLimit($start,$end,$orderBy){
+		$result = array();
+		$sql = 'select * from profiles p where p.role in (20, 40)';
+		if( $orderBy==='birthday' ){
+			$order = " order by p.{$orderBy} desc";
+		}else{
+			$order = " order by p.{$orderBy} asc";
+		}
+		$limit = " limit $start, $end";
+		$this->log($sql.$order.$limit);
+	
+		try{
+			$resultAll = $this->query($sql.$order);
+			$resultLimit = $this->query($sql.$order.$limit);
+			$result = array('total_data' => count($resultAll),
+					'data' => $resultLimit);
+			//$this->log($resultAll);
+		}catch( Exception $e ){
+			$this->log("exception => ".$e->getMessage());
+		}
+	
+		return $result;
+	}
+	
 	public function removeProfile($id){
 		$flag = false;
 		$strSql = "DELETE FROM profiles ";

@@ -46,7 +46,9 @@ function validate(form){
 	}
 }
 </script>
-
+<div style="padding:5px;">
+<h2 style="margin-bottom: 10px;">Webboard - New Topic</h2>
+<hr />
 <form action="NewQuestion.php?Action=Save" method="post" name="frmMain" id="frmMain">
   <table width="621" border="1" cellpadding="1" cellspacing="1" bordercolor="#eeeeee">
     <tr>
@@ -63,4 +65,6 @@ function validate(form){
     </tr>
   </table>
   <input name="btnSave" type="button" id="btnSave" value="Submit" onclick="submitNewTopic(this.form);" />
+  <input type="button" value="Back" onclick="javascript:history.back();" />
 </form>
+</div>

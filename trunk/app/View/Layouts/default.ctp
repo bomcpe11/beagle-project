@@ -76,7 +76,7 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 						<button type="button" id="btn-logout">Log off</button>
 					</td>
 					<td style="width: 45%;">
-						<form action="<?php echo $this->Html->url('/Searchresult');?>" method="post">
+						<form action="<?php echo $this->Html->url('/Searchresult');?>" method="get">
 							<input class="txt-search" type="text" name="keyword" value="<?php echo (empty($keyword)?'':$keyword); ?>" placeholder="Search...">
 						</form>
 					</td>
@@ -103,7 +103,7 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 						</a>
 					</div>
 					<div class="menu-item-wrapper">
-						<a href="#">
+						<a href="<?php echo $this->webroot; ?>Resources">
 							<img src="<?php echo $this->Html->url('/img/icon-resources-01.png');?>" class="tooltip"
 								alt="Resources" title="Resources"></img>
 						</a>
@@ -115,7 +115,7 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 						</a>
 					</div>
 					<div class="menu-item-wrapper">
-						<a href="#">
+						<a href="<?php echo $this->webroot; ?>Export">
 							<img src="<?php echo $this->Html->url('/img/icon-export-01.png');?>" class="tooltip"
 								alt="Export" title="Export"></img>
 						</a>
@@ -133,7 +133,7 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 						</a>
 					</div>
 					<div class="menu-item-wrapper">
-						<a href="#">
+						<a href="<?php echo $this->webroot; ?>Mentorexpert">
 							<img src="<?php echo $this->Html->url('/img/icon-mentorexpert-01.png');?>" class="tooltip"
 								alt="Mentor Expert" title="Mentor Expert"></img>
 						</a>
@@ -186,17 +186,17 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 	<!-- Footer -->
 	<div id="footer">
 		<div id="footer_icon_wrapper">
-			<a href="http://www.nstda.or.th/"><img src="<?php echo $this->Html->url('/img/logo-nstd-01.png');?>"
+			<a href="http://www.nstda.or.th/" target="_blank"><img src="<?php echo $this->Html->url('/img/logo-nstd-01.png');?>"
 				alt="สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ" title="สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ"></img></a>
-			<a href="http://www2.kmutt.ac.th/"><img src="<?php echo $this->Html->url('/img/logo-kmutt-01.png');?>" 
+			<a href="http://www2.kmutt.ac.th/" target="_blank"><img src="<?php echo $this->Html->url('/img/logo-kmutt-01.png');?>" 
 				alt="มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี" title="มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี"></img></a>
-			<a href="http://www.cmu.ac.th/"><img src="<?php echo $this->Html->url('/img/logo-cheangmai-01.png');?>" 
+			<a href="http://www.cmu.ac.th/" target="_blank"><img src="<?php echo $this->Html->url('/img/logo-cheangmai-01.png');?>" 
 				alt="มหาวิทยาลัยเชียงใหม่" title="มหาวิทยาลัยเชียงใหม่"></img></a>
-			<a href="http://www.ku.ac.th/"><img src="<?php echo $this->Html->url('/img/logo-kasetsart-01.png');?>" 
+			<a href="http://www.ku.ac.th/" target="_blank"><img src="<?php echo $this->Html->url('/img/logo-kasetsart-01.png');?>" 
 				alt="มหาวิทยาลัยเกษตรศาสตร์" title="มหาวิทยาลัยเกษตรศาสตร์"></img></a>
-			<a href="http://www.sut.ac.th/"><img src="<?php echo $this->Html->url('/img/logo_sut-01.png');?>" 
+			<a href="http://www.sut.ac.th/" target="_blank"><img src="<?php echo $this->Html->url('/img/logo_sut-01.png');?>" 
 				alt="มหาวิทยาลัยเทคโนโลยีสุรนารี" title="มหาวิทยาลัยเทคโนโลยีสุรนารี"></img></a>
-			<a href="http://www.wu.ac.th/"><img src="<?php echo $this->Html->url('/img/logo-wu-01.png');?>" 
+			<a href="http://www.wu.ac.th/" target="_blank"><img src="<?php echo $this->Html->url('/img/logo-wu-01.png');?>" 
 				alt="มหาวิทยาลัยวลัยลักษณ์" title="มหาวิทยาลัยวลัยลักษณ์"></img></a>
 		</div>
 	</div>

@@ -12,6 +12,25 @@ class PortfolioController extends AppController {
 		
 		/* Profile */
 		$dataProfile = $this->Profile->getDataById($profileId);
+		$arrayBirthday = array();
+		$arrayBirthday = explode('-', $dataProfile[0]['profiles']['birthday']);	// <<< Y-m-d
+		$birthdayTh = '';
+		$birthdayTh .= $arrayBirthday[2];
+		switch ($arrayBirthday[1]) {
+			case "01":	$birthdayTh .= " มกราคม"; break;
+			case "02":	$birthdayTh .= " กุมภาพันธ์"; break;
+			case "03":	$birthdayTh .= " มีนาคม"; break;
+			case "04":	$birthdayTh .= " เมษายน"; break;
+			case "05":	$birthdayTh .= " พฤษภาคม"; break;
+			case "06":	$birthdayTh .= " มิถุนายน"; break;
+			case "07":	$birthdayTh .= " กรกฏาคม"; break;
+			case "08":	$birthdayTh .= " สิงหาคม"; break;
+			case "09":	$birthdayTh .= " กันยายน"; break;
+			case "10":	$birthdayTh .= " ตุลาคม"; break;
+			case "11":	$birthdayTh .= " พฤศจิกายน"; break;
+			default:	$birthdayTh .= " ธันวาคม";
+		}
+		$birthdayTh .= " พ.ศ. " . ( intval($arrayBirthday[0]) + 543 );
 		//$this->log($dataProfile);
 		
 		/* Education */
@@ -314,7 +333,7 @@ class PortfolioController extends AppController {
 										<tr><td>Nickname : '.$dataProfile[0]['profiles']['nickname'].'</td></tr>
 										<tr><td>Address : '.$dataProfile[0]['profiles']['address'].'</td></tr>
 										<tr><td>Nationality : '.$dataProfile[0]['profiles']['nationality'].'</td></tr>
-										<tr><td>Birth date : '.$dataProfile[0]['profiles']['birthday'].'</td></tr>
+										<tr><td>Birth date : '.$birthdayTh.'</td></tr>
 										<tr><td>Religious : '.$dataProfile[0]['profiles']['religious'].'</td></tr>
 										<tr><td>Email : '.$dataProfile[0]['profiles']['email'].'</td></tr>
 									</table>
@@ -569,7 +588,7 @@ class PortfolioController extends AppController {
 					<table style="width: 100%;">
 							<tr>
 								<td>
-									<h5 style="color: #333333;">Eduction<h5>
+									<h5 style="color: #333333;">Education<h5>
 								</td>
 							</tr>
 						</table>

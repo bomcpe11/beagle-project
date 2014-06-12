@@ -21,6 +21,21 @@ class Gvar extends AppModel {
 		
 		return $result;
 	}// getVarCodeVarDesc1
+	function getVarcodeVardesc12ByVarname($byVarName) {
+		$result = null;
+		$strSql = "SELECT varcode, vardesc1, vardesc2";
+		$strSql .= " FROM gvars";
+		$strSql .= " WHERE varname='".$byVarName."'";
+		$strSql .= " ORDER BY varcode ASC";
+		
+		try {
+			$result = $this->query($strSql);
+		} catch ( Exception $e ) {
+			$this->log("Exception => ".$e->getMessage());
+		}// try catch
+		
+		return $result;
+	}// getVarCodeVarDesc1
 	/* ------------------------------------------------------------------------------------------------- */
 	function getVarcodeVardesc1ByVarnameVardesc2($byVarName, $byVarDesc2) {
 		$result = null;

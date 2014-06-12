@@ -61,6 +61,11 @@ class Family extends AppModel {
 		try{
 			$this->query($sql);
 			$flag = true;
+			try{
+				$this->setProfileUpdSearchFlg($id);
+			}catch(Exception $e){
+				
+			}
 		}catch(Exception $e){
 			$this->log($e->getMessage());
 		}
@@ -93,6 +98,11 @@ class Family extends AppModel {
 		try{
 			$this->query($sql);
 			$flag = true;
+			try{
+				$this->setProfileUpdSearchFlg($id);
+			}catch(Exception $e){
+				
+			}
 		}catch(Exception $e){
 			$this->log($e->getMessage());
 		}
@@ -127,6 +137,20 @@ class Family extends AppModel {
 			$this->log($e->getMessage());
 		}
 		
+		return $flag;
+	}
+	
+	public function setProfileUpdSearchFlg($id) {
+		$flag = false;
+		$strSql = "UPDATE profiles SET updforsearchflg=1 WHERE id=(select profile_id from families where id=".$id.")";
+		// 			$this->log($strSql);
+		try {
+			$this->query($strSql);
+			$flag = true;
+		} catch ( Exception $e ) {
+			$this->log("Exception => ".$e->getMessage());
+		}
+	
 		return $flag;
 	}
 }

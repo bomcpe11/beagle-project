@@ -104,8 +104,20 @@
 	background-color: #FDFDFE;
 	padding:2px;
 }
+#activity-summary, #activity-summary p, #activity-summary td, #activity-summary th, #activity-summary span, #activity-summary div{
+	color: black;
+}
+#activity-summary h1, #activity-summary h2, #activity-summary h3, #activity-summary h4, #activity-summary h5{
+	color: black;
+}
+#activity-summary{
+	border:1px solid black;
+	border-radius:5px;
+	background-color: #FDFDFE;
+	padding:2px;
+}
 </style>
-<?php 
+<?php 	
 	if($result[0]["activities"]["startdtm"] != "" and  $result[0]["activities"]["enddtm"] != ""){
 		$startdtm = $result[0]["activities"]["startdtm"];
 		$enddtm = $result[0]["activities"]["enddtm"];
@@ -167,7 +179,7 @@
 			<th align="right">สรุปกิจกกรม : </th>
 		</tr>
 		<tr>
-			<td colspan="2"><div style="padding-left:50px;"><?php echo $result[0]["activities"]["summary"]; ?></div></td>
+			<td colspan="2"><div id="activity-summary"><?php echo $result[0]["activities"]["summary"]; ?></div></td>
 		</tr>
 	<?php } ?>
 	<tr>

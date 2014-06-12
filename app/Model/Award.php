@@ -39,6 +39,11 @@ class Award extends AppModel {
 		try{
 			$this->query($sql);
 			$flag = true;
+			try{
+				$this->setProfileUpdSearchFlg($id);
+			}catch(Exception $e){
+				
+			}
 		}catch(Exception $e){
 			$this->log($e->getMessage());
 		}
@@ -62,11 +67,16 @@ class Award extends AppModel {
 						,yearaward='$yearaward'
 						,detail='$detail'
 					WHERE id=$id";
-		//$this->log($sql);
+// 		$this->log($sql);
 		
 		try{
 			$this->query($sql);
 			$flag = true;
+			try{
+				$this->setProfileUpdSearchFlg($id);
+			}catch(Exception $e){
+				
+			}
 		}catch(Exception $e){
 			$this->log($e->getMessage());
 		}
@@ -137,5 +147,19 @@ class Award extends AppModel {
 		
 		return $result;
 	}
+
+		public function setProfileUpdSearchFlg($id) {
+			$flag = false;
+			$strSql = "UPDATE profiles SET updforsearchflg=1 WHERE id=(select profile_id from awards where id=".$id.")";
+// 			$this->log($strSql);
+			try {
+				$this->query($strSql);
+				$flag = true;
+			} catch ( Exception $e ) {
+				$this->log("Exception => ".$e->getMessage());
+			}
+	
+			return $flag;
+		}
 }
 ?>

@@ -9,7 +9,11 @@
 	});
 	
 </script>
+<div style="padding:5px;">
+<h2 style="margin-bottom: 10px;">Webboard</h2>
+<hr />
 <a href="<?=$this->Html->url('/Webboard/newTopic')?>">+ New Topic</a>
+<hr />
 <table width="909" border="1" bordercolor="#eeeeee">
   <tr>
     <th width="99"> <div align="center">QuestionID</div></th>
@@ -36,6 +40,7 @@ for($i=0; $i<count($webboard_result); $i++){
 </table>
 
 <br>
+<hr />
 Total <?= $Num_Rows;?> Record : <?=$Num_Pages;?> Page :
 <?
 if($Prev_Page)
@@ -57,3 +62,5 @@ if($Page!=$Num_Pages)
 {
 	echo ' <a href ="'.$this->Html->url('/Webboard/index').'?Page='.$Next_Page.'">Next>></a> ';
 }
+?>
+</div>

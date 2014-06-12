@@ -10,8 +10,8 @@
 			setBirthDatePicker('.birthDatePicker');
 			
 			var config = {
-					filebrowserImageUploadUrl : getURL('/activity/uploadImages'),
-					filebrowserUploadUrl : getURL('/activity/uploadImages')
+					filebrowserImageUploadUrl : getURL('/Activity/uploadImages'),
+					filebrowserUploadUrl : getURL('/Activity/uploadImages')
 // 					toolbarCanCollapse : false,
 // 					colorButton_enableMore : false,
 // 					toolbar :
@@ -25,7 +25,8 @@
 // 						{ name: 'tools',       items : [ 'Maximize', 'About' ] }
 // 					]
 				};
-			
+
+			<?php if( $isAdmin ){ ?> CKEDITOR.replace( 'summary', config); <?php } ?>
 			CKEDITOR.replace( 'editCK', config);
 		});
 		
@@ -77,7 +78,7 @@
 			var endDate = jQuery('#endDate').val();
 			var location = jQuery('#location').val();
 			var shortdesc = jQuery('#shortdesc').val();
-			var summary = jQuery('#summary').val()? jQuery('#summary').val(): '';
+			var summary = jQuery('#summary').val()? CKEDITOR.instances.summary.getData(): '';//jQuery('#summary').val()? jQuery('#summary').val(): '';
 			var longdesc = CKEDITOR.instances.editCK.getData();
 			jConfirm('ท่านต้องการบันทึกข้อมูลกิจกรรมนี้ใช่หรือไม่?', 
 				function(){ //okFunc
@@ -180,8 +181,12 @@
 	<?php if( $isAdmin ){ ?>
 	<tr align="left">
 		<th align="right" width="20%">สรุปกิจกรรม : </th>
-		<td align="left">
-			<textarea id="summary" style="width: 700px;" rows="5"><?php echo $result[0]["activities"]["summary"] ?></textarea>
+	</tr>
+	<tr align="left">
+		<td colspan="2">
+			<textarea id="summary" style="width: 700px;" rows="5">
+				<?php echo $result[0]["activities"]["summary"] ?>
+			</textarea>
 		</td>
 	</tr>
 	<?php } ?>

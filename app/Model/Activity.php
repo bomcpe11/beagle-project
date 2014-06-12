@@ -126,6 +126,7 @@ class Activity extends AppModel {
 		$strSql .= " ,summary = '".$summary."'";
 		$strSql .= " ,longdesc = '".$longdesc."'";
 		$strSql .= " ,updated_at = sysdate()";		
+		$strSql .= " ,updforsearchflg = 1";		
 		$strSql .= " WHERE id = ".$id;
 		$strSql .= ";";
 		$this->log("strSql => ".$strSql);
@@ -154,5 +155,6 @@ class Activity extends AppModel {
 	
 		return $flag;
 	}
+
 }
 ?>

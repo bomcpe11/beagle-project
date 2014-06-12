@@ -111,6 +111,7 @@ class PersonalInfoController extends AppController {
 	/* ------------------------------------------------------------------------------------------------ */
 	public function updateProfileAjax() {
 		$this->log('---- PersonalInfoController -> updateProfileAjax ----');
+		$objUser = $this->getObjUser();
 		
 		//$this->log($this->request->data);
 		$result 		= array();
@@ -159,7 +160,11 @@ class PersonalInfoController extends AppController {
 												,$blogAddress
 												,$status) ) {
 			$result['flg'] = 1;
-			$result['msg'] = "การแก้ไขข้อมูลส่วนตัวเสร็จเรียบร้อย";								
+			$result['msg'] = "การแก้ไขข้อมูลส่วนตัวเสร็จเรียบร้อย";	
+
+			$newObjUser = $this->Profile->getDataById($objUser['id']);
+			$this->Session->delete('objuser');
+			$this->Session->write('objuser',$newObjUser[0]["profiles"]);
 		} else {
 			$result['flg'] = -1;
 			$result['msg'] = "เกิดข้อผิดพลาดใน การแก้ไขข้อมูลส่วนตัว กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์";

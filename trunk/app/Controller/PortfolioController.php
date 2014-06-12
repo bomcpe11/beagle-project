@@ -15,7 +15,7 @@ class PortfolioController extends AppController {
 		$arrayBirthday = array();
 		$arrayBirthday = explode('-', $dataProfile[0]['profiles']['birthday']);	// <<< Y-m-d
 		$birthdayTh = '';
-		$birthdayTh .= $arrayBirthday[2];
+		$birthdayTh .= intval($arrayBirthday[2]);
 		switch ($arrayBirthday[1]) {
 			case "01":	$birthdayTh .= " มกราคม"; break;
 			case "02":	$birthdayTh .= " กุมภาพันธ์"; break;
@@ -51,6 +51,11 @@ class PortfolioController extends AppController {
 		for( $i=0;$i<$countEducation && $i<4;$i++ ){
 			$splitEndYear = array();
 			$splitEndYear = explode('-', $dataEducation[$i]['educations']['endyear']);	// yyyy-mm-dd
+			if( empty($splitEndYear[0]) ){
+				$endYearTh = '';
+			}else{
+				$endYearTh = intval($splitEndYear[0]) + 543;
+			}
 			
 			if( $i==0 ){
 				$htmlEducation = '';
@@ -60,7 +65,7 @@ class PortfolioController extends AppController {
 			
 			$htmlEducationTable .= '<tr>
 										<td>'.$dataEducation[$i]['educations']['edutype'].'</td>
-										<td>'.$splitEndYear[0].'</td>
+										<td>'.$endYearTh.'</td>
 										<td>'.$dataEducation[$i]['educations']['gpa'].'</td>
 										<td>'.$dataEducation[$i]['educations']['name'].'</td>
 									</tr>';

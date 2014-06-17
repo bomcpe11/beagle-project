@@ -11,6 +11,9 @@ if(isset($objuser) && !empty($objuser)){
 	return;
 }
 
+// initialize profile_id
+$profile_id = isset($_GET['id']) && $this->params['controller']!=='Activity'? $_GET['id']: $objuser['id'];
+
 /**
  *
  * PHP 5
@@ -97,7 +100,7 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 			<div id="menu">
 				<div id="menu_group_wrapper">
 					<div class="menu-item-wrapper">
-						<a href="<?php echo $this->webroot;?>PersonalInfo/index?id=<?php echo isset($_GET['id'])? $_GET['id']: $objuser['id']; ?>">
+						<a href="<?php echo $this->webroot;?>PersonalInfo/index?id=<?php echo $profile_id; ?>">
 							<img src="<?php echo $this->Html->url('/img/icon-personalinfo-01.png');?>" class="tooltip"
 								alt="Personal Info" title="Personal Info"></img>
 						</a>
@@ -109,7 +112,7 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 						</a>
 					</div>
 					<div class="menu-item-wrapper">
-						<a href="<?php echo $this->webroot; ?>Project/index?id=<?php echo isset($_GET['id'])? $_GET['id']: $objuser['id']; ?>">
+						<a href="<?php echo $this->webroot; ?>Project/index?id=<?php echo $profile_id; ?>">
 							<img src="<?php echo $this->Html->url('/img/icon-project-01.png');?>" class="tooltip"
 								alt="Project" title="Project"></img>
 						</a>
@@ -127,7 +130,7 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 						</a>
 					</div>
 					<div class="menu-item-wrapper">
-						<a href="<?php echo $this->webroot; ?>Achieve/index?id=<?php echo isset($_GET['id'])? $_GET['id']: $objuser['id']; ?>">
+						<a href="<?php echo $this->webroot; ?>Achieve/index?id=<?php echo $profile_id; ?>">
 							<img src="<?php echo $this->Html->url('/img/icon-archieve-01.png');?>" class="tooltip"
 								alt="Achieve" title="Achieve"></img>
 						</a>

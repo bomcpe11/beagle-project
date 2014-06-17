@@ -42,7 +42,7 @@ td.hover{
 		</tr>
 		<tr>
 			<td></td>
-			<td><input type="button" value="ค้นหา" onclick="searchData('1','id')"/></td>
+			<td><input type="button" value="ค้นหา" onclick="searchData('1', 'nameth', '0');"/></td>
 		</tr>
 	</table>
 	<div id="section_search">
@@ -83,18 +83,52 @@ td.hover{
 <!-- ############################################################################################### -->
 
 <script type="text/javascript">
+	var g_orderByOld = '';
+	var g_sortOld = '';
 	jQuery(document).ready(function(){
 		jQuery('input[type="button"]').button();
 
 		jQuery('#key_word').val('*');
-		searchData('1','nameth');
+		searchData('1', 'nameth', '0');
 	});
 	/*	------------------------------------------------------------------------------------------------ */
-	function searchData(currentPage, orderBy){
+	function searchData(currentPage, orderBy, typeSearch){
 		var keyWord = jQuery('#key_word').val();
 		var searchWidth = new Array();
 		var flagActivity = -1;	// -1 not have activity, 1 have activity
-
+		var sort = '';
+		/**
+		* typeSearch, 
+		* [0] = click main search
+		* [1] = click pagginh
+		* [2] = click <th> for order by 
+		*/
+		if( typeSearch==='0' ){
+			sort = 'ASC';
+			
+			g_orderByOld = orderBy;
+			g_sortOld = sort;
+		}else if( typeSearch==='1' ){
+			sort = g_sortOld;
+		}else if( typeSearch==='2' ){
+			/** toggle order by **/
+			if( g_orderByOld===orderBy ){
+				sort = 'DESC';
+				if( g_sortOld===sort ){ // reverse value
+					sort = 'ASC';
+				}else{
+					sort = 'DESC';
+				}
+			}else{
+				sort = 'ASC';
+			}
+			
+			g_orderByOld = orderBy;
+			g_sortOld = sort;
+		}
+		
+		
+		
 		jQuery('input[name="search_width"]').each(function(i,e){
 			if( jQuery(e).prop('checked') ){
 				searchWidth.push(jQuery(e).val());
@@ -137,7 +171,8 @@ td.hover{
 							,'searchWidth':searchWidth
 							,'flagActivity':flagActivity
 							,'currentPage':currentPage
-							,'orderBy':orderBy}}
+							,'orderBy':orderBy
+							,'sort':sort}}
 				,function(response){
 					/* var countData = data?data.length:0; */
 					var countData = response.data.length;
@@ -155,13 +190,13 @@ td.hover{
 					
 					html+='<thead>';
 					html+='<tr>';
-					html+='<th onclick="searchData(\'1\', \'nameth\')">ชื่อ</th>';
-					html+='<th onclick="searchData(\'1\', \'lastnameth\')">นามสกุล</th>';
-					html+='<th onclick="searchData(\'1\', \'nickname\')">ชื่อเล่น</th>';
-					html+='<th onclick="searchData(\'1\', \'generation\')">รุ่นที่</th>';
-					html+='<th onclick="searchData(\'1\', \'login\')">Username</th>';
-					html+='<th onclick="searchData(\'1\', \'birthday\')">อายุ(ปี)</th>';
-					html+='<th onclick="searchData(\'1\', \'email\')">email</th>';
+					html+='<th onclick="searchData(\'1\', \'nameth\', \'2\')">ชื่อ</th>';
+					html+='<th onclick="searchData(\'1\', \'lastnameth\', \'2\')">นามสกุล</th>';
+					html+='<th onclick="searchData(\'1\', \'nickname\', \'2\')">ชื่อเล่น</th>';
+					html+='<th onclick="searchData(\'1\', \'generation\', \'2\')">รุ่นที่</th>';
+					html+='<th onclick="searchData(\'1\', \'login\', \'2\')">Username</th>';
+					html+='<th onclick="searchData(\'1\', \'birthday\', \'2\')">อายุ(ปี)</th>';
+					html+='<th onclick="searchData(\'1\', \'email\', \'2\')">email</th>';
 					<?php if($isAdmin){ ?>html+='<th>Admin</th>';<?php } ?>
 					html+='</tr>';
 					html+='</thead>';
@@ -204,7 +239,7 @@ td.hover{
 																last: 'Last', 
 																theme: 'black',
 																onchange: function(newPageValue){
-																	searchData(newPageValue, orderBy);
+																	searchData(newPageValue, orderBy, '1');
 																} 
 															});
 					}else{

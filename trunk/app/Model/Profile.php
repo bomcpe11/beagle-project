@@ -11,15 +11,15 @@ class Profile extends AppModel {
 		return $result;
 	}
 	
-	public function getProfilesByLimit($start,$end,$orderBy){
+	public function getProfilesByLimit($start,$recordPerPage,$orderBy, $sort){
 		$result = array();
 		$sql = 'select * from profiles p';
 		if( $orderBy==='birthday' ){
-			$order = " order by p.{$orderBy} desc";
+			$order = " order by p.{$orderBy} $sort";
 		}else{
-			$order = " order by p.{$orderBy} asc";
+			$order = " order by p.{$orderBy} $sort";
 		}
-		$limit = " limit $start, $end";
+		$limit = " limit $start, $recordPerPage";
 		$this->log($sql.$order.$limit);
 		
 		try{
@@ -541,8 +541,9 @@ class Profile extends AppModel {
 										$searchWidth,
 										$flagActivity,
 										$start,
-										$end,
-										$orderBy){
+										$recordPerPage,
+										$orderBy,
+										$sort){
 		$result = array();
 		$resultAll = array();
 		$resultLimit = array();
@@ -586,11 +587,11 @@ class Profile extends AppModel {
 		}
 		$sql = "$sql ( $sqlCondition )";
 		if( $orderBy==='birthday' ){
-			$order = " order by p.{$orderBy} desc";
+			$order = " order by p.{$orderBy} $sort";
 		}else{
-			$order = " order by p.{$orderBy} asc";
+			$order = " order by p.{$orderBy} $sort";
 		}
-		$limit = " limit $start, $end";
+		$limit = " limit $start, $recordPerPage";
 		$this->log($sql.$order.$limit);
 	
 		try {

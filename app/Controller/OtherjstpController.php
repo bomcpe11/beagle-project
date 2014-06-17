@@ -23,23 +23,31 @@ class OtherjstpController extends AppController {
 		$flagActivity = $this->request->data['flagActivity'];
 		$currentPage = $this->request->data['currentPage'];
 		$orderBy = $this->request->data['orderBy'];
+		$sort = $this->request->data['sort'];
+		/*$orderByNew = $this->request->data['orderByNew'];
+		if( $orderByOld===$orderByNew ){
+			$sort = 'DESC';
+		}else{
+			$sort = 'ASC';
+		}*/
 		$recordPerPage = 30;
-		$limitStart = $recordPerPage * ($currentPage - 1);
-		$limitEnd = $recordPerPage * $currentPage;
+		$start = $recordPerPage * ($currentPage - 1);
 		
 		$keyWord = trim($keyWord);
 		if($keyWord=="*"){
 			//TODO: Search All, limit 0, 200
-			$result = $this->Profile->getProfilesByLimit($limitStart,
-															$limitEnd,
-															$orderBy);
+			$result = $this->Profile->getProfilesByLimit($start,
+															$recordPerPage,
+															$orderBy,
+															$sort);
 		}else{
 			$result = $this->Profile->getDataForPsearch($keyWord,
 														$searchWidth,
 														$flagActivity,
-														$limitStart,
-														$limitEnd,
-														$orderBy);
+														$start,
+														$recordPerPage,
+														$orderBy,
+														$sort);
 		}
 		$result['record_per_page'] = $recordPerPage;
 		//$this->log($result);

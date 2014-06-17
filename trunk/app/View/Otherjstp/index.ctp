@@ -98,6 +98,7 @@ td.hover{
 		var flagActivity = -1;	// -1 not have activity, 1 have activity
 		var sort = '';
 		/**
+		* *** toggle order by ***
 		* typeSearch, 
 		* [0] = click main search
 		* [1] = click pagginh
@@ -111,10 +112,9 @@ td.hover{
 		}else if( typeSearch==='1' ){
 			sort = g_sortOld;
 		}else if( typeSearch==='2' ){
-			/** toggle order by **/
 			if( g_orderByOld===orderBy ){
 				sort = 'DESC';
-				if( g_sortOld===sort ){ // reverse value
+				if( g_sortOld===sort ){ // inverse value
 					sort = 'ASC';
 				}else{
 					sort = 'DESC';
@@ -125,6 +125,15 @@ td.hover{
 			
 			g_orderByOld = orderBy;
 			g_sortOld = sort;
+		}
+		
+		// inverse where ordery by birthday
+		if( orderBy==='birthday' ){
+			if( sort==='ASC' ){
+				sort = 'DESC';
+			}else{
+				sort = 'ASC';
+			}
 		}
 		
 		
@@ -244,7 +253,7 @@ td.hover{
 															});
 					}else{
 						html+='<tr>';
-						html+='<td colspan="7" style="text-align:center">ไม่พบข้อมูล</td>';
+						html+='<td colspan="<?php echo $isAdmin?'8':7; ?>" style="text-align:center">ไม่พบข้อมูล</td>';
 						html+='</tr>';
 
 						/* pagination */

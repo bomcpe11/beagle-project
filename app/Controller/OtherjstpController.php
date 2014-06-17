@@ -24,12 +24,6 @@ class OtherjstpController extends AppController {
 		$currentPage = $this->request->data['currentPage'];
 		$orderBy = $this->request->data['orderBy'];
 		$sort = $this->request->data['sort'];
-		/*$orderByNew = $this->request->data['orderByNew'];
-		if( $orderByOld===$orderByNew ){
-			$sort = 'DESC';
-		}else{
-			$sort = 'ASC';
-		}*/
 		$recordPerPage = 30;
 		$start = $recordPerPage * ($currentPage - 1);
 		

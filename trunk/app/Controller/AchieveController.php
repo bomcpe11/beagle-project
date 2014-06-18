@@ -47,7 +47,8 @@ class AchieveController extends AppController{
 		/* set data to view*/
 		$this->set(compact('isOwner'
 							,'fullNameTh'
-							,'listAward'));
+							,'listAward'
+							,'get_profile_id'));
 	}
 /* ------------------------------------------------------------------------------------------------ */
 	public function savedNewAward(){
@@ -144,6 +145,7 @@ class AchieveController extends AppController{
 		$this->log('Start :: AchieveController :: uploadFiles');
 		$objUser = $this->getObjUser();
 		$id = $_POST["idUpload"];
+		$profile_id = $_GET["id"];
 		$uploadfor = $_GET['uploadfor'];
 	
 		if($_FILES["upload"]["size"]>25000000){
@@ -174,7 +176,7 @@ class AchieveController extends AppController{
 		} else {
 			$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
 		}
-		$this->redirect(array("controller" => "Achieve", "action" => "?id=".$objUser['id']));
+		$this->redirect(array("controller" => "Achieve", "action" => "?id=".$profile_id));
 		$this->log('End :: AchieveController :: uploadFiles');
 	}
 	/* --------------------------------------------------------------------------------------------------- */
@@ -188,6 +190,7 @@ class AchieveController extends AppController{
 		
 		$dataname = $this->request->data["dataname"];
 		$dataid = $this->request->data["dataid"];
+		$profileid = $this->request->data["profileid"];
 		
 		$imgPath = '';
 		$raw_imgPath = '';
@@ -233,7 +236,7 @@ class AchieveController extends AppController{
 		}
 	
 		$this->layout='public';
-		$this->set(compact('imgPath', 'raw_imgPath', 'dataname', 'dataid'));
+		$this->set(compact('imgPath', 'raw_imgPath', 'dataname', 'dataid', 'profileid'));
 	
 		$this->log('END :: AchieveController -> crop()');
 	

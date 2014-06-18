@@ -16,7 +16,9 @@
 									<p>ไม่พบข้อมูล</p>";
 						}
 					?>
+					<?php if($isAdmin || $isOwner){ ?>
 					<input type="button" style="margin: 10px 0 0 47px;" onclick="window.location.replace('<?php echo $this->Html->url('/Changepic/index?id='.$objUser[0]['profiles']['id']);?>');" value="แก้ไขรูปภาพ" />
+					<?php } ?>
 				</div>
 			</div>
 			<div class="section-content">

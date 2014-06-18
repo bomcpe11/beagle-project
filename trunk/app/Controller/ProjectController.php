@@ -56,7 +56,8 @@ class ProjectController extends AppController {
 							,'fullNameTh'
 							,'listResearchType'
 							,'listResearch'
-							,'listOtherwork'));
+							,'listOtherwork'
+							,'get_profile_id'));
 	}
 	/* --------------------------------------------------------------------------------------------------- */
 	public function savedNewResearch(){
@@ -172,6 +173,7 @@ class ProjectController extends AppController {
 		$this->log('Start :: ProjectController :: uploadFiles');
 		$objUser = $this->getObjUser();
 		$id = $_POST["idUpload"];
+		$profile_id = $_GET["id"];
 		$uploadfor = $_GET['uploadfor'];
 		
 		if($_FILES["upload"]["size"]>25000000){
@@ -203,7 +205,7 @@ class ProjectController extends AppController {
 		} else {
 			$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
 		}
-		$this->redirect(array("controller" => "Project", "action" => "?id=".$objUser['id']));
+		$this->redirect(array("controller" => "Project", "action" => "?id=".$profile_id));
 		$this->log('End :: ActivityController :: uploadFiles');
 	}
 	
@@ -217,6 +219,7 @@ class ProjectController extends AppController {
 		
 		$dataname = $this->request->data["dataname"];
 		$dataid = $this->request->data["dataid"];
+		$profileid = $this->request->data["profileid"];
 		
 		$imgPath = '';
 		$raw_imgPath = '';
@@ -269,7 +272,7 @@ class ProjectController extends AppController {
 		}
 	
 		$this->layout='public';
-		$this->set(compact('imgPath', 'raw_imgPath', 'dataname', 'dataid'));
+		$this->set(compact('imgPath', 'raw_imgPath', 'dataname', 'dataid', 'profileid'));
 	
 		$this->log('END :: ProjectController -> crop()');
 	
@@ -285,7 +288,7 @@ class ProjectController extends AppController {
 		$dataname = $this->request->data['dataname'];
 		$dataid = $this->request->data['dataid'];
 		
-		$objUser = $this->getObjUser();
+		//$objUser = $this->getObjUser();
 	
 		$directory = "";
 		$model = "";

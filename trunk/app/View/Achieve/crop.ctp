@@ -27,6 +27,7 @@
 		var raw_imgPath = '<?php echo $raw_imgPath; ?>';
 		var dataname = '<?php echo $dataname; ?>';
 		var dataid = '<?php echo $dataid; ?>';
+		var profileid = '<?php echo $profileid; ?>';
 		var cropInfo = g_imgCropper.getSelection();
 
 		// validate imgDesc
@@ -36,6 +37,7 @@
 					,dataname: dataname
 					,dataid: dataid
 					,cropInfo: cropInfo
+					,profileid: profileid
 				}
 			,function(data){
 // 				console.log(data);
@@ -43,7 +45,7 @@
 				jAlert(data.message
 						, function(){ 
 							if( data.status ){
-								window.location.replace('<?php echo $this->Html->url('/Achieve/index?id='.$objuser['id']); ?>');
+								window.location.replace('<?php echo $this->Html->url('/Achieve/index?id='.$profileid); ?>');
 							}
 						}//okFunc	
 						, function(){ 

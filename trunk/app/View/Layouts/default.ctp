@@ -36,6 +36,11 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
+	<meta http-equiv="cache-control" content="max-age=0" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="expires" content="0" />
+	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+	<meta http-equiv="pragma" content="no-cache" />
 	<?php 
 		echo $this->Html->charset(); 
 	?>
@@ -106,7 +111,7 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 						</a>
 					</div>
 					<div class="menu-item-wrapper">
-						<a href="<?php echo $this->webroot; ?>Resources">
+						<a href="<?php echo $this->webroot; ?>Resources/index?id=<?php echo $profile_id; ?>">
 							<img src="<?php echo $this->Html->url('/img/icon-resources-01.png');?>" class="tooltip"
 								alt="Resources" title="Resources"></img>
 						</a>
@@ -118,13 +123,13 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 						</a>
 					</div>
 					<div class="menu-item-wrapper">
-						<a href="<?php echo $this->webroot; ?>Export">
+						<a href="<?php echo $this->webroot; ?>Export/index?id=<?php echo $profile_id; ?>">
 							<img src="<?php echo $this->Html->url('/img/icon-export-01.png');?>" class="tooltip"
 								alt="Export" title="Export"></img>
 						</a>
 					</div>
 					<div class="menu-item-wrapper">
-						<a href="<?php echo $this->webroot; ?>Customize">
+						<a href="<?php echo $this->webroot; ?>Customize/index?id=<?php echo $profile_id; ?>">
 							<img src="<?php echo $this->Html->url('/img/icon-customize-01.png');?>" class="tooltip"
 								alt="Customize" title="Customize"></img>
 						</a>
@@ -136,13 +141,13 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 						</a>
 					</div>
 					<div class="menu-item-wrapper">
-						<a href="<?php echo $this->webroot; ?>Mentorexpert">
+						<a href="<?php echo $this->webroot; ?>Mentorexpert/index?id=<?php echo $profile_id; ?>">
 							<img src="<?php echo $this->Html->url('/img/icon-mentorexpert-01.png');?>" class="tooltip"
 								alt="Mentor Expert" title="Mentor Expert"></img>
 						</a>
 					</div>
 					<div class="menu-item-wrapper">
-						<a href="<?php echo $this->webroot; ?>Otherjstp">
+						<a href="<?php echo $this->webroot; ?>Otherjstp/index?id=<?php echo $profile_id; ?>">
 							<img src="<?php echo $this->Html->url('/img/icon-otherjstp-01.png');?>" class="tooltip"
 								alt="Other JSTP" title="Other JSTP"></img>
 						</a>

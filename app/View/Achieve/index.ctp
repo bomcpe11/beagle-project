@@ -45,7 +45,7 @@
 										?>
 											<img class="thumb" src="<?php echo $this->Html->url("/".$listAward[$i]['a']['thumbpath']); ?>" />
 										<?php }else{ ?>
-											<div class="blank">ไม่มีภาพ<?php if($isOwner=="1"){ ?><br /><a class="link"><img class="thumbchoosefile" alt="อัพโหลดภาพ" title="อัพโหลดภาพ" style="margin: 10px 0 0 0;" src="<?php echo $this->Html->url("/img/plus.png");?>" /></a><?php } ?></div>
+											<div class="blank">ไม่มีภาพ<?php if($isAdmin || $isOwner=="1"){ ?><br /><a class="link"><img class="thumbchoosefile" alt="อัพโหลดภาพ" title="อัพโหลดภาพ" style="margin: 10px 0 0 0;" src="<?php echo $this->Html->url("/img/plus.png");?>" /></a><?php } ?></div>
 										<?php } ?>
 									</div>
 								</td>
@@ -100,8 +100,8 @@
 												@closedir($dir);
 												?>
 												<?php 
-													if($objuser['id']==$_GET['id'] && $countFiles<5){
-														genUploadFileForm($this->Html->url('/Achieve/uploadFiles').'?uploadfor=award', $listAward[$i]['a']['id']);
+													if(($isAdmin ||$objuser['id']==$_GET['id']) && $countFiles<5){
+														genUploadFileForm($this->Html->url('/Achieve/uploadFiles').'?uploadfor=award&id='.$_GET['id'], $listAward[$i]['a']['id']);
 													}
 												?>
 											</div>
@@ -143,6 +143,7 @@
 							<input type="file" name="file_upload" />
 							<input type="hidden" name="dataname" />
 							<input type="hidden" name="dataid" />
+							<input type="hidden" name="profileid" />
 						</td>
 					</tr>
 				</table>
@@ -181,7 +182,7 @@
 			input_container.find('div.'+jQuery(this).attr('frmid')).show();
 		});
 		
-		<?php if($isOwner=="1"){ ?>
+		<?php if($isAdmin || $isOwner=="1"){ ?>
 		jQuery('div.thumb1 .thumb').mouseover(function(){
 			var thumb_container = jQuery(this).closest("div.thumb1");
 			thumb_container.find('.overlay').show();
@@ -202,6 +203,7 @@
 			var frmContainer = jQuery('#frmthumbuploader');
 			frmContainer.find('input[name="dataname"]').val(dataname);
 			frmContainer.find('input[name="dataid"]').val(dataid);
+			frmContainer.find('input[name="profileid"]').val('<?php echo $get_profile_id; ?>');
 			
 			frmContainer.css('width', '500px');
 			var buttons = [

@@ -9,7 +9,29 @@ class ChangepicController extends AppController {
 	public function index(){
 		$this->log("START :: ChangepicController -> index()");
 		
+		$get_profile_id = @intval($this->request->query['id']);
+		$sssnObjUser = $this->getObjUser();
+		$objUser = $this->Profile->getDataById($get_profile_id);
+		$isOwner = false;
+		
+		if( !empty($objUser) ){
+			/* owner profile */
+			if( $get_profile_id==$sssnObjUser['id'] ){
+				$isOwner = true;
+			}else if(!$this->getIsAdmin()){
+				//TODO: Redirect to Mainmenu.
+				$this->redirect(array("controller" => "Mainmenu"));
+			}
+		}
+		if(empty($get_profile_id)) $isOwner = true;
+		
+		if(!$this->getIsAdmin() && !$isOwner){
+			$this->redirect(array("controller" => "Mainmenu"));
+		}
+		
 		$this->prepareDataFnc("");	// $flagUploadFile
+		
+		$this->set('isOwner', $isOwner);
 		
 		$this->log("END :: ChangepicController -> index()");
 	}// index
@@ -276,20 +298,21 @@ class ChangepicController extends AppController {
 		$dataSource = $this->ProfilePic->getdatasource();
 		$dataSource->begin();
 		if( $this->ProfilePic->deleteById($id) ){
-			if( unlink($dataProfilePic[0]['pp']['imgpath']) ){
-				$dataSource->commit();
-				
-				$result['flg'] = '1';
-				$result['msg'] = 'ลบรูปโปรไฟล์ เสร็จเรียบร้อย';
-				
-				//reset session
-				$newObjUser = $this->Profile->getDataById($objUser['id']);
-				$this->Session->delete('objuser');
-				$this->Session->write('objuser',$newObjUser[0]["profiles"]);
-			}else{
-				$result['flg'] = '0';
-				$result['msg'] = 'เกิดข้อผิดพลาด กรุณาติดต่อผู้ดูแลระบบ';
-			}
+// 			if( unlink($dataProfilePic[0]['pp']['imgpath']) ){
+			unlink($dataProfilePic[0]['pp']['imgpath']);
+			$dataSource->commit();
+			
+			$result['flg'] = '1';
+			$result['msg'] = 'ลบรูปโปรไฟล์ เสร็จเรียบร้อย';
+			
+			//reset session
+			$newObjUser = $this->Profile->getDataById($objUser['id']);
+			$this->Session->delete('objuser');
+			$this->Session->write('objuser',$newObjUser[0]["profiles"]);
+// 			}else{
+// 				$result['flg'] = '0';
+// 				$result['msg'] = 'เกิดข้อผิดพลาด กรุณาติดต่อผู้ดูแลระบบ';
+// 			}
 		}else{
 			$dataSource->rollback();
 			
@@ -301,7 +324,11 @@ class ChangepicController extends AppController {
 		
 		$this->prepareDataFnc($result['msg']);
 		$redirectparam = (empty($profileId)?'':'?id='.$profileId);
-		$this->render("index");
+		//$this->render("index");
+		
+		$this->redirect(array("controller" => "Changepic",
+				"action" => "index".$redirectparam
+		));
 	}
 	/* ------------------------------------------------------------------------------------------------- */
 	private function prepareDataFnc($flagUploadFile) {

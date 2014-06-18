@@ -44,9 +44,11 @@
 				</a>
 			</td>
 			<td>
+				<?php if($isAdmin){ ?>
 				<div class="showall-activity">
 					<a href="<?php echo $this->Html->url('/Activitylist');?>"><img src="<?php echo $this->Html->url('/img/menu_activity.png');?>" style="cursor:pointer;" /></a>
 				</div>
+				<?php } ?>
 			 </td></tr>
 			 </table>
 		</li>

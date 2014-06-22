@@ -137,7 +137,7 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 					<div class="menu-item-wrapper">
 						<a href="<?php echo $this->webroot; ?>Achieve/index?id=<?php echo $profile_id; ?>">
 							<img src="<?php echo $this->Html->url('/img/icon-archieve-01.png');?>" class="tooltip"
-								alt="Achieve" title="Achieve"></img>
+								alt="Achievement" title="Achievement"></img>
 						</a>
 					</div>
 					<div class="menu-item-wrapper">

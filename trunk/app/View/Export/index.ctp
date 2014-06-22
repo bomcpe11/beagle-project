@@ -8,7 +8,7 @@
 <div id="frm-menu" class="framecontainer" style="text-align:center;display:block;">
 	<a class="btn" href="<?php echo $this->Html->url('/Portfolio/').'?id='.$_GET['id']; ?>" target="_blank">ดาวน์โหลด Portfolio</a><br/>
 	<?php if($isAdmin){ ?>
-	<a class="btn" href="<?php echo $this->Html->url('/Export/allPersonalInfoes'); ?>">Export All Personal Infoes</a><br />
+	<a class="btn" href="<?php echo $this->Html->url('/Export/allPersonalInfoes'); ?>">Export All Personal Info</a><br />
 	<a class="btn" href="<?php echo $this->Html->url('/Export/allActivities'); ?>">Export All Activities</a><br />
 	<?php } ?>
 	<a class="btn" frmid="" onclick="window.location.replace('<?php echo $this->Html->url('/Mainmenu'); ?>');">Back to Main Menu</a><br />

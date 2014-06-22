@@ -6,7 +6,7 @@
 	<a href="<?php echo $this->Html->url('/PersonalInfo/index?id='.$objuser['id']);?>"><li id="menu-personal-info" class="active"><div class="caption">Personal Info</div></li></a>
 	<a href="<?php echo $this->Html->url('/Project/index?id='.$objuser['id']);?>"><li id="menu-project" class="active"><div class="caption">Project/Research</div></li></a>
 	<li></li>
-	<a href="<?php echo $this->Html->url('/Resources');?>"><li id="menu-resources" class="active"><div class="caption">Resources</div></li></a>
+	<a href="<?php echo $this->Html->url('/Resources/index?id='.$objuser['id']);?>"><li id="menu-resources" class="active"><div class="caption">Resources</div></li></a>
 	<li></li>
 	<li id="menu-utility" class="active">
 		<ul class="util-menu">
@@ -19,14 +19,14 @@
 	<li></li>
 	<li></li>
 	<li></li>
-	<a href="<?php echo $this->Html->url('/Customize');?>"><li id="menu-customize" class="active"><div class="caption">Customize</div></li></a>
+	<a href="<?php echo $this->Html->url('/Customize/index?id='.$objuser['id']);?>"><li id="menu-customize" class="active"><div class="caption">Customize</div></li></a>
 	<li></li>
-	<a href="<?php echo $this->Html->url('/Export');?>"><li id="menu-export" class="active"><div class="caption">Export</div></li></a>
+	<a href="<?php echo $this->Html->url('/Export/index?id='.$objuser['id']);?>"><li id="menu-export" class="active"><div class="caption">Export</div></li></a>
 	<li></li>
 	<li></li>
-	<a href="<?php echo $this->Html->url('/Mentorexpert');?>"><li id="menu-mentor" class="active"><div class="caption">Mentor & Expert</div></li></a>
-	<a href="<?php echo $this->Html->url('/Otherjstp');?>"><li id="menu-otherjstp" class="active"><div class="caption">Other JSTP</div></li></a>
-	<a href="<?php echo $this->Html->url('/Achieve/index?id='.$objuser['id']);?>"><li id="menu-achieve" class="active"><div class="caption">Achieve</div></li></a>
+	<a href="<?php echo $this->Html->url('/Mentorexpert/index?id='.$objuser['id']);?>"><li id="menu-mentor" class="active"><div class="caption">Mentor & Expert</div></li></a>
+	<a href="<?php echo $this->Html->url('/Otherjstp/index?id='.$objuser['id']);?>"><li id="menu-otherjstp" class="active"><div class="caption">Other JSTP</div></li></a>
+	<a href="<?php echo $this->Html->url('/Achieve/index?id='.$objuser['id']);?>"><li id="menu-achieve" class="active"><div class="caption">Achievement</div></li></a>
 	<li></li>
 	
 		<li id="menu-activity" class="active">

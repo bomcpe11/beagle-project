@@ -8,7 +8,7 @@
 					<form action="'.$action.'" method="post" enctype="multipart/form-data">
 						<input type="file" name="upload" />
 						<input type="hidden" name="idUpload" value="'.$idUpload.'" /><br />
-						* จำกัด 5 ไฟล์ และขนาดไม่เกิน 25 MB
+						* จำกัด 5 ไฟล์ และขนาดรวมไม่เกิน 25 MB
 						<input type="submit" style="margin:0px;display:inline;" value="Upload" /> 
 						<input type="button" style="margin:0px;display:inline;" value="Back" class="frmbtn" frmid="frm1" />
 					</form>
@@ -102,12 +102,14 @@
 												<?php 
 												$path = "files/research/".$listResearch[$i]['r']['id'];
 												$countFiles = 0;
+												$totalsize = 0;
 												if($dir = @opendir($path)){
 													while (($file = readdir($dir)) !== false)
 													{ 
 														if(is_file($path."/".$file)){ 
+															$totalsize += filesize($path."/".$file);
 															?><a href="<?php echo $this->Html->url("/".$path."/".$file);?>" style="color:black;"><?php
-															echo $file; ?></a> 
+															echo $file; ?></a>
 															<?php if($isAdmin || $isOwner=="1"){ ?>
 																<img src="<?php echo $this->Html->url('/img/icon_del.png');?>" style="cursor:pointer;" width="10" height="10" title="ลบไฟล์ <?php echo $file; ?> นี้"
 																onclick="deleteFile('<?php echo $path."/".$file ?>','<?php echo $listResearch[$i]['r']['id'] ?>');" />
@@ -121,6 +123,7 @@
 												?>
 												<?php 
 													if(($isAdmin || $objuser['id']==$_GET['id']) && $countFiles<5){
+														?><i>[<?php echo round($totalsize / 1048576, 1); ?>MB/25MB]</i><?php
 														genUploadFileForm($this->Html->url('/Project/uploadFiles').'?uploadfor=research&id='.$_GET['id'], $listResearch[$i]['r']['id']);
 													}
 												?>
@@ -223,10 +226,12 @@
 												<?php 
 												$path = "files/otherwork/".$listOtherwork[$i]['o']['id'];
 												$countFiles = 0;
+												$totalsize = 0;
 												if($dir = @opendir($path)){
 													while (($file = readdir($dir)) !== false)
 													{ 
 														if(is_file($path."/".$file)){ 
+															$totalsize += filesize($path."/".$file);
 															?><a href="<?php echo $this->Html->url("/".$path."/".$file);?>" style="color:black;"><?php
 															echo $file; ?></a> 
 															<?php if($isAdmin || $isOwner=="1"){ ?>
@@ -242,6 +247,7 @@
 												?>
 												<?php 
 													if(($isAdmin ||$objuser['id']==$_GET['id']) && $countFiles<5){
+														?><i>[<?php echo round($totalsize / 1048576, 1); ?>MB/25MB]</i><?php
 														genUploadFileForm($this->Html->url('/Project/uploadFiles').'?uploadfor=otherwork&id='.$_GET['id'], $listOtherwork[$i]['o']['id']);
 													}
 												?>

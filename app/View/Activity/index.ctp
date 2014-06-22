@@ -1,4 +1,10 @@
-<?php //include 'popup_join_activity.ctp'; ?>
+<?php 
+	echo $this->Html->css('personal_info.css');
+?>
+<?php 
+	//include 'popup_join_activity.ctp';
+	include 'comment.ctp';
+?>
 <?php 
 	$isAllowUploadFile = $isAdmin;
 ?>
@@ -259,4 +265,125 @@
 	</tr>
 </table>
 <?php if($isAllowUploadFile){ ?></form><?php } ?>
+<!-- ####################################################### Comments ############################################# -->
+<div class="container">
+	<h2>ความคิดเห็น</h2>
+	<div class="section-content">
+		<ul id="sortable_actcomments">
+			<?php 
+				$countListComment = count($listComment);
+				if( $countListComment>0 ){
+					for( $i=0;$i<$countListComment;$i++ ){
+ 						//echo $listComment[$i]['ac']['commentable_id'].'|'.$objuser['id'];
+						echo "<li class=\"ui-state-default block\">
+								<input type=\"hidden\" name=\"actcomments_id\" value=\"{$listComment[$i]['ac']['id']}\">
+								<span class=\"ui-icon ui-icon-arrowthick-2-n-s\"></span>
+								<div class=\"data-item-wrapper\">
+									<table class=\"table-data-item\">
+										<tr>
+											<td><strong>หัวข้อ : {$listComment[$i]['ac']['title']}</strong></td>
+											<td class=\"edit-delete\">";
+						
+						if( $objuser['id']===$listComment[$i]['ac']['commentable_id'] ){
+							echo "				<img src=\"{$this->Html->url('/img/icon_del.png')}\" width=\"16\" height=\"16\"
+													onclick=\"deleteComment('{$listComment[$i]['ac']['id']}')\" />";
+						}
+						echo "				</td>
+										</tr>
+										<tr>
+											<td colspan=\"2\" class=\"comment\">{$listComment[$i]['ac']['comment']}</td>
+										</tr>
+										<tr>
+											<td colspan=\"2\">โดย {$listComment[$i][0]['commentator']} เมื่อวันที่ {$listComment[$i]['ac']['created_at']}</td>
+										</tr>
+									</table>
+								</div>
+							</il>";
+					}
+				}else{
+					echo "<il class=\"ui-state-default block\">
+							<div class=\"data-item-wrapper\">
+								<table class=\"table-data-item\">
+									<tr class=\"no-found-data\">
+										<td>ไม่พบข้อมูล</td>
+									</tr>
+								</table>
+							</div>
+						</li>";
+				}
+			?>
+		</ul>
+	</div>
+	<div class="section-content">
+		<table class="table-data-item">
+			<colgroup>
+				<col style="width:20%;">
+				<col style="width:80%;">
+			</colgroup>
+			<tr>
+				<td colspan="2"><h3>เพิ่มความคิดเห็น</h3></td>
+			</tr>
+			<tr>
+				<td style="text-align: right;"><b>หัวข้อ :</b></td>
+				<td>
+					<input type="text" id="comment_title" style="width: 98%;" value=""></input>
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align: right;vertical-align: top;"><b>ความคิดเห็น :</b></td>
+				<td>
+					<textarea type="text" id="comment_detial" style="width: 98%;height: 100px;"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="button" id="button_add_comment" value="เพิ่มข้อมูล ความคิดเห็น" onclick="addNewComment()"/>
+				</td>
+			</tr>
+		</table>
+	</div>
 </div>
+</div>
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		<?php 
+			if( $isAdmin ){
+				echo "jQuery('#sortable_actcomments').sortable({
+							update: function(event, ui) {
+								// format => sortable_xxxx
+								var sortable_id = ui.item.parent('ul').prop('id').replace(/sortable_/gi,'');
+								//console.log(sortable_id);
+								
+								updateSortableSeq(sortable_id);
+						    }
+						});";
+			}
+		?>
+	});
+	/* -------------------------------------------------------------------------------------------------- */
+	function updateSortableSeq(sortable_id){
+		var data = new Array();
+		
+		jQuery('#sortable_'+sortable_id).find('li').each(function(i,e){
+			data.push({'id':jQuery(e).find('input[name="'+sortable_id+'_id"]').val()
+					 ,'seq':i});
+		});
+
+		loading();
+		jQuery.post('<?php echo $this->Html->url('/Activity/updateSortableSeq');?>'
+				,{'data':{'sortable_id':sortable_id
+							,'data':data}}
+				,function(data){
+					unloading();
+					jAlert(data.msg, 
+							function(){ //okFunc
+							}, 
+							function(){ //openFunc
+							}, 
+							function(){ //closeFunc
+							}
+							);
+				}
+				,'json');
+	}
+</script>

@@ -8,7 +8,7 @@
 						<form action="'.$action.'" method="post" enctype="multipart/form-data">
 							<input type="file" name="upload" />
 							<input type="hidden" name="idUpload" value="'.$idUpload.'" /><br />
-							* จำกัด 5 ไฟล์ และขนาดไม่เกิน 25 MB
+							* จำกัด 5 ไฟล์ และขนาดรวมไม่เกิน 25 MB
 							<input type="submit" style="margin:0px;display:inline;" value="Upload" />
 							<input type="button" style="margin:0px;display:inline;" value="Back" class="frmbtn" frmid="frm1" />
 						</form>
@@ -82,10 +82,12 @@
 												<?php 
 												$path = "files/award/".$listAward[$i]['a']['id'];
 												$countFiles = 0;
+												$totalsize = 0;
 												if($dir = @opendir($path)){
 													while (($file = readdir($dir)) !== false)
 													{ 
 														if(is_file($path."/".$file)){ 
+															$totalsize += filesize($path."/".$file);
 															?><a href="<?php echo $this->Html->url("/".$path."/".$file);?>" style="color:black;"><?php
 															echo $file; ?></a> 
 															<?php if($isAdmin || $isOwner=="1"){ ?>
@@ -101,6 +103,7 @@
 												?>
 												<?php 
 													if(($isAdmin ||$objuser['id']==$_GET['id']) && $countFiles<5){
+														?><i>[<?php echo round($totalsize / 1048576, 1); ?>MB/25MB]</i><?php
 														genUploadFileForm($this->Html->url('/Achieve/uploadFiles').'?uploadfor=award&id='.$_GET['id'], $listAward[$i]['a']['id']);
 													}
 												?>

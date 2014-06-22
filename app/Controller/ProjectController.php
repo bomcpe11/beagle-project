@@ -176,11 +176,11 @@ class ProjectController extends AppController {
 		$profile_id = $_GET["id"];
 		$uploadfor = $_GET['uploadfor'];
 		
-		if($_FILES["upload"]["size"]>25000000){
-			$this->redirect(array("controller" => "Project", "action" => "?id=".$objUser['id']));
-			$this->log('Maximum file > 25 MB , not upload!!');
-			return;
-		}
+// 		if($_FILES["upload"]["size"]>25000000){
+// 			$this->redirect(array("controller" => "Project", "action" => "?id=".$objUser['id']));
+// 			$this->log('Maximum file > 25 MB , not upload!!');
+// 			return;
+// 		}
 		
 		switch ($uploadfor){
 			case 'research': $uploadfor='research'; break;
@@ -196,12 +196,32 @@ class ProjectController extends AppController {
 		$result = '';
 	
 		if ( $this->checkDirectory($directory) ) {
-			$this->log('TEMP FILE = '.$_FILES["upload"]["tmp_name"]);
-			if ( move_uploaded_file($_FILES["upload"]["tmp_name"]	// temp_file
-					, $directory."/".$fileName) ) {	// path file
-			} else {
+			
+			//TODO:Check folder limit for 25MB.
+			$totalsize = 0;
+			if($dir = @opendir($directory)){
+				while (($file = readdir($dir)) !== false)
+				{
+					if(is_file($directory.$file)){
+						$totalsize += filesize($directory.$file);
+					}
+				}
+			}
+			$totalsize += $_FILES["upload"]["size"];
+			
+			if($totalsize<=26214400){ //$totalsize<=25MB
+				
+				//TODO: Upload Files.
+				$this->log('TEMP FILE = '.$_FILES["upload"]["tmp_name"]);
+				if ( move_uploaded_file($_FILES["upload"]["tmp_name"]	// temp_file
+						, $directory."/".$fileName) ) {	// path file
+				} else {
+					$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
+				}
+			}else{
 				$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
 			}
+			
 		} else {
 			$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
 		}

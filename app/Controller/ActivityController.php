@@ -1,7 +1,7 @@
 <?php
 class ActivityController extends AppController {
 	public $names = "ActivityController";
-	public $uses = array('Activity','Profile','JoinActivity');
+	public $uses = array('Activity','Profile','JoinActivity','Actcomment');
 	
 	public function index() {
 		$this->setTitle('ข้อมูลกิจกรรม');
@@ -18,6 +18,22 @@ class ActivityController extends AppController {
 		if( count($checkJoinActivity)>0 ){
 			$flagJoinActivity = 1;
 		}
+		
+		/* comment */
+		$listComment = $this->Actcomment->selectByActivityId($id);
+		$countListComment = count($listComment);
+		$splitCreatedAt = array();
+		$splitUpdatedAt = array();
+		for( $i=0;$i<$countListComment;$i++ ){
+			// Ex. yyyy-MM-dd hh:mm:ss
+			$splitCreatedAt = explode(' ',$listComment[$i]['ac']['created_at']);
+			$splitUpdatedAt = explode(' ',$listComment[$i]['ac']['updated_at']);
+			
+			$listComment[$i]['ac']['created_at'] = $this->DateThai($listComment[$i]['ac']['created_at']).' เวลา '.$splitCreatedAt[1].' น.';
+			$listComment[$i]['ac']['updated_at'] = $this->DateThai($listComment[$i]['ac']['updated_at']).' เวลา '.$splitUpdatedAt[1].' น.';
+		}
+		//$this->log($listComment);
+		$this->set('listComment',$listComment);
 		
 		$this->set("result", $result);
 		$this->set("flagJoinActivity", $flagJoinActivity);
@@ -309,6 +325,100 @@ class ActivityController extends AppController {
 			$result['msg'] = 'ตั้งค่าแสดงเป็นกิจกรรมล่าสุดเรียบร้อย';
 		}else{
 			$result['status'] = 'เกิดข้อผิดพลาดในการตั้งค่า กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+		}
+		
+		$this->layout='ajax';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	}
+	/* ------------------------------------------------------------------------------------------------ */
+	public function saveNewComment(){
+		$this->log('---- ActivityController -> saveNewComment ----');
+		
+		//$this->log($this->request->data);
+		$result = array();
+		$objUser = $this->getObjUser();
+		$commentTitle = $this->request->data['commentTitle'];
+		$commentDetial = $this->request->data['commentDetial'];
+		$activityId = $this->request->data['activityId'];
+		$commentableType = 'Activity';
+		
+		$dataSource = $this->Actcomment->getDataSource();
+		if( $this->Actcomment->insertData($commentTitle
+										,$commentDetial
+										,$objUser['id']
+										,$commentableType
+										,$activityId) ){
+			$dataSource->commit();
+			$result['msg'] = 'เพิ่มความคิดเห็นเสร็จเรียบร้อย';
+			$result['flag'] = 1;
+		}else{
+			$dataSource->rollback();
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การเพิ่มความคิดเห็น กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			$result['flag'] = -1;
+		}
+		//$this->log($result);
+		
+		$this->layout='ajax';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	}
+	/* ------------------------------------------------------------------------------------------------ */
+	public function deleteComment(){
+		$this->log('---- ActivityController -> deleteComment ----');
+		
+		$result = array();
+		//$this->log($this->request->data);
+		$id = $this->request->data['id'];
+
+		$dataSource = $this->Actcomment->getDataSource();
+		if( $this->Actcomment->deleteData($id) ){
+			$dataSource->commit();
+			$result['flg'] = 1;
+			$result['msg'] = 'ลบความคิดเห็นเสร็จเรียบร้อย';
+		}else{
+			$dataSource->rollback();
+			$result['flg'] = -1;
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การลบความคิดเห็น กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+		}
+		
+		$this->layout='ajax';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	}
+	/* ------------------------------------------------------------------------------------------------ */
+	public function updateSortableSeq(){
+		$this->log('---- ActivityController -> updateSortableSeq ----');
+		
+		//$this->log($this->request->data);
+		$result = array();
+		$flagUpdateData = false;
+		$id = $this->request->data['sortable_id'];
+		$data = $this->request->data['data'];
+		$countData = count($data);
+		
+		if( $id==='actcomments' ){
+			$dataSource = $this->Actcomment->getDataSource();
+			$dataSource->begin();
+			for( $i=0;$i<$countData;$i++ ){
+				$flagUpdateData = $this->Actcomment->updateSeq($data[$i]['id']
+																	,$data[$i]['seq']);
+				if( !$flagUpdateData ){
+					break;
+				}
+			}
+			if( $flagUpdateData ){
+				$dataSource->commit();
+				$result['flg'] = 1;
+				$result['msg'] = 'การแก้ไขลำดับข้อมูลความคิดเห็น เสร็จเรียบร้อย';
+			}else{
+				$dataSource->rollback();
+				$result['flg'] = -1;
+				$result['msg'] = 'เกิดข้อผิดพลาดในการแก้ไขลำดับ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			}
+		}else{
+			$result['flag'] = -1;
+			$result['msg'] = 'เกิดข้อผิดพลาดในการแก้ไขลำดับ กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
 		}
 		
 		$this->layout='ajax';

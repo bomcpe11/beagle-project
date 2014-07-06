@@ -6,6 +6,25 @@ class Activity extends AppModel {
 		return $result;
 	}
 	/* ------------------------------------------------------------------------------------------------ */
+	public function getActivitesPagination($start, $recordPerPage, $orderBy, $sort){
+		$sqlSelect = "select * from activities";
+		$sqlOrder = " order by $orderBy $sort";
+		$sqlLimit = " limit $start, $recordPerPage";
+		$this->log($sqlSelect.$sqlOrder.$sqlLimit, 'debug');
+		
+		try{
+			$resultAll = $this->query($sqlSelect.$sqlOrder);
+			$resultLimit = $this->query($sqlSelect.$sqlOrder.$sqlLimit);
+			$result = array('total_data' => count($resultAll),
+								'data' => $resultLimit);
+			//$this->log($resultAll);
+		}catch( Exception $e ){
+			$this->log("exception => ".$e->getMessage());
+		}
+		
+		return $result;
+	}
+	/* ------------------------------------------------------------------------------------------------ */
 // 	public function deleteActivites($idDelete){
 // 		$sql = 'delete from activities where id ='.$idDelete;
 // 		$result = $this->query($sql);

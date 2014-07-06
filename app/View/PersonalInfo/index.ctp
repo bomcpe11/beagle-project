@@ -125,7 +125,7 @@
 					<?php }?>
 				</table>
 				<table style="width:100%;"><tr>
-					<td align="center">
+					<td align="center" style="padding-right: 200px;">
 						<input type="button" style="display: inline-block; margin: 0;"
 								id="button_edit_profile" onclick="javascript:edit_profile();" value="แก้ไขข้อมูลส่วนตัว"/>
 						<!-- <input type="button" style="display: inline-block; margin: 0;"

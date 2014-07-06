@@ -65,11 +65,11 @@
 		<td align="left"><input type="text" id="activityName" style="width: 300px;" /></td>
 	</tr>
 	<tr align="left">
-		<th align="right" width="20%">วันที่จัดกิจกรรม เริ่มต้น : </th>
+		<th align="right" width="20%">วันเริ่มต้น : </th>
 		<td align="left"><input type="text" class="datePicker" id="startDate" /></td>
 	</tr>
 	<tr align="left">
-		<th align="right" width="20%">วันที่จัดกิจกรรม สิ้นสุด : </th>
+		<th align="right" width="20%">วันสิ้นสุด : </th>
 		<td align="left"><input type="text" class="datePicker" id="endDate" /></td>
 	</tr>
 	<tr align="left">
@@ -77,7 +77,7 @@
 		<td align="left"><input type="text" id="location" style="width: 300px;" /></td>
 	</tr>
 	<tr align="left">
-		<th align="right" width="20%">รายละเอียดกิจกรรม อย่างย่อ : </th>
+		<th align="right" width="20%">รายละเอียดกิจกรรม(ย่อ) : </th>
 		<td align="left">
 		<textarea id="shortdesc" style="width: 700px;" rows="5" ></textarea>
 		</td>

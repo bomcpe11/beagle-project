@@ -33,7 +33,7 @@
 								<td><input id="family-occupation" type="text" value="'+ occupation +'"></td>\
 							</tr>\
 							<tr>\
-								<td style="text-align:right;">ตำแหนง :</td>\
+								<td style="text-align:right;">ตำแหน่ง :</td>\
 								<td><input id="family-position" type="text" value="'+ position +'"></td>\
 							</tr>\
 							<tr>\

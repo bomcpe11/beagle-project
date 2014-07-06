@@ -163,11 +163,11 @@
 		<td><?php echo $result[0]["activities"]["name"] ?></td>
 	</tr>
 	<tr>
-		<th align="right">วันที่จัดกิจกรรมเริ่มต้น : </th>
+		<th align="right">วันเริ่มต้น : </th>
 		<td><?php echo $startdtm; ?></td>
 	</tr>
 	<tr>
-		<th align="right">วันที่จัดกิจกรรมสิ้นสุด : </th>
+		<th align="right">วันสิ้นสุด : </th>
 		<td><?php echo $enddtm; ?></td>
 	</tr>
 	<tr>
@@ -175,14 +175,14 @@
 		<td><?php echo $result[0]["activities"]["location"] ?></td>
 	</tr>
 	<tr>
-		<th align="right">รายละเอียดกิจกรรมอย่างย่อ : </th><td></td>
+		<th align="right">รายละเอียดกิจกรรม(ย่อ) : </th><td></td>
 	</tr>
 	<tr>
 		<td colspan="2"><div style="padding-left:50px;"><?php echo $result[0]["activities"]["shortdesc"] ?></div></td>
 	</tr>
 	<?php if( $isAdmin ){ ?>
 		<tr>
-			<th align="right">สรุปกิจกกรม : </th>
+			<th align="right">สรุปกิจกรรม : </th>
 		</tr>
 		<tr>
 			<td colspan="2"><div id="activity-summary"><?php echo $result[0]["activities"]["summary"]; ?></div></td>

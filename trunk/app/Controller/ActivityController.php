@@ -19,6 +19,8 @@ class ActivityController extends AppController {
 			$flagJoinActivity = 1;
 		}
 		
+// 		$this->log($this->Actcomment->getAll());
+		
 		/* comment */
 		$listComment = $this->Actcomment->selectByActivityId($id);
 		$countListComment = count($listComment);

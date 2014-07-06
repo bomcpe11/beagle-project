@@ -26,6 +26,8 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 	<meta http-equiv="expires" content="0" />
 	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
 	<meta http-equiv="pragma" content="no-cache" />
+	<link rel="shortcut icon" href="<?php echo $this->Html->url('/img/favicon.ico');?>" type="image/x-icon">
+	<link rel="icon" href="<?php echo $this->Html->url('/img/favicon.ico');?>" type="image/x-icon">
 	<?php 
 		echo $this->Html->charset(); 
 	?>
@@ -58,6 +60,9 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 	<div id="header">
 		<div id="header_logo_wrapper">
 			<img src="<?php echo $this->Html->url('/img/logo-jstp_v2.png');?>"></img>
+		</div>
+		<div id="header_jstp_logo">
+			<img src="<?php echo $this->Html->url('/img/JSTPLogo.png');?>"></img>
 		</div>
 	</div>
 	<div id="header-bottom-border">

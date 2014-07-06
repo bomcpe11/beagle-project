@@ -128,7 +128,7 @@
 		</td>
 	</tr>
 	<tr align="left">
-		<th align="right" width="20%">วันที่จัดกิจกรรม เริ่มต้น : </th>
+		<th align="right" width="20%">วันเริ่มต้น : </th>
 		<td align="left">
 		<?php 
 			if($result[0]["activities"]["startdtm"] != "" and  $result[0]["activities"]["enddtm"] != ""){
@@ -149,7 +149,7 @@
 		</td>
 	</tr>
 	<tr align="left">
-		<th align="right" width="20%">วันที่จัดกิจกรรม สิ้นสุด : </th>
+		<th align="right" width="20%">วันสิ้นสุด : </th>
 		<td align="left">
 		<?php if( $isAdmin ){ ?>
 			<input type="text" class="datePicker" id="endDate" value="<?php echo $enddtm ?>" />
@@ -169,7 +169,7 @@
 		</td>
 	</tr>
 	<tr align="left">
-		<th align="right" width="20%">รายละเอียดกิจกรรม อย่างย่อ : </th>
+		<th align="right" width="20%">รายละเอียดกิจกรรม(ย่อ) : </th>
 		<td align="left">
 		<?php if( $isAdmin ){ ?>
 			<textarea id="shortdesc" style="width: 700px;" rows="5" ><?php echo $result[0]["activities"]["shortdesc"] ?></textarea>

@@ -1,5 +1,26 @@
 <?php 
 	//echo $this->Html->css('profile.css');
+function toThaiDtm($dtm){
+	if(!empty($dtm)){
+		$dtmArray=explode(' ',$dtm);
+		$dateArray=explode('-',$dtmArray[0]);
+		$thai_month_arr=array(  "00"=>"",
+				"01"=>"ม.ค.",
+				"02"=>"ก.พ.",
+				"03"=>"มี.ค.",
+				"04"=>"เม.ย.",
+				"05"=>"พ.ค.",
+				"06"=>"มิ.ย.",
+				"07"=>"ก.ค.",
+				"08"=>"ส.ค.",
+				"09"=>"ก.ย.",
+				"10"=>"ต.ค.",
+				"11"=>"พ.ย.",
+				"12"=>"ธ.ค."
+		);
+		return $dateArray[2].' '.$thai_month_arr[$dateArray[1]].' '.substr(($dateArray[0]+543),-2)." ".$dtmArray[1];
+	}
+}
 ?>
 
 <script type="text/javascript">
@@ -59,7 +80,7 @@ if(count($webboard)>0){
     <td height="53" colspan="2"><?=nl2br($webboard[0]["webboards"]["Details"]);?></td>
   </tr>
   <tr>
-    <td width="397">Name : <?=$webboard[0]["webboards"]["Name"];?> Create Date : <?=$webboard[0]["webboards"]["CreateDate"];?></td>
+    <td width="397">Name : <?=$webboard[0]["webboards"]["Name"];?> Create Date : <?=toThaiDtm($webboard[0]["webboards"]["CreateDate"]);?></td>
     <td width="253">View : <?=$webboard[0]["webboards"]["View"];?> Reply : <?=$webboard[0]["webboards"]["Reply"];?></td>
   </tr>
 </table>
@@ -75,7 +96,7 @@ for($i=0; $i<count($replies); $i++){
     <td width="">Name :
         <?=$replies[$i]["webboard_replies"]["Name"];?>      </td>
     <td width="">Create Date :
-    <?=$replies[$i]["webboard_replies"]["CreateDate"];?></td>
+    <?=toThaiDtm($replies[$i]["webboard_replies"]["CreateDate"]);?></td>
   </tr>
 </table><hr />
 <?

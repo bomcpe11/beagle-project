@@ -25,7 +25,7 @@ td.hover{
 <div>
 	<table class="section-layout" style="width:50%;">
 		<tr>
-			<td class="form-label">Key Word :</td>
+			<td class="form-label">KeyWord :</td>
 			<td><input id="key_word" type="text" style="width:95%"/></td>
 		</tr>
 		<tr>
@@ -37,7 +37,7 @@ td.hover{
 				<input name="search_width" type="checkbox" checked="checked" value="login"/><lable>Username</lable><br/>
 				<input name="search_width" type="checkbox" value="age"/><lable>อายุ</lable>
 				<input name="search_width" type="checkbox" value="generation"/><lable>รุ่น</lable>
-				<input name="search_width" type="checkbox" value="activities"/><lable>ชื่อกิจกรรมที่เข้าร่วม</lable>
+				<input name="search_width" type="checkbox" value="activities" style="display:none;"/><lable style="display:none;">ชื่อกิจกรรมที่เข้าร่วม</lable>
 			</td>
 		</tr>
 		<tr>

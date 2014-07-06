@@ -1,6 +1,10 @@
 <?php
 class Actcomment extends AppModel{
 	/* ------------------------------------------------------------------------------------------------- */
+	public function getAll(){
+		$result = $this->query('select * from actcomments');
+		return $result;
+	}
 	public function insertData($title
 								,$comment
 								,$commentable_id
@@ -27,7 +31,7 @@ class Actcomment extends AppModel{
 					'$activity_id',
 					now(),
 					now(),
-					(SELECT ifnull(max(ac.seq) + 1,0) AS seq FROM actcomments ac)
+					(SELECT ifnull(max(ac.seq) + 1,0) AS seq FROM actcomments ac WHERE activity_id=$activity_id)
 				)";
 		//$this->log($sql);
 		

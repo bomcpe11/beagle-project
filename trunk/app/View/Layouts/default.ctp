@@ -41,6 +41,8 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 	<meta http-equiv="expires" content="0" />
 	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
 	<meta http-equiv="pragma" content="no-cache" />
+	<link rel="shortcut icon" href="<?php echo $this->Html->url('/img/favicon.ico');?>" type="image/x-icon">
+	<link rel="icon" href="<?php echo $this->Html->url('/img/favicon.ico');?>" type="image/x-icon">
 	<?php 
 		echo $this->Html->charset(); 
 	?>
@@ -69,6 +71,10 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
+	<script type="text/javascript">
+		jQuery.noConflict();
+		G_WEB_ROOT = '<?php echo $this->webroot; ?>';
+	</script>
 </head>
 <body>
 	<!-- Header -->
@@ -84,13 +90,13 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 						<button type="button" id="btn-logout">Log off</button>
 					</td>
 					<td style="width: 45%;">
-						<form action="<?php echo $this->Html->url('/Searchresult');?>" method="get">
+						<form id="form-search" action="<?php echo $this->Html->url('/Searchresult');?>" method="get">
 							<input class="txt-search" type="text" name="keyword" value="<?php echo (empty($keyword)?'':$keyword); ?>" placeholder="Search...">
 						</form>
 					</td>
 					<td style="width: 10%;">
 						<input type="image" src="<?php echo $this->Html->url('/img/search-icon.png');?>" 
-							style="width: 20px;height: 20px;margin-left: 5px;" title="Search Project">
+							style="width: 20px;height: 20px;margin-left: 5px;" title="Search Project" onclick="submitFormSearch();">
 					</td>
 				</tr>
 			</table>
@@ -232,8 +238,6 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 	</div>
 	
 	<script type="text/javascript">
-		jQuery.noConflict();
-		G_WEB_ROOT = '<?php echo $this->webroot; ?>';
 	
 		jQuery(document).ready(function(){
 			jQuery('input:button, input:submit').button();
@@ -251,6 +255,10 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 		jQuery('#btn-mainmenu').button().click(function(){
 	    	  window.location.replace('<?php echo $this->Html->url('/Mainmenu'); ?>');
 			});
+
+	    function submitFormSearch(){
+			jQuery('#form-search').submit();
+	    }
 	</script>
 </body>
 </html>

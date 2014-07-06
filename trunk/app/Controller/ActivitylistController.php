@@ -10,12 +10,33 @@ class ActivitylistController extends AppController {
 	
 	function getActivitylist(){
 		$this->log('Start :: ActivitylistController :: getActivitylist');
-		$result = $this->Activity->getActivites();
-		//$this->log($result[0]["activities"]["name"]);
-		$this->set("result", $result);
+		
+		//$this->log($this->request->query, 'debug');
+		$orderBy = empty($this->request->query['orderBy'])? 'name': $this->request->query['orderBy'];
+		$sort = empty($this->request->query['sort'])? 'ASC': $this->request->query['sort'];
+		$currentPage = empty($this->request->query['currentPage'])? '1': $this->request->query['currentPage'];
+		$recordPerPage = 30;
+		$start = $recordPerPage * ($currentPage - 1);
+		$totalRecord = 0;
+		$resultQuery = array();
+		$result = array();
+		
+		$resultQuery = $this->Activity->getActivitesPagination($start, $recordPerPage, $orderBy, $sort);
+		//$this->log($resultQuery, 'debug');
+		$result = $resultQuery['data'];
+		$totalRecord = $resultQuery['total_data'];
+		$this->set(compact('result', 
+							'totalRecord', 
+							'orderBy', 
+							'sort', 
+							'currentPage', 
+							'recordPerPage', 
+							'start', 
+							'totalRecord',
+							'orderBy',
+							'sort'));
 		 
 		$this->log("END :: ActivitylistController :: getActivitylist");
-		
 	}
 
 	function deleteActivity(){

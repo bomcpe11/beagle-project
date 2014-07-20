@@ -43,9 +43,9 @@ class ExportController extends AppController {
 	public function allPersonalInfoes(){
 		$this->log("START :: ExportController -> allPersonalInfoes()");
 		
-		header('Content-type: application/csv charset=utf-8');
-		header('Content-Disposition: attachment; filename="personal-info-data.csv"');
-		header("Content-Encoding: utf-8");
+// 		header('Content-type: application/csv charset=utf-8');
+// 		header('Content-Disposition: attachment; filename="personal-info-data.csv"');
+// 		header("Content-Encoding: utf-8");
 		
 // 		$stmt = "select * from profiles p
 // left join awards a on (a.profile_id=p.id)
@@ -56,31 +56,33 @@ class ExportController extends AppController {
 		
 		$result = $this->Queryexport->query($stmt);
 		
-		// The column headings of your .csv file
-		$header_row = array();
-		$data_row = array();
+		$this->exportXLS('personal-info-data', $result);
 		
-		// Print the column names as the headers of a table
-		for($i = 0; $i < mysql_num_fields($result); $i++) {
-			$field_info = mysql_fetch_field($result, $i);
-			echo ($i==0?'':',').$field_info->name;
-		}
+// 		// The column headings of your .csv file
+// 		$header_row = array();
+// 		$data_row = array();
 		
-		echo "\n";
+// 		// Print the column names as the headers of a table
+// 		for($i = 0; $i < mysql_num_fields($result); $i++) {
+// 			$field_info = mysql_fetch_field($result, $i);
+// 			echo ($i==0?'':',').$field_info->name;
+// 		}
 		
-		// Print the data
-		while($row = mysql_fetch_row($result)) {
-			$i=0;
-			foreach($row as $_column) {
-				echo ($i==0?'':',').$_column;
-				$i++;
-			}
-			echo "\n";
-		}
+// 		echo "\n";
 		
-		// send data to view
-		$this->layout = "ajax";
-		$this->render("exportfile");
+// 		// Print the data
+// 		while($row = mysql_fetch_row($result)) {
+// 			$i=0;
+// 			foreach($row as $_column) {
+// 				echo ($i==0?'':',').$_column;
+// 				$i++;
+// 			}
+// 			echo "\n";
+// 		}
+		
+// 		// send data to view
+// 		$this->layout = "ajax";
+// 		$this->render("exportfile");
 			
 		$this->log("END :: ExportController -> allPersonalInfoes()");
 	}
@@ -88,9 +90,9 @@ class ExportController extends AppController {
 	public function allActivities(){
 		$this->log("START :: ExportController -> allActivities()");
 		
-		header('Content-type: application/csv charset=utf-8');
-		header('Content-Disposition: attachment; filename="activities-data.csv"');
-		header("Content-Encoding: utf-8");
+// 		header('Content-type: application/csv charset=utf-8');
+// 		header('Content-Disposition: attachment; filename="activities-data.csv"');
+// 		header("Content-Encoding: utf-8");
 		
 		// 		$stmt = "select * from profiles p
 		// left join awards a on (a.profile_id=p.id)
@@ -101,31 +103,33 @@ class ExportController extends AppController {
 		
 		$result = $this->Queryexport->query($stmt);
 		
+		$this->exportXLS('activities-data', $result);
+		
 		// The column headings of your .csv file
-		$header_row = array();
-		$data_row = array();
+// 		$header_row = array();
+// 		$data_row = array();
 		
-		// Print the column names as the headers of a table
-		for($i = 0; $i < mysql_num_fields($result); $i++) {
-			$field_info = mysql_fetch_field($result, $i);
-			echo ($i==0?'':',').$field_info->name;
-		}
+// 		// Print the column names as the headers of a table
+// 		for($i = 0; $i < mysql_num_fields($result); $i++) {
+// 			$field_info = mysql_fetch_field($result, $i);
+// 			echo ($i==0?'':',').$field_info->name;
+// 		}
 		
-		echo "\n";
+// 		echo "\n";
 		
-		// Print the data
-		while($row = mysql_fetch_row($result)) {
-			$i=0;
-			foreach($row as $_column) {
-				echo ($i==0?'':',').$_column;
-				$i++;
-			}
-			echo "\n";
-		}
+// 		// Print the data
+// 		while($row = mysql_fetch_row($result)) {
+// 			$i=0;
+// 			foreach($row as $_column) {
+// 				echo ($i==0?'':',').$_column;
+// 				$i++;
+// 			}
+// 			echo "\n";
+// 		}
 		
-		// send data to view
-		$this->layout = "ajax";
-		$this->render("exportfile");
+// 		// send data to view
+// 		$this->layout = "ajax";
+// 		$this->render("exportfile");
 			
 		$this->log("END :: ExportController -> allActivities()");
 	}
@@ -182,4 +186,90 @@ class ExportController extends AppController {
 	
 		return ($explodeDate[2] - 543)."/".$explodeDate[1]."/".$explodeDate[0];
 	}// changeFormatDate
+	
+	public function exportXLS($filename, $result){
+		
+		header("Content-Type: application/vnd.ms-excel");
+		header('Content-Disposition: attachment; filename="'.$filename.'.xls"');
+		header("Content-Encoding: utf-8");
+		
+		global $header,$header_flag;
+		$header_flag = 'Y';
+		$index = 0;
+		//*if there is reference code more than 0 record then retrieve ID from its
+		if(mysql_num_rows($result) > 0){
+			echo
+				'<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel"
+				xmlns="http://www.w3.org/TR/REC-html40">
+				<head>
+					<meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
+				</head>';
+				
+					while($row = mysql_fetch_assoc($result)){
+						$index++ ;
+						$data_list.='<TR>';
+						
+						foreach ($row as $key => $value)  {
+							$data_list .= $this->data_colum($key,$value,$index);
+						}
+						
+						$data_list.='</TR>';
+					}
+					echo '<TABLE  x:str BORDER="1" >
+				<TR bgcolor= "#6d7b8d">
+					'.$header.'
+				</TR>'.$data_list .'
+			  </TABLE>';
+		}
+		
+		
+		$this->layout = "ajax";
+		$this->render("exportfile");
+	}
+	
+	private function add_colum($value,$color)
+	{
+		if($color = 'Y')
+		{
+			$value = "<td><font color='FFFFFF'> ".$value."</font></td>";
+		}else
+		{
+			$value = "<td>".$this->replace_word($value)."</td>";
+		}
+	
+		return $value ;
+	}
+	private function data_colum($header_title,$value,$row)
+	{
+		global $header,$header_flag;
+		if($header_flag == 'Y' && $row == 1 )
+		{
+			$header.= $this->add_colum($header_title,'Y' );
+		}else
+		{
+			$header_flag = 'N';
+		}
+		if(!$value || $value == ' ' )
+		{
+			$value = "&#32;";
+		}
+		if((strtoupper($value) == 'NULL') || (strtoupper($value)== 'NA') || $value == '01/01/1900' )
+		{
+			$value = "&#32;";
+		}
+		if(($row%2)== 0)
+		{
+			$value = "<td bgcolor='#EBDDE2'>".$value."</td>";
+		}else
+		{
+			$value = "<td >".$value."</td>";
+		}
+	
+		return  $value ;
+	}
+	private function replace_word($word)
+	{
+		$word = str_replace(',',' ',$word);
+		return $word ;
+	}
 }

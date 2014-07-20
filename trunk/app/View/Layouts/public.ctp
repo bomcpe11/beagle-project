@@ -61,9 +61,9 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 		<div id="header_logo_wrapper">
 			<img src="<?php echo $this->Html->url('/img/logo-jstp_v2.png');?>"></img>
 		</div>
-		<div id="header_jstp_logo">
+		<!--div id="header_jstp_logo">
 			<img src="<?php echo $this->Html->url('/img/JSTPLogo.png');?>"></img>
-		</div>
+		</div-->
 	</div>
 	<div id="header-bottom-border">
 		

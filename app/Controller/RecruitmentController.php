@@ -10,7 +10,7 @@ class RecruitmentController extends AppController {
 		$accountRole 	= $this->Gvar->getVarcodeVardesc1ByVarnameVardesc2("ACCOUNT_ROLE", "Y");
 		
 		$this->set(compact("accountRole"));
-		$this->setTitle('ค้นหาบุคคล');
+		$this->setTitle('Member Recruitment Manager');
 	}
 	/* ------------------------------------------------------------------------------------------------ */
 	public function searchData(){

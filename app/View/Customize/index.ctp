@@ -11,6 +11,7 @@
 		<a class="framebtn" frmid="frm-addnewmember">Add new member</a> <!-- Admin --><br />
 		<a class="framebtn" urllink="<?php echo $this->Html->url('/Activitylist'); ?>">Activity Manager</a><br />
 		<a class="framebtn" frmid="frm-generationmanager" onclick="display_generationlist();">Generation Manager</a><br />
+		<a class="framebtn" urllink="<?php echo $this->Html->url('/Recruitment'); ?>">Member Recruitment Manager</a><br />
 	<?php } ?>
 	<a class="framebtn" frmid="frm-changepassword">Change password</a><br />
 	<a class="framebtn" urllink="<?php echo $this->Html->url('/Changepic'); ?>">Change picture profile</a><br />

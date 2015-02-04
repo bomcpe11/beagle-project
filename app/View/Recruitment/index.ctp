@@ -21,7 +21,135 @@ table.table-data td{
 td.hover{
 	cursor:pointer;
 }
+.right{
+	text-align:right;
+}
 </style>
+<div style="display:none;">
+	<div id="popupForm" style="width:1000px;" >
+		<div class="input">
+			<fieldset>
+			<legend>ข้อมูลผู้สมัครคัดเลือก</legend>
+			<table>
+				<tr>
+					<td class="right">รหัสประจำตัว : </td>
+					<td><input type="text" id="id_come" name="comming[id_come]" /></td>
+					<td class="right">หมายเหตุ : </td>
+					<td colspan="3"><input type="text" id="ps" name="comming[ps]" /></td>
+				</tr>
+				<tr>
+					<td class="right">คำนำหน้าชื่อ : </td>
+					<td><input type="text" id="before_name" name="comming[before_name]" /></td>
+					<td class="right">ชื่อ : </td>
+					<td><input type="text" id="first_name" name="comming[first_name]" /></td>
+					<td class="right">นามสกุล : </td>
+					<td><input type="text" id="family_name" name="comming[family_name]" /></td>
+				</tr>
+				<tr>
+					<td class="right">เลขบัตรประจำตัวประชาชน : </td>
+					<td><input type="text" id="card_id" name="comming[card_id]" /></td>
+					<td class="right">ชื่อเล่น : </td>
+					<td><input type="text" id="nickname" name="comming[nickname]" /></td>
+					<td class="right">เพศ : </td>
+					<td><input type="text" id="sex" name="comming[sex]" /></td>
+				</tr>
+				<tr>
+					<td class="right">วัน/เดือน/ปี เกิด : </td>
+					<td><input type="text" id="birthday" name="comming[birthday]" class="birthDatePicker" /></td>
+					<td class="right">อายุ : </td>
+					<td><input type="text" id="year" name="comming[year]" /></td>
+				</tr>
+				<tr>
+					<td class="right">ชื่อ-นามสกุล บิดา : </td>
+					<td><input type="text" id="father" name="comming[father]" /></td>
+					<td class="right">อาชีพของบิดา : </td>
+					<td><input type="text" id="father_career" name="comming[father_career]" /></td>
+				</tr>
+				<tr>
+					<td class="right">ชื่อ-นามสกุล มารดา : </td>
+					<td><input type="text" id="mother" name="comming[mother]" /></td>
+					<td class="right">อาชีพของมารดา : </td>
+					<td><input type="text" id="mother_career" name="comming[mother_career]" /></td>
+				</tr>
+				<tr>
+					<td class="right">ที่อยู่ บ้านเลขที่ : </td>
+					<td><input type="text" id="address" name="comming[address]" /></td>
+					<td class="right">หมู่ที่ : </td>
+					<td><input type="text" id="address2" name="comming[address2]" /></td>
+					<td class="right">ซอย/ถนน : </td>
+					<td><input type="text" id="address3" name="comming[address3]" /></td>
+				</tr>
+				<tr>
+					<td class="right">ถนน : </td>
+					<td><input type="text" id="street" name="comming[street]" /></td>
+					<td class="right">ตำบล : </td>
+					<td><input type="text" id="locality" name="comming[locality]" /></td>
+					<td class="right">อำเภอ : </td>
+					<td><input type="text" id="district" name="comming[district]" /></td>
+				</tr>
+				<tr>
+					<td class="right">จังหวัด : </td>
+					<td><input type="text" id="province_id" name="comming[province_id]" /></td>
+					<td class="right">รหัสไปรษณีย์ : </td>
+					<td><input type="text" id="zip_code" name="comming[zip_code]" /></td>
+				</tr>
+				<tr>
+					<td class="right">โทรศัพท์ : </td>
+					<td><input type="text" id="telephone" name="comming[telephone]" /></td>
+					<td class="right">โทรศัพท์มือถือ : </td>
+					<td><input type="text" id="mobilephone" name="comming[mobilephone]" /></td>
+					<td class="right">โทรสาร : </td>
+					<td><input type="text" id="fax" name="comming[fax]" /></td>
+				</tr>
+				<tr>
+					<td class="right">E-mail : </td>
+					<td><input type="text" id="email" name="comming[email]" /></td>
+				</tr>
+				<tr>
+					<td class="right">ผู้ปกครองที่ให้ติดต่อได้ : </td>
+					<td><input type="text" id="contact_parent" name="comming[contact_parent]" /></td>
+					<td class="right">เกี่ยวข้องเป็น : </td>
+					<td><input type="text" id="relation" name="comming[relation]" /></td>
+					<td class="right">โทรศัพท์ที่ติดต่อได้สะดวก<br />(ผู้ปกครอง) : </td>
+					<td><input type="text" id="parent_phone" name="comming[parent_phone]" /></td>
+				</tr>
+				<tr>
+					<td class="right">ระดับการศึกษา : </td>
+					<td><input type="text" id="level_education" name="comming[level_education]" /></td>
+					<td class="right">โรงเรียน : </td>
+					<td><input type="text" id="school" name="comming[school]" /></td>
+				</tr>
+				<tr>
+					<td class="right">โรงเรียนระดับประถมศึกษา : </td>
+					<td><input type="text" id="primary_school" name="comming[primary_school]" /></td>
+				</tr>
+				<tr>
+					<td class="right">หัวข้อโครงการวิทยาศาสตร์ : </td>
+					<td><input type="text" id="project" name="comming[project]" /></td>
+				</tr>
+				<tr>
+					<td class="right">เคยสมัครเข้าร่วมโครงการมาก่อน : </td>
+					<td><input type="text" id="spply" name="comming[spply]" /></td>
+					<td class="right">สมัคร ปี/ผล : </td>
+					<td><input type="text" id="result" name="comming[result]" /></td>
+				</tr>
+				<tr>
+					<td class="right">การได้รับข้อมูล : </td>
+					<td><input type="text" id="infor" name="comming[infor]" /></td>
+					<td class="right">ระบุ : </td>
+					<td><input type="text" id="infor2" name="comming[infor2]" /></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center"><input type="button" value="เพิ่มรายชื่อ" onclick="submit_addnewrecruit(this);" /> 
+					<input type="button" onclick="clearForm(this);" value="ล้าง Input" /></td>
+				</tr>
+			</table>
+			</fieldset>
+		</div>
+	</div>
+</div>
+
+
 <div>
 	<table class="section-layout" style="width:50%;">
 		<tr>
@@ -40,6 +168,14 @@ td.hover{
 		<tr>
 			<td></td>
 			<td><input type="button" value="ค้นหา" onclick="searchData('1', 'first_name', '0');"/></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input type="button" value="เพิ่มรายชื่อผุ้สมัคร" onclick="popup_open('#popupForm');"/></td>
 		</tr>
 	</table>
 	<div id="section_search">
@@ -158,13 +294,13 @@ td.hover{
 					var countData = response.data.length;
 					var html='<table class="table-data">';
 					html+='<colgroup>';
+					html+='<col style="width: 8%;">';
+					html+='<col style="width: 25%;">';
+					html+='<col style="width: 25%;">';
+					html+='<col style="width: 5%;">';
+					html+='<col style="width: 7%;">';
 					html+='<col style="width: 15%;">';
 					html+='<col style="width: 15%;">';
-					html+='<col style="width: 5%;">';
-					html+='<col style="width: 5%;">';
-					html+='<col>';
-					html+='<col style="width: 10%;">';
-					html+='<col style="width: 30%;">';
 					html+='</colgroup>';
 					
 					html+='<thead>';
@@ -173,7 +309,7 @@ td.hover{
 					html+='<th onclick="searchData(\'1\', \'first_name\', \'2\')">ชื่อ</th>';
 					html+='<th onclick="searchData(\'1\', \'family_name\', \'2\')">นามสกุล</th>';
 					html+='<th onclick="searchData(\'1\', \'nickname\', \'2\')">ชื่อเล่น</th>';
-					html+='<th onclick="searchData(\'1\', \'birthday\', \'2\')">อายุ(ปี)</th>';
+					html+='<th onclick="searchData(\'1\', \'year\', \'2\')">อายุ(ปี)</th>';
 					html+='<th >จังหวัด</th>';
 					html+='<th onclick="searchData(\'1\', \'spply\', \'2\')">เคยสมัครเข้าร่วมโครงการ</th>';
 					html+='</tr>';
@@ -189,13 +325,13 @@ td.hover{
 									,lastname: response.data[i].p.family_name
 										};
 							html+='<tr params="'+escape(JSON.stringify(params))+'">';
-							html+='<td class="hover openprofile">'+response.data[i].p.before_name+'</td>';
+							html+='<td class="hover openprofile" style="text-align:center">'+response.data[i].p.before_name+'</td>';
 							html+='<td class="hover openprofile">'+response.data[i].p.first_name+'</td>';
 							html+='<td class="hover openprofile">'+response.data[i].p.family_name+'</td>';
-							html+='<td class="hover openprofile">'+response.data[i].p.nickname+'</td>';
-							html+='<td class="hover openprofile">'+getAge(response.data[i].p.birthday)+'</td>';
-							html+='<td class="hover openprofile">'+response.data[i].p.province_id+'</td>';
-							html+='<td class="hover openprofile">'+response.data[i].p.spply+'</td>';
+							html+='<td class="hover openprofile" style="text-align:center">'+response.data[i].p.nickname+'</td>';
+							html+='<td class="hover openprofile" style="text-align:center">'+response.data[i].p.year+'</td>';
+							html+='<td class="hover openprofile" style="text-align:center">'+response.data[i].p.province_id+'</td>';
+							html+='<td class="hover openprofile" style="text-align:center">'+response.data[i].p.spply+'</td>';
 							html+='</tr>';
 						}
 
@@ -254,6 +390,38 @@ td.hover{
 // 		console.log(params);
         var win = window.open('<?php echo $this->Html->url('/Recruitment/view?id='); ?>'+params.id, '_blank');
         win.focus();
+	}
+
+	function clearForm(t){
+		var input_container = jQuery(t).closest("div.input");
+
+		input_container.find('input:text').val('');
+		input_container.find('select').val('');
+	}
+
+	function popup_open(id){
+		var buttons = [
+		               {
+			               text: "บันทึก", click: function() {
+			            	   editProfile();
+			               }
+		               }
+		       		];
+
+		openPopupHtml("แก้ไขข้อมูลส่วนตัว", id, buttons, 
+				function(){ //openFunc
+					setBirthDatePicker(".birthDatePicker");
+				}, 
+				function(){ //closeFunc
+				}
+		);
+	}
+	
+	function submit_addnewrecruit(t){
+		var input_container = jQuery(t).closest("div.input");
+		var params = input_container.find('input, select').serializeArray();
+
+		jQuery.post( "<?php echo $this->Html->url('/Recruitment/save'); ?>", params, function(data){ console.log(data); }, 'json');
 	}
 	
 </script>

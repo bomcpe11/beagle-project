@@ -31,16 +31,15 @@ td.hover{
 		<tr>
 			<td class="form-label">ค้นหาด้วย :</td>
 			<td>
-				<input name="search_width" type="checkbox" checked="checked" value="nameth"/><lable>ชื่อ</lable>
-				<input name="search_width" type="checkbox" checked="checked" value="lastnameth"/><lable>นามสกุล</lable>
+				<input name="search_width" type="checkbox" checked="checked" value="first_name"/><lable>ชื่อ</lable>
+				<input name="search_width" type="checkbox" checked="checked" value="family_name"/><lable>นามสกุล</lable>
 				<input name="search_width" type="checkbox" checked="checked" value="nickname"/><lable>ชื่อเล่น</lable>
-				<input name="search_width" type="checkbox" checked="checked" value="login"/><lable>Username</lable><br/>
-				<input name="search_width" type="checkbox" value="age"/><lable>อายุ</lable>
+				<input name="search_width" type="checkbox" value="year"/><lable>อายุ</lable>
 			</td>
 		</tr>
 		<tr>
 			<td></td>
-			<td><input type="button" value="ค้นหา" onclick="searchData('1', 'nameth', '0');"/></td>
+			<td><input type="button" value="ค้นหา" onclick="searchData('1', 'first_name', '0');"/></td>
 		</tr>
 	</table>
 	<div id="section_search">
@@ -61,7 +60,7 @@ td.hover{
 		jQuery('input[type="button"]').button();
 
 		jQuery('#key_word').val('*');
-		searchData('1', 'nameth', '0');
+		searchData('1', 'first_name', '0');
 	});
 	/*	------------------------------------------------------------------------------------------------ */
 	function searchData(currentPage, orderBy, typeSearch){
@@ -170,13 +169,13 @@ td.hover{
 					
 					html+='<thead>';
 					html+='<tr>';
-					html+='<th onclick="searchData(\'1\', \'nameth\', \'2\')">ชื่อ</th>';
-					html+='<th onclick="searchData(\'1\', \'lastnameth\', \'2\')">นามสกุล</th>';
+					html+='<th onclick="searchData(\'1\', \'before_name\', \'2\')">คำนำหน้า</th>';
+					html+='<th onclick="searchData(\'1\', \'first_name\', \'2\')">ชื่อ</th>';
+					html+='<th onclick="searchData(\'1\', \'family_name\', \'2\')">นามสกุล</th>';
 					html+='<th onclick="searchData(\'1\', \'nickname\', \'2\')">ชื่อเล่น</th>';
-					html+='<th onclick="searchData(\'1\', \'generation\', \'2\')">รุ่นที่</th>';
-					html+='<th onclick="searchData(\'1\', \'login\', \'2\')">Username</th>';
 					html+='<th onclick="searchData(\'1\', \'birthday\', \'2\')">อายุ(ปี)</th>';
-					html+='<th onclick="searchData(\'1\', \'email\', \'2\')">email</th>';
+					html+='<th >จังหวัด</th>';
+					html+='<th onclick="searchData(\'1\', \'spply\', \'2\')">เคยสมัครเข้าร่วมโครงการ</th>';
 					html+='</tr>';
 					html+='</thead>';
 					
@@ -186,18 +185,17 @@ td.hover{
 						for( var i=0;i<countData;i++ ){
 							params = {
 									id: response.data[i].p.id
-									,name: response.data[i].p.nameth
-									,lastname: response.data[i].p.lastnameth
-									,role: response.data[i].p.role
+									,name: response.data[i].p.first_name
+									,lastname: response.data[i].p.family_name
 										};
 							html+='<tr params="'+escape(JSON.stringify(params))+'">';
-							html+='<td class="hover openprofile">'+response.data[i].p.nameth+'</td>';
-							html+='<td class="hover openprofile">'+response.data[i].p.lastnameth+'</td>';
+							html+='<td class="hover openprofile">'+response.data[i].p.before_name+'</td>';
+							html+='<td class="hover openprofile">'+response.data[i].p.first_name+'</td>';
+							html+='<td class="hover openprofile">'+response.data[i].p.family_name+'</td>';
 							html+='<td class="hover openprofile">'+response.data[i].p.nickname+'</td>';
-							html+='<td class="hover openprofile">'+( (response.data[i].p.generation)? response.data[i].p.generation: '' )+'</td>';
-							html+='<td class="hover openprofile">'+( (response.data[i].p.login)? response.data[i].p.login: '' )+'</td>';
 							html+='<td class="hover openprofile">'+getAge(response.data[i].p.birthday)+'</td>';
-							html+='<td class="hover openprofile">'+response.data[i].p.email+'</td>';
+							html+='<td class="hover openprofile">'+response.data[i].p.province_id+'</td>';
+							html+='<td class="hover openprofile">'+response.data[i].p.spply+'</td>';
 							html+='</tr>';
 						}
 

@@ -1,7 +1,7 @@
 <?php
 class Comming extends AppModel {
 	
-	private $fields = ' id_come, before_name, first_name, family_name, nickname, sex, year, province_id, spply ';
+	private $fields = ' id, id_come, before_name, first_name, family_name, nickname, sex, birthday, province_id, spply ';
 	
 	public function getProfiles(){
 		$result = $this->query('select * from commings');
@@ -15,7 +15,7 @@ class Comming extends AppModel {
 	
 	public function getProfilesByLimit($start,$recordPerPage,$orderBy, $sort){
 		$result = array();
-		$sql = 'select '.$fields.' from commings p';
+		$sql = 'select '.$this->fields.' from commings p';
 		if( $orderBy==='birthday' ){
 			$order = " order by p.{$orderBy} $sort";
 		}else{

@@ -51,6 +51,26 @@ class RecruitmentController extends AppController {
 		$this->render('response');
 	}
 	
+	public function save(){
+		
+		$result['status'] = false;
+		$result['message'] = '';
+		
+		$comming = $this->request->data['comming'];
+		//print_r($comming);
+		
+		if($this->Comming->insert($comming)){
+			$result['status'] = true;
+			$result['message'] = 'บันทึกข้อมูลเรียบร้อย';
+		}else{
+			$result['message'] = 'เกิดข้อผิดพลาดในการบันทึกข้อมูล กรุณาติดต่อผู้ดูแลระบบ';
+		}
+		
+		$this->layout='ajax';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	}
+	
 	public function admin_updateCustomize(){
 		if(!$this->isAdmin){
 			return;

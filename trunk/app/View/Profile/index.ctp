@@ -422,7 +422,7 @@
 				?>
 				
 				
-				<input type="button" id="button_add_other_award" value="เเพิ่มข้อมูล ผลงานอื่นๆ" onclick="openPopupOtherwork('','','','','')"/>
+				<input type="button" id="button_add_other_award" value="เพิ่มข้อมูล ผลงานอื่นๆ" onclick="openPopupOtherwork('','','','','')"/>
 			</div>
 		</div>
 		<div class="container">
@@ -459,7 +459,7 @@
 							</table>";
 					}
 				?>
-				<input type="button" id="button_add_award" value="เเพิ่มข้อมูล รางวัลที่ได้รับ" onclick="openPopupAward('','','','')"/>
+				<input type="button" id="button_add_award" value="เพิ่มข้อมูล รางวัลที่ได้รับ" onclick="openPopupAward('','','','')"/>
 			</div>
 		</div>
 		<div class="container">

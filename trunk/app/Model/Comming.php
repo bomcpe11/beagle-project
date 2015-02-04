@@ -1,7 +1,7 @@
 <?php
 class Comming extends AppModel {
 	
-	private $fields = ' id, id_come, before_name, first_name, family_name, nickname, sex, birthday, province_id, spply ';
+	private $fields = ' id, id_come, before_name, first_name, family_name, nickname, sex, birthday, year, province_id, spply ';
 	
 	public function getProfiles(){
 		$result = $this->query('select * from commings');
@@ -55,7 +55,39 @@ class Comming extends AppModel {
 		return $flag;
 	}
 	/* ------------------------------------------------------------------------------------------------------- */
-	public function insert($id_come,
+	public function insert($obj){
+		$flag = false;
+		
+		try {
+			
+			/**
+			 * TODO:: set str SQL on Controler.
+			 * 
+			 */
+			$fields = '';
+			$values = '';
+			foreach($obj as $key=>$val){
+				$fields.=$key.',';
+				
+				if($key=='birthday') $val = $this->changeFormatDate($val);
+				$values."'".$val."',";
+			}
+			$field = trim($fields, ",");
+			$values = trim($values, ",");
+			
+			$strSql = "insert into comming (".$fields.") values (".$values.");";
+			
+			$this->query($strSql);
+		
+			$flag = true;
+		} catch ( Exception $e ) {
+			$this->log("exception => ".$e->getMessage());
+		}// try catch
+		 
+		return $flag;
+	}
+	
+	public function insert_o($id_come,
 							$ps,
 							$before_name,
 							$first_name,

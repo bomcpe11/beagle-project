@@ -127,7 +127,7 @@ function openPopupHtml(title, html, buttons, openFunc, closeFunc, isPutCloseBtn)
 	
 	if(buttons==undefined) buttons = [{text: "Close", click: function() {jQuery(this).dialog("close"); jQuery(this).remove();}}]
 	else if(isPutCloseBtn==undefined || isPutCloseBtn==true){
-			buttons.push({text: "Close", click: function() {jQuery(this).dialog("close");}});
+			buttons.push({text: "ปิดหน้าจอ", click: function() {jQuery(this).dialog("close");}});
 	}
         NewDialog.dialog({
             modal: true,

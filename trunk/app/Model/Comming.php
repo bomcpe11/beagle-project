@@ -59,24 +59,19 @@ class Comming extends AppModel {
 		$flag = false;
 		
 		try {
-			
-			/**
-			 * TODO:: set str SQL on Controler.
-			 * 
-			 */
 			$fields = '';
 			$values = '';
 			foreach($obj as $key=>$val){
 				$fields.=$key.',';
 				
 				if($key=='birthday') $val = $this->changeFormatDate($val);
-				$values."'".$val."',";
+				$values.="'".$val."',";
 			}
-			$field = trim($fields, ",");
+			$fields = trim($fields, ",");
 			$values = trim($values, ",");
 			
-			$strSql = "insert into comming (".$fields.") values (".$values.");";
-			
+			$strSql = "insert into commings (".$fields.") values (".$values.");";
+			$this->log("query => ".$strSql);
 			$this->query($strSql);
 		
 			$flag = true;
@@ -346,5 +341,17 @@ class Comming extends AppModel {
 	
 		return $flag;
 	}
+	
+	public function changeFormatDate($data) {
+		/*
+		 * index of $explodeDate
+		 * [0] = day
+		 * [1] = month
+		 * [2] = year(2013)
+		 */
+		$explodeDate = explode("/", $data);
+	
+		return ($explodeDate[2] - 543)."/".$explodeDate[1]."/".$explodeDate[0];
+	}// changeFormatDate
 }
 ?>

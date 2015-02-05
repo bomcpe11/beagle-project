@@ -2,14 +2,21 @@
 // session_start();
 class RecruitmentController extends AppController {
 	/* ------------------------------------------------------------------------------------------------ */
-	public $uses = array('Comming', 'Gvar');
+	public $uses = array('Comming', 'Province', 'School', 'Gvar');
 	/* ------------------------------------------------------------------------------------------------ */
 	public function index(){
-		$this->log('---- Psearch -> index ----');
+		$this->log('---- RecruitmentController -> index ----');
 		
-		$accountRole 	= $this->Gvar->getVarcodeVardesc1ByVarnameVardesc2("ACCOUNT_ROLE", "Y");
+		$namePrefixs 	= $this->Gvar->getVarcodeVardesc1ByVarname("NAME_PREFIX_TH");
+		$sexs			= $this->Gvar->getVarcodeVardesc1ByVarname("SEX_TH");
+		$careers		= $this->Gvar->getVarcodeVardesc1ByVarname("CAREER_TH");
+		$educations		= $this->Gvar->getVarcodeVardesc1ByVarname("EDUCATION_STEP");
+		$infors			= $this->Gvar->getVarcodeVardesc1ByVarname("INFOR_TH");
 		
-		$this->set(compact("accountRole"));
+		$provinces = $this->Province->getForDDL();
+		$schools = $this->School->getForDDL();
+		
+		$this->set(compact('provinces', 'schools', 'namePrefixs', 'sexs', 'careers', 'educations', 'infors'));
 		$this->setTitle('Member Recruitment Manager');
 	}
 	/* ------------------------------------------------------------------------------------------------ */

@@ -74,15 +74,27 @@ class DATABASE_CONFIG {
 // 	);
 	
 	#๋JSTP-Host
+// 	public $default = array(
+// 		'datasource' => 'Database/Mysql',
+// 		'persistent' => false,
+// 		'host' => '61.19.247.206',
+// 		'login' => 'h511067_test1',
+// 		'password' => 'jstp_2015',
+// 		'database' => 'h511067_test1',
+// 		'prefix' => '',
+// 		'encoding' => 'utf8',
+// 	);
+	
+	#๋JSTP-Host
 	public $default = array(
-		'datasource' => 'Database/Mysql',
-		'persistent' => false,
-		'host' => '61.19.247.206',
-		'login' => 'h511067_test1',
-		'password' => 'jstp_2015',
-		'database' => 'h511067_test1',
-		'prefix' => '',
-		'encoding' => 'utf8',
+	'datasource' => 'Database/Mysql',
+	'persistent' => false,
+	'host' => '103.253.75.56',
+	'login' => 'unitedla_jstp',
+	'password' => 'jstp_2015',
+	'database' => 'unitedla_jstp',
+	'prefix' => '',
+	'encoding' => 'utf8',
 	);
 
 	public $test = array(

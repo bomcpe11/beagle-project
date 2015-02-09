@@ -199,8 +199,11 @@ var schools = <?=json_encode($schools)?>;
 					<td><input type="text" id="infor2" name="comming[infor2]" /></td>
 				</tr>
 				<tr>
-					<td colspan="6" align="center"><input type="button" value="เพิ่มรายชื่อ" onclick="submit_addnewrecruit(this);" /> 
-					<input type="button" onclick="clearForm(this);" value="ล้าง Input" /></td>
+					<td colspan="6" align="center">
+						<input type="button" value="เพิ่มรายชื่อ" onclick="submit_addnewrecruit(this);" />
+						<input type="button" value="เพิ่มรายชื่อต่อ" onclick="submit_addnewrecruit(this);" /> 
+						<input type="button" onclick="clearForm(this);" value="ล้าง Input" />
+					</td>
 				</tr>
 			</table>
 			</fieldset>
@@ -234,7 +237,10 @@ var schools = <?=json_encode($schools)?>;
 		</tr>
 		<tr>
 			<td></td>
-			<td><input type="button" value="เพิ่มรายชื่อผุ้สมัคร" onclick="popup_open('#popupForm');"/></td>
+			<td>
+				<input type="button" value="เพิ่มรายชื่อผุ้สมัคร" onclick="popup_open('#popupForm');"/>
+				<input type="button" value="Export รายชื่อผู้สมัคร" onclick=""/>
+			</td>
 		</tr>
 	</table>
 	<div id="section_search">
@@ -401,8 +407,8 @@ var schools = <?=json_encode($schools)?>;
 							html+='<td class="hover openprofile">'+response.data[i].p.family_name+'</td>';
 							html+='<td class="hover openprofile" style="text-align:center">'+response.data[i].p.nickname+'</td>';
 							html+='<td class="hover openprofile" style="text-align:center">'+response.data[i].p.year+'</td>';
-							html+='<td class="hover openprofile" style="text-align:center">'+response.data[i].p.province_id+'</td>';
-							html+='<td class="hover openprofile" style="text-align:center">'+response.data[i].p.spply+'</td>';
+							html+='<td class="hover openprofile" style="text-align:center">'+response.data[i].p1.name+'</td>';
+							html+='<td class="hover openprofile" style="text-align:center">'+decode_value(response.data[i].p.spply)+'</td>';
 							html+='</tr>';
 						}
 
@@ -488,10 +494,39 @@ var schools = <?=json_encode($schools)?>;
 	}
 	
 	function submit_addnewrecruit(t){
+		unloading();
 		var input_container = jQuery(t).closest("div.input");
 		var params = input_container.find('input, select').serializeArray();
 
-		jQuery.post( "<?php echo $this->Html->url('/Recruitment/save'); ?>", params, function(data){ console.log(data); }, 'json');
+		jQuery.post( "<?php echo $this->Html->url('/Recruitment/save'); ?>", 
+				params, 
+				function(data){ 
+					//console.log(data); 
+					if(data.status){
+						searchData('1', 'first_name', '0');
+						closePopup('#popupForm');
+					}else{
+						jAlert(data.message
+								, function(){ 
+								}//okFunc	
+								, function(){ 
+									unloading();
+								}//openFunc
+								, function(){ 		
+								}//closeFunc
+						);
+					}
+				},
+				'json');
+	}
+
+	function decode_value(val){
+		//console.log(val);
+		switch(val){
+		case true: val='ใช่'; break;
+		case false: val='ไม่ใช่'; break;
+		}
+		return val;
 	}
 	
 </script>

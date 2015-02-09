@@ -78,6 +78,12 @@ class RecruitmentController extends AppController {
 		$this->render('response');
 	}
 	
+	public function view(){
+		
+		
+		$this->render('view');
+	}
+	
 	public function admin_updateCustomize(){
 		if(!$this->isAdmin){
 			return;

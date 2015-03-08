@@ -43,13 +43,13 @@ var schools = <?=json_encode($schools)?>;
 			<table>
 				<tr>
 					<td class="right">รหัสประจำตัว : </td>
-					<td><input class="required" type="text" id="id_come" name="comming[id_come]" /></td>
+					<td><input class="required" type="text" id="id_come" name="recruit[id_come]" /></td>
 					<td class="right">หมายเหตุ : </td>
-					<td colspan="3"><input type="text" id="ps" name="comming[ps]" /></td>
+					<td colspan="3"><input type="text" id="ps" name="recruit[ps]" /></td>
 				</tr>
 				<tr>
 					<td class="right">คำนำหน้าชื่อ : </td>
-					<td><select id="before_name" name="comming[before_name]">
+					<td><select id="before_name" name="recruit[before_name]">
 						<option value="">--กรุณาเลือก--</option>
 					<?php 
 						foreach($namePrefixs as $row){
@@ -58,17 +58,17 @@ var schools = <?=json_encode($schools)?>;
 					?>
 					</select></td>
 					<td class="right">ชื่อ : </td>
-					<td><input class="required" type="text" id="first_name" name="comming[first_name]" /></td>
+					<td><input class="required" type="text" id="first_name" name="recruit[first_name]" /></td>
 					<td class="right">นามสกุล : </td>
-					<td><input class="required" type="text" id="family_name" name="comming[family_name]" /></td>
+					<td><input class="required" type="text" id="family_name" name="recruit[family_name]" /></td>
 				</tr>
 				<tr>
 					<td class="right">เลขบัตรประจำตัวประชาชน : </td>
-					<td><input class="required" type="text" id="card_id" name="comming[card_id]" /></td>
+					<td><input class="required" type="text" id="card_id" name="recruit[card_id]" /></td>
 					<td class="right">ชื่อเล่น : </td>
-					<td><input class="required" type="text" id="nickname" name="comming[nickname]" /></td>
+					<td><input class="required" type="text" id="nickname" name="recruit[nickname]" /></td>
 					<td class="right">เพศ : </td>
-					<td><select id="sex" name="comming[sex]">
+					<td><select id="sex" name="recruit[sex]">
 						<option value="">--กรุณาเลือก--</option>
 					<?php 
 						foreach($sexs as $row){
@@ -79,15 +79,15 @@ var schools = <?=json_encode($schools)?>;
 				</tr>
 				<tr>
 					<td class="right">วัน/เดือน/ปี เกิด : </td>
-					<td><input class="required birthDatePicker" type="text" id="birthday" name="comming[birthday]" /></td>
+					<td><input class="required birthDatePicker" type="text" id="birthday" name="recruit[birthday]" readonly="readonly" /></td>
 					<td class="right">อายุ : </td>
-					<td><input type="text" id="year" name="comming[year]" /></td>
+					<td><input type="text" id="year" name="recruit[year]" /></td>
 				</tr>
 				<tr>
 					<td class="right">ชื่อ-นามสกุล บิดา : </td>
-					<td><input class="required" type="text" id="father" name="comming[father]" /></td>
+					<td><input class="required" type="text" id="father" name="recruit[father]" /></td>
 					<td class="right">อาชีพของบิดา : </td>
-					<td><select id="father_career" name="comming[father_career]">
+					<td><select id="father_career" name="recruit[father_career]">
 						<option value="">--กรุณาเลือก--</option>
 					<?php 
 						foreach($careers as $row){
@@ -98,9 +98,9 @@ var schools = <?=json_encode($schools)?>;
 				</tr>
 				<tr>
 					<td class="right">ชื่อ-นามสกุล มารดา : </td>
-					<td><input class="required" type="text" id="mother" name="comming[mother]" /></td>
+					<td><input class="required" type="text" id="mother" name="recruit[mother]" /></td>
 					<td class="right">อาชีพของมารดา : </td>
-					<td><select id="mother_career" name="comming[mother_career]">
+					<td><select id="mother_career" name="recruit[mother_career]">
 						<option value="">--กรุณาเลือก--</option>
 					<?php 
 						foreach($careers as $row){
@@ -111,23 +111,23 @@ var schools = <?=json_encode($schools)?>;
 				</tr>
 				<tr>
 					<td class="right">ที่อยู่ บ้านเลขที่ : </td>
-					<td><input class="required" type="text" id="address" name="comming[address]" /></td>
+					<td><input class="required" type="text" id="address" name="recruit[address]" /></td>
 					<td class="right">หมู่ที่ : </td>
-					<td><input class="required" type="text" id="address2" name="comming[address2]" /></td>
+					<td><input class="required" type="text" id="address2" name="recruit[address2]" /></td>
 					<td class="right">ซอย/ถนน : </td>
-					<td><input type="text" id="address3" name="comming[address3]" /></td>
+					<td><input type="text" id="address3" name="recruit[address3]" /></td>
 				</tr>
 				<tr>
 					<td class="right">ถนน : </td>
-					<td><input type="text" id="street" name="comming[street]" /></td>
+					<td><input type="text" id="street" name="recruit[street]" /></td>
 					<td class="right">ตำบล : </td>
-					<td><input class="required" type="text" id="locality" name="comming[locality]" /></td>
+					<td><input class="required" type="text" id="locality" name="recruit[locality]" /></td>
 					<td class="right">อำเภอ : </td>
-					<td><input class="required" type="text" id="district" name="comming[district]" /></td>
+					<td><input class="required" type="text" id="district" name="recruit[district]" /></td>
 				</tr>
 				<tr>
 					<td class="right">จังหวัด : </td>
-					<td><select class="required" id="province_id" name="comming[province_id]">
+					<td><select class="required" id="province_id" name="recruit[province_id]">
 						<option value="">--กรุณาเลือก--</option>
 					<?php 
 						foreach ($provinces as $row){
@@ -136,31 +136,31 @@ var schools = <?=json_encode($schools)?>;
 					?>
 					</select></td>
 					<td class="right">รหัสไปรษณีย์ : </td>
-					<td><input class="required" type="text" id="zip_code" name="comming[zip_code]" /></td>
+					<td><input class="required" type="text" id="zip_code" name="recruit[zip_code]" /></td>
 				</tr>
 				<tr>
 					<td class="right">โทรศัพท์ : </td>
-					<td><input type="text" id="telephone" name="comming[telephone]" /></td>
+					<td><input type="text" id="telephone" name="recruit[telephone]" /></td>
 					<td class="right">โทรศัพท์มือถือ : </td>
-					<td><input class="required" type="text" id="mobilephone" name="comming[mobilephone]" /></td>
+					<td><input class="required" type="text" id="mobilephone" name="recruit[mobilephone]" /></td>
 					<td class="right">โทรสาร : </td>
-					<td><input type="text" id="fax" name="comming[fax]" /></td>
+					<td><input type="text" id="fax" name="recruit[fax]" /></td>
 				</tr>
 				<tr>
 					<td class="right">E-mail : </td>
-					<td><input class="required" type="text" id="email" name="comming[email]" /></td>
+					<td><input class="required" type="text" id="email" name="recruit[email]" /></td>
 				</tr>
 				<tr>
 					<td class="right">ผู้ปกครองที่ให้ติดต่อได้ : </td>
-					<td><input class="required" type="text" id="contact_parent" name="comming[contact_parent]" /></td>
+					<td><input class="required" type="text" id="contact_parent" name="recruit[contact_parent]" /></td>
 					<td class="right">เกี่ยวข้องเป็น : </td>
-					<td><input class="required" type="text" id="relation" name="comming[relation]" /></td>
+					<td><input class="required" type="text" id="relation" name="recruit[relation]" /></td>
 					<td class="right">โทรศัพท์ที่ติดต่อได้สะดวก<br />(ผู้ปกครอง) : </td>
-					<td><input class="required" type="text" id="parent_phone" name="comming[parent_phone]" /></td>
+					<td><input class="required" type="text" id="parent_phone" name="recruit[parent_phone]" /></td>
 				</tr>
 				<tr>
 					<td class="right">ระดับการศึกษา : </td>
-					<td><select class="required" id="level_education" name="comming[level_education]">
+					<td><select class="required" id="level_education" name="recruit[level_education]">
 						<option value="">--กรุณาเลือก--</option>
 					<?php 
 						foreach($educations as $row){
@@ -169,25 +169,25 @@ var schools = <?=json_encode($schools)?>;
 					?>
 					</select></td>
 					<td class="right">โรงเรียน : </td>
-					<td colspan="3"><input type="text" class="required" id="school" name="comming[school]" style="width:300px;" /></td>
+					<td colspan="3"><input type="text" class="required" id="school" name="recruit[school]" style="width:300px;" /></td>
 				</tr>
 				<tr>
 					<td class="right">โรงเรียนระดับประถมศึกษา : </td>
-					<td><input class="required" type="text" id="primary_school" name="comming[primary_school]" /></td>
+					<td><input class="required" type="text" id="primary_school" name="recruit[primary_school]" /></td>
 				</tr>
 				<tr>
 					<td class="right">หัวข้อโครงการวิทยาศาสตร์ : </td>
-					<td><input type="text" id="project" name="comming[project]" /></td>
+					<td><input type="text" id="project" name="recruit[project]" /></td>
 				</tr>
 				<tr>
 					<td class="right">เคยสมัครเข้าร่วมโครงการมาก่อน : </td>
-					<td><input type="checkbox" id="spply" name="comming[spply]" value="1" /></td>
+					<td><input type="checkbox" id="spply" name="recruit[spply]" value="1" /></td>
 					<td class="right">สมัคร ปี/ผล : </td>
-					<td><input type="text" id="result" name="comming[result]" /></td>
+					<td><input type="text" id="result" name="recruit[result]" /></td>
 				</tr>
 				<tr>
 					<td class="right">การได้รับข้อมูล : </td>
-					<td><select id="infor" name="comming[infor]">
+					<td><select id="infor" name="recruit[infor]">
 						<option value="">--กรุณาเลือก--</option>
 					<?php 
 						foreach($infors as $row){
@@ -196,14 +196,7 @@ var schools = <?=json_encode($schools)?>;
 					?>
 					</select></td>
 					<td class="right">ระบุ : </td>
-					<td><input type="text" id="infor2" name="comming[infor2]" /></td>
-				</tr>
-				<tr>
-					<td colspan="6" align="center">
-						<input type="button" value="เพิ่มรายชื่อ" onclick="submit_addnewrecruit(this);" />
-						<input type="button" value="เพิ่มรายชื่อต่อ" onclick="submit_addnewrecruit(this);" /> 
-						<input type="button" onclick="clearForm(this);" value="ล้าง Input" />
-					</td>
+					<td><input type="text" id="infor2" name="recruit[infor2]" /></td>
 				</tr>
 			</table>
 			</fieldset>
@@ -470,7 +463,7 @@ var schools = <?=json_encode($schools)?>;
 	}
 
 	function clearForm(t){
-		var input_container = jQuery(t).closest("div.input");
+		var input_container = jQuery(t).closest("div.ui-dialog").find('div.input');
 
 		input_container.find('input:text').val('');
 		input_container.find('select').val('');
@@ -478,7 +471,10 @@ var schools = <?=json_encode($schools)?>;
 	}
 
 	function popup_open(id){
-		var buttons = [];
+		var buttons = [{text: "เพิ่มรายชื่อ", click: function() { submit_addnewrecruit(this); }},
+		               {text: "เพิ่มรายชื่อต่อ", click: function() { submit_addnewrecruit(this); }},
+		               {text: "ล้าง Input", click: function() { clearForm(this); }},
+			       		];
 		jQuery(id).css('width', '1100px');
 		openPopupHtml("Member Recruitment Manager", id, buttons, 
 				function(){ //openFunc
@@ -495,7 +491,7 @@ var schools = <?=json_encode($schools)?>;
 	
 	function submit_addnewrecruit(t){
 		unloading();
-		var input_container = jQuery(t).closest("div.input");
+		var input_container = jQuery(t).closest("div.ui-dialog").find('div.input');
 		var params = input_container.find('input, select').serializeArray();
 
 		jQuery.post( "<?php echo $this->Html->url('/Recruitment/save'); ?>", 

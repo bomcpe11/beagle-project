@@ -2,7 +2,7 @@
 // session_start();
 class RecruitmentController extends AppController {
 	/* ------------------------------------------------------------------------------------------------ */
-	public $uses = array('Comming', 'Province', 'School', 'Gvar');
+	public $uses = array('Recruit', 'Province', 'School', 'Gvar');
 	/* ------------------------------------------------------------------------------------------------ */
 	public function index(){
 		$this->log('---- RecruitmentController -> index ----');
@@ -37,12 +37,12 @@ class RecruitmentController extends AppController {
 		$keyWord = trim($keyWord);
 		if($keyWord=="*"){
 			//TODO: Search All, limit 0, 200
-			$result = $this->Comming->getProfilesByLimit($start,
+			$result = $this->Recruit->getProfilesByLimit($start,
 															$recordPerPage,
 															$orderBy,
 															$sort);
 		}else{
-			$result = $this->Comming->getDataForPsearch($keyWord,
+			$result = $this->Recruit->getDataForPsearch($keyWord,
 														$searchWidth,
 														$flagActivity,
 														$start,
@@ -63,10 +63,10 @@ class RecruitmentController extends AppController {
 		$result['status'] = false;
 		$result['message'] = '';
 		
-		$comming = $this->request->data['comming'];
-		//print_r($comming);
+		$recruit = $this->request->data['recruit'];
+		//print_r($recruit);
 		
-		if($this->Comming->insert($comming)){
+		if($this->Recruit->insert($recruit)){
 			$result['status'] = true;
 			$result['message'] = 'บันทึกข้อมูลเรียบร้อย';
 		}else{
@@ -79,9 +79,29 @@ class RecruitmentController extends AppController {
 	}
 	
 	public function view(){
+		$this->log('---- RecruitmentController -> view ----');
 		
+		$id = $this->request->query['id'];
 		
-		$this->render('view');
+		if(!empty($id)){
+		
+			$recruit = $this->Recruit->getDataById($id);
+			
+			$namePrefixs 	= $this->Gvar->getVarcodeVardesc1ByVarname("NAME_PREFIX_TH");
+			$sexs			= $this->Gvar->getVarcodeVardesc1ByVarname("SEX_TH");
+			$careers		= $this->Gvar->getVarcodeVardesc1ByVarname("CAREER_TH");
+			$educations		= $this->Gvar->getVarcodeVardesc1ByVarname("EDUCATION_STEP");
+			$infors			= $this->Gvar->getVarcodeVardesc1ByVarname("INFOR_TH");
+			
+			$provinces = $this->Province->getForDDL();
+			$schools = $this->School->getForDDL();
+			
+			$this->set(compact('recruit', 'provinces', 'schools', 'namePrefixs', 'sexs', 'careers', 'educations', 'infors'));
+			
+			$this->setTitle('Member Recruitment Manager');
+		}else{
+			//TODO: redirect to home
+		}
 	}
 	
 	public function admin_updateCustomize(){

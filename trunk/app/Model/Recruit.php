@@ -1,21 +1,21 @@
 <?php
-class Comming extends AppModel {
+class Recruit extends AppModel {
 	
 	private $fields = ' p.id, id_come, before_name, first_name, family_name, nickname, sex, birthday, year, province_id, p1.name, spply ';
 	
 	public function getProfiles(){
-		$result = $this->query('select * from commings');
+		$result = $this->query('select * from recruits');
 		return $result;
 	}
 	
 	public function getProfilesLimit(){
-		$result = $this->query('select * from commings p limit 0, 200');
+		$result = $this->query('select * from recruits p limit 0, 200');
 		return $result;
 	}
 	
 	public function getProfilesByLimit($start,$recordPerPage,$orderBy, $sort){
 		$result = array();
-		$sql = 'select '.$this->fields.' from commings p, provinces p1 where p.province_id=p1.id';
+		$sql = 'select '.$this->fields.' from recruits p, provinces p1 where p.province_id=p1.id';
 		if( $orderBy==='birthday' ){
 			$order = " order by p.{$orderBy} $sort";
 		}else{
@@ -39,7 +39,7 @@ class Comming extends AppModel {
 	
 	public function removeProfile($id){
 		$flag = false;
-		$strSql = "DELETE FROM commings ";
+		$strSql = "DELETE FROM recruits ";
 		$strSql .= "WHERE id='".$id."'";
 		$strSql .= ";";
 		//$this->log("strSql => ".$strSql);
@@ -70,7 +70,7 @@ class Comming extends AppModel {
 			$fields = trim($fields, ",");
 			$values = trim($values, ",");
 			
-			$strSql = "insert into commings (".$fields.") values (".$values.");";
+			$strSql = "insert into recruits (".$fields.") values (".$values.");";
 			$this->log("query => ".$strSql);
 			$this->query($strSql);
 		
@@ -120,7 +120,7 @@ class Comming extends AppModel {
 							$infor,
 							$infor2) {
 		$flag = false;
-		$strSql = "INSERT INTO commings";
+		$strSql = "INSERT INTO recruits";
 		$strSql .= " (id_come, ps, before_name, first_name, family_name, card_id, nickname, sex, birthday, year, father, father_career, mother, mother_carrer, address, address2, address3, street, locality, district, province_id, zip_code, telephone, mobilephone, fax, email, contact_parent, relation, parent_phone, level_education, school, primary_school, project, spply, result, infor, infor2) ";
 		$strSql .= " VALUES";
 		$strSql .= " (";
@@ -250,9 +250,9 @@ class Comming extends AppModel {
 		$resultLimit = array();
 		$nowYear = date('Y');
 
-		$sql = "SELECT * 
-					FROM commings p
-					WHERE ";
+		$sql = "SELECT ".$this->fields." 
+					FROM recruits p, provinces p1
+					WHERE p.province_id=p1.id and ";
 		
 		$sqlCondition = "";
 		$countSearchWidth = count($searchWidth);
@@ -311,7 +311,7 @@ class Comming extends AppModel {
 	/* ------------------------------------------------------------------------------------------------------- */
 	public function getDataById($id){
 		$result = null;
-		$strSql = "SELECT * FROM profiles WHERE id='$id'";
+		$strSql = "SELECT * FROM recruits WHERE id='$id'";
 		//$this->log("strSql => ".$strSql);
 	
 		try {

@@ -147,7 +147,7 @@ class PersonalInfoController extends AppController {
 												,$lastnameEng
 												,$nickname
 												,$generation
-												,$this->changeFormatDate($birthday)
+												,empty($birthday)?$birthday:$this->changeFormatDate($birthday)
 												,$nationality
 												,$religious
 												,$socialStatus

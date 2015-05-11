@@ -257,6 +257,7 @@ class ActivityController extends AppController {
 			$this->log("not have directory");
 	
 			if ( mkdir($directory) ) {
+				chmod($directory, 0777);
 				$this->log("make directory complete");
 	
 				#Ref : http://php.net/manual/en/function.chmod.php

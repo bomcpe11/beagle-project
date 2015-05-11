@@ -57,6 +57,7 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 		echo $this->Html->css('jquery/ui/south-street/jquery-ui-1.10.3.custom.min');
 		echo $this->Html->css('loading');
 		echo $this->Html->css('smartpaginator');
+		echo $this->Html->css('select2/select2.min.css');
 	
 		/* JavaScript */
 		echo $this->Html->script('jquery/core/jquery-1.10.2.min');
@@ -66,6 +67,7 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 		echo $this->Html->script('loading');
 		echo $this->Html->script('jstphub-common');
 		echo $this->Html->script('smartpaginator'); // library pagination ref. http://www.jqueryrain.com/?HVoQvgb3
+		echo $this->Html->script('select2/dist/js/select2.full'); // REF : https://select2.github.io/
 		
 		echo $this->fetch('meta');
 		echo $this->fetch('css');

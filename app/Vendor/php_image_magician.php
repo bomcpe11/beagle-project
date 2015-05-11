@@ -2417,7 +2417,7 @@ class imageLib
     
 ## -------------------------------------------------------- 
   
-    public function saveImage($savePath, $imageQuality="100")
+    public function saveImage($savePath, $imageQuality="100", $chmod=0777)
     # Author:     Jarrod Oberto
     # Date:       27-02-08  
     # Purpose:    Saves the image
@@ -2493,6 +2493,8 @@ class imageLib
     // *** Display error if a file type is not supported.
     if ($error != '') {
       $this->errorArray[] = $error . ' support is NOT enabled. File not saved.';
+    }else{
+    	chmod($savePath, $chmod);
     }       
     }
 

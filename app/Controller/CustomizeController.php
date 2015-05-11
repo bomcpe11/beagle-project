@@ -33,7 +33,7 @@ App::uses('CakeEmail', 'Network/Email');
 class CustomizeController extends AppController {
 
 	public $names = "CustomizeController";
-	public $uses = array("Gvar", "Profile", "Generation");
+	public $uses = array("Gvar", "Profile", "Generation", "RecruitRound");
 
 	public function index(){
 		
@@ -135,6 +135,63 @@ class CustomizeController extends AppController {
 	public function getGenerationList(){
 		
 		$result = $this->Generation->getAll();
+		
+		$this->layout = "ajax";
+		$this->set("message", json_encode(array("result" => $result)));
+		$this->render("response");
+	}
+	
+	public function addrecruitround_submit(){
+		if(!$this->isAdmin){
+			return;
+		}
+		$this->log("START :: CustomizeController -> addrecruitround_submit()");
+	
+		$result['status'] = false;
+		$result['message'] = '';
+	
+		$txt_recruitround = $this->request->data["txt_recruitround"];
+	
+		//TODO: Insert Data.
+		if($this->RecruitRound->insert($txt_recruitround)){
+			$result['status'] = true;
+			$result['message'] = "เพิ่ม รอบการคัดเลือก เรียบร้อย";
+		}
+	
+		$this->layout = "ajax_admin";
+		$this->set("message", json_encode(array("result" => $result)));
+		$this->render("response");
+	
+		$this->log("END :: CustomizeController -> addrecruitround_submit()");
+	}
+	
+	public function remove_recruitround(){
+		if(!$this->isAdmin){
+			return;
+		}
+		$this->log("START :: CustomizeController -> remove_recruitround()");
+	
+		$result['status'] = false;
+		$result['message'] = '';
+	
+		$recruitroundid = $this->request->data["recruitroundid"];
+	
+		//TODO: Insert Data.
+		if($this->RecruitRound->remove($recruitroundid)){
+			$result['status'] = true;
+			$result['message'] = "ลบข้อมูล เรียบร้อย";
+		}
+	
+		$this->layout = "ajax_admin";
+		$this->set("message", json_encode(array("result" => $result)));
+		$this->render("response");
+	
+		$this->log("END :: CustomizeController -> remove_recruitround()");
+	}
+	
+	public function getRecruitRoundList(){
+		
+		$result = $this->RecruitRound->getAll();
 		
 		$this->layout = "ajax";
 		$this->set("message", json_encode(array("result" => $result)));

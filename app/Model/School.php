@@ -10,5 +10,10 @@ class School extends AppModel {
 		$result = $this->query('select id, name from schools t');
 		return $result;
 	}
+	
+	public function getRecord($id){
+		$result = $this->query('select * from schools t where id='.$id);
+		return $result;
+	}
 }
 ?>

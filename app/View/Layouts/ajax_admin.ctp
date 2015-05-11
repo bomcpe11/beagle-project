@@ -19,7 +19,7 @@
 ?>
 <?php 
 //######### Check $_SESSION for user loged-in #############
-	if(isset($objuser) && !empty($objuser) && $objuser['role_admin']=="1"){
+	if(isset($objuser) && !empty($objuser) && ($objuser['role_admin']=="1" || $objuser['role_admin']=="2")){
 		//TODO: it have objuser.
 	}else{
 		//TODO: not found objuser, not loged-in., Redirect t LginController

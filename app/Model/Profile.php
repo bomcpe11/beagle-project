@@ -6,6 +6,11 @@ class Profile extends AppModel {
 		return $result;
 	}
 	
+	public function getProfilesByCardID($cardid){
+		$result = $this->query("select * from profiles where cardid='".$cardid."'");
+		return $result;
+	}
+	
 	public function getProfilesLimit(){
 		$result = $this->query('select * from profiles p limit 0, 200');
 		return $result;
@@ -17,8 +22,14 @@ class Profile extends AppModel {
 		if( $orderBy==='birthday' ){
 			$order = " order by p.{$orderBy} $sort";
 		}else{
-			$order = " order by p.{$orderBy} $sort";
+			if(empty($orderBy)){
+				$order = '';
+			}
+			else{
+				$order = " order by p.{$orderBy} $sort";
+			}
 		}
+		
 		$limit = " limit $start, $recordPerPage";
 		$this->log($sql.$order.$limit);
 		
@@ -209,6 +220,24 @@ class Profile extends AppModel {
 		return $flag;
 	}//addnewmember
 	
+	public function addnewmemberrecruit($cardtype, $cardid, $name, $lastname, $birthdate, $email, $nickname, $address, $telphone, $celphone, $titleth){
+		$flag = false;
+		$strSql = "INSERT INTO profiles(cardtype, cardid, nameth, lastnameth, birthday, email, nickname, address, telphone, celphone, titleth)";
+		$strSql .= "VALUES('".$cardtype."', '".$cardid."', '".$name."', '".$lastname."', '".$birthdate."', '".$email."', '".$nickname."', '".$address."', '".$telphone."', '".$celphone."', '".$titleth."')";
+		$strSql .= ";";
+		//$this->log("strSql => ".$strSql);
+		 
+		try {
+			$this->query($strSql);
+		
+			$flag = true;
+		} catch ( Exception $e ) {
+			$this->log("exception => ".$e->getMessage());
+		}// try catch
+		 
+		return $flag;
+	}//addnewmember
+	
 	public function checkforsignin($cardtype, $cardid, $name, $lastname, $birthdate, $email){
 		$result = null;
 		$strSql = "SELECT * FROM profiles WHERE (nameth='".$name."' AND lastnameth='".$lastname."') "
@@ -377,7 +406,7 @@ class Profile extends AppModel {
 		$strSql .= " ,lastnameeng = '".$lastnameEng."'";
 		$strSql .= " ,nickname = '".$nickname."'";
 		$strSql .= " ,generation = '".$generation."'";
-		$strSql .= " ,birthday = '".$birthday."'";
+		if(!empty($birthday)) $strSql .= " ,birthday = '".$birthday."'";
 		$strSql .= " ,nationality = '".$nationality."'";
 		$strSql .= " ,religious = '".$religious."'";
 		$strSql .= " ,socialstatus = '".$socialStatus."'";

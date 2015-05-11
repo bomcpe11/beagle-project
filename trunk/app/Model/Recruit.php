@@ -1,21 +1,21 @@
 <?php
 class Recruit extends AppModel {
 	
-	private $fields = ' p.id, id_come, before_name, first_name, family_name, nickname, sex, birthday, year, province_id, p1.name, spply ';
+	private $fields = ' p.id, id_come, before_name, first_name, family_name, nickname, sex, birthday, year, p.province_id, p1.name, spply, status ';
 	
 	public function getProfiles(){
 		$result = $this->query('select * from recruits');
 		return $result;
 	}
 	
-	public function getProfilesLimit(){
-		$result = $this->query('select * from recruits p limit 0, 200');
+	public function getProfilesLimit($roundid){
+		$result = $this->query('select * from recruits p where recruitroundid='.$roundid.' limit 0, 200');
 		return $result;
 	}
 	
-	public function getProfilesByLimit($start,$recordPerPage,$orderBy, $sort){
+	public function getProfilesByLimit($roundid,$start,$recordPerPage,$orderBy, $sort){
 		$result = array();
-		$sql = 'select '.$this->fields.' from recruits p, provinces p1 where p.province_id=p1.id';
+		$sql = 'select '.$this->fields.' from recruits p, provinces p1 where p.province_id=p1.id and p.recruitroundid='.$roundid.' ';
 		if( $orderBy==='birthday' ){
 			$order = " order by p.{$orderBy} $sort";
 		}else{
@@ -37,10 +37,35 @@ class Recruit extends AppModel {
 		return $result;
 	}
 	
-	public function removeProfile($id){
+	public function getProfilesByFields($fields){
+		$field = implode(', ', $fields);
+		$sql = "select $field from recruits, provinces, schools where recruits.province_id=provinces.id and recruits.school=schools.id";
+		
+		$this->log($sql);
+		
+		return $this->query($sql);
+	}
+	
+	public function unMember($id){
 		$flag = false;
-		$strSql = "DELETE FROM recruits ";
-		$strSql .= "WHERE id='".$id."'";
+		$strSql = "update recruits set status=0, profileid=NULL where id='$id'";
+		$strSql .= ";";
+		//$this->log("strSql => ".$strSql);
+			
+		try {
+			$this->query($strSql);
+		
+			$flag = true;
+		} catch ( Exception $e ) {
+			$this->log("exception => ".$e->getMessage());
+		}// try catch
+			
+		return $flag;
+	}
+	
+	public function unMemberProfile($profileid){
+		$flag = false;
+		$strSql = "update recruits set status=0, profileid=NULL where profileid='$profileid'";
 		$strSql .= ";";
 		//$this->log("strSql => ".$strSql);
 			
@@ -238,7 +263,8 @@ class Recruit extends AppModel {
 	/* ------------------------------------------------------------------------------------------------------- */
 	
 	/* ------------------------------------------------------------------------------------------------------- */
-	public function getDataForPsearch($keyWord,
+	public function getDataForPsearch($roundid, 
+										$keyWord,
 										$searchWidth,
 										$flagActivity,
 										$start,
@@ -252,7 +278,7 @@ class Recruit extends AppModel {
 
 		$sql = "SELECT ".$this->fields." 
 					FROM recruits p, provinces p1
-					WHERE p.province_id=p1.id and ";
+					WHERE p.recruitroundid='".$roundid."' and p.province_id=p1.id and ";
 		
 		$sqlCondition = "";
 		$countSearchWidth = count($searchWidth);
@@ -322,6 +348,21 @@ class Recruit extends AppModel {
 	
 		return $result;
 	}
+	public function getDataInIds($arr_ids){
+		$result = null;
+// 		$strSql = "SELECT * FROM recruits WHERE id in ('".implode("','",$arr_ids)."')";
+		$strSql = "select p.id, id_come, before_name, first_name, family_name, nickname, p2.name, level_education
+				from recruits p, schools p2 where p.school=p2.id and p.id in ('".implode("','",$arr_ids)."')";
+		//$this->log("strSql => ".$strSql);
+	
+		try {
+   			$result = $this->query($strSql);
+   		} catch ( Exception $e ) {
+   			$this->log("exception => ".$e->getMessage());
+   		}
+	
+		return $result;
+	}
 	/* ------------------------------------------------------------------------------------------------------- */
 	public function updateIsApprove($id,$is_approve){
 		$flag = false;
@@ -330,6 +371,42 @@ class Recruit extends AppModel {
 					updated_at=now()
 					WHERE id='$id'";
 		//$this->log("strSql => ".$strSql);
+	
+		try {
+   			$this->query($strSql);
+   			
+   			$flag = true;
+   		} catch ( Exception $e ) {
+   			$this->log("exception => ".$e->getMessage());
+   		}
+	
+		return $flag;
+	}
+	
+	public function updateJstpmember($id,$profileid){
+		$flag = false;
+		$strSql = "UPDATE recruits 
+					SET status=1,
+					profileid='".$profileid."'
+					WHERE id='$id'";
+	
+		try {
+   			$this->query($strSql);
+   			
+   			$flag = true;
+   		} catch ( Exception $e ) {
+   			$this->log("exception => ".$e->getMessage());
+   		}
+	
+		return $flag;
+	}
+	
+	public function updateRemoveJstpmember($id){
+		$flag = false;
+		$strSql = "UPDATE recruits 
+					SET status=0,
+					profileid=NULL
+					WHERE id='$id'";
 	
 		try {
    			$this->query($strSql);

@@ -11,7 +11,7 @@
 		<a class="framebtn" frmid="frm-addnewmember">Add new member</a> <!-- Admin --><br />
 		<a class="framebtn" urllink="<?php echo $this->Html->url('/Activitylist'); ?>">Activity Manager</a><br />
 		<a class="framebtn" frmid="frm-generationmanager" onclick="display_generationlist();">Generation Manager</a><br />
-		<a class="framebtn" urllink="<?php echo $this->Html->url('/Recruitment'); ?>">Member Recruitment Manager</a><br />
+		<a class="framebtn" frmid="frm-recruitmanager" onclick="display_recruitroundlist();">Member Recruitment Manager</a><br />
 	<?php } ?>
 	<a class="framebtn" frmid="frm-changepassword">Change password</a><br />
 	<a class="framebtn" urllink="<?php echo $this->Html->url('/Changepic'); ?>">Change picture profile</a><br />
@@ -81,6 +81,25 @@
 	</div>
 	
 	<div id="generationlist"></div>
+	<a class="framebtn" frmid="frm-menu">Back</a>
+</div>
+<div id="frm-recruitmanager" class="framecontainer">
+	<div class="input">
+		<fieldset>
+		<legend>Recruitment Manager</legend>
+			<table>
+				<tr>
+					<td>ชื่อรอบการรับสมัคร : </td>
+					<td><input type="text" id="txt_recruitround" /> *</td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center"><input type="button" value="เพิ่ม รอบการรับสมัคร" onclick="submit_addrecruitround(this);" /> <input type="button" class="btn-reset" value="ล้าง Input" /></td>
+				</tr>
+			</table>
+		</fieldset>
+	</div>
+	
+	<div id="recruitroundlist"></div>
 	<a class="framebtn" frmid="frm-menu">Back</a>
 </div>
 <script type="text/javascript">
@@ -166,6 +185,7 @@ function submit_addnewmember(t){
 	);// jQuery.post
 }
 function display_generationlist(){
+	loading();
 	jQuery.post("<?php echo $this->Html->url('/Customize/getGenerationList');?>", 
 			{},
 			function(data) {
@@ -302,6 +322,150 @@ function remove_generation(id, name){
 		}
 	);
 }
+
+/*--- Start Recruitment Manager ----*/
+
+function display_recruitroundlist(){
+	loading();
+	jQuery.post("<?php echo $this->Html->url('/Customize/getRecruitRoundList');?>", 
+			{},
+			function(data) {
+				unloading();
+
+				var html = '<table class="tabledata" style="margin:5px 20px;">'
+							+'<tr>'
+							+'	<th>รอบการรับสมัคร</th>'
+							+'	<th></th>'
+							+'</tr>';
+
+				if(data.result.length>0){
+					for(var i=0; i<data.result.length; i++){
+						html += '<tr>'
+								+'	<td><a style="color:blue;" href="<?php echo $this->Html->url('/Recruitment?recruitroundid='); ?>'+data.result[i].recruit_rounds.id+'&roundname='+data.result[i].recruit_rounds.name+'">'+data.result[i].recruit_rounds.name+'</a></td>'
+								+'	<td><img src="<?php echo $this->Html->url('/img/icon_del.png'); ?>" style="cursor:pointer;" onclick="remove_recruitround(\''+data.result[i].recruit_rounds.id+'\', \''+data.result[i].recruit_rounds.name+'\')" /></td>'
+								+'</tr>';
+					}
+				}else{
+					html += '<tr>'
+							+'	<td colspan="2">ไม่มีข้อมูล</td>'
+							+'</tr>';
+				}
+
+				html += '</table>';
+
+				jQuery('#recruitroundlist').html(html);
+				
+			}// function(data)
+			, "json").error(function() {
+				jAlert('Ajax Error : get recruitround list');
+				unloading();
+			}// function()
+	);// jQuery.post
+}
+function submit_addrecruitround(t){
+	
+	var input_container = jQuery(t).closest("div.input");
+
+	var txt_recruitround = jQuery.trim(input_container.find('#txt_recruitround').val());
+
+	// validate field *
+	if ( !txt_recruitround ) {
+		jAlert("กรุณากรอกข้อมูลช่องที่ * ให้ครบ" 
+				, function(){ 
+				}//okFunc	
+				, function(){ 
+				}//openFunc
+				, function(){ 		
+				}//closeFunc
+		);// jAlert
+		
+		return false;
+	}// if
+	
+	var data = {txt_recruitround: txt_recruitround};
+//		console.log(data);
+	loading();
+	jQuery.post("<?php echo $this->Html->url('/Customize/addrecruitround_submit');?>", 
+			data,
+			function(data) {
+				if ( data.result.status ) {
+					display_recruitroundlist();
+					jAlert(data.result.message
+							, function(){ 
+								input_container.find('input.btn-reset').click();
+							}//okFunc	
+							, function(){ 
+							}//openFunc
+							, function(){ 		
+							}//closeFunc
+					);// jAlert
+				}else{
+					jAlert(data.result.message
+							, function(){ 
+							}//okFunc	
+							, function(){ 
+							}//openFunc
+							, function(){ 		
+							}//closeFunc
+					);
+				}
+	
+				unloading();
+			}// function(data)
+			, "json").error(function() {
+				jAlert('Ajax Error : add recruitround');
+				unloading();
+			}// function()
+	);// jQuery.post
+}
+function remove_recruitround(id, name){
+	jConfirm('ต้องการลบ "'+name+'" ?', 
+		function(){ //okFunc
+
+		var data = {recruitroundid: id};
+
+		jQuery.post("<?php echo $this->Html->url('/Customize/remove_recruitround');?>", data,
+			function(data) {
+					if ( data.result.status ) {
+						display_recruitroundlist();
+						jAlert(data.result.message
+								, function(){ 
+								}//okFunc	
+								, function(){ 
+								}//openFunc
+								, function(){ 		
+								}//closeFunc
+						);// jAlert
+					}//if else
+					else{
+						jAlert(data.result.message
+								, function(){ 
+									
+								}//okFunc	
+								, function(){ 
+								}//openFunc
+								, function(){ 		
+								}//closeFunc
+						);// jAlert
+					}
+
+					unloading();
+				}// function(data)
+				, "json").error(function() {
+				}// function()
+			);// jQuery.post
+		}, 
+		function(){ //cancelFunc
+		}, 
+		function(){ //openFunc
+		}, 
+		function(){ //closeFunc
+		}
+	);
+}
+
+/*--- End Recruitment Manager ----*/
+
 </script>
 <?php } ?>
 <!-- ########################################## Change Password ##################################### -->

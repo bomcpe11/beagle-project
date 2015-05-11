@@ -9,5 +9,9 @@ class Province extends AppModel {
 		$result = $this->query('select id, name from provinces t');
 		return $result;
 	}
+	public function getByID($id){
+		$result = $this->query("select * from provinces t where id='".$id."'");
+		return $result;
+	}
 }
 ?>

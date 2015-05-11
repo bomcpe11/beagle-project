@@ -243,7 +243,7 @@ class PortfolioController extends AppController {
 				<body>
 					<div name="page1" class="page">
 						<div style="margin: 150px 0 0 300px;">
-							<h3 style="color: #47B224;">JSPT OFFICIAL</h3>
+							<h3 style="color: #47B224;">JSTP OFFICIAL</h3>
 							<h1 style="color: #333333;">PROFILE &
 							PORTFOLIO</h1>
 							<h4 style="color: #333333; font-weight: normal">Junior talented <span style="color: #47B224; font-weight: bold;">scientist</span></h4>

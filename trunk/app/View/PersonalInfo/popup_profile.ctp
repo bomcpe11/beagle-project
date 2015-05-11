@@ -71,11 +71,12 @@
 									?></select>\
 								</p>\
 							</li>\
-							<li class="single">\
-								<p><strong>* วันเกิด :</strong></p>\
+							<li class="single">\<?php if($isSuperAdmin){ ?>
+								<p><strong>วันเกิด :</strong></p>\
 								<p>\
 									<input id="text-birthday" class="birthDatePicker" type="text" value="'+setFormatForDatePicker('<?php echo $birthday; ?>')+'">\
-								</p>\
+									<span style="padding-left:10px;color:red;">ข้อมูลวันเกิดจะไม่แสดงให้ผู้อื่นเห็น ยกเว้น JSTP Staff</span>\
+								</p>\<?php } ?>
 							</li>\
 							<li>\
 								<p><strong>สัญชาติ :</strong></p>\
@@ -184,7 +185,6 @@
 			|| !lastnameEng
 			|| !nickname
 			|| !generation
-			|| !birthday
 			|| !email ) {
 			jAlert("กรุณากรอกข้อมูลช่องที่ * ให้ครบ" 
 					, function(){ 

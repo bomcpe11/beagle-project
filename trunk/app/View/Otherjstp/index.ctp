@@ -69,7 +69,9 @@ td.hover{
 	</tr>
 	<tr>
 		<td>สิทธิ์ Admin : </td>
-		<td><select name="roleadmin"><option value="0">ไม่ใช่</option><option value="1">ใช่</option></select></td>
+		<td><select name="roleadmin"><option value="0">ไม่ใช่</option><option value="1">Admin</option>
+			<?php if($isSuperAdmin){ ?><option value="2">Super Admin</option><?php } ?>
+			</select></td>
 	</tr>
 	<tr>
 		<td>ลบสมาชิก : </td>
@@ -269,10 +271,10 @@ td.hover{
 						gotoProfile(this);
 					});
 					<?php if($isAdmin){ ?>
-					jQuery('.btncustom').click(function(){
+					jQuery('.btncustom').unbind('click').click(function(){
 						customize_openpopup(this);
 					});
-					jQuery('.btnremovemember').click(function(){
+					jQuery('.btnremovemember').unbind('click').click(function(){
 						remove_member();
 					});
 					<?php } ?>
@@ -364,7 +366,9 @@ td.hover{
 					//role, roleadmin
 					container.find('select[name="role"]').val(params.role);
 					//console.log(parseInt(params.role_admin, 10));
-					if(parseInt(params.role_admin, 10)==1){
+					if(parseInt(params.role_admin, 10)==2){
+						container.find('select[name="roleadmin"]').val('2');
+					}else if(parseInt(params.role_admin, 10)==1){
 						container.find('select[name="roleadmin"]').val('1');
 					}else{
 						container.find('select[name="roleadmin"]').val('0');

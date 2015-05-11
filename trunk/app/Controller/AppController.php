@@ -38,6 +38,7 @@ class AppController extends Controller {
 	private $objuser = null;
 	protected $isLogin = false;
 	protected $isAdmin = false;
+	protected $isSuperAdmin = false;
 	
 	
 	function beforeFilter(){
@@ -49,9 +50,13 @@ class AppController extends Controller {
 		$this->set('isLogin', $this->isLogin);
 		
 // 		$this->log($this->objuser);
+
+		$this->isSuperAdmin = ($this->objuser['role_admin']==2?true:false);
+		$this->set('isSuperAdmin', $this->isSuperAdmin);
 		
-		$this->isAdmin = ($this->objuser['role_admin']==1?true:false);
+		$this->isAdmin = $this->isSuperAdmin || ($this->objuser['role_admin']==1?true:false);
 		$this->set('isAdmin', $this->isAdmin);
+		
 		
 		$dataProfile =  $this->getObjUser();
 // 		$this->log($dataProfile);
@@ -94,6 +99,10 @@ class AppController extends Controller {
 	
 	protected function getIsAdmin(){
 		return $this->isAdmin;
+	}
+	
+	protected function getIsSuperAdmin(){
+		return $this->isSuperAdmin;
 	}
 	
 	function DateThai($strDate)

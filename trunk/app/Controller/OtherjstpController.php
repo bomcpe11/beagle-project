@@ -2,7 +2,7 @@
 // session_start();
 class OtherjstpController extends AppController {
 	/* ------------------------------------------------------------------------------------------------ */
-	public $uses = array('Profile', 'Gvar');
+	public $uses = array('Profile', 'Gvar', 'Recruit');
 	/* ------------------------------------------------------------------------------------------------ */
 	public function index(){
 		$this->log('---- Psearch -> index ----');
@@ -22,6 +22,7 @@ class OtherjstpController extends AppController {
 		$searchWidth = $this->request->data['searchWidth'];
 		$flagActivity = $this->request->data['flagActivity'];
 		$currentPage = $this->request->data['currentPage'];
+		if(empty($currentPage)) $currentPage=1;
 		$orderBy = $this->request->data['orderBy'];
 		$sort = $this->request->data['sort'];
 		$recordPerPage = 30;
@@ -92,6 +93,7 @@ class OtherjstpController extends AppController {
 		
 		//TODO: update DB.
 		if($this->Profile->removeProfile($profileid)){
+			$this->Recruit->unMemberProfile($profileid);
 			$result['status'] = true;
 			$result['message'] = 'ลบสมาชิกเรียบร้อย';
 		}else{

@@ -52,9 +52,9 @@
 								</td>
 							</tr>
 							<tr>
-								<td>
-									<strong>วันเกิด : </strong>
-									<span><?php echo $birthday;?></span>
+								<td><?php if($isSuperAdmin || $isOwner){ ?>
+									<strong>วันเกิด :<span style="color:red;font-size: 12px;">*</span> </strong>
+									<span><?php echo $birthday;?></span><?php } ?>
 								</td>
 								<td>
 									<strong>อายุ : </strong>
@@ -103,8 +103,8 @@
 									<span><?php echo $objUser[0]['profiles']['email'];?></span>
 								</td>
 								<td>
-									<strong>ตำแหน่งทางวิชาการ(ถ้ามี) : </strong>
-									<span><?php echo $objUser[0]['profiles']['position'];?></span>
+									<strong></strong>
+									<span></span>
 								</td>
 							</tr>
 							<tr>
@@ -135,8 +135,13 @@
 			</div>
 		</div>
 	</div>
+	<div>
+		<span style="padding:0 0 0 10px;color:red;">* ข้อมูลที่มีเครื่องหมายนี้จะไม่แสดงให้ผู้อื่นเห็น ยกเว้น JSTP Staff</span>
+	</div>
+	<?php if($isSuperAdmin || $isOwner){ ?>
 	<div class="container">
-		<h2>ประวัติครอบครัว</h2>
+		<h2 style="padding: 5px 0;">ประวัติครอบครัว <span style="color:red;font-size: 17px;">*</span></h2>
+		
 		<div class="section-content">
 			<ul id="sortable_family">
 				<?php 
@@ -205,6 +210,7 @@
 			<input type="button" id="button_add_family" onclick="openPopupFamily('','','','','','','')" value="เพิ่มข้อมูล ประวัติครอบครัว"/>
 		</div>
 	</div>
+	<?php } ?>
 	<div class="container">
 		<h2>ประวัติการศึกษา</h2>
 		<div class="section-content">
@@ -253,7 +259,11 @@
 										</tr>
 										<tr>
 											<td><strong>ปีการศึกษา : </strong><?php echo $startYear.' - '.$endYear; ?></td>
-											<td colspan="2"><strong>เกรดเฉลี่ย : </strong><?php echo ( empty($listEducation[$i]['educations']['gpa'])?'-':$listEducation[$i]['educations']['gpa'] );?></td>
+											<td colspan="2">
+												<?php if($isAdmin || $objuser['role']=='40' ){ //Admin || อาจารย์ ?>
+												<strong>เกรดเฉลี่ย :<span style="color:red;font-size: 12px;">*</span> </strong><?php echo ( empty($listEducation[$i]['educations']['gpa'])?'-':$listEducation[$i]['educations']['gpa'] );?>
+												<?php } ?>
+											</td>
 										</tr>
 									</table>
 								</div>

@@ -111,7 +111,7 @@ class EmailConfig {
 		'username' => 'admin@myjstp.org',
 		'password' => 'jstphub_2013',
 		'client' => null,
-		'log' => false,
+		'log' => true,
 		//'charset' => 'utf-8',
 		//'headerCharset' => 'utf-8',
 	);
@@ -120,9 +120,10 @@ class EmailConfig {
 		'host' => 'ssl://smtp.gmail.com',
 		'port' => 465,
 		'timeout' => 30,
-		'username' => 'jstp.email@gmail.com',
-		'password' => 'jstpemail',
-		'transport' => 'Smtp'
+		'username' => 'bomcpe11@gmail.com',
+		'password' => '',
+		'transport' => 'Smtp',
+		'log' => true,
 	);
 
 }

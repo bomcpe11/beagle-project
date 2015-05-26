@@ -143,19 +143,19 @@ class LoginController extends AppController {
 			$this->Profile->signinactivate($data[0]['profiles']['id'], $select_cardtype, $txt_cardid, $txt_email, $alterkey);
 // 			$this->loginFnc($txt_username, md5($txt_password), "false");
 			//TODO: Send Email
-			$rs_email = $this->sendEmail($txt_email, $data[0]['profiles']['id'], $alterkey);
+			$rs_email = $this->sendEmail($txt_email, $data[0]['profiles']['id'], $alterkey, $txt_name, $txt_surname);
 			$this->log($rs_email);
 			if($rs_email['status']){
 				$result['status'] = true;
-				$result['message'] = "ลงทะเบียนเรียบร้อย<br />กรุณาตรวจสอบอีเมล์เพื่อกำหนด Username, Passsword ในขั้นตอนต่อไป";
+				$result['message'] = "ได้รับข้อมูลท่านแล้ว<br />กรุณากดลิ้งยืนยันตัวตนจากอีเมลที่ส่งให้เพื่อตั้งค่า username กับ password<br /><br />*กรุณาตรวจสอบอีเมล myjstp จากกล่อง ถังขยะด้วย เนื่องจากบางครั้งอีเมลถูกระบบป้องกัน spam ไปอยู่ในถังขยะหรือ spam";
 			}else{
-				$result['message']='ไม่สามารถส่งออกอีเมล์ได้ กรุณาติดต่อผู้ดูแลเว็บไซต์';
+				$result['message']='ไม่สามารถส่งออกอีเมล์ได้<br />กรุณาติดต่อ ผู้ดูแลระบบ ochakaew@gmail.com';
 			}
 		}else if(count($data)>1){
-			$result['message']='พบข้อมูลซ้ำซ้อน กรุณาติดต่อผู้ดูแลเว็บไซต์';
+			$result['message']='พบข้อมูลซ้ำซ้อน<br />กรุณาติดต่อ ผู้ดูแลระบบ ochakaew@gmail.com';
 		}else{
 			//Not found data.
-			$result['message']='ไม่พบข้อมูลนี้';
+			$result['message']='ไม่พบข้อมูลนี้<br />กรุณาติดต่อ ผู้ดูแลระบบ ochakaew@gmail.com';
 		}
 		
 		$this->layout = "ajax_public";
@@ -203,7 +203,7 @@ class LoginController extends AppController {
 					$cakeEmail = new CakeEmail('jstpEmail');
 					$cakeEmail->template('jstphub_email', 'jstphub_email');
 					$cakeEmail->emailFormat('html');
-					$cakeEmail->from(array('admin-noreply@myjstp.org' => 'MyJSTP Administrator'));
+					$cakeEmail->from(array('admin@myjstp.org' => 'MyJSTP Administrator'));
 					$cakeEmail->to($email);
 			        $cakeEmail->subject('MyJSTP : Reset Password');
 			        $cakeEmail->send($content);
@@ -281,7 +281,44 @@ class LoginController extends AppController {
 		$this->render('response');
 	}
 	
-	private function sendEmail($recipient, $id, $alterkey){
+	public function testSendEmail(){
+		
+		//TODO: Send email code here.
+		/*// The message
+		$message = "Line 1\r\nLine 2\r\nLine 3";
+		
+		// In case any of our lines are larger than 70 characters, we should use wordwrap()
+		$message = wordwrap($message, 70, "\r\n");
+		
+		// Send
+		$result = mail('jnattapop@gmail.com', 'My Subject', $message);
+		
+		print_r($result);
+		
+		*/
+		
+		
+		
+		
+		$recipient = 'bomcpe11@gmail.com';
+		$subject = 'MyJSTP : TEST MAIL';
+		$content = '<b>MyJSTP Test mail sending</b>';
+		
+		$email = new CakeEmail('gmail');
+		$email->template('jstphub_email', 'jstphub_email');
+		$email->emailFormat('html');
+		$email->from(array('admin@myjstp.org' => 'MyJSTP Administrator'));
+		$email->to($recipient);
+		$email->subject($subject);
+		$email->send($content);
+		$result = true;
+		
+		$this->layout = 'ajax_public';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	}
+	
+	private function sendEmail($recipient, $id, $alterkey, $txt_name='Anonymous', $txt_surname=''){
 		$this->log('---- LoginController -> sendEmail ----');
 	
 		$result = array();
@@ -299,10 +336,11 @@ class LoginController extends AppController {
 		$reglink = Router::url('/Register?id='.$id.'&key='.$alterkey, true);
 		
 // 		$recipient = $this->request['data']['email_send_to'];
-		$subject = 'MyJSTP : REGISTER';
+		$subject = 'MyJSTP : REGISTER ('.$txt_name.' '.$txt_surname.')';
 		//$content = substr(trim($this->request['data']['email_text']), 3, -4);	// delete whitespace and <p></p>
-		$content = '<b>MyJSTP Register, Please click this link</b><br />'
-				.'<a href="'.$reglink.'">'.$reglink.'</a>';
+		$content = '<p><b>Dear '.$txt_name.' '.$txt_surname.'</b></p>'
+				.'<p>MyJSTP Register, Please click this link</p>'
+				.'<p><a href="'.$reglink.'">'.$reglink.'</a></p>';
 	
 // 		$db = $this->EmailHistory->getDataSource();
 // 		$db->begin();
@@ -310,15 +348,17 @@ class LoginController extends AppController {
 // 				$recipient,
 // 				$subject,
 // 				$content) ){
+// 		$recipient = 'bomcpe11@gmail.com';
 			try{
+				
 				$email = new CakeEmail('jstpEmail');
 				$email->template('jstphub_email', 'jstphub_email');
 				$email->emailFormat('html');
-				$email->from(array('admin-noreply@myjstp.org' => 'MyJSTP Administrator'));
+				$email->from(array('admin@myjstp.org' => 'MyJSTP Administrator'));
 				$email->to($recipient);
 				$email->subject($subject);
 				$email->send($content);
-	
+				
 // 				$result['flg'] = '1';
 				$result['status'] = true;
 				$result['msg'] = 'ดำเนินการส่ง Email เสร็จเรียบร้อย';

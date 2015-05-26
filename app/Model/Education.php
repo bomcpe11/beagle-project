@@ -49,8 +49,8 @@ class Education extends AppModel {
 					, '$faculty'
 					, '$major'
 					, '$gpa'
-					, STR_TO_DATE('$startyear', '%d,%m,%Y')
-					, STR_TO_DATE('$endyear', '%d,%m,%Y')
+					, ".(empty($startyear)?"NULL":"STR_TO_DATE('$startyear', '%d,%m,%Y')")."
+					, ".(empty($endyear)?"NULL":"STR_TO_DATE('$endyear', '%d,%m,%Y')")."
 					, '$edutype'
 					, $profile_id
 					, now()
@@ -61,12 +61,13 @@ class Education extends AppModel {
 			$this->query($sql);
 			$flag = true;
 			try{
-				$this->setProfileUpdSearchFlg($id);
+				$this->setProfileUpdSearchFlg($profile_id);
 			}catch(Exception $e){
 				
 			}
 		}catch(Exception $e){
 			$this->log($e->getMessage());
+			$this->log($sql);
 		}
 		
 		return $flag;
@@ -102,7 +103,7 @@ class Education extends AppModel {
 			$this->query($sql);
 			$flag = true;
 			try{
-				$this->setProfileUpdSearchFlg($id);
+				$this->setProfileUpdSearchFlg($profile_id);
 			}catch(Exception $e){
 				
 			}
@@ -145,9 +146,9 @@ class Education extends AppModel {
 		return $flag;
 	}
 	
-	public function setProfileUpdSearchFlg($id) {
+	public function setProfileUpdSearchFlg($profile_id) {
 		$flag = false;
-		$strSql = "UPDATE profiles SET updforsearchflg=1 WHERE id=(select profile_id from educations where id=".$id.")";
+		$strSql = "UPDATE profiles SET updforsearchflg=1 WHERE id=$profile_id";
 		// 			$this->log($strSql);
 		try {
 			$this->query($strSql);

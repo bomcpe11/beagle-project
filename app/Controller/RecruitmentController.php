@@ -264,8 +264,8 @@ class RecruitmentController extends AppController {
 						.' อำเภอ/เขต '.$recruit['district']
 						.' จังหวัด '.$province_name
 						.' '.$recruit['zip_code'];
-			$telphone = $recruit['telphone'];
-			$celphone = $recruit['celphone'];
+			$telephone = $recruit['telephone'];
+			$celphone = $recruit['mobilephone'];
 			$titleth = $recruit['titleth'];
 			
 			if(!empty($txt_cardid)){ $checkCardId = $this->Profile->checkCardId($txt_cardid); }
@@ -280,7 +280,7 @@ class RecruitmentController extends AppController {
 				$result['message'] = "อีเมล์ นี้มีข้อมูลแล้ว";
 			} else{
 				//TODO: Insert Data.
-				$this->Profile->addnewmemberrecruit('1', $card_id, $first_name, $family_name, $birthday, $email, $nickname, $address, $telphone, $celphone, $titleth);
+				$this->Profile->addnewmemberrecruit('1', $card_id, $first_name, $family_name, $birthday, $email, $nickname, $address, $telephone, $celphone, $titleth);
 				$profile = $this->Profile->getProfilesByCardID($card_id);
 				$profile = $profile[0]['profiles'];
 				$this->Recruit->updateJstpmember($recruit['id'], $profile['id']);
@@ -458,8 +458,10 @@ class RecruitmentController extends AppController {
 		$school = $this->School->getRecord($schoolid);
 		$level_education = $recruit['level_education'];
 		
+		//$this->log($school);
+		
 		if(!empty($school)){
-			$this->Education->insertEducation($school[0]['name']
+			$this->Education->insertEducation($school[0]['t']['name']
 					, ''
 					, ''
 					, ''

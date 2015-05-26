@@ -20,11 +20,22 @@
 		jQuery('#button_login, #button_register').button();
 
 		setFooterToBottom();
-
-		jQuery('body').prepend('<div id="login-human1"></div>');
+		setSizeofLeftSide();
 		
 	});// jQuery.ready
 	/* ------------------------------------------------------------------------------------------------- */
+	
+	jQuery(window).resize(function(){
+		setFooterToBottom();
+		setSizeofLeftSide();
+	});
+	
+	function setSizeofLeftSide(){
+		var body = document.body,
+	    html = document.documentElement;
+		var documentWidth = Math.max( body.scrollWidth, body.offsetWidth, html.clientWidth, html.scrollWidth, html.offsetWidth );
+		jQuery('#left-side').width(documentWidth-500);
+	}
 	
 	function setFooterToBottom(){
 
@@ -45,11 +56,11 @@
 // 		console.log(documentHeight);
 // 		console.log(jContent.height());
 // 		console.log(contentHeightSetting);
-		if(jContent.height() < contentHeightSetting){
+// 		if(jContent.height() < contentHeightSetting){
 			jContent.css('height', contentHeightSetting + 'px');
 			jLeftSide.css('height', contentHeightSetting + 'px');
 			jRightSide.css('height', contentHeightSetting + 'px');
-		}
+// 		}
 		
 	}
 	
@@ -132,7 +143,8 @@
 </script>
 <!-- ###################################################################################################### -->
 
-<div id="left-side" style="clear:both;float:left;position:relative;width:auto;">
+<div id="left-side" style="clear:both;float:left;position:relative;width:100px;overflow:hidden;">
+	<div id="login-human1"></div>
 	<div id="login-human2"></div>
 	<div id="login-network"></div>
 </div>
@@ -170,80 +182,6 @@
 	</div>
 </div>
 
-<!--table style="width:100%;border-spacing: 0px">
-	<td>
-		<div style="position:relative;color:white;">
-			DFSD
-			
-		</div>
-	</td>
-	<td style="width:500px;">
-		<div>
-			DSDLJDSLFKJFD
-		</div>
-	</td>
-</table-->
-
-<!--table align="center" class="tableLayout">
-	<tr>
-		<td class="upperBar">
-			<table class="tableForm">
-				<tr>
-					<td colspan="2"><h2>JSTP Login</h2></td>
-				</tr>
-				<tr>
-					<td align="right" class="tdLabel">Username :</td>
-					<td align="left"><input type="text" id="text_username" class="textbox" maxlength="100"/></td>
-				</tr>
-				<tr>
-					<td align="right" class="tdLabel">Password :</td>
-					<td align="left"><input type="password" id="text_password" maxlength="100"/></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td align="left">
-						<input type="checkbox" id="checkbox_remem" value="remem"/> Remember me
-					</td>
-					
-				</tr>
-				<tr>
-					<td></td>
-					<td align="left">
-						<span id="span_error"></span>
-					</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td align="left">
-						<input type="submit" id="button_login" value="Login" onClick="JavaScript:loginFnc();"/>
-						<input type="button" id="button_register" value="Sign in" onClick="JavaScript:goRegister()"/>
-						<input type="button" id="button_reset_password" value="ลืมรหัสผ่าน" onClick="JavaScript:openPopupForgotPassword()"/>
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<table style="padding: 20px;">
-				<tr>
-					<td>
-						<img width="150px" height="150px" src="<?php echo $this->webroot;?>img/JSTPLogo2.gif"/>
-					</td>
-					<td style="padding-left: 20px;">
-						<p style="text-indent: 25px;word-wrap: break-word;">
-						ระบบจัดการข้อมูลผ่านทางเว็บไซด์เป็นส่วนหนึ่งของโครงการพัฒนาอัจฉริยภาพทางวิทยาศาสตร์และเทคโนโลยีสำหรับเด็กและ
-						เยาวชน ( JSTP) ซึ่งจะรวบรวมและจัดเก็บข้อมูลส่วนบุคคลของนักเรียนที่สมัครเข้าร่วมโครงการ อาทิเช่น ประวัติส่วนบุคคล
-						ประสบการณ์การทำงานวิจัย ตลอดจนผลงานที่ได้รับรางวัล เป็นต้นโดยมีวัตถุประสงค์เพื่อพัฒนาการจัดเก็บข้อมูลอย่างเป็นระบบ
-						สะดวกในการสืบค้นข้อมูล รวมทั้งยังสามารถติดตามความก้าวหน้าของนักเรียนที่ได้รับการคัดเลือกเข้าร่วมโครงการ เพื่อเป็น
-						ประโยชน์ในการพัฒนาโครงการต่อไป
-						</p>
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-</table-->
 <div style="display:none;">
 	<div id="frm-newmember">
 		<table>
@@ -283,18 +221,6 @@
 				<td>อีเมล์ : </td>
 				<td><input type="text" id="txt_email" /> *</td>
 			</tr>
-<!-- 			<tr> -->
-<!-- 				<td>Username : </td> -->
-<!-- 				<td><input type="text" id="txt_username" /> *</td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td>Password : </td> -->
-<!-- 				<td><input type="password" id="txt_password" /> *</td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td>Re-password : </td> -->
-<!-- 				<td><input type="password" id="txt_repassword" /> *</td> -->
-<!-- 			</tr> -->
 		</table>
 	</div>
 </div>

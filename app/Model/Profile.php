@@ -220,12 +220,12 @@ class Profile extends AppModel {
 		return $flag;
 	}//addnewmember
 	
-	public function addnewmemberrecruit($cardtype, $cardid, $name, $lastname, $birthdate, $email, $nickname, $address, $telphone, $celphone, $titleth){
+	public function addnewmemberrecruit($cardtype, $cardid, $name, $lastname, $birthdate, $email, $nickname, $address, $telephone, $celphone, $titleth){
 		$flag = false;
 		$strSql = "INSERT INTO profiles(cardtype, cardid, nameth, lastnameth, birthday, email, nickname, address, telphone, celphone, titleth)";
-		$strSql .= "VALUES('".$cardtype."', '".$cardid."', '".$name."', '".$lastname."', '".$birthdate."', '".$email."', '".$nickname."', '".$address."', '".$telphone."', '".$celphone."', '".$titleth."')";
+		$strSql .= "VALUES('".$cardtype."', '".$cardid."', '".$name."', '".$lastname."', '".$birthdate."', '".$email."', '".$nickname."', '".$address."', '".$telephone."', '".$celphone."', '".$titleth."')";
 		$strSql .= ";";
-		//$this->log("strSql => ".$strSql);
+// 		$this->log("strSql => ".$strSql);
 		 
 		try {
 			$this->query($strSql);
@@ -411,7 +411,7 @@ class Profile extends AppModel {
 		$strSql .= " ,religious = '".$religious."'";
 		$strSql .= " ,socialstatus = '".$socialStatus."'";
 		$strSql .= " ,studystatus = '".$studyStatus."'";
-		$strSql .= " ,address = '".$address."'";
+		$strSql .= " ,address = '".preg_replace("#\r|\n#", " ", $address)."'";
 		$strSql .= " ,telphone = '".$telPhone."'";
 		$strSql .= " ,celphone = '".$celPhone."'";
 		$strSql .= " ,email = '".$email."'";

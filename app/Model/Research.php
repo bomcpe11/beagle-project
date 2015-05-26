@@ -70,7 +70,7 @@ class Research extends AppModel {
 			$this->query($sql);
 			$flag = true;
 			try{
-				$this->setProfileUpdSearchFlg($id);
+				$this->setProfileUpdSearchFlg($profile_id);
 			}catch(Exception $e){
 				
 			}
@@ -112,7 +112,7 @@ class Research extends AppModel {
 			$this->query($sql);
 			$flag = true;
 			try{
-				$this->setProfileUpdSearchFlg($id);
+				$this->setProfileUpdSearchFlg($profile_id);
 			}catch(Exception $e){
 				
 			}
@@ -172,9 +172,9 @@ class Research extends AppModel {
 		
 	}
 	
-	public function setProfileUpdSearchFlg($id) {
+	public function setProfileUpdSearchFlg($profile_id) {
 		$flag = false;
-		$strSql = "UPDATE profiles SET updforsearchflg=1 WHERE id=(select profile_id from researches where id=".$id.")";
+		$strSql = "UPDATE profiles SET updforsearchflg=1 WHERE id=$profile_id";
 		// 			$this->log($strSql);
 		try {
 			$this->query($strSql);

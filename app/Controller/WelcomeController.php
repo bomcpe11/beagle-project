@@ -28,6 +28,9 @@
  * @package       app.Controller
  * @link http://book.cakephp.org/2.0/en/controllers/pages-controller.html
  */
+
+App::uses('CakeEmail', 'Network/Email');
+
 class WelcomeController extends AppController {
 
 	public $names = "WelcomeController";
@@ -65,6 +68,46 @@ class WelcomeController extends AppController {
 		foreach($result['profiles'] as $key => $item){
 			$this->log($key.'='.$item);
 		}
+	}
+
+	public function testSendEmail(){
+	
+		//TODO: Send email code here.
+		/*// The message
+		$message = "Line 1\r\nLine 2\r\nLine 3";
+	
+		// In case any of our lines are larger than 70 characters, we should use wordwrap()
+		$message = wordwrap($message, 70, "\r\n");
+	
+		// Send
+		$result = mail('jnattapop@gmail.com', 'My Subject', $message);
+	
+		print_r($result);
+	
+		*/
+	
+		
+		$names = array('Leoma Bulkley','Jermaine Meredith','Raguel Dalpiaz','Alfonzo Vasconcellos','Chanelle Bono','Hillary Veach','Lovella Scull','Janelle July','Shay Hilchey','Latrisha Fite','Evonne Moss','Lynnette Fails','Lucretia Vanduyne','Jennell Schug','Ashly Castonguay','Herbert Castagna','Michel Borchers','Leila Behrendt','Nila Marinaro','Margery Peets','Sondra Scaglione','Kelsie Hoy','Gillian Jarvis','Casimira Coyle','Claudia Forehand','Twyla Mcdowell','Gayle Nesby','Monet Seedorf','Teodora Doll','Kaylene Greenly','Marylynn Jolicoeur','Lissette Lunday','Candi Rentfro','Irvin Hattaway','Glennie Zupan','Yi Manzano','Ardith Beggs','Golda Ouk','Vernetta Treece','Pamala Wohl','Ramona Trousdale','Jayne Gilmer','Yuriko Gracey','Pa Fine','Flor Alleman','Ocie Johnosn','Julian Gooslin','Martha Haugh','Ila Gammage','Renita Kress');
+	
+		$name = $names[array_rand($names)];
+	
+		$recipient = 'bomcpe11@gmail.com';
+		$subject = 'MyJSTP : Registering '.$name;
+		$content = '<b>Dear '.$name.'</b><br /></p>MyJSTP Test mail sending & Registering</p><p>MyJSTP Register, Please click this link
+http://myjstp.org/Register?id=597&key='.$name.'</p>';
+	
+		$email = new CakeEmail('jstpEmail');
+		$email->template('jstphub_email', 'jstphub_email');
+		$email->emailFormat('html');
+		$email->from(array('admin@myjstp.org' => 'MyJSTP Administrator'));
+		$email->to($recipient);
+		$email->subject($subject);
+		$email->send($content);
+		$result = true;
+	
+		$this->layout = 'ajax_public';
+		$this->set('message', json_encode($result));
+		$this->render('response');
 	}
 	
 }

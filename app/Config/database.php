@@ -66,9 +66,9 @@ class DATABASE_CONFIG {
 // 			'datasource' => 'Database/Mysql',
 // 			'persistent' => false,
 // 			'host' => 'localhost',
-// 			'login' => 'root',
-// 			'password' => '1234',
-// 			'database' => 'myjstp',
+// 			'login' => 'h511067_myjstp',
+// 			'password' => 'B70sd@1i213j!0u820$C',
+// 			'database' => 'h511067_jstphub',
 // 			'prefix' => '',
 // 			'encoding' => 'utf8',
 // 	);

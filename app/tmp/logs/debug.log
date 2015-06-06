@@ -1,1 +1,268 @@
 2013-10-05 04:14:22 Debug: [WelcomeController.php:40] Test Logger krafffffff!!!!ครับ
+2015-05-29 00:08:18 Debug: [LoginController.php:12] ---- LoginController -> index ----
+2015-05-29 00:08:24 Debug: [LoginController.php:35] ---- LoginController -> loginAjax ----
+2015-05-29 00:08:24 Debug: [LoginController.php:52] ---- LoginController -> loginFnc ----
+2015-05-29 00:08:25 Debug: [LoginController.php:78] write session complete
+2015-05-29 00:08:25 Debug: [LoginController.php:115] ---- LoginController -> deleteCookie ----
+2015-05-29 00:08:25 Debug: [LoginController.php:119] delete cookie complete
+2015-05-29 00:08:25 Debug: [Activity.php:52] SELECT * FROM activities WHERE currentflg=1
+2015-05-29 00:08:28 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-05-29 00:08:36 Debug: [PersonalInfoController.php:490] ---- PersonalInfoController -> saveNewComment ----
+2015-05-29 00:08:38 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-05-29 00:11:49 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-05-29 00:13:30 Debug: [WelcomeController.php:44] Test Logger krafffffff!!!!ครับ
+2015-05-29 00:13:30 Debug: [WelcomeController.php:45] Test Logger krafffffff!!!!ค่ะ
+2015-05-29 00:13:46 Debug: [WelcomeController.php:44] Test Logger krafffffff!!!!ครับ
+2015-05-29 00:13:46 Debug: [WelcomeController.php:45] Test Logger krafffffff!!!!ค่ะ
+2015-05-29 00:21:35 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-05-29 00:23:39 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-05-29 00:23:53 Debug: [PersonalInfoController.php:490] ---- PersonalInfoController -> saveNewComment ----
+2015-05-29 00:23:55 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-05-29 00:24:14 Debug: [PersonalInfoController.php:490] ---- PersonalInfoController -> saveNewComment ----
+2015-05-29 00:24:15 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-05-29 00:34:18 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-05-29 00:35:24 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-05-29 00:38:58 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-05-29 00:39:15 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-05-29 00:40:33 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-05-29 00:49:31 Debug: [PersonalInfoController.php:490] ---- PersonalInfoController -> saveNewComment ----
+2015-05-29 00:49:33 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-05-29 00:51:59 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-05-29 00:54:01 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-05-29 00:54:16 Debug: [PersonalInfoController.php:520] ---- PersonalInfoController -> deleteComment ----
+2015-05-29 00:54:17 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-03 00:45:09 Debug: [Activity.php:52] SELECT * FROM activities WHERE currentflg=1
+2015-06-03 00:45:17 Debug: [ProjectController.php:9] ---- ProjectController -> index ----
+2015-06-03 00:45:29 Debug: [ProjectController.php:64] ---- ProjectController -> savedNewResearch ----
+2015-06-03 00:45:34 Debug: [ProjectController.php:9] ---- ProjectController -> index ----
+2015-06-03 00:45:53 Debug: [ProjectController.php:173] Start :: ProjectController :: uploadFiles
+2015-06-03 00:45:53 Debug: [ProjectController.php:195] directory = files/research/56/  fileName = aci_db
+2015-06-03 00:45:53 Debug: [ProjectController.php:407] not have directory
+2015-06-03 00:45:53 Debug: [ProjectController.php:423] make directory fail
+2015-06-03 00:45:53 Debug: [ProjectController.php:9] ---- ProjectController -> index ----
+2015-06-03 00:46:07 Debug: [ProjectController.php:9] ---- ProjectController -> index ----
+2015-06-03 00:48:24 Debug: [ProjectController.php:173] Start :: ProjectController :: uploadFiles
+2015-06-03 00:48:24 Debug: [ProjectController.php:195] directory = files/research/56/  fileName = aci_db
+2015-06-03 00:48:24 Debug: [ProjectController.php:407] not have directory
+2015-06-03 00:48:24 Debug: [ProjectController.php:423] make directory fail
+2015-06-03 00:48:24 Debug: [ProjectController.php:9] ---- ProjectController -> index ----
+2015-06-03 00:48:28 Debug: [ProjectController.php:9] ---- ProjectController -> index ----
+2015-06-03 00:49:12 Debug: [ProjectController.php:173] Start :: ProjectController :: uploadFiles
+2015-06-03 00:49:12 Debug: [ProjectController.php:195] directory = files/research/56/  fileName = aci_db
+2015-06-03 00:49:12 Debug: [ProjectController.php:407] not have directory
+2015-06-03 00:49:12 Debug: [ProjectController.php:410] make directory complete
+2015-06-03 00:49:12 Debug: [ProjectController.php:416] set permission complete
+2015-06-03 00:49:12 Debug: [ProjectController.php:215] TEMP FILE = /Applications/XAMPP/xamppfiles/temp/phpthNRC4
+2015-06-03 00:49:12 Debug: [ProjectController.php:9] ---- ProjectController -> index ----
+2015-06-03 00:49:49 Debug: [ProjectController.php:173] Start :: ProjectController :: uploadFiles
+2015-06-03 00:49:49 Debug: [ProjectController.php:195] directory = files/research/56/  fileName = Pango - เผื่อว่าเธอคิด (Official Lyrics Video).mp4
+2015-06-03 00:49:49 Debug: [ProjectController.php:9] ---- ProjectController -> index ----
+2015-06-03 01:45:21 Debug: [Activity.php:52] SELECT * FROM activities WHERE currentflg=1
+2015-06-03 01:45:26 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 01:47:37 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 01:47:45 Debug: [AchieveController.php:55] ---- AchieveController -> savedNewAward ----
+2015-06-03 01:47:47 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 01:47:57 Debug: [AchieveController.php:145] Start :: AchieveController :: uploadFiles
+2015-06-03 01:47:57 Debug: [AchieveController.php:166] directory = files/award/17/  fileName = Special MV แล้วเราจะได้รักกันไหม -ณเดชน์ คูกิมิยะ ญาญ่า อุรัสยา Ost รอยฝันตะวันเดือด.mp4
+2015-06-03 01:47:57 Debug: [AchieveController.php:364] not have directory
+2015-06-03 01:47:57 Debug: [AchieveController.php:367] make directory complete
+2015-06-03 01:47:57 Debug: [AchieveController.php:373] set permission complete
+2015-06-03 01:47:57 Debug: [AchieveController.php:186] TEMP FILE = /Applications/XAMPP/xamppfiles/temp/phpOSqL0Y
+2015-06-03 01:47:57 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 01:48:09 Debug: [AchieveController.php:145] Start :: AchieveController :: uploadFiles
+2015-06-03 01:48:09 Debug: [AchieveController.php:166] directory = files/award/17/  fileName = ทั้งชีวิต - บี พีระพัฒน์_ลิเดีย feat.โก้ mr.saxman.mp3
+2015-06-03 01:48:09 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:00:02 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:01:28 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:02:11 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:07:37 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:07:48 Debug: [AchieveController.php:145] Start :: AchieveController :: uploadFiles
+2015-06-03 02:07:48 Debug: [AchieveController.php:166] directory = files/award/17/  fileName = ทั้งชีวิต - บี พีระพัฒน์_ลิเดีย feat.โก้ mr.saxman.mp3
+2015-06-03 02:07:48 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:07:51 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:08:44 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:09:01 Debug: [AchieveController.php:145] Start :: AchieveController :: uploadFiles
+2015-06-03 02:09:01 Debug: [AchieveController.php:166] directory = files/award/17/  fileName = 
+2015-06-03 02:09:01 Debug: [AchieveController.php:186] TEMP FILE = 
+2015-06-03 02:09:01 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:11:34 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:11:41 Debug: [AchieveController.php:145] Start :: AchieveController :: uploadFiles
+2015-06-03 02:11:41 Debug: [AchieveController.php:166] directory = files/award/17/  fileName = ทั้งชีวิต - บี พีระพัฒน์_ลิเดีย feat.โก้ mr.saxman.mp3
+2015-06-03 02:11:41 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:11:43 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:12:00 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:12:03 Debug: [AchieveController.php:147] Start :: AchieveController :: uploadFiles
+2015-06-03 02:12:03 Debug: [AchieveController.php:168] directory = files/award/17/  fileName = 
+2015-06-03 02:12:03 Debug: [AchieveController.php:188] TEMP FILE = 
+2015-06-03 02:12:03 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:12:23 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:14:49 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:14:56 Debug: [AchieveController.php:145] Start :: AchieveController :: uploadFiles
+2015-06-03 02:14:56 Debug: [AchieveController.php:166] directory = files/award/17/  fileName = ทั้งชีวิต - บี พีระพัฒน์_ลิเดีย feat.โก้ mr.saxman.mp3
+2015-06-03 02:14:56 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:14:57 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:15:18 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:15:19 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:15:32 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:15:38 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:15:58 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:16:44 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:16:46 Debug: [AchieveController.php:145] Start :: AchieveController :: uploadFiles
+2015-06-03 02:16:46 Debug: [AchieveController.php:166] directory = files/award/17/  fileName = 
+2015-06-03 02:16:46 Debug: [AchieveController.php:186] TEMP FILE = 
+2015-06-03 02:16:46 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:16:59 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:17:02 Debug: [AchieveController.php:145] Start :: AchieveController :: uploadFiles
+2015-06-03 02:17:02 Debug: [AchieveController.php:166] directory = files/award/17/  fileName = 
+2015-06-03 02:17:02 Debug: [AchieveController.php:186] TEMP FILE = 
+2015-06-03 02:17:02 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:17:11 Debug: [AchieveController.php:145] Start :: AchieveController :: uploadFiles
+2015-06-03 02:17:11 Debug: [AchieveController.php:166] directory = files/award/17/  fileName = ทั้งชีวิต - บี พีระพัฒน์_ลิเดีย feat.โก้ mr.saxman.mp3
+2015-06-03 02:17:11 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:20:21 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:20:27 Debug: [AchieveController.php:145] Start :: AchieveController :: uploadFiles
+2015-06-03 02:20:27 Debug: [AchieveController.php:166] directory = files/award/17/  fileName = 
+2015-06-03 02:20:27 Debug: [AchieveController.php:186] TEMP FILE = 
+2015-06-03 02:20:27 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:20:37 Debug: [AchieveController.php:145] Start :: AchieveController :: uploadFiles
+2015-06-03 02:20:37 Debug: [AchieveController.php:166] directory = files/award/17/  fileName = ทั้งชีวิต - บี พีระพัฒน์_ลิเดีย feat.โก้ mr.saxman.mp3
+2015-06-03 02:20:37 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:22:05 Debug: [ProjectController.php:387] Start :: ProjectController :: deleteFile
+2015-06-03 02:22:05 Debug: [ProjectController.php:392] message = สำเร็จ
+2015-06-03 02:22:05 Debug: [ProjectController.php:393] status = 1
+2015-06-03 02:22:05 Debug: [ProjectController.php:397] End :: ProjectController :: deleteFile
+2015-06-03 02:22:07 Debug: [AchieveController.php:9] ---- AchieveController -> index ----
+2015-06-03 02:22:13 Debug: [Activity.php:52] SELECT * FROM activities WHERE currentflg=1
+2015-06-03 02:22:16 Debug: [ProjectController.php:9] ---- ProjectController -> index ----
+2015-06-03 02:22:20 Debug: [ProjectController.php:387] Start :: ProjectController :: deleteFile
+2015-06-03 02:22:20 Debug: [ProjectController.php:392] message = สำเร็จ
+2015-06-03 02:22:20 Debug: [ProjectController.php:393] status = 1
+2015-06-03 02:22:20 Debug: [ProjectController.php:397] End :: ProjectController :: deleteFile
+2015-06-03 02:22:21 Debug: [ProjectController.php:9] ---- ProjectController -> index ----
+2015-06-03 02:22:23 Debug: [Activity.php:52] SELECT * FROM activities WHERE currentflg=1
+2015-06-03 02:27:49 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-03 02:29:25 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-03 02:32:17 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-03 02:46:51 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-03 02:47:14 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-03 02:47:43 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-03 02:48:16 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-03 02:49:16 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-03 02:51:11 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-03 02:51:18 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-04 03:04:30 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-04 03:06:13 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-04 03:09:52 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-04 03:11:37 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-04 03:12:29 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-04 03:14:03 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-04 03:14:55 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-05 02:31:47 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-05 02:31:49 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-05 02:31:54 Debug: [LogoutController.php:30] Logout successful
+2015-06-05 02:31:54 Debug: [LoginController.php:12] ---- LoginController -> index ----
+2015-06-05 02:31:59 Debug: [LoginController.php:35] ---- LoginController -> loginAjax ----
+2015-06-05 02:31:59 Debug: [LoginController.php:52] ---- LoginController -> loginFnc ----
+2015-06-05 02:31:59 Debug: [LoginController.php:78] write session complete
+2015-06-05 02:31:59 Debug: [LoginController.php:115] ---- LoginController -> deleteCookie ----
+2015-06-05 02:31:59 Debug: [LoginController.php:119] delete cookie complete
+2015-06-05 02:31:59 Debug: [Activity.php:52] SELECT * FROM activities WHERE currentflg=1
+2015-06-05 02:32:02 Debug: [OtherjstpController.php:8] ---- Psearch -> index ----
+2015-06-05 02:32:02 Debug: [OtherjstpController.php:17] ---- Psearch -> searchData ----
+2015-06-05 02:32:02 Debug: [Profile.php:34] select * from profiles p order by p.nameth ASC limit 0, 30
+2015-06-05 02:32:05 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-05 03:00:35 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-05 03:00:43 Debug: [PersonalInfoController.php:467] ---- PersonalInfoController -> editComment ----
+2015-06-05 03:01:13 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-05 03:01:29 Debug: [PersonalInfoController.php:467] ---- PersonalInfoController -> editComment ----
+2015-06-05 03:01:31 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-05 03:01:40 Debug: [PersonalInfoController.php:467] ---- PersonalInfoController -> editComment ----
+2015-06-05 03:01:42 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-05 03:01:51 Debug: [OtherjstpController.php:8] ---- Psearch -> index ----
+2015-06-05 03:01:51 Debug: [OtherjstpController.php:17] ---- Psearch -> searchData ----
+2015-06-05 03:01:51 Debug: [Profile.php:34] select * from profiles p order by p.nameth ASC limit 0, 30
+2015-06-05 03:02:25 Debug: [OtherjstpController.php:17] ---- Psearch -> searchData ----
+2015-06-05 03:02:25 Debug: [Profile.php:624] SELECT * 
+						FROM profiles p
+						WHERE  (  p.nameth LIKE '%นิตยา%' OR p.lastnameth LIKE '%นิตยา%' OR p.nickname LIKE '%นิตยา%' OR p.login LIKE '%นิตยา%' ) order by p.nameth ASC limit 0, 30
+2015-06-05 03:02:35 Debug: [OtherjstpController.php:17] ---- Psearch -> searchData ----
+2015-06-05 03:02:35 Debug: [Profile.php:34] select * from profiles p order by p.nameth ASC limit 0, 30
+2015-06-05 03:02:43 Debug: [OtherjstpController.php:17] ---- Psearch -> searchData ----
+2015-06-05 03:02:43 Debug: [Profile.php:34] select * from profiles p order by p.generation ASC limit 0, 30
+2015-06-05 03:02:45 Debug: [OtherjstpController.php:17] ---- Psearch -> searchData ----
+2015-06-05 03:02:45 Debug: [Profile.php:34] select * from profiles p order by p.generation DESC limit 0, 30
+2015-06-05 03:03:32 Debug: [OtherjstpController.php:59] START :: OtherjstpController -> admin_updateCustomize()
+2015-06-05 03:03:32 Debug: [Profile.php:367] UPDATE profiles
+				SET role='40'
+					,role_admin='0'
+				WHERE id='3'
+2015-06-05 03:03:32 Debug: [OtherjstpController.php:80] END :: OtherjstpController -> admin_updateCustomize()
+2015-06-05 03:03:32 Debug: [OtherjstpController.php:17] ---- Psearch -> searchData ----
+2015-06-05 03:03:32 Debug: [Profile.php:34] select * from profiles p limit 0, 30
+2015-06-05 03:03:37 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-05 03:05:18 Debug: [LogoutController.php:30] Logout successful
+2015-06-05 03:05:18 Debug: [LoginController.php:12] ---- LoginController -> index ----
+2015-06-05 03:05:23 Debug: [LoginController.php:35] ---- LoginController -> loginAjax ----
+2015-06-05 03:05:23 Debug: [LoginController.php:52] ---- LoginController -> loginFnc ----
+2015-06-05 03:05:23 Debug: [LoginController.php:115] ---- LoginController -> deleteCookie ----
+2015-06-05 03:05:23 Debug: [LoginController.php:119] delete cookie complete
+2015-06-05 03:05:34 Debug: [LoginController.php:35] ---- LoginController -> loginAjax ----
+2015-06-05 03:05:34 Debug: [LoginController.php:52] ---- LoginController -> loginFnc ----
+2015-06-05 03:05:34 Debug: [LoginController.php:78] write session complete
+2015-06-05 03:05:34 Debug: [LoginController.php:115] ---- LoginController -> deleteCookie ----
+2015-06-05 03:05:34 Debug: [LoginController.php:119] delete cookie complete
+2015-06-05 03:05:34 Debug: [Activity.php:52] SELECT * FROM activities WHERE currentflg=1
+2015-06-05 03:05:36 Debug: [OtherjstpController.php:8] ---- Psearch -> index ----
+2015-06-05 03:05:37 Debug: [OtherjstpController.php:17] ---- Psearch -> searchData ----
+2015-06-05 03:05:37 Debug: [Profile.php:34] select * from profiles p order by p.nameth ASC limit 0, 30
+2015-06-05 03:05:39 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-05 03:05:44 Debug: [PersonalInfoController.php:517] ---- PersonalInfoController -> saveNewComment ----
+2015-06-05 03:05:45 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-06 14:52:27 Debug: [Activity.php:52] SELECT * FROM activities WHERE currentflg=1
+2015-06-07 00:43:59 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-07 00:45:27 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-07 00:45:53 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-07 00:47:23 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-07 00:48:15 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-07 00:49:17 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-07 00:49:25 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-07 00:49:52 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-07 00:50:02 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-07 00:50:19 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-07 00:50:42 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-07 00:50:44 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-07 00:51:03 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-07 00:51:05 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-07 00:51:48 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-07 00:53:07 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-07 00:53:37 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-07 00:53:43 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-07 00:53:56 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-07 00:54:01 Debug: [OtherjstpController.php:8] ---- Psearch -> index ----
+2015-06-07 00:54:01 Debug: [OtherjstpController.php:17] ---- Psearch -> searchData ----
+2015-06-07 00:54:01 Debug: [Profile.php:34] select * from profiles p order by p.nameth ASC limit 0, 30
+2015-06-07 00:54:08 Debug: [OtherjstpController.php:17] ---- Psearch -> searchData ----
+2015-06-07 00:54:08 Debug: [Profile.php:624] SELECT * 
+						FROM profiles p
+						WHERE  (  p.nameth LIKE '%ชินวัตร%' OR p.lastnameth LIKE '%ชินวัตร%' OR p.nickname LIKE '%ชินวัตร%' OR p.login LIKE '%ชินวัตร%' ) order by p.nameth ASC limit 0, 30
+2015-06-07 00:54:09 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-07 00:54:25 Debug: [PersonalInfoController.php:517] ---- PersonalInfoController -> saveNewComment ----
+2015-06-07 00:54:27 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-07 00:54:39 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-07 00:55:03 Debug: [PersonalInfoController.php:517] ---- PersonalInfoController -> saveNewComment ----
+2015-06-07 00:55:05 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-07 00:57:13 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-07 00:57:20 Debug: [PersonalInfoController.php:517] ---- PersonalInfoController -> saveNewComment ----
+2015-06-07 00:57:21 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-07 00:57:47 Debug: [LogoutController.php:30] Logout successful
+2015-06-07 00:57:47 Debug: [LoginController.php:12] ---- LoginController -> index ----
+2015-06-07 00:57:53 Debug: [LoginController.php:35] ---- LoginController -> loginAjax ----
+2015-06-07 00:57:53 Debug: [LoginController.php:52] ---- LoginController -> loginFnc ----
+2015-06-07 00:57:53 Debug: [LoginController.php:78] write session complete
+2015-06-07 00:57:53 Debug: [LoginController.php:115] ---- LoginController -> deleteCookie ----
+2015-06-07 00:57:53 Debug: [LoginController.php:119] delete cookie complete
+2015-06-07 00:57:53 Debug: [Activity.php:52] SELECT * FROM activities WHERE currentflg=1
+2015-06-07 00:57:55 Debug: [PersonalInfoController.php:16] ---- PersonalInfoController -> index ----
+2015-06-07 00:58:08 Debug: [PersonalInfoController.php:570] ---- PersonalInfoController -> updateSortableSeq ----
+2015-06-07 00:58:20 Debug: [LogoutController.php:30] Logout successful
+2015-06-07 00:58:20 Debug: [LoginController.php:12] ---- LoginController -> index ----

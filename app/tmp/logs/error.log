@@ -1,1 +1,1383 @@
 2013-10-04 12:17:33 Error: Test Logger krafffffff!!!!
+2015-05-29 00:08:25 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:08:28 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:08:28 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:08:38 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:11:50 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:13:24 Error: [MissingControllerException] Controller class WelcomController could not be found.
+Exception Attributes: array (
+  'class' => 'WelcomController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/welcom
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:13:25 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:13:25 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:21:35 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:23:40 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:23:55 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:24:16 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:24:16 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:29:47 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/js/ckeditor/sample
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:29:47 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:29:47 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:30:05 Error: [MissingActionException] Action AppController::webroot() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'webroot',
+)
+Request URL: /myjstp/app/webroot/js/ckeditor/sample
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/htdocs/myjstp/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(AppController), Object(CakeRequest), Object(CakeResponse))
+#2 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-05-29 00:30:06 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:30:11 Error: [MissingActionException] Action AppController::webroot() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'webroot',
+)
+Request URL: /myjstp/app/webroot/js/ckeditor/sample/index.html
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Applications/XAMPP/xamppfiles/htdocs/myjstp/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(AppController), Object(CakeRequest), Object(CakeResponse))
+#2 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2015-05-29 00:30:11 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:30:18 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/js/ckeditor/sample/index.html
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:30:19 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:34:19 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:35:25 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:38:58 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:39:16 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:40:34 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:49:34 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:52:00 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:54:02 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-05-29 00:54:18 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 00:45:12 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 00:45:12 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 00:45:19 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 00:45:37 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 00:45:58 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 00:46:09 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 00:48:26 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 00:48:30 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 00:49:15 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 00:49:51 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 01:45:21 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 01:45:27 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 01:47:37 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 01:47:47 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 01:47:58 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 01:48:09 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:00:02 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:01:28 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:02:12 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:07:37 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:07:49 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:07:51 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:08:44 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:09:02 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:11:34 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:11:41 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:11:43 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:12:00 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:12:03 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:12:23 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:14:49 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:14:56 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:14:58 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:15:18 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:15:20 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:15:33 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:15:38 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:15:58 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:16:44 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:16:47 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:17:00 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:17:03 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:17:11 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:20:21 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:20:27 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:20:37 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:22:07 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:22:14 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:22:16 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:22:21 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:22:24 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:27:49 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:29:26 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:32:18 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:46:52 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:47:15 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:47:44 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:48:17 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:49:17 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:51:11 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-03 02:51:19 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-04 03:04:31 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-04 03:06:14 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-04 03:09:53 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-04 03:11:38 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-04 03:12:30 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-04 03:14:03 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-04 03:14:55 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-05 02:31:47 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-05 02:31:49 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-05 02:31:59 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-05 02:32:02 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-05 02:32:06 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-05 03:00:35 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-05 03:01:14 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-05 03:01:31 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-05 03:01:42 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-05 03:01:51 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-05 03:03:37 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-05 03:03:37 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-05 03:05:34 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-05 03:05:36 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-05 03:05:39 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-05 03:05:45 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-06 14:52:27 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-06 14:52:27 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:43:59 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:45:27 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:45:53 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:47:23 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:48:15 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:49:17 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:49:25 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:49:52 Error: Fatal Error (1): Call to undefined function vardump() in [/Applications/XAMPP/xamppfiles/htdocs/myjstp/app/View/PersonalInfo/index.ctp, line 391]
+2015-06-07 00:49:52 Error: [FatalErrorException] Call to undefined function vardump()
+Request URL: /myjstp/PersonalInfo/index?id=549
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/lib/Cake/Error/ErrorHandler.php(205): ErrorHandler::handleFatalError(1, 'Call to undefin...', '/Applications/X...', 391)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', '/Applications/X...', 391, Array)
+#2 /Applications/XAMPP/xamppfiles/htdocs/myjstp/lib/Cake/Core/App.php(931): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', '/Applications/X...', 391, Array)
+#3 /Applications/XAMPP/xamppfiles/htdocs/myjstp/lib/Cake/Core/App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2015-06-07 00:49:52 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:50:02 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:50:19 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:50:42 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:50:44 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:51:03 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:51:05 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:51:48 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:53:07 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:53:38 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:53:43 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:53:56 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:54:01 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:54:01 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:54:09 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:54:09 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:54:27 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:54:27 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:54:39 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:54:39 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:55:05 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:55:05 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:57:13 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:57:13 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:57:21 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:57:21 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/3/138.JPG
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:57:53 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2015-06-07 00:57:56 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /myjstp/img/profiles/2/183.jpg
+Stack Trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/myjstp/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}

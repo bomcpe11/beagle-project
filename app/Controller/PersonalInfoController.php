@@ -463,6 +463,33 @@ class PersonalInfoController extends AppController {
 		$this->render('response');
 	}
 	/* ------------------------------------------------------------------------------------------------ */
+	public function editComment(){
+		$this->log('---- PersonalInfoController -> editComment ----');
+		
+		$result = array();
+		//$this->log($this->request->data);
+		$id = $this->request->data['id'];
+		$title = $this->request->data['title'];
+		$comment = $this->request->data['comment'];
+	
+		$dataSource = $this->Comment->getDataSource();
+		if( $this->Comment->updateData($id
+										,$title
+										,$comment) ){
+			$dataSource->commit();
+			$result['msg'] = 'การแก้ไขความคิดเห็นเสร็จเรียบร้อย';
+			$result['flag'] = 1;
+		}else{
+			$dataSource->rollback();
+			$result['msg'] = 'เกิดข้อผิดพลาดใน การแก้ไขความคิดเห็น กรุณาติดต่อเจ้าหน้าที่ดูแลเว็บไซต์';
+			$result['flag'] = -1;
+		}
+		
+		$this->layout='ajax';
+		$this->set('message', json_encode($result));
+		$this->render('response');
+	}
+	/* ------------------------------------------------------------------------------------------------ */
 	public function deletedWorkplace(){
 		$this->log('---- PersonalInfoController -> deletedWorkplace ----');
 		

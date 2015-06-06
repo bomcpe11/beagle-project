@@ -180,7 +180,7 @@ class AchieveController extends AppController{
 			}
 			$totalsize += $_FILES["upload"]["size"];
 			
-			if($totalsize<=26214400){ //$totalsize<=25MB
+			if($totalsize<=52428800){ //$totalsize<=50MB
 
 				//TODO: Upload Files.
 				$this->log('TEMP FILE = '.$_FILES["upload"]["tmp_name"]);
@@ -190,11 +190,12 @@ class AchieveController extends AppController{
 					$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
 				}
 			}else{
-				$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
+				$result = "พื้นที่รวม เกิน 50MB กรุณาใช้ไฟล์เล็กกว่านี้";
 			}
 		} else {
-			$result = "บันทึกข้อมูล ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ";
+			$result = "ไม่สามารถสร้าง directory กรุณาติดต่อผู้ดูแลระบบ";
 		}
+		$this->Session->write('Message.alert', $result);
 		$this->redirect(array("controller" => "Achieve", "action" => "?id=".$profile_id));
 		$this->log('End :: AchieveController :: uploadFiles');
 	}

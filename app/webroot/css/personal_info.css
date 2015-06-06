@@ -125,7 +125,7 @@
 .edit-delete{
 	text-align: right;
 }
-.edit-delete img{
+.edit-delete img, .comment-edit-delete img{
 	width: 16px;
 	height: 16px;
 	cursor: pointer;
@@ -175,6 +175,9 @@
 }
 .ui-icon{
 	float: left;
+}
+#sortable_comment{
+	line-height:2;
 }
 
 div.thumb1{

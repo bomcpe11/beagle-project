@@ -261,6 +261,14 @@ $cakeDescription = __d('cake_dev', 'My JSTP');
 	    function submitFormSearch(){
 			jQuery('#form-search').submit();
 	    }
+
+	    <?php 
+	    	if(!empty($message_alert)){ //$message_alert in AppController.beforeFilter()
+		    	$message_alert = str_replace("'", "\\'", $message_alert);
+		    	echo "jAlert('{$message_alert}');";
+	    	}
+	    ?>
+	    
 	</script>
 </body>
 </html>

@@ -27,7 +27,7 @@ class Comment extends AppModel {
 					'$profile_id',
 					now(),
 					now(),
-					(SELECT ifnull(max(c.seq),0) + 1 AS seq FROM comments c WHERE c.commentable_id=$commentable_id)
+					(SELECT ifnull(max(c.seq),0) + 1 AS seq FROM comments c WHERE c.profile_id=$profile_id)
 				)";
 		//$this->log($sql);
 		
@@ -36,6 +36,25 @@ class Comment extends AppModel {
 			$flag = true;
 		}catch(Exception $e){
 			$this->log($e->getMessage());
+		}
+		
+		return $flag;
+	}
+		/* ------------------------------------------------------------------------------------------------- */
+	public function updateData($id, $title, $comment) {
+		
+		$flag = false;
+		$sql = "UPDATE comments
+		SET title='$title'
+		,comment='$comment'
+		,updated_at=now()
+		WHERE id=$id";
+		
+		try {
+			$this->query ( $sql );
+			$flag = true;
+		} catch ( Exception $e ) {
+			$this->log ( $e->getMessage () );
 		}
 		
 		return $flag;

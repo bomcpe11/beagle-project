@@ -8,7 +8,7 @@
 						<form action="'.$action.'" method="post" enctype="multipart/form-data">
 							<input type="file" name="upload" />
 							<input type="hidden" name="idUpload" value="'.$idUpload.'" /><br />
-							* จำกัด 5 ไฟล์ และขนาดรวมไม่เกิน 25 MB
+							* จำกัด 5 ไฟล์ และขนาดรวมไม่เกิน 50 MB
 							<input type="submit" style="margin:0px;display:inline;" value="Upload" />
 							<input type="button" style="margin:0px;display:inline;" value="Back" class="frmbtn" frmid="frm1" />
 						</form>
@@ -103,7 +103,7 @@
 												?>
 												<?php 
 													if(($isAdmin ||$objuser['id']==$_GET['id']) && $countFiles<5){
-														?><i>[<?php echo round($totalsize / 1048576, 1); ?>MB/25MB]</i><?php
+														?><i>[<?php echo round($totalsize / 1048576, 1); ?>MB/50MB]</i><?php
 														genUploadFileForm($this->Html->url('/Achieve/uploadFiles').'?uploadfor=award&id='.$_GET['id'], $listAward[$i]['a']['id']);
 													}
 												?>

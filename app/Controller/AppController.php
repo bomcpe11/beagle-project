@@ -78,6 +78,11 @@ class AppController extends Controller {
 		$this->set("login",$dataProfile['login']);
 		$this->set("last_login_at",$this->DateThai($dataProfile['last_login_at']));
 		$this->set('last_updated_at',$this->DateThai($dataProfile['updated_at']));
+		
+		//Show message alert.
+		$message_alert = trim($this->Session->read('Message.alert'));
+		$this->set('message_alert', $message_alert);
+		$this->Session->write('Message.alert', '');
 	}
 	
 	protected function setTitle($msg){

@@ -62,16 +62,16 @@
 class DATABASE_CONFIG {
 
 	#Localhost
-// 	public $default = array(
-// 			'datasource' => 'Database/Mysql',
-// 			'persistent' => false,
-// 			'host' => 'localhost',
-// 			'login' => 'h511067_myjstp',
-// 			'password' => 'B70sd@1i213j!0u820$C',
-// 			'database' => 'h511067_jstphub',
-// 			'prefix' => '',
-// 			'encoding' => 'utf8',
-// 	);
+	public $default = array(
+			'datasource' => 'Database/Mysql',
+			'persistent' => false,
+			'host' => 'localhost',
+			'login' => 'root',
+			'password' => '1234',
+			'database' => 'myjstp',
+			'prefix' => '',
+			'encoding' => 'utf8',
+	);
 	
 	#๋JSTP-Host
 // 	public $default = array(
@@ -85,17 +85,17 @@ class DATABASE_CONFIG {
 // 		'encoding' => 'utf8',
 // 	);
 	
-	#๋JSTP-Host
-	public $default = array(
-	'datasource' => 'Database/Mysql',
-	'persistent' => false,
-	'host' => '103.253.75.56',
-	'login' => 'unitedla_jstp',
-	'password' => 'jstp_2015',
-	'database' => 'unitedla_jstp',
-	'prefix' => '',
-	'encoding' => 'utf8',
-	);
+// 	#๋JSTP-Host
+// 	public $default = array(
+// 	'datasource' => 'Database/Mysql',
+// 	'persistent' => false,
+// 	'host' => '103.253.75.56',
+// 	'login' => 'unitedla_jstp',
+// 	'password' => 'jstp_2015',
+// 	'database' => 'unitedla_jstp',
+// 	'prefix' => '',
+// 	'encoding' => 'utf8',
+// 	);
 
 	public $test = array(
 		'datasource' => 'Database/Mysql',

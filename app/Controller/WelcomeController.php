@@ -90,8 +90,9 @@ class WelcomeController extends AppController {
 		$names = array('Leoma Bulkley','Jermaine Meredith','Raguel Dalpiaz','Alfonzo Vasconcellos','Chanelle Bono','Hillary Veach','Lovella Scull','Janelle July','Shay Hilchey','Latrisha Fite','Evonne Moss','Lynnette Fails','Lucretia Vanduyne','Jennell Schug','Ashly Castonguay','Herbert Castagna','Michel Borchers','Leila Behrendt','Nila Marinaro','Margery Peets','Sondra Scaglione','Kelsie Hoy','Gillian Jarvis','Casimira Coyle','Claudia Forehand','Twyla Mcdowell','Gayle Nesby','Monet Seedorf','Teodora Doll','Kaylene Greenly','Marylynn Jolicoeur','Lissette Lunday','Candi Rentfro','Irvin Hattaway','Glennie Zupan','Yi Manzano','Ardith Beggs','Golda Ouk','Vernetta Treece','Pamala Wohl','Ramona Trousdale','Jayne Gilmer','Yuriko Gracey','Pa Fine','Flor Alleman','Ocie Johnosn','Julian Gooslin','Martha Haugh','Ila Gammage','Renita Kress');
 	
 		$name = $names[array_rand($names)];
-	
-		$recipient = 'bomcpe11@gmail.com';
+
+// 		$recipient = 'bombermancpe11@hotmail.com';
+		$recipient = 'j_nattapop@hotmail.com';
 		$subject = 'MyJSTP : Registering '.$name;
 		$content = '<b>Dear '.$name.'</b><br /></p>MyJSTP Test mail sending & Registering</p><p>MyJSTP Register, Please click this link
 http://myjstp.org/Register?id=597&key='.$name.'</p>';

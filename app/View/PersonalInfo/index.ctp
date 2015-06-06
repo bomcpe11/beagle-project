@@ -361,18 +361,23 @@
 					if( $countListComment>0 ){
 						for( $i=0;$i<$countListComment;$i++ ){
 	 						//echo $listComment[$i]['c']['commentable_id'].'|'.$objuser['id'];
-							echo "<li class=\"ui-state-default block\">
-									<input type=\"hidden\" name=\"comment_id\" value=\"{$listComment[$i]['c']['id']}\">
+							echo "<li id=\"comment-{$listComment[$i]['c']['id']}\" class=\"ui-state-default block\">
+									<input type=\"hidden\" name=\"comment_id\" class=\"comment_id\" value=\"{$listComment[$i]['c']['id']}\">
 									<span class=\"ui-icon ui-icon-arrowthick-2-n-s\"></span>
 									<div class=\"data-item-wrapper\">
 										<table class=\"table-data-item\">
 											<tr>
-												<td><strong>หัวข้อ : {$listComment[$i]['c']['title']}</strong></td>
-												<td class=\"edit-delete\">";
+												<td>
+													<strong>หัวข้อ : {$listComment[$i]['c']['title']}</strong>
+													<input type=\"hidden\" class=\"title\" value=\"{$listComment[$i]['c']['title']}\" />
+												</td>
+												<td class=\"comment-edit-delete\" width=\"50\">";
 							
-							if($isAdmin || $listComment[$i]['c']['commentable_id']==$objuser['id'] /* && commentatorid==session_profile_id*/){
-								echo "				<img src=\"{$this->Html->url('/img/icon_del.png')}\" width=\"16\" height=\"16\"
-														onclick=\"deleteComment('{$listComment[$i]['c']['id']}')\" />";
+							if($listComment[$i]['c']['commentable_id']==$objuser['id'] || $isAdmin){
+								echo "				<img src=\"{$this->Html->url('/img/icon_edit.png')}\" width=\"16\" height=\"16\"
+														onclick=\"openPopupComment('#comment-{$listComment[$i]['c']['id']}')\" />
+													<img src=\"{$this->Html->url('/img/icon_del.png')}\" width=\"16\" height=\"16\"
+														onclick=\"deleteComment('	{$listComment[$i]['c']['id']}')\" />";
 							}
 							echo "				</td>
 											</tr>
@@ -423,13 +428,22 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2">
+						<td></td>
+						<td>
 							<input type="button" id="button_add_comment" value="เพิ่มข้อมูล ความคิดเห็น" onclick="addNewComment()"/>
 						</td>
 					</tr>
 				</table>
 			</div>
 	</div>
+	<script type="text/javascript">
+		CKEDITOR.replace( 'comment_detial', {toolbar: [
+		                                       		{ name: 'document', items: [ 'Source', '-', 'NewPage', 'Preview', '-', 'Templates' ] },	// Defines toolbar group with name (used to create voice label) and items in 3 subgroups.
+		                                    		[ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],			// Defines toolbar group without name.
+		                                    		'/',																					// Line break - next group will be placed in new line.
+		                                    		{ name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'FontSize', 'TextColor', 'BGColor' ] },
+		                                    	]});
+	</script>
 	<?php }?>
 	<!-- Popup -->
 	<div id="popup-profile">
